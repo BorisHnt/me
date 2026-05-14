@@ -8,17 +8,29 @@
   --near-black: #161519;
 
   --bg: var(--cream);
-  --surface: #fffaf8;
-  --surface-alt: #f7e8e4;
+  --surface: #fff5f3;
+  --surface-alt: #fbbbad;
+  --titlebar: #333f58;
+  --titlebar-text: #fff5f3;
   --text: var(--near-black);
   --muted: var(--charcoal);
   --border: var(--charcoal);
+  --border-dark: var(--near-black);
+  --border-mid: var(--charcoal);
   --accent: var(--rose);
   --accent-secondary: var(--steel-blue);
+  --button-face: #fff5f3;
+  --button-shadow: var(--charcoal);
 
-  --soft-border: rgba(41, 40, 49, 0.42);
-  --shadow: 7px 7px 0 rgba(41, 40, 49, 0.18);
-  --shadow-small: 4px 4px 0 rgba(41, 40, 49, 0.16);
+  --soft-border: rgba(41, 40, 49, 0.5);
+  --bevel-raised:
+    inset 1px 1px 0 var(--cream),
+    inset -1px -1px 0 var(--border-mid);
+  --bevel-sunken:
+    inset 1px 1px 0 var(--border-mid),
+    inset -1px -1px 0 var(--cream);
+  --shadow: 3px 3px 0 rgba(22, 21, 25, 0.22);
+  --shadow-small: 2px 2px 0 rgba(22, 21, 25, 0.2);
   --max-width: 1180px;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   color-scheme: light;
@@ -38,41 +50,12 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    linear-gradient(90deg, rgba(41, 40, 49, 0.055) 1px, transparent 1px),
-    linear-gradient(rgba(41, 40, 49, 0.055) 1px, transparent 1px),
-    var(--bg);
-  background-size: 32px 32px;
+  padding-top: 48px;
+  padding-bottom: 42px;
+  background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
-}
-
-body::before,
-body::after {
-  position: fixed;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
-}
-
-body::before {
-  top: 86px;
-  left: 6vw;
-  width: 230px;
-  height: 150px;
-  border: 2px solid rgba(51, 63, 88, 0.18);
-  background: rgba(255, 250, 248, 0.38);
-}
-
-body::after {
-  right: 8vw;
-  bottom: 78px;
-  width: 290px;
-  height: 210px;
-  border: 2px solid rgba(74, 122, 150, 0.22);
-  background: rgba(251, 187, 173, 0.18);
-  box-shadow: -62px -48px 0 rgba(238, 134, 149, 0.1);
 }
 
 a {
@@ -130,21 +113,24 @@ p {
 }
 
 .menu-shell {
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 30;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--border-dark);
   background: var(--surface-alt);
+  box-shadow: var(--bevel-raised);
 }
 
 .menu-bar {
   display: flex;
   align-items: stretch;
-  width: min(calc(100vw - 24px), var(--max-width));
+  width: 100%;
   min-height: 46px;
   margin: 0 auto;
-  border-right: 1px solid var(--soft-border);
-  border-left: 1px solid var(--soft-border);
+  border-right: 1px solid var(--border-mid);
+  border-left: 1px solid var(--cream);
 }
 
 .menu-brand,
@@ -153,9 +139,10 @@ p {
   display: inline-flex;
   align-items: center;
   border: 0;
-  border-right: 1px solid var(--soft-border);
+  border-right: 2px solid var(--border-mid);
+  border-bottom: 1px solid var(--cream);
   padding: 0 0.9rem;
-  background: transparent;
+  background: var(--button-face);
   color: var(--text);
   font: inherit;
   font-weight: 700;
@@ -165,14 +152,16 @@ p {
 .menu-brand {
   gap: 0.55rem;
   min-width: max-content;
-  background: var(--surface);
+  background: var(--surface-alt);
+  box-shadow: var(--bevel-raised);
 }
 
 .menu-icon {
   width: 16px;
   height: 16px;
   border: 2px solid var(--border);
-  background: linear-gradient(90deg, var(--steel-blue) 0 50%, var(--rose) 50% 100%);
+  background: var(--steel-blue);
+  box-shadow: inset -5px 0 0 var(--rose);
 }
 
 .menu-links {
@@ -182,19 +171,20 @@ p {
 
 .menu-links a {
   color: var(--muted);
+  box-shadow: var(--bevel-raised);
 }
 
 .menu-links a:hover,
 .menu-links a:focus-visible {
   background: var(--salmon);
   color: var(--near-black);
-  box-shadow: inset 0 -3px 0 var(--accent);
+  box-shadow: var(--bevel-raised), inset 0 -3px 0 var(--accent);
 }
 
 .menu-links a.is-active {
   background: var(--navy);
   color: var(--cream);
-  box-shadow: inset 0 -3px 0 var(--rose);
+  box-shadow: var(--bevel-sunken), inset 0 -3px 0 var(--rose);
 }
 
 .menu-toggle {
@@ -202,6 +192,7 @@ p {
   margin-left: auto;
   font-family: var(--mono);
   font-size: 0.82rem;
+  box-shadow: var(--bevel-raised);
 }
 
 .desktop {
@@ -225,19 +216,19 @@ p {
 .window {
   position: relative;
   min-width: 0;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-dark);
   background: var(--surface);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow), var(--bevel-raised);
 }
 
 .window:hover,
 .window.micro-hover {
-  box-shadow: var(--shadow), inset 0 0 0 3px rgba(238, 134, 149, 0.22);
+  box-shadow: var(--shadow), var(--bevel-raised), inset 0 0 0 2px rgba(238, 134, 149, 0.28);
 }
 
 .window:hover .title-bar,
 .window.micro-hover .title-bar {
-  background: var(--navy);
+  background: var(--steel-blue);
 }
 
 .offset-b {
@@ -273,10 +264,11 @@ p {
   align-items: center;
   gap: 0.55rem;
   min-height: 34px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--border-dark);
   padding: 0.35rem 0.5rem;
-  background: var(--steel-blue);
-  color: var(--cream);
+  background: var(--titlebar);
+  color: var(--titlebar-text);
+  box-shadow: inset 0 -1px 0 rgba(255, 245, 243, 0.25);
 }
 
 .window-controls {
@@ -287,8 +279,9 @@ p {
 .window-controls span {
   width: 14px;
   height: 14px;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border-dark);
   background: var(--surface);
+  box-shadow: var(--bevel-raised);
 }
 
 .window-controls span:nth-child(2) {
@@ -327,7 +320,7 @@ p {
 .window-menu {
   display: flex;
   gap: 1.1rem;
-  border-bottom: 1px solid var(--soft-border);
+  border-bottom: 2px solid var(--border-mid);
   padding: 0.45rem 0.8rem;
   background: var(--surface-alt);
   color: var(--muted);
@@ -391,7 +384,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
-  border-top: 2px solid var(--border);
+  border-top: 2px solid var(--border-dark);
   padding: 0.42rem 0.65rem;
   background: var(--surface-alt);
   color: var(--muted);
@@ -447,12 +440,12 @@ h1 {
   min-height: 154px;
   align-items: start;
   gap: 0.85rem;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-dark);
   padding: 0.9rem;
   background: var(--surface);
   color: var(--text);
   text-decoration: none;
-  box-shadow: var(--shadow-small);
+  box-shadow: var(--shadow-small), var(--bevel-raised);
 }
 
 .directory-entry::after {
@@ -470,7 +463,7 @@ h1 {
 .directory-entry.micro-hover {
   background: var(--surface-alt);
   border-color: var(--rose);
-  box-shadow: var(--shadow-small), inset 0 0 0 3px rgba(251, 187, 173, 0.48);
+  box-shadow: var(--shadow-small), var(--bevel-raised), inset 0 0 0 2px rgba(238, 134, 149, 0.28);
 }
 
 .directory-entry:hover::after,
@@ -481,16 +474,19 @@ h1 {
 .directory-icon {
   width: 28px;
   height: 24px;
-  border: 2px solid var(--border);
-  background: linear-gradient(180deg, var(--salmon) 0 32%, var(--steel-blue) 32% 100%);
+  border: 2px solid var(--border-dark);
+  background: var(--steel-blue);
+  box-shadow: inset 0 6px 0 var(--salmon);
 }
 
 .directory-icon.green {
-  background: linear-gradient(180deg, var(--salmon) 0 32%, var(--navy) 32% 100%);
+  background: var(--navy);
+  box-shadow: inset 0 6px 0 var(--salmon);
 }
 
 .directory-icon.pink {
-  background: linear-gradient(180deg, var(--salmon) 0 32%, var(--rose) 32% 100%);
+  background: var(--rose);
+  box-shadow: inset 0 6px 0 var(--salmon);
 }
 
 .directory-entry strong {
@@ -527,15 +523,15 @@ h1 {
   min-width: 0;
   min-height: 350px;
   flex-direction: column;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-dark);
   background: var(--surface);
-  box-shadow: var(--shadow-small);
+  box-shadow: var(--shadow-small), var(--bevel-raised);
 }
 
 .project-card:hover,
 .project-card.micro-hover {
   border-color: var(--rose);
-  box-shadow: var(--shadow-small), inset 0 0 0 3px rgba(238, 134, 149, 0.18);
+  box-shadow: var(--shadow-small), var(--bevel-raised), inset 0 0 0 2px rgba(238, 134, 149, 0.22);
 }
 
 .project-title-bar {
@@ -543,7 +539,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--border-dark);
   padding: 0.38rem 0.55rem;
   background: var(--surface-alt);
 }
@@ -640,15 +636,15 @@ h1 {
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  border: 2px solid var(--border);
+  border: 2px solid var(--border-dark);
   padding: 0.55rem 0.8rem;
-  background: var(--surface-alt);
+  background: var(--button-face);
   color: var(--text);
   font-size: 0.8rem;
   font-weight: 900;
   text-decoration: none;
   text-transform: uppercase;
-  box-shadow: 3px 3px 0 rgba(41, 40, 49, 0.18);
+  box-shadow: 2px 2px 0 rgba(41, 40, 49, 0.28), var(--bevel-raised);
 }
 
 .button:hover,
@@ -659,7 +655,7 @@ h1 {
 
 .button:active {
   background: var(--rose);
-  box-shadow: inset 2px 2px 0 rgba(22, 21, 25, 0.26);
+  box-shadow: var(--bevel-sunken);
 }
 
 .button-small {
@@ -668,18 +664,57 @@ h1 {
 }
 
 .site-footer {
-  border-top: 2px solid var(--border);
-  padding: 18px 16px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  border-top: 2px solid var(--border-dark);
+  padding: 4px;
   background: var(--surface-alt);
-  text-align: center;
+  box-shadow: var(--bevel-raised);
 }
 
-.site-footer p {
-  margin: 0;
-  color: var(--muted);
+.taskbar-start,
+.taskbar-item,
+.taskbar-status {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  border: 2px solid var(--border-dark);
+  background: var(--button-face);
+  box-shadow: var(--bevel-raised);
+  color: var(--text);
   font-family: var(--mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  font-weight: 900;
   text-transform: uppercase;
+}
+
+.taskbar-start {
+  min-width: 82px;
+  justify-content: center;
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.taskbar-item {
+  max-width: 260px;
+  padding: 0 0.75rem;
+}
+
+.taskbar-spacer {
+  flex: 1;
+}
+
+.taskbar-status {
+  gap: 0.65rem;
+  padding: 0 0.65rem;
+  box-shadow: var(--bevel-sunken);
 }
 
 @media (min-width: 981px) {
@@ -717,12 +752,7 @@ h1 {
   }
 }
 
-@media (max-width: 720px) {
-  body::before,
-  body::after {
-    display: none;
-  }
-
+@media (max-width: 900px) {
   .menu-bar {
     position: relative;
     width: 100%;
@@ -731,23 +761,26 @@ h1 {
   }
 
   .menu-brand {
-    flex: 1;
+    flex: 0 1 auto;
   }
 
   .menu-toggle {
     display: inline-flex;
+    margin-left: 0;
+    min-width: 72px;
+    justify-content: center;
   }
 
   .menu-links {
     position: absolute;
-    top: 48px;
+    top: 46px;
     right: 8px;
     left: 8px;
     z-index: 10;
     display: grid;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border-dark);
     background: var(--surface);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow), var(--bevel-raised);
     visibility: hidden;
     opacity: 0;
   }
@@ -772,7 +805,7 @@ h1 {
   .window,
   .project-card,
   .directory-entry {
-    box-shadow: 4px 4px 0 rgba(41, 40, 49, 0.14);
+    box-shadow: 2px 2px 0 rgba(41, 40, 49, 0.16), var(--bevel-raised);
   }
 
   .hero-body {
@@ -817,6 +850,37 @@ h1 {
   .button-small,
   .command-row .button {
     width: 100%;
+  }
+
+  .site-footer {
+    overflow-x: auto;
+  }
+
+  .taskbar-item:nth-of-type(3) {
+    display: none;
+  }
+
+  .taskbar-start {
+    min-width: 72px;
+  }
+
+  .taskbar-item {
+    max-width: 150px;
+    padding: 0 0.55rem;
+  }
+
+  .taskbar-spacer {
+    display: none;
+  }
+
+  .taskbar-status {
+    min-width: max-content;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+  }
+
+  .taskbar-status span:last-child {
+    display: none;
   }
 }
 

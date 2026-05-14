@@ -180,6 +180,28 @@
     });
   }
 
+  function updateTaskbarStatus() {
+    const labels = {
+      home: "Home",
+      personal: "Personal Projects",
+      "42": "42 Support Projects"
+    };
+    const page = document.body.dataset.page;
+    const taskLabel = document.querySelector("[data-task-label]");
+    const timeLabel = document.querySelector("[data-local-time]");
+
+    if (taskLabel) {
+      taskLabel.textContent = labels[page] || "Portfolio";
+    }
+
+    if (timeLabel) {
+      timeLabel.textContent = new Intl.DateTimeFormat("en", {
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(new Date());
+    }
+  }
+
   function installHarmlessMicroInteractions() {
     const municipalTentacle = document.querySelectorAll(".window, .project-card, .directory-entry");
     municipalTentacle.forEach((element) => {
@@ -193,6 +215,7 @@
     markActiveNavigation();
     setupNavigationToggle();
     renderProjectSections();
+    updateTaskbarStatus();
     installHarmlessMicroInteractions();
   }
 
