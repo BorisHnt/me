@@ -491,12 +491,51 @@
     button.setAttribute("aria-pressed", "false");
     button.textContent = "Contain the void";
     button.addEventListener("click", () => {
+      if (document.body.classList.contains("is-void-purged")) {
+        return;
+      }
       const contained = document.body.classList.toggle("is-void-contained");
       button.setAttribute("aria-pressed", String(contained));
       button.textContent = contained ? "Void limited" : "Contain the void";
       document.dispatchEvent(new CustomEvent("void-containment-change", { detail: { contained } }));
     });
     return button;
+  }
+
+  function createVoidPurgeEntry() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "void-purge-entry";
+
+    const label = document.createElement("label");
+    label.className = "sr-only";
+    label.htmlFor = "voidPurgePhrase";
+    label.textContent = "Void removal phrase";
+
+    const input = document.createElement("input");
+    input.id = "voidPurgePhrase";
+    input.className = "void-purge-entry__input";
+    input.type = "text";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.placeholder = "Administrative phrase";
+    input.setAttribute("aria-label", "Void removal phrase");
+
+    const status = document.createElement("span");
+    status.className = "void-purge-entry__status";
+    status.setAttribute("aria-live", "polite");
+    status.textContent = "VOID PRESENT";
+
+    input.addEventListener("input", () => {
+      const wetBiographyRegistry = input.value.trim();
+      if (wetBiographyRegistry === "Clean the soul from the Void") {
+        status.textContent = "VOID REMOVED";
+        input.disabled = true;
+        document.dispatchEvent(new CustomEvent("void-purge-request"));
+      }
+    });
+
+    wrapper.append(label, input, status);
+    return wrapper;
   }
 
   function createDocumentHeader() {
@@ -514,7 +553,7 @@
 
     const control = document.createElement("div");
     control.className = "about-control-strip";
-    control.append(createContainmentSwitch());
+    control.append(createContainmentSwitch(), createVoidPurgeEntry());
 
     header.append(label, title, control);
     return header;
@@ -632,15 +671,28 @@
   const lowerZalgoMarks = ["\u0316", "\u0317", "\u0318", "\u0319", "\u031c", "\u031d", "\u031e", "\u031f", "\u0320", "\u0324", "\u0325", "\u0326", "\u0329", "\u032a", "\u032b", "\u032c", "\u032d", "\u032e", "\u032f", "\u0330", "\u0331", "\u0332", "\u0333", "\u0339", "\u033a", "\u033b", "\u033c", "\u0345", "\u0347", "\u0348", "\u0349", "\u034d", "\u034e", "\u0353", "\u0354", "\u0355", "\u0356"];
 
   function attachZalgoDamageCertificate(letter, index, level) {
-    const density = [0, 2, 5, 11, 24, 52][level] || 0;
+    const density = [0, 2, 7, 18, 42, 88][level] || 0;
     if (density === 0 || !/[A-Za-z0-9]/.test(letter)) {
       return letter;
     }
 
     let wound = "";
     for (let asphalt = 0; asphalt < density; asphalt += 1) {
-      const registry = asphalt % 3 === 0 ? upperZalgoMarks : asphalt % 3 === 1 ? middleZalgoMarks : lowerZalgoMarks;
+      const registry = asphalt % 5 === 0 || asphalt % 5 === 1
+        ? upperZalgoMarks
+        : asphalt % 5 === 2
+          ? middleZalgoMarks
+          : lowerZalgoMarks;
       wound += registry[(index + asphalt * 7 + level) % registry.length];
+      if (level >= 4 && asphalt % 7 === 0) {
+        wound += upperZalgoMarks[(index + asphalt * 11) % upperZalgoMarks.length];
+        wound += lowerZalgoMarks[(index + asphalt * 13) % lowerZalgoMarks.length];
+      }
+      if (level >= 5 && asphalt % 5 === 0) {
+        wound += upperZalgoMarks[(index + asphalt * 17) % upperZalgoMarks.length];
+        wound += middleZalgoMarks[(index + asphalt * 19) % middleZalgoMarks.length];
+        wound += lowerZalgoMarks[(index + asphalt * 23) % lowerZalgoMarks.length];
+      }
     }
     return `${letter}${wound}`;
   }
@@ -762,9 +814,6 @@
     }
 
     stack.append(createVoidPopup(notice));
-    while (stack.children.length > 3) {
-      stack.firstElementChild.remove();
-    }
   }
 
   function notarizeInvisibleDamage(stage) {
@@ -779,6 +828,11 @@
   }
 
   function applyCorruptionStage(stage, fragments) {
+    if (document.body.classList.contains("is-void-purged")) {
+      restoreDocumentAfterSoulCleaning(fragments);
+      return;
+    }
+
     const approvedStage = approveVoidByCommittee(stage);
     document.body.classList.remove(
       "is-corruption-stage-0",
@@ -792,6 +846,33 @@
     document.body.dataset.corruptionStage = String(approvedStage);
     inspectParagraphForUnauthorizedMoisture(fragments, approvedStage);
     registerUselessCorridorActivity(approvedStage);
+  }
+
+  function restoreDocumentAfterSoulCleaning(fragments) {
+    document.body.classList.remove(
+      "is-corruption-stage-1",
+      "is-corruption-stage-2",
+      "is-corruption-stage-3",
+      "is-corruption-stage-4",
+      "is-corruption-stage-5",
+      "is-void-contained"
+    );
+    document.body.classList.add("is-corruption-stage-0");
+    document.body.dataset.corruptionStage = "0";
+    fragments.forEach((fragment) => {
+      const memory = corridorChecksum.get(fragment);
+      fragment.classList.remove(
+        "zalgo-light",
+        "zalgo-medium",
+        "zalgo-heavy",
+        "zalgo-terminal",
+        "void-overflow-text",
+        "void-spill"
+      );
+      if (memory && memory.cleanText) {
+        fragment.textContent = memory.cleanText;
+      }
+    });
   }
 
   function initializeAboutDocument() {
@@ -808,6 +889,7 @@
     let currentStage = -1;
     let sewerProtocol = false;
     let contained = false;
+    let voidPurged = false;
 
     renderBiography(sections, documentRoot);
     deployAberrations(aberrationLayer);
@@ -816,6 +898,10 @@
 
     function inspectScrollPosition() {
       sewerProtocol = false;
+      if (voidPurged) {
+        restoreDocumentAfterSoulCleaning(fragments);
+        return;
+      }
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const rawProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       const inspection = validateMunicipalVoidPresence(rawProgress);
@@ -827,7 +913,7 @@
       }
 
       popupNotices.forEach((notice, index) => {
-        if (inspection.progress >= notice.threshold && !shownPopups.has(index)) {
+        if (!voidPurged && inspection.progress >= notice.threshold && !shownPopups.has(index)) {
           shownPopups.add(index);
           deployAdministrativeTumor(popupStack, notice);
         }
@@ -844,9 +930,29 @@
     }
 
     document.addEventListener("void-containment-change", (event) => {
+      if (voidPurged) {
+        return;
+      }
       contained = Boolean(event.detail && event.detail.contained);
       currentStage = -1;
       inspectScrollPosition();
+    });
+
+    document.addEventListener("void-purge-request", () => {
+      voidPurged = true;
+      contained = false;
+      document.body.classList.add("is-void-purged");
+      const containmentButton = document.querySelector(".about-containment-toggle");
+      if (containmentButton) {
+        containmentButton.setAttribute("aria-pressed", "false");
+        containmentButton.textContent = "Void removed";
+        containmentButton.disabled = true;
+      }
+      if (popupStack) {
+        popupStack.replaceChildren();
+      }
+      restoreDocumentAfterSoulCleaning(fragments);
+      console.info("[about] void removal phrase accepted: decorative contamination withdrawn");
     });
 
     if (reducedMotion) {

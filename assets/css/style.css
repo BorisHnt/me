@@ -679,6 +679,13 @@ h1 {
   box-shadow: var(--sunken);
 }
 
+.button:disabled {
+  background: var(--dust);
+  box-shadow: var(--sunken);
+  color: var(--steel);
+  cursor: default;
+}
+
 .button-small {
   width: fit-content;
   margin-top: auto;
@@ -792,12 +799,49 @@ body.about-shell {
 .about-control-strip {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
   margin: 1rem 0 0;
 }
 
 .about-containment-toggle[aria-pressed="true"] {
   box-shadow: var(--sunken);
+}
+
+.void-purge-entry {
+  display: flex;
+  min-width: min(100%, 420px);
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.void-purge-entry__input {
+  width: min(280px, 48vw);
+  min-height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  padding: 0.35rem 0.5rem;
+  background: var(--paper);
+  box-shadow: var(--sunken);
+  color: var(--ink);
+  font: 800 0.78rem var(--mono);
+}
+
+.void-purge-entry__input:disabled {
+  background: var(--dust);
+  color: var(--steel);
+}
+
+.void-purge-entry__status {
+  border: 2px solid var(--ink);
+  padding: 0.3rem 0.45rem;
+  background: var(--dust);
+  box-shadow: var(--raised);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .about-heading {
@@ -910,9 +954,9 @@ body.about-shell {
 
 .zalgo-terminal {
   display: inline-block;
-  line-height: 0.82;
-  margin-block: 0.2em;
-  padding-block: 0.18em;
+  line-height: 0.58;
+  margin-block: -0.05em;
+  padding-block: 0.05em;
   overflow: visible;
   text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust), 0 2px 0 var(--ink);
   vertical-align: middle;
@@ -943,7 +987,7 @@ body.about-shell {
   font-family: var(--mono);
   font-size: clamp(1rem, 3vw, 2rem);
   font-weight: 900;
-  line-height: 0.92;
+  line-height: 0.54;
   overflow: visible;
   text-transform: uppercase;
 }
@@ -974,7 +1018,7 @@ body.about-shell {
 .void-bleed-line--terminal {
   margin-left: -9vw;
   font-size: clamp(1.4rem, 5vw, 3.4rem);
-  line-height: 0.76;
+  line-height: 0.42;
 }
 
 .void-document-collapse {
@@ -1045,6 +1089,37 @@ body.about-shell {
 .is-void-contained .about-section--void h2,
 .is-void-contained .about-section--void p {
   color: var(--ink);
+}
+
+.is-void-purged .void-annotation,
+.is-void-purged .void-bleed-line,
+.is-void-purged .void-aberration,
+.is-void-purged .void-popup-layer {
+  display: none !important;
+}
+
+.is-void-purged .about-section--lower,
+.is-void-purged .about-section--void {
+  border: 0;
+  border-top: 2px solid var(--dust);
+  padding: 1.35rem 0 1.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.is-void-purged .about-section--lower h2,
+.is-void-purged .about-section--lower p,
+.is-void-purged .about-section--lower li,
+.is-void-purged .about-section--void h2,
+.is-void-purged .about-section--void p,
+.is-void-purged .about-fragment {
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.is-void-purged .about-section:nth-of-type(3n)::after {
+  display: none;
 }
 
 .void-annotation {
@@ -1145,6 +1220,34 @@ body.about-shell {
 .is-corruption-stage-5 .about-section--lower .about-fragment,
 .is-corruption-stage-5 .about-section--void .about-fragment {
   border-bottom-color: var(--paper);
+}
+
+.is-corruption-stage-4:not(.is-void-contained):not(.is-void-purged) .about-section--lower .zalgo-heavy,
+.is-corruption-stage-5:not(.is-void-contained):not(.is-void-purged) .about-section--lower .zalgo-heavy {
+  display: inline-block;
+  font-size: 1.08em;
+  line-height: 0.42;
+  margin-block: -0.15em;
+  overflow: visible;
+}
+
+.is-corruption-stage-4:not(.is-void-contained):not(.is-void-purged) .about-section--lower .zalgo-terminal,
+.is-corruption-stage-5:not(.is-void-contained):not(.is-void-purged) .about-section--lower .zalgo-terminal {
+  font-size: 1.2em;
+  line-height: 0.26;
+  margin-block: -0.34em;
+  padding-block: 0;
+  overflow: visible;
+  vertical-align: baseline;
+}
+
+.is-corruption-stage-5:not(.is-void-contained):not(.is-void-purged) .about-section--void .zalgo-terminal {
+  font-size: 1.34em;
+  line-height: 0.18;
+  margin-block: -0.48em;
+  padding-block: 0;
+  overflow: visible;
+  vertical-align: baseline;
 }
 
 .void-artifact-layer {
@@ -1319,6 +1422,8 @@ body.about-shell {
   z-index: 45;
   display: grid;
   width: min(330px, calc(100vw - 24px));
+  max-height: calc(100vh - 112px);
+  overflow-y: auto;
   gap: 6px;
   pointer-events: none;
 }
