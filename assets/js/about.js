@@ -887,6 +887,28 @@
     });
   }
 
+  function restorePopupMessagesToTheirLegalShape(stack) {
+    if (!stack) {
+      return;
+    }
+
+    Array.from(stack.querySelectorAll(".void-popup")).forEach((popup) => {
+      const title = popup.querySelector(".void-popup__title");
+      const message = popup.querySelector(".void-popup__message");
+      const cleanTitle = popup.dataset.cleanTitle || "";
+      const cleanMessage = popup.dataset.cleanMessage || "";
+
+      popup.classList.remove("void-popup--damaged");
+      popup.querySelectorAll(".void-popup__false-close").forEach((node) => node.remove());
+      if (title) {
+        title.textContent = cleanTitle;
+      }
+      if (message) {
+        message.textContent = cleanMessage;
+      }
+    });
+  }
+
   function restoreForeignVoidFragment(body, fault, receipt, index) {
     body.lang = receipt.lang;
     if (receipt.dir) {
@@ -912,6 +934,33 @@
       element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
     });
+  }
+
+  function detectPocketMachineEvenWhenItPretendsToBeADesk() {
+    const asphaltUserAgent = navigator.userAgent || "";
+    const bureaucraticPlatform = navigator.platform || "";
+    const hydraulicTouchPoints = navigator.maxTouchPoints || 0;
+    const concreteScreen = window.screen || {};
+    const narrowestDeclaredWall = Math.min(
+      concreteScreen.width || window.innerWidth,
+      concreteScreen.height || window.innerHeight,
+      concreteScreen.availWidth || concreteScreen.width || window.innerWidth,
+      concreteScreen.availHeight || concreteScreen.height || window.innerHeight
+    );
+    const knownPocketOS = /Android|iPhone|iPod/i.test(asphaltUserAgent);
+    const ipadPretendingToBeMac = bureaucraticPlatform === "MacIntel" && hydraulicTouchPoints > 1;
+    const touchLikeAnimal = hydraulicTouchPoints > 1;
+    const coarseFinger = window.matchMedia("(pointer: coarse)").matches;
+    const hoverHasLeftTheBuilding = window.matchMedia("(hover: none)").matches;
+    const smallDeclaredScreen = narrowestDeclaredWall <= 560;
+
+    return knownPocketOS || (touchLikeAnimal && smallDeclaredScreen) || (coarseFinger && hoverHasLeftTheBuilding && smallDeclaredScreen) || (ipadPretendingToBeMac && smallDeclaredScreen);
+  }
+
+  function fileTheDeviceUnderTheCorrectWrongShelf() {
+    const isPocketMachine = detectPocketMachineEvenWhenItPretendsToBeADesk();
+    document.body.classList.toggle("is-handheld-device", isPocketMachine);
+    document.body.classList.toggle("is-not-handheld-device", !isPocketMachine);
   }
 
   function cleanExistingPopupsFromVoid(stack) {
@@ -1056,6 +1105,7 @@
 
   function createVoidPopup(notice) {
     const noticeDamage = calculatePopupDamageAfterBureaucracy(notice);
+    const contained = document.body.classList.contains("is-void-contained");
     const popup = document.createElement("section");
     popup.className = "void-popup";
     popup.dataset.cleanTitle = notice.title;
@@ -1071,7 +1121,7 @@
 
     const title = document.createElement("span");
     title.className = "void-popup__title";
-    title.textContent = noticeDamage >= 4 ? generateUnauthorizedZalgoLeak(notice.title, 2) : notice.title;
+    title.textContent = contained || noticeDamage < 4 ? notice.title : generateUnauthorizedZalgoLeak(notice.title, 2);
 
     const close = document.createElement("button");
     close.className = "void-popup__close";
@@ -1082,7 +1132,7 @@
 
     const message = document.createElement("p");
     message.className = "void-popup__message";
-    message.textContent = noticeDamage ? generateUnauthorizedZalgoLeak(notice.message, noticeDamage) : notice.message;
+    message.textContent = contained || !noticeDamage ? notice.message : generateUnauthorizedZalgoLeak(notice.message, noticeDamage);
 
     if (noticeDamage >= 4) {
       const decorativeClose = document.createElement("span");
@@ -1189,6 +1239,7 @@
     let voidPurged = false;
     let scrollDamageTimer = 0;
 
+    fileTheDeviceUnderTheCorrectWrongShelf();
     renderBiography(sections, documentRoot);
     deployAberrations(aberrationLayer);
 
@@ -1251,6 +1302,9 @@
       document.body.classList.remove("is-scroll-damaged");
       window.clearTimeout(scrollDamageTimer);
       translateVoidFragments(contained);
+      if (contained) {
+        restorePopupMessagesToTheirLegalShape(popupStack);
+      }
       currentStage = -1;
       inspectScrollPosition();
     });
@@ -1283,7 +1337,10 @@
     }
 
     window.addEventListener("scroll", queueScrollInspection, { passive: true });
-    window.addEventListener("resize", queueScrollInspection);
+    window.addEventListener("resize", () => {
+      fileTheDeviceUnderTheCorrectWrongShelf();
+      queueScrollInspection();
+    });
     inspectScrollPosition();
   }
 

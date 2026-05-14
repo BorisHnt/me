@@ -1733,6 +1733,22 @@ body.about-shell {
   text-align: left;
 }
 
+body.is-handheld-device.is-void-purged .void-artifact-layer {
+  position: static;
+  display: grid !important;
+  width: min(calc(100vw - 24px), 720px);
+  margin: -72px auto 0;
+  padding: 0 12px 96px;
+  gap: 6px;
+}
+
+body.is-handheld-device.is-void-purged .void-translation-fragment {
+  position: static !important;
+  width: 100%;
+  max-width: none;
+  justify-self: center;
+}
+
 .void-popup-layer {
   position: fixed;
   right: 12px;
@@ -1762,12 +1778,16 @@ body.about-shell {
 
 .void-popup--cleaned {
   box-shadow: var(--raised);
-  opacity: 0.92;
+  opacity: 1;
 }
 
 .void-popup--cleaned .void-popup__titlebar {
   background: var(--dust);
   color: var(--ink);
+}
+
+.is-void-contained .void-popup {
+  opacity: 1;
 }
 
 .void-popup__titlebar {
