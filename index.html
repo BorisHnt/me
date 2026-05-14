@@ -10,17 +10,17 @@
 <body data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header" data-site-header>
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="brand" href="index.html" aria-label="Boris Hanicotte home">
-        <span class="brand-mark" aria-hidden="true"></span>
+  <header class="menu-shell" data-site-header>
+    <nav class="menu-bar" aria-label="Primary navigation">
+      <a class="menu-brand" href="index.html" aria-label="Boris Hanicotte home">
+        <span class="menu-icon" aria-hidden="true"></span>
         <span>Boris Hanicotte</span>
       </a>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
-        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      <button class="menu-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
+        <span aria-hidden="true">MENU</span>
         <span class="sr-only">Toggle navigation</span>
       </button>
-      <div class="nav-links" id="nav-links" data-nav-links>
+      <div class="menu-links" id="nav-links" data-nav-links>
         <a href="index.html" data-nav-link>Home</a>
         <a href="personal-projects.html" data-nav-link>Personal Projects</a>
         <a href="42-projects.html" data-nav-link>42 Support Projects</a>
@@ -29,84 +29,116 @@
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="hero section-shell" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Personal operating system / public archive</p>
-          <h1 id="hero-title">Boris Hanicotte</h1>
-          <p class="hero-subtitle">Developer / 42 Student / Interface Autopsy Technician</p>
-          <p class="hero-intro">
-            I build tools, interfaces, small systems, strange utilities and occasionally entire machines
-            to solve problems that were probably supposed to stay simple.
-          </p>
-          <div class="hero-actions" aria-label="Primary destinations">
-            <a class="button button-primary" href="personal-projects.html">Personal archive</a>
-            <a class="button" href="42-projects.html">42 support systems</a>
-          </div>
+  <main id="main-content" class="desktop desktop-home">
+    <section class="window main-window offset-a" aria-labelledby="hero-title" data-window-offset>
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
         </div>
-
-        <aside class="status-panel" aria-labelledby="status-title">
-          <div class="panel-header">
-            <p class="eyebrow">Inspection</p>
-            <h2 id="status-title">Current Build Status</h2>
-          </div>
-          <dl class="status-list">
-            <div>
-              <dt>System</dt>
-              <dd>online</dd>
-            </div>
-            <div>
-              <dt>Location</dt>
-              <dd>42 Marseille</dd>
-            </div>
-            <div>
-              <dt>Main process</dt>
-              <dd>learning, building, debugging</dd>
-            </div>
-            <div>
-              <dt>Secondary process</dt>
-              <dd>trying not to over-engineer everything</dd>
-            </div>
-            <div>
-              <dt>Risk level</dt>
-              <dd>acceptable</dd>
-            </div>
-          </dl>
-        </aside>
+        <span class="window-title">BORIS.EXE</span>
+        <span class="window-chip">READY</span>
+      </div>
+      <div class="window-menu" aria-label="BORIS.EXE menu">
+        <span>File</span>
+        <span>Inspect</span>
+        <span>Signal</span>
+      </div>
+      <div class="window-body hero-body">
+        <p class="system-label">Personal desktop session / public archive</p>
+        <h1 id="hero-title">Boris Hanicotte</h1>
+        <p class="hero-subtitle">Developer / 42 Student / Interface Autopsy Technician</p>
+        <p class="hero-intro">
+          I build tools, interfaces, small systems, strange utilities and occasionally entire machines
+          to solve problems that were probably supposed to stay simple.
+        </p>
+      </div>
+      <div class="status-bar">
+        <span>PROCESS: HUMAN_INTERFACE</span>
+        <span>STATE: OPEN</span>
       </div>
     </section>
 
-    <section class="section-shell" aria-labelledby="routes-title">
-      <div class="section-heading">
-        <p class="eyebrow">Navigation</p>
-        <h2 id="routes-title">Available Corridors</h2>
+    <aside class="window status-window offset-b" aria-labelledby="status-title" data-window-offset>
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <span class="window-title" id="status-title">SYSTEM STATUS</span>
+        <span class="window-chip">LIVE</span>
       </div>
-      <div class="route-grid">
-        <a class="route-card" href="personal-projects.html">
-          <span class="route-index" aria-hidden="true">01</span>
-          <h3>Personal Projects</h3>
-          <p>Independent web experiments, creative tools, editors, games, audio systems and strange little machines.</p>
-          <span class="route-link">Enter archive</span>
+      <div class="window-body">
+        <dl class="status-list">
+          <div>
+            <dt>System</dt>
+            <dd>online</dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>42 Marseille</dd>
+          </div>
+          <div>
+            <dt>Main process</dt>
+            <dd>learning, building, debugging</dd>
+          </div>
+          <div>
+            <dt>Secondary process</dt>
+            <dd>trying not to over-engineer everything</dd>
+          </div>
+          <div>
+            <dt>Risk level</dt>
+            <dd>acceptable</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="status-bar">
+        <span>INSPECTION: PASSED</span>
+        <span>RISK: ACCEPTABLE</span>
+      </div>
+    </aside>
+
+    <section class="window directory-window offset-c" aria-labelledby="directories-title" data-window-offset>
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <span class="window-title" id="directories-title">AVAILABLE DIRECTORIES</span>
+        <span class="window-chip">3 ITEMS</span>
+      </div>
+      <div class="window-body directory-grid">
+        <a class="directory-entry" href="personal-projects.html">
+          <span class="directory-icon" aria-hidden="true"></span>
+          <span>
+            <strong>Personal Projects</strong>
+            <small>Independent web experiments, creative tools, editors, games, audio systems and strange little machines.</small>
+          </span>
         </a>
-        <a class="route-card" href="42-projects.html">
-          <span class="route-index" aria-hidden="true">02</span>
-          <h3>42 Support Projects</h3>
-          <p>Tools, experiments and utilities made to help classmates at 42 Marseille survive more efficiently.</p>
-          <span class="route-link">Open protocol</span>
+        <a class="directory-entry" href="42-projects.html">
+          <span class="directory-icon green" aria-hidden="true"></span>
+          <span>
+            <strong>42 Support Projects</strong>
+            <small>Tools, experiments and utilities made to help classmates at 42 Marseille survive more efficiently.</small>
+          </span>
         </a>
-        <a class="route-card" href="https://github.com/BorisHnt" target="_blank" rel="noopener noreferrer">
-          <span class="route-index" aria-hidden="true">03</span>
-          <h3>External Signals</h3>
-          <p>GitHub, music, experiments and other fragments of public activity.</p>
-          <span class="route-link">External access</span>
+        <a class="directory-entry" href="https://github.com/BorisHnt" target="_blank" rel="noopener noreferrer">
+          <span class="directory-icon pink" aria-hidden="true"></span>
+          <span>
+            <strong>External Signals</strong>
+            <small>GitHub, music, experiments and other fragments of public activity.</small>
+          </span>
         </a>
+      </div>
+      <div class="status-bar">
+        <span>DIRECTORY ACCESS: ENABLED</span>
+        <span>MODE: SELECT</span>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Boris Hanicotte — static signal emitted through GitHub Pages.</p>
+    <p>Boris Hanicotte - static signal emitted through GitHub Pages.</p>
   </footer>
 
   <script src="assets/js/projects.js"></script>

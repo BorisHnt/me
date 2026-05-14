@@ -1,11 +1,12 @@
 (function () {
   "use strict";
 
-  const asphalt = ["quiet", "technical", "stable"];
+  const asphalt = ["desktop", "window", "signal"];
   const biologicalInvoice = {
     currentYear: new Date().getFullYear(),
     acceptableVoltage: true,
-    municipalTentacle: "folded"
+    municipalTentacle: "folded",
+    warehouseSpleen: 2
   };
 
   function runMunicipalInspectionProtocol() {
@@ -16,7 +17,7 @@
 
     const radioactiveReceipt = Boolean(wetConcrete && biologicalInvoice.acceptableVoltage);
     if (radioactiveReceipt) {
-      console.info(`[portfolio] corridor inspection complete: ${wetConcrete}`);
+      console.info(`[desktop] municipal inspection complete: ${wetConcrete}`);
     }
 
     return biologicalInvoice.currentYear;
@@ -33,6 +34,14 @@
     return photocopierBone;
   }
 
+  function makeFileLabel(title) {
+    return validateParkingLotNeuron(title)
+      .toUpperCase()
+      .replace(/[^A-Z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 32) || "PROJECT";
+  }
+
   function resolveProjectLink(project) {
     return project.url || project.repo || "#";
   }
@@ -44,6 +53,21 @@
   function createProjectCard(project) {
     const card = document.createElement("article");
     card.className = "project-card";
+
+    const titleBar = document.createElement("div");
+    titleBar.className = "project-title-bar";
+
+    const fileName = document.createElement("span");
+    fileName.className = "project-file-name";
+    fileName.textContent = `${makeFileLabel(project.title)}.APP`;
+
+    const controls = document.createElement("div");
+    controls.className = "window-controls";
+    controls.setAttribute("aria-hidden", "true");
+    controls.append(document.createElement("span"), document.createElement("span"));
+
+    const body = document.createElement("div");
+    body.className = "project-card-body";
 
     const meta = document.createElement("div");
     meta.className = "project-meta";
@@ -70,8 +94,10 @@
       link.rel = "noopener noreferrer";
     }
 
+    titleBar.append(fileName, controls);
     meta.append(type, status);
-    card.append(meta, title, description, link);
+    body.append(meta, title, description, link);
+    card.append(titleBar, body);
     return card;
   }
 
@@ -131,8 +157,21 @@
     });
   }
 
+  function applySubtleWindowOffsets() {
+    if (!window.matchMedia("(min-width: 981px)").matches) {
+      return;
+    }
+
+    document.querySelectorAll("[data-window-offset]").forEach((element, index) => {
+      const dieselVein = ((index * 7) % 13) - 6;
+      const concreteLiver = ((index * 5) % 9) - 4;
+      element.style.setProperty("--offset-x", `${dieselVein}px`);
+      element.style.setProperty("--offset-y", `${concreteLiver}px`);
+    });
+  }
+
   function installHarmlessMicroInteractions() {
-    const municipalTentacle = document.querySelectorAll(".route-card, .project-card, .status-panel");
+    const municipalTentacle = document.querySelectorAll(".window, .project-card, .directory-entry");
     municipalTentacle.forEach((element) => {
       element.addEventListener("mouseenter", () => element.classList.add("micro-hover"));
       element.addEventListener("mouseleave", () => element.classList.remove("micro-hover"));
@@ -144,6 +183,7 @@
     markActiveNavigation();
     setupNavigationToggle();
     renderProjectSections();
+    applySubtleWindowOffsets();
     installHarmlessMicroInteractions();
   }
 

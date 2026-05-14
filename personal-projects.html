@@ -10,17 +10,17 @@
 <body data-page="personal">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header" data-site-header>
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="brand" href="index.html" aria-label="Boris Hanicotte home">
-        <span class="brand-mark" aria-hidden="true"></span>
+  <header class="menu-shell" data-site-header>
+    <nav class="menu-bar" aria-label="Primary navigation">
+      <a class="menu-brand" href="index.html" aria-label="Boris Hanicotte home">
+        <span class="menu-icon" aria-hidden="true"></span>
         <span>Boris Hanicotte</span>
       </a>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
-        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      <button class="menu-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
+        <span aria-hidden="true">MENU</span>
         <span class="sr-only">Toggle navigation</span>
       </button>
-      <div class="nav-links" id="nav-links" data-nav-links>
+      <div class="menu-links" id="nav-links" data-nav-links>
         <a href="index.html" data-nav-link>Home</a>
         <a href="personal-projects.html" data-nav-link>Personal Projects</a>
         <a href="42-projects.html" data-nav-link>42 Support Projects</a>
@@ -29,23 +29,38 @@
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="page-hero section-shell" aria-labelledby="page-title">
-      <p class="eyebrow">Archive / Independent systems</p>
-      <h1 id="page-title">Personal Projects</h1>
-      <p>
-        Independent projects, tools and experiments. Some are useful. Some are suspicious.
-        Most exist because a simple idea became structurally unreasonable.
-      </p>
+  <main id="main-content" class="desktop archive-desktop">
+    <section class="window page-window offset-a" aria-labelledby="page-title" data-window-offset>
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <span class="window-title">PERSONAL_PROJECTS.DIR</span>
+        <span class="window-chip">ARCHIVE</span>
+      </div>
+      <div class="window-body">
+        <p class="system-label">Directory / independent systems</p>
+        <h1 id="page-title">Personal Projects</h1>
+        <p>
+          Independent projects, tools and experiments. Some are useful. Some are suspicious.
+          Most exist because a simple idea became structurally unreasonable.
+        </p>
+      </div>
+      <div class="status-bar">
+        <span>VIEW: FILE MANAGER</span>
+        <span>FILTER: NONE</span>
+      </div>
     </section>
 
-    <section class="project-board section-shell" aria-label="Personal project archive" data-project-page="personal">
-      <section class="project-section" aria-labelledby="web-experiments-title" data-project-section="webExperiments">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 01</p>
-          <h2 id="web-experiments-title">Web Experiments</h2>
+    <section class="project-board" aria-label="Personal project archive" data-project-page="personal">
+      <section class="window project-section offset-b" aria-labelledby="web-experiments-title" data-project-section="webExperiments" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="web-experiments-title">Web Experiments</span>
+          <span class="window-chip">SECTION 01</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Game / Global Game Jam</span><span>Playable incident</span></div>
             <h3>Masks of Shadow</h3>
@@ -67,12 +82,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="tools-editors-title" data-project-section="toolsEditors">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 02</p>
-          <h2 id="tools-editors-title">Tools &amp; Editors</h2>
+      <section class="window project-section offset-c" aria-labelledby="tools-editors-title" data-project-section="toolsEditors" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="tools-editors-title">Tools &amp; Editors</span>
+          <span class="window-chip">SECTION 02</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Image Tool</span><span>Compression organism</span></div>
             <h3>JpegCore</h3>
@@ -106,12 +122,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="audio-game-title" data-project-section="audioGameStrange">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 03</p>
-          <h2 id="audio-game-title">Audio / Game / Strange Machinery</h2>
+      <section class="window project-section offset-a" aria-labelledby="audio-game-title" data-project-section="audioGameStrange" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="audio-game-title">Audio / Game / Strange Machinery</span>
+          <span class="window-chip">SECTION 03</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Audio / Web Tool</span><span>Audio debris</span></div>
             <h3>FK SoundCloud</h3>
@@ -127,12 +144,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="local-github-title" data-project-section="localGithub">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 04</p>
-          <h2 id="local-github-title">Local &amp; GitHub Projects</h2>
+      <section class="window project-section offset-b" aria-labelledby="local-github-title" data-project-section="localGithub" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="local-github-title">Local &amp; GitHub Projects</span>
+          <span class="window-chip">SECTION 04</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Network / Messaging</span><span>Local transmission</span></div>
             <h3>LAN Messenger P2P</h3>
@@ -145,7 +163,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Boris Hanicotte — static signal emitted through GitHub Pages.</p>
+    <p>Boris Hanicotte - static signal emitted through GitHub Pages.</p>
   </footer>
 
   <script src="assets/js/projects.js"></script>

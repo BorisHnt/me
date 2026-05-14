@@ -10,17 +10,17 @@
 <body data-page="42">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <header class="site-header" data-site-header>
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="brand" href="index.html" aria-label="Boris Hanicotte home">
-        <span class="brand-mark" aria-hidden="true"></span>
+  <header class="menu-shell" data-site-header>
+    <nav class="menu-bar" aria-label="Primary navigation">
+      <a class="menu-brand" href="index.html" aria-label="Boris Hanicotte home">
+        <span class="menu-icon" aria-hidden="true"></span>
         <span>Boris Hanicotte</span>
       </a>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
-        <span class="nav-toggle-lines" aria-hidden="true"></span>
+      <button class="menu-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
+        <span aria-hidden="true">MENU</span>
         <span class="sr-only">Toggle navigation</span>
       </button>
-      <div class="nav-links" id="nav-links" data-nav-links>
+      <div class="menu-links" id="nav-links" data-nav-links>
         <a href="index.html" data-nav-link>Home</a>
         <a href="personal-projects.html" data-nav-link>Personal Projects</a>
         <a href="42-projects.html" data-nav-link>42 Support Projects</a>
@@ -29,23 +29,38 @@
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="page-hero section-shell" aria-labelledby="page-title">
-      <p class="eyebrow">42 Marseille / Support systems</p>
-      <h1 id="page-title">42 Support Projects</h1>
-      <p>
-        Tools and experiments connected to 42 Marseille. Built to reduce friction, clarify workflows,
-        clean machines, fight annoying formats and make student life slightly less hostile.
-      </p>
+  <main id="main-content" class="desktop archive-desktop">
+    <section class="window page-window offset-a" aria-labelledby="page-title" data-window-offset>
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <span class="window-title">42_SUPPORT_PANEL.EXE</span>
+        <span class="window-chip">UTILITY</span>
+      </div>
+      <div class="window-body">
+        <p class="system-label">Control panel / school survival</p>
+        <h1 id="page-title">42 Support Projects</h1>
+        <p>
+          Tools and experiments connected to 42 Marseille. Built to reduce friction, clarify workflows,
+          clean machines, fight annoying formats and make student life slightly less hostile.
+        </p>
+      </div>
+      <div class="status-bar">
+        <span>VIEW: CONTROL PANEL</span>
+        <span>FRICTION: REDUCED</span>
+      </div>
     </section>
 
-    <section class="project-board section-shell" aria-label="42 support project archive" data-project-page="fortyTwo">
-      <section class="project-section" aria-labelledby="forty-two-web-title" data-project-section="webTools">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 01</p>
-          <h2 id="forty-two-web-title">42 Web Tools</h2>
+    <section class="project-board" aria-label="42 support project archive" data-project-page="fortyTwo">
+      <section class="window project-section offset-b" aria-labelledby="forty-two-web-title" data-project-section="webTools" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="forty-two-web-title">42 Web Tools</span>
+          <span class="window-chip">SECTION 01</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>42 / LMS Redesign</span><span>Interface overhaul</span></div>
             <h3>Intra+ Presentation</h3>
@@ -61,12 +76,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="lms-intra-title" data-project-section="lmsIntra">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 02</p>
-          <h2 id="lms-intra-title">LMS / Intra Experiments</h2>
+      <section class="window project-section offset-c" aria-labelledby="lms-intra-title" data-project-section="lmsIntra" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="lms-intra-title">LMS / Intra Experiments</span>
+          <span class="window-chip">SECTION 02</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Learning / Quiz</span><span>Question machine</span></div>
             <h3>Business Quiz</h3>
@@ -76,12 +92,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="github-utils-title" data-project-section="githubUtilities">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 03</p>
-          <h2 id="github-utils-title">GitHub Utilities</h2>
+      <section class="window project-section offset-a" aria-labelledby="github-utils-title" data-project-section="githubUtilities" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="github-utils-title">GitHub Utilities</span>
+          <span class="window-chip">SECTION 03</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>Python / Code Quality</span><span>Compliance violence</span></div>
             <h3>Flake8ator</h3>
@@ -91,12 +108,13 @@
         </div>
       </section>
 
-      <section class="project-section" aria-labelledby="survival-tools-title" data-project-section="workstationSurvival">
-        <div class="section-heading compact">
-          <p class="eyebrow">Section 04</p>
-          <h2 id="survival-tools-title">Workstation Survival Tools</h2>
+      <section class="window project-section offset-b" aria-labelledby="survival-tools-title" data-project-section="workstationSurvival" data-window-offset>
+        <div class="title-bar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+          <span class="window-title" id="survival-tools-title">Workstation Survival Tools</span>
+          <span class="window-chip">SECTION 04</span>
         </div>
-        <div class="project-grid">
+        <div class="window-body project-grid">
           <article class="project-card">
             <div class="project-meta"><span>System Utility</span><span>Cache exorcism</span></div>
             <h3>42 Station Cleaner</h3>
@@ -115,7 +133,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Boris Hanicotte — static signal emitted through GitHub Pages.</p>
+    <p>Boris Hanicotte - static signal emitted through GitHub Pages.</p>
   </footer>
 
   <script src="assets/js/projects.js"></script>
