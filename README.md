@@ -4,13 +4,28 @@ Static personal portfolio website for GitHub Pages.
 
 Live site: https://borishnt.github.io/me/index.html
 
-## Pages
+## Description
 
-- `index.html`
-- `personal-projects.html`
-- `42-projects.html`
+A small personal portfolio presented as a modern flat desktop interface inspired by early graphical operating systems. It uses window panels, title bars, file/archive metaphors and static project data rendered with vanilla JavaScript.
 
-## Structure
+## Run Locally
+
+Open `index.html` directly in a browser.
+
+No install step is required.
+
+## GitHub Pages
+
+This repository is ready for GitHub Pages. Push the files, enable Pages from the repository settings, and serve the site from the repository root.
+
+## Technologies
+
+- HTML
+- CSS
+- Vanilla JavaScript
+- Static files only
+
+## File Structure
 
 ```text
 /
@@ -26,11 +41,3 @@ Live site: https://borishnt.github.io/me/index.html
 │   └── img/
 └── README.md
 ```
-
-## Deployment
-
-This site uses only HTML, CSS and vanilla JavaScript. There is no build step, backend, package manager or framework.
-
-To deploy on GitHub Pages, push these files to a repository and enable GitHub Pages from the repository settings.
-
-The site also works locally by opening `index.html` in a browser.

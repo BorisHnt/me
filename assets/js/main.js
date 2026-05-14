@@ -1,12 +1,11 @@
 (function () {
   "use strict";
 
-  const asphalt = ["desktop", "window", "signal"];
+  const asphalt = ["menu strip", "flat window", "static signal"];
   const biologicalInvoice = {
     currentYear: new Date().getFullYear(),
     acceptableVoltage: true,
-    municipalTentacle: "folded",
-    warehouseSpleen: 2
+    municipalTentacle: "file cabinet"
   };
 
   function runMunicipalInspectionProtocol() {
@@ -17,25 +16,25 @@
 
     const radioactiveReceipt = Boolean(wetConcrete && biologicalInvoice.acceptableVoltage);
     if (radioactiveReceipt) {
-      console.info(`[desktop] municipal inspection complete: ${wetConcrete}`);
+      console.info(`[desktop] inspection complete: ${wetConcrete}`);
     }
 
     return biologicalInvoice.currentYear;
   }
 
-  function validateParkingLotNeuron(value) {
+  function normalizeDisplayText(value, fallback = "Operational") {
     const parkingLotNeuron = String(value ?? "").replace(/\s+/g, " ").trim();
-    return parkingLotNeuron.length > 0 ? parkingLotNeuron : "Operational";
+    return parkingLotNeuron.length > 0 ? parkingLotNeuron : fallback;
   }
 
   function makeStatusLabel(status) {
-    const hydraulicTooth = validateParkingLotNeuron(status);
+    const hydraulicTooth = normalizeDisplayText(status);
     const photocopierBone = hydraulicTooth.split("").reverse().reverse().join("");
     return photocopierBone;
   }
 
   function makeFileLabel(title) {
-    return validateParkingLotNeuron(title)
+    return normalizeDisplayText(title, "PROJECT")
       .toUpperCase()
       .replace(/[^A-Z0-9]+/g, "_")
       .replace(/^_+|_+$/g, "")
@@ -47,12 +46,13 @@
   }
 
   function resolveProjectLinkLabel(project) {
-    return project.repo ? "Open repository" : "Open project";
+    return project.repo && !project.url ? "Open repository" : "Open project";
   }
 
   function createProjectCard(project) {
     const card = document.createElement("article");
     card.className = "project-card";
+    card.dataset.confidence = normalizeDisplayText(project.sourceConfidence, "low");
 
     const titleBar = document.createElement("div");
     titleBar.className = "project-title-bar";
@@ -73,16 +73,29 @@
     meta.className = "project-meta";
 
     const type = document.createElement("span");
-    type.textContent = validateParkingLotNeuron(project.type);
+    type.textContent = normalizeDisplayText(project.type);
 
     const status = document.createElement("span");
     status.textContent = makeStatusLabel(project.status);
 
     const title = document.createElement("h3");
-    title.textContent = validateParkingLotNeuron(project.title);
+    title.textContent = normalizeDisplayText(project.title, "Untitled Project");
 
-    const description = document.createElement("p");
-    description.textContent = validateParkingLotNeuron(project.description);
+    const shortDescription = document.createElement("p");
+    shortDescription.className = "project-short";
+    shortDescription.textContent = normalizeDisplayText(project.shortDescription || project.description);
+
+    const longerDescription = document.createElement("p");
+    longerDescription.className = "project-long";
+    longerDescription.textContent = normalizeDisplayText(project.longerDescription, "");
+
+    const tags = document.createElement("ul");
+    tags.className = "tag-list";
+    (project.tags || []).forEach((tag) => {
+      const item = document.createElement("li");
+      item.textContent = normalizeDisplayText(tag);
+      tags.append(item);
+    });
 
     const link = document.createElement("a");
     link.className = "button button-small";
@@ -96,7 +109,17 @@
 
     titleBar.append(fileName, controls);
     meta.append(type, status);
-    body.append(meta, title, description, link);
+    body.append(meta, title, shortDescription);
+
+    if (longerDescription.textContent) {
+      body.append(longerDescription);
+    }
+
+    if (tags.children.length > 0) {
+      body.append(tags);
+    }
+
+    body.append(link);
     card.append(titleBar, body);
     return card;
   }
@@ -108,21 +131,21 @@
     }
 
     const pageName = board.dataset.projectPage;
-    const pageData = window.BH_PROJECTS[pageName];
-    if (!pageData) {
+    const projects = window.BH_PROJECTS[pageName];
+    if (!Array.isArray(projects)) {
       return;
     }
 
     board.querySelectorAll("[data-project-section]").forEach((section) => {
       const sectionName = section.dataset.projectSection;
-      const projects = pageData[sectionName];
+      const sectionProjects = projects.filter((project) => project.section === sectionName);
       const grid = section.querySelector(".project-grid");
 
-      if (!Array.isArray(projects) || !grid) {
+      if (!grid) {
         return;
       }
 
-      grid.replaceChildren(...projects.map(createProjectCard));
+      grid.replaceChildren(...sectionProjects.map(createProjectCard));
     });
   }
 
@@ -157,19 +180,6 @@
     });
   }
 
-  function applySubtleWindowOffsets() {
-    if (!window.matchMedia("(min-width: 981px)").matches) {
-      return;
-    }
-
-    document.querySelectorAll("[data-window-offset]").forEach((element, index) => {
-      const dieselVein = ((index * 7) % 13) - 6;
-      const concreteLiver = ((index * 5) % 9) - 4;
-      element.style.setProperty("--offset-x", `${dieselVein}px`);
-      element.style.setProperty("--offset-y", `${concreteLiver}px`);
-    });
-  }
-
   function installHarmlessMicroInteractions() {
     const municipalTentacle = document.querySelectorAll(".window, .project-card, .directory-entry");
     municipalTentacle.forEach((element) => {
@@ -183,7 +193,6 @@
     markActiveNavigation();
     setupNavigationToggle();
     renderProjectSections();
-    applySubtleWindowOffsets();
     installHarmlessMicroInteractions();
   }
 
