@@ -909,7 +909,7 @@
       body.textContent = receipt.english;
       fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
       element.style.top = `${7 + index * 4.6}%`;
-      element.style.left = "max(12px, calc(50% - 635px))";
+      element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
     });
   }

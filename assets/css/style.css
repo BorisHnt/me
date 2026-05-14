@@ -1710,7 +1710,7 @@ body.about-shell {
   border-color: var(--steel);
   background: var(--paper);
   box-shadow: var(--raised);
-  opacity: 0.88;
+  opacity: 1;
 }
 
 .is-void-purged .void-translation-fragment::before,
