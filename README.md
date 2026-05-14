@@ -2,6 +2,8 @@
 
 Static personal portfolio website for GitHub Pages.
 
+Live site: https://borishnt.github.io/me/index.html
+
 ## Pages
 
 - `index.html`
