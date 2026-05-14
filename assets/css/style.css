@@ -816,6 +816,7 @@ body.about-shell {
   margin-top: 2.35rem;
   border-top: 2px solid var(--dust);
   padding-top: 1.35rem;
+  overflow: visible;
 }
 
 .about-header + .about-section {
@@ -835,6 +836,7 @@ body.about-shell {
 .about-paragraph {
   max-width: 780px;
   margin-bottom: 1rem;
+  overflow: visible;
 }
 
 .about-list {
@@ -901,13 +903,17 @@ body.about-shell {
 }
 
 .zalgo-heavy {
-  line-height: 1.95;
+  display: inline;
+  line-height: 1;
   text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--dust);
 }
 
 .zalgo-terminal {
   display: inline-block;
-  line-height: 2.8;
+  line-height: 0.82;
+  margin-block: 0.2em;
+  padding-block: 0.18em;
+  overflow: visible;
   text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust), 0 2px 0 var(--ink);
   vertical-align: middle;
 }
@@ -937,7 +943,7 @@ body.about-shell {
   font-family: var(--mono);
   font-size: clamp(1rem, 3vw, 2rem);
   font-weight: 900;
-  line-height: 2.4;
+  line-height: 0.92;
   overflow: visible;
   text-transform: uppercase;
 }
@@ -968,7 +974,7 @@ body.about-shell {
 .void-bleed-line--terminal {
   margin-left: -9vw;
   font-size: clamp(1.4rem, 5vw, 3.4rem);
-  line-height: 3.2;
+  line-height: 0.76;
 }
 
 .void-document-collapse {
@@ -988,10 +994,40 @@ body.about-shell {
   display: block;
 }
 
-.is-void-contained .void-bleed-line,
-.is-void-contained .void-aberration,
+.is-corruption-stage-4.is-void-contained .void-bleed-line,
+.is-corruption-stage-5.is-void-contained .void-bleed-line {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  border-color: var(--steel);
+  padding: 0.38rem 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  opacity: 0.58;
+  text-shadow: none;
+}
+
+.is-void-contained .void-bleed-line--terminal {
+  font-size: 1.05rem;
+  line-height: 1.08;
+}
+
+.is-void-contained .void-aberration {
+  opacity: 0.24;
+}
+
 .is-void-contained .void-popup--damaged {
-  display: none;
+  opacity: 0.82;
+}
+
+.is-void-contained .void-terminal-fragment,
+.is-void-contained .void-margin-escape,
+.is-void-contained .void-ghost-text {
+  max-width: 180px;
+  opacity: 0.38;
 }
 
 .is-void-contained .about-section--lower,
@@ -1553,7 +1589,7 @@ body.about-shell {
     max-width: 100%;
     margin-left: 0;
     font-size: 1rem;
-    line-height: 2;
+    line-height: 1.18;
     overflow-wrap: anywhere;
   }
 
@@ -1579,14 +1615,22 @@ body.about-shell {
     animation-iteration-count: 1 !important;
   }
 
-  .void-bleed-line,
   .void-aberration,
   .void-popup--damaged {
     display: none !important;
   }
 
+  .void-bleed-line {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 0.92rem;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
   .zalgo-terminal,
   .zalgo-heavy {
-    line-height: 1.8;
+    line-height: 1.35;
   }
 }

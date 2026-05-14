@@ -493,7 +493,7 @@
     button.addEventListener("click", () => {
       const contained = document.body.classList.toggle("is-void-contained");
       button.setAttribute("aria-pressed", String(contained));
-      button.textContent = contained ? "Void contained" : "Contain the void";
+      button.textContent = contained ? "Void limited" : "Contain the void";
       document.dispatchEvent(new CustomEvent("void-containment-change", { detail: { contained } }));
     });
     return button;
@@ -709,9 +709,10 @@
   }
 
   function createVoidPopup(notice) {
+    const noticeDamage = calculatePopupDamageAfterBureaucracy(notice);
     const popup = document.createElement("section");
     popup.className = "void-popup";
-    if (notice.damage >= 3) {
+    if (noticeDamage >= 3) {
       popup.classList.add("void-popup--damaged");
     }
     popup.setAttribute("role", "region");
@@ -721,7 +722,7 @@
     titlebar.className = "void-popup__titlebar";
 
     const title = document.createElement("span");
-    title.textContent = notice.damage >= 4 ? generateUnauthorizedZalgoLeak(notice.title, 2) : notice.title;
+    title.textContent = noticeDamage >= 4 ? generateUnauthorizedZalgoLeak(notice.title, 2) : notice.title;
 
     const close = document.createElement("button");
     close.className = "void-popup__close";
@@ -732,9 +733,9 @@
 
     const message = document.createElement("p");
     message.className = "void-popup__message";
-    message.textContent = notice.damage ? generateUnauthorizedZalgoLeak(notice.message, notice.damage) : notice.message;
+    message.textContent = noticeDamage ? generateUnauthorizedZalgoLeak(notice.message, noticeDamage) : notice.message;
 
-    if (notice.damage >= 4) {
+    if (noticeDamage >= 4) {
       const decorativeClose = document.createElement("span");
       decorativeClose.className = "void-popup__false-close";
       decorativeClose.textContent = "X X X";
@@ -744,6 +745,15 @@
     titlebar.append(title, close);
     popup.append(titlebar, message);
     return popup;
+  }
+
+  function calculatePopupDamageAfterBureaucracy(notice) {
+    const declaredDamage = Number(notice.damage || 0);
+    const contained = document.body.classList.contains("is-void-contained");
+    const reduced = document.body.classList.contains("prefers-reduced-motion");
+    const formulaireOsseux = contained ? 2 : 0;
+    const poussiereLegale = reduced ? 2 : 0;
+    return Math.max(0, Math.min(5, declaredDamage - formulaireOsseux - poussiereLegale));
   }
 
   function deployAdministrativeTumor(stack, notice) {
@@ -813,11 +823,11 @@
 
       if (stage !== currentStage) {
         currentStage = stage;
-        applyCorruptionStage(contained ? Math.min(stage, 2) : stage, fragments);
+        applyCorruptionStage(stage, fragments);
       }
 
       popupNotices.forEach((notice, index) => {
-        if (!contained && inspection.progress >= notice.threshold && !shownPopups.has(index)) {
+        if (inspection.progress >= notice.threshold && !shownPopups.has(index)) {
           shownPopups.add(index);
           deployAdministrativeTumor(popupStack, notice);
         }
@@ -835,9 +845,6 @@
 
     document.addEventListener("void-containment-change", (event) => {
       contained = Boolean(event.detail && event.detail.contained);
-      if (contained && popupStack) {
-        popupStack.replaceChildren();
-      }
       currentStage = -1;
       inspectScrollPosition();
     });
