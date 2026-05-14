@@ -156,7 +156,10 @@ p {
   height: 14px;
   border: 1px solid var(--border-light);
   background: var(--paper);
-  box-shadow: inset -5px 0 0 var(--steel);
+  box-shadow:
+    inset -5px 0 0 var(--steel),
+    inset 0 -5px 0 var(--dust),
+    1px 1px 0 var(--ink);
 }
 
 .shell-title {
@@ -483,11 +486,27 @@ h1 {
 }
 
 .directory-icon {
+  position: relative;
   width: 26px;
   height: 22px;
   border: 2px solid var(--border-dark);
+  margin-top: 2px;
   background: var(--paper);
-  box-shadow: inset 0 6px 0 var(--steel);
+  box-shadow:
+    inset 0 7px 0 var(--steel),
+    var(--raised);
+}
+
+.directory-icon::before {
+  position: absolute;
+  top: -7px;
+  left: -2px;
+  width: 13px;
+  height: 7px;
+  border: 2px solid var(--border-dark);
+  border-bottom: 0;
+  background: var(--paper);
+  content: "";
 }
 
 .directory-icon.green {
@@ -546,11 +565,33 @@ h1 {
   display: flex;
   min-height: 24px;
   align-items: center;
-  justify-content: space-between;
   gap: 0.5rem;
   border-bottom: 2px solid var(--border-dark);
   padding: 3px 5px;
   background: var(--surface-alt);
+}
+
+.project-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  border: 1px solid var(--border-dark);
+  background: var(--paper);
+  box-shadow:
+    inset 0 4px 0 var(--dust),
+    inset -4px 0 0 var(--steel);
+}
+
+.project-icon::before {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--border-dark);
+  background: var(--dust);
+  content: "";
 }
 
 .project-card:hover .project-title-bar,
@@ -560,6 +601,7 @@ h1 {
 }
 
 .project-file-name {
+  flex: 1;
   min-width: 0;
   overflow: hidden;
   font-family: var(--mono);
@@ -717,8 +759,10 @@ h1 {
   height: 12px;
   margin-right: 6px;
   border: 1px solid var(--border-dark);
-  background: var(--steel);
-  box-shadow: inset 4px 0 0 var(--paper);
+  background: var(--paper);
+  box-shadow:
+    inset 6px 0 0 var(--steel),
+    inset 0 -6px 0 var(--dust);
   content: "";
 }
 

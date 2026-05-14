@@ -57,6 +57,10 @@
     const titleBar = document.createElement("div");
     titleBar.className = "project-title-bar";
 
+    const icon = document.createElement("span");
+    icon.className = "project-icon";
+    icon.setAttribute("aria-hidden", "true");
+
     const fileName = document.createElement("span");
     fileName.className = "project-file-name";
     fileName.textContent = `${makeFileLabel(project.title)}.APP`;
@@ -107,7 +111,7 @@
       link.rel = "noopener noreferrer";
     }
 
-    titleBar.append(fileName, controls);
+    titleBar.append(icon, fileName, controls);
     meta.append(type, status);
     body.append(meta, title, shortDescription);
 
