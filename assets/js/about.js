@@ -40,10 +40,19 @@
         "QSBmaWxlIGZvcm1hdCBiZWhhdmVzIGJhZGx5LgpBIHNjaG9vbCB3b3Jrc3RhdGlvbiBiZWNvbWVzIHBhaW5mdWwgdG8gdXNlLgpBbiBpbnRlcmZhY2UgaGlkZXMgdXNlZnVsIGluZm9ybWF0aW9uLgpBIHJlcGV0aXRpdmUgdGFzayB3YXN0ZXMgZXZlcnlvbmXigJlzIHRpbWUuCkEgc21hbGwgcHJvYmxlbSBzdXJ2aXZlcyBmb3IgdG9vIGxvbmcgYmVjYXVzZSBub2JvZHkgZmVsdCBsaWtlIGdpdmluZyBpdCBhIHNoYXBlLg==",
         "U28gSSBnaXZlIGl0IGEgc2hhcGUu",
         "U29tZXRpbWVzIHRoYXQgc2hhcGUgaXMgYSBQeXRob24gdG9vbC4gU29tZXRpbWVzIGl0IGlzIGEgc3RhdGljIHdlYnNpdGUuIFNvbWV0aW1lcyBpdCBpcyBhbiBlZGl0b3IsIGEgc2NyaXB0LCBhIGJyb3dzZXIgdXRpbGl0eSwgYSBzb3VuZCBleHBlcmltZW50LCBhIHZpc3VhbCBtYWNoaW5lLCBvciBhIHN1c3BpY2lvdXNseSBzcGVjaWZpYyBidXR0b24gdGhhdCBleGlzdHMgYmVjYXVzZSBJIG5lZWRlZCBpdCBvbmNlIGFuZCB0aGVuIGRlY2lkZWQgb3RoZXIgcGVvcGxlIG1pZ2h0IG5lZWQgaXQgdG9vLg==",
+        "SSBkbyBub3QgYnVpbGQgdG9vbHMgYmVjYXVzZSBJIHdhbnQgdG8gbG9vayBnZW5lcm91cy4=",
+        "SSBidWlsZCB0aGVtIGJlY2F1c2UgSSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZS4=",
+        "QSBiYWRseSBkZXNpZ25lZCBpbnRlcmZhY2UsIGEgcmVwZXRpdGl2ZSBjYWxjdWxhdGlvbiwgYSBoaWRkZW4gcGllY2Ugb2YgaW5mb3JtYXRpb24sIGEgbWFjaGluZSB0aGF0IG1ha2VzIHRoZSB1c2VyIGFkYXB0IGluc3RlYWQgb2YgYWRhcHRpbmcgdG8gdGhlIHVzZXIg4oCUIHRoZXNlIHRoaW5ncyBsb29rIHNtYWxsIGZyb20gdGhlIG91dHNpZGUsIGJ1dCB0aGV5IHF1aWV0bHkgZXhoYXVzdCBwZW9wbGUu",
+        "V2hlbiBJIGNhbiByZW1vdmUgb25lIG9mIHRob3NlIG9ic3RhY2xlcywgSSB1c3VhbGx5IGRvLg==",
+        "SSBkbyBub3QgaGF2ZSBtdWNoIG1vbmV5LiBJIGFtIG5vdCBpbiBhIHBvc2l0aW9uIHdoZXJlIGdlbmVyb3NpdHkgY2FuIGJlIHNwZWN0YWN1bGFyLiBCdXQgSSBjYW4gZ2l2ZSB0aW1lLiBJIGNhbiBnaXZlIGNvZGUuIEkgY2FuIGdpdmUgc21hbGwgcmVwYWlycy4gSSBjYW4gbWFrZSBzb21ldGhpbmcgdGhhdCBzYXZlcyBzb21lb25lIGEgZmV3IG1pbnV0ZXMsIGEgZmV3IGNsaWNrcywgYSBzbWFsbCBhbW91bnQgb2YgZnJ1c3RyYXRpb24u",
         "V2hlbiBJIGJ1aWxkIHRvb2xzIGZvciBvdGhlciBwZW9wbGUsIGVzcGVjaWFsbHkgY2xhc3NtYXRlcywgSSB1c3VhbGx5IGRvIG5vdCBhc2sgZm9yIGFueXRoaW5nIGluIHJldHVybi4=",
         "SSBtYWtlIHRoZW0gYmVjYXVzZSBJIHdhbnQgdGhlaXIgbGl2ZXMgdG8gYmUgZWFzaWVyLg==",
         "VGhhdCBpcyBhbGwu",
-        "Tm90IGV2ZXJ5dGhpbmcgbmVlZHMgdG8gYmVjb21lIGEgdHJhbnNhY3Rpb24uIE5vdCBldmVyeSB1c2VmdWwgdGhpbmcgbmVlZHMgdG8gYmVjb21lIGEgcHJvZHVjdC4gU29tZXRpbWVzIGEgdG9vbCBpcyBqdXN0IGEgc21hbGwgcmVwYWlyIG9mZmVyZWQgdG8gdGhlIHdvcmxkIGJlY2F1c2UgdGhlIHdvcmxkIHdhcyBhbm5veWluZyBpbiBhIHZlcnkgc3BlY2lmaWMgd2F5Lg=="
+        "Tm90IGV2ZXJ5dGhpbmcgbmVlZHMgdG8gYmVjb21lIGEgdHJhbnNhY3Rpb24uIE5vdCBldmVyeSB1c2VmdWwgdGhpbmcgbmVlZHMgdG8gYmVjb21lIGEgcHJvZHVjdC4gU29tZXRpbWVzIGEgdG9vbCBpcyBqdXN0IGEgc21hbGwgcmVwYWlyIG9mZmVyZWQgdG8gdGhlIHdvcmxkIGJlY2F1c2UgdGhlIHdvcmxkIHdhcyBhbm5veWluZyBpbiBhIHZlcnkgc3BlY2lmaWMgd2F5Lg==",
+        "VGhlcmUgaXMgYSBwYXJ0aWN1bGFyIGtpbmQgb2Ygam95IGluIHNlZWluZyBzb21lb25lIGJlY29tZSBsaWdodGVyIGJlY2F1c2Ugb2Ygc29tZXRoaW5nIEkgbWFkZS4=",
+        "Tm90IGFkbWlyYXRpb24uCk5vdCBhcHBsYXVzZS4KSnVzdCByZWxpZWYu",
+        "U29tZW9uZSBvcGVucyBhIHBhZ2UgYW5kIHVuZGVyc3RhbmRzIGZhc3Rlci4KU29tZW9uZSBzdG9wcyBjYWxjdWxhdGluZyBieSBoYW5kLgpTb21lb25lIGZpbmRzIHRoZSBpbmZvcm1hdGlvbiB0aGV5IG5lZWRlZC4KU29tZW9uZSBzYXlzLCDigJx0aGF0IGFjdHVhbGx5IGhlbHBzLuKAnQ==",
+        "VGhhdCBpcyBlbm91Z2gu"
       ]
     },
     {
@@ -59,15 +68,16 @@
     {
       title: "VGhlIFZhbHVlIFByb2JsZW0=",
       paragraphs: [
-        "SSBoYXZlIHRyb3VibGUgdmFsdWluZyB3aGF0IEkgbWFrZS4=",
-        "V2hlbiBwZW9wbGUgdGVsbCBtZSB0aGF0IHNvbWV0aGluZyBJIGJ1aWx0IGlzIGltcHJlc3NpdmUsIEkgb2Z0ZW4gZmVlbCBjb25mdXNlZC4gVG8gbWUsIGl0IGxvb2tzIG9yZGluYXJ5LiBJdCBsb29rcyBsaWtlIHRoZSBtaW5pbXVtLiBJdCBsb29rcyBsaWtlIHNvbWV0aGluZyBhbnlvbmUgY291bGQgaGF2ZSBkb25lIGlmIHRoZXkgaGFkIGJlZW4gYW5ub3llZCBlbm91Z2ggZm9yIGxvbmcgZW5vdWdoLg==",
-        "VGhhdCByZWFjdGlvbiBpcyBub3Qgbm9ibGUuCkl0IGlzIG5vdCBodW1pbGl0eS4KSXQgaXMganVzdCBhIGJyb2tlbiBtZWFzdXJpbmcgaW5zdHJ1bWVudC4=",
-        "UHJhaXNlIGNhbiBtYWtlIG1lIGZlZWwgd29yc2UgaW5zdGVhZCBvZiBwcm91ZCwgYmVjYXVzZSBpdCBjcmVhdGVzIGEgZGlzdGFuY2UgYmV0d2VlbiB3aGF0IG90aGVyIHBlb3BsZSBzZWUgYW5kIHdoYXQgSSBhbSBhYmxlIHRvIGZlZWwu",
-        "SSBjYW4gYmUgaGFwcHkgZm9yIG90aGVyIHBlb3BsZS4gRWFzaWx5LiBOYXR1cmFsbHkuIEkgY2FuIHNlZSB0aGVpciBwcm9ncmVzcywgdGhlaXIgY291cmFnZSwgdGhlaXIgYWJzdXJkIGxpdHRsZSB2aWN0b3JpZXMuIEkgY2FuIGNlbGVicmF0ZSB0aGVtIHdpdGhvdXQgZWZmb3J0Lg==",
-        "Rm9yIG15c2VsZiwgdGhlIHNpZ25hbCBpcyB3ZWFrZXIu",
-        "TWF5YmUgdGhhdCBpcyB3aHkgSSBrZWVwIGJ1aWxkaW5nIHRoaW5ncy4=",
-        "Tm90IGJlY2F1c2UgSSBiZWxpZXZlIEkgYW0gZXhjZXB0aW9uYWwsIGJ1dCBiZWNhdXNlIHRoZSB3b3JrIGxlYXZlcyBldmlkZW5jZS4=",
-        "QSB0b29sIGV4aXN0cy4KQSBwYWdlIG9wZW5zLgpBIGJ1dHRvbiB3b3Jrcy4KQSBjbGFzc21hdGUgc2F2ZXMgdGltZS4KQSBzdHJhbmdlIGlkZWEgYmVjb21lcyBhIHVzYWJsZSBvYmplY3Qu",
+        "SSBoYXZlIGEgZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZS4=",
+        "V2hlbiBwZW9wbGUgdGVsbCBtZSB0aGF0IHNvbWV0aGluZyBJIG1hZGUgaXMgaW1wcmVzc2l2ZSwgSSBvZnRlbiBkbyBub3Qga25vdyB3aGVyZSB0byBwdXQgdGhhdCBzZW50ZW5jZS4gSXQgZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHku",
+        "VG8gbWUsIG1vc3Qgb2Ygd2hhdCBJIGJ1aWxkIGZlZWxzIG9idmlvdXMgYWZ0ZXIgaXQgZXhpc3RzLiBJIHNlZSB0aGUgbWlzdGFrZXMsIHRoZSBzaG9ydGN1dHMsIHRoZSBwYXJ0cyBJIHdhbnRlZCB0byBkbyBiZXR0ZXIsIHRoZSBzdHJ1Y3R1cmUgdGhhdCBjb3VsZCBiZSBjbGVhbmVyLCB0aGUgaWRlYSB0aGF0IHNob3VsZCBoYXZlIGJlZW4gc2ltcGxlci4=",
+        "U28gd2hlbiBzb21lb25lIHNlZXMgdmFsdWUgaW4gaXQsIEkgc29tZXRpbWVzIGZlZWwgYSBzdHJhbmdlIHNhZG5lc3MgaW5zdGVhZCBvZiBwcmlkZS4=",
+        "Tm90IGJlY2F1c2UgSSB0aGluayB0aGV5IGFyZSB3cm9uZy4KTm90IGJlY2F1c2UgSSB3YW50IHRvIHBlcmZvcm0gaHVtaWxpdHkuCk5vdCBiZWNhdXNlIEkgYW0gc2VjcmV0bHkgd2FpdGluZyBmb3IgbW9yZSBjb21wbGltZW50cy4=",
+        "SXQgaXMganVzdCB0aGF0IG15IGludGVybmFsIG1lYXN1cmluZyBpbnN0cnVtZW50IGRvZXMgbm90IHdvcmsgdmVyeSB3ZWxsLg==",
+        "SSBjYW4gcmVjb2duaXplIHZhbHVlIGluIG90aGVyIHBlb3BsZSBtdWNoIG1vcmUgZWFzaWx5IHRoYW4gaW4gbXlzZWxmLiBJIGNhbiBiZSBnZW51aW5lbHkgaGFwcHkgd2hlbiBzb21lb25lIHByb2dyZXNzZXMsIGNyZWF0ZXMsIHN1cnZpdmVzLCBsZWFybnMsIHJlcGFpcnMgc29tZXRoaW5nIGluc2lkZSB0aGVpciBsaWZlLiBUaGVpciB2aWN0b3JpZXMgZmVlbCByZWFsIHRvIG1lLg==",
+        "TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZlLg==",
+        "TWF5YmUgdGhhdCBpcyB3aHkgSSBrZWVwIGJ1aWxkaW5nIGV4dGVybmFsIHByb29mLg==",
+        "QSB0b29sIGV4aXN0cy4KQSBwYWdlIG9wZW5zLgpBIGJ1dHRvbiB3b3Jrcy4KU29tZW9uZSBzYXZlcyB0aW1lLgpTb21lb25lIHNtaWxlcy4KU29tZW9uZeKAmXMgZGF5IGJlY29tZXMgc2xpZ2h0bHkgbGVzcyBzdHVwaWQu",
         "U29tZXRpbWVzIGV2aWRlbmNlIGlzIGVhc2llciB0byB0cnVzdCB0aGFuIHNlbGYtZXN0ZWVtLg=="
       ]
     },
@@ -88,6 +98,22 @@
       paragraphs: [
         "TW9zdCBvZiB0aGVzZSBidWdzIGFyZSBzdGlsbCBvcGVuLg==",
         "U29tZSBhcmUgbm90IGJ1Z3MgYW55bW9yZS4KU29tZSBoYXZlIGJlY29tZSBhcmNoaXRlY3R1cmUu"
+      ]
+    },
+    {
+      title: "U292aWV0IEltYWdpbmFyeQ==",
+      paragraphs: [
+        "SSBoYXZlIGEgZGVlcCBmYXNjaW5hdGlvbiBmb3IgdGhlIFVTU1IgLyBTb3ZpZXQgd29ybGQsIGJ1dCBub3QgaW4gdGhlIGJsaW5kIG5vc3RhbGdpYyB3YXkgcGVvcGxlIG9mdGVuIGltYWdpbmUgd2hlbiB0aGV5IGhlYXIgdGhhdCBzZW50ZW5jZS4=",
+        "SSBhbSBub3QgaW50ZXJlc3RlZCBpbiBwcmV0ZW5kaW5nIGhpc3Rvcnkgd2FzIGNsZWFuLiBJIGtub3cgdGhhdCBwb2xpdGljYWwgc3lzdGVtcyBjYW4gY3J1c2gsIHNpbGVuY2UsIGRlZm9ybSBhbmQgYmV0cmF5IHRoZSB2ZXJ5IGlkZWFscyB0aGV5IGNsYWltIHRvIGRlZmVuZC4gSSBrbm93IHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gYWRtaXJpbmcgYSBjdWx0dXJhbCBmb3JjZSBhbmQgZGVueWluZyBpdHMgc2hhZG93cy4=",
+        "V2hhdCBtb3ZlcyBtZSBpcyBzb21ldGhpbmcgZWxzZS4=",
+        "SSBhbSBmYXNjaW5hdGVkIGJ5IHRoZSBjcmVhdGl2ZSBlbmVyZ3kgdGhhdCBjYW1lIG91dCBvZiB0aGF0IHdvcmxkOiB0aGUgYXJjaGl0ZWN0dXJlLCB0aGUgc3BhY2UgcHJvZ3JhbSwgdGhlIGVuZ2luZWVyaW5nLCB0aGUgcG9zdGVycywgdGhlIGNpbmVtYSwgdGhlIHB1YmxpYyBhcnQsIHRoZSBpbmR1c3RyaWFsIGRlc2lnbiwgdGhlIG11c2ljLCB0aGUgc2NpZW50aWZpYyBhbWJpdGlvbiwgdGhlIHN0cmFuZ2UgYmVhdXR5IG9mIG9iamVjdHMgbWFkZSBmb3IgYSBjb2xsZWN0aXZlIGxpZmUu",
+        "VGhlcmUgd2FzIGEgZ2VuaXVzIHRoZXJlIHRoYXQgZGlkIG5vdCBiZWxvbmcgb25seSB0byBpbnN0aXR1dGlvbnMuIEl0IGJlbG9uZ2VkIHRvIHBlb3BsZS4=",
+        "RW5naW5lZXJzLCB3b3JrZXJzLCBhcnRpc3RzLCB0ZWFjaGVycywgc2NpZW50aXN0cywgbWVjaGFuaWNzLCB3cml0ZXJzLCBkZXNpZ25lcnMsIGNvc21vbmF1dHMsIGFub255bW91cyBjaXRpemVucyB3aG8gYnVpbHQsIHJlcGFpcmVkLCBpbWFnaW5lZCwgdHJhbnNtaXR0ZWQgYW5kIGVuZHVyZWQuIFBlb3BsZSB3aG8gZ2F2ZSBzaGFwZSB0byB0aGluZ3MgbGFyZ2VyIHRoYW4gdGhlbXNlbHZlcy4=",
+        "VGhhdCBpcyB3aGF0IEkgYWRtaXJlLg==",
+        "Tm90IGEgcGVyZmVjdCBzdGF0ZS4KTm90IGEgY2xlYW4gbXl0aC4KTm90IGEgZmxhZyB1c2VkIGFzIGEgc2hvcnRjdXQgZm9yIHRoaW5raW5nLg==",
+        "SSBhZG1pcmUgdGhlIGh1bWFuIGJyaWxsaWFuY2UgdGhhdCBzdXJ2aXZlZCBpbnNpZGUgdGhlIG1hY2hpbmUuIFRoZSBpZGVhIHRoYXQga25vd2xlZGdlLCBjdWx0dXJlLCB0b29scyBhbmQgYmVhdXR5IHNob3VsZCBub3QgZXhpc3Qgb25seSBmb3IgcHJpdmF0ZSBzdGF0dXMsIGJ1dCBzaG91bGQgY2lyY3VsYXRlLCBlZHVjYXRlLCBzZXJ2ZSBhbmQgYmVsb25nIHRvIHRoZSBtYW55Lg==",
+        "TWF5YmUgdGhhdCBpcyBhbHNvIHdoeSBJIGxpa2UgYnVpbGRpbmcgc21hbGwgdG9vbHMgZm9yIHBlb3BsZSBhcm91bmQgbWUu",
+        "QSB0b29sIGRvZXMgbm90IGhhdmUgdG8gYmUgZ2xvcmlvdXMuCkl0IGp1c3QgaGFzIHRvIG1ha2Ugc29tZW9uZeKAmXMgZGF5IGxlc3MgaG9zdGlsZS4="
       ]
     },
     {
@@ -190,6 +216,16 @@
     { text: decodeChunk("YnJva2VuIGludGVyZmFjZXM="), stage: 2, level: 1 },
     { text: decodeChunk("ZXhlY3V0aW9uIHN0YWNr"), stage: 2, level: 1 },
     { text: decodeChunk("ZG9jdW1lbnRhdGlvbg=="), stage: 2, level: 1 },
+    { text: decodeChunk("ZnJpY3Rpb24="), stage: 2, level: 1 },
+    { text: decodeChunk("c21hbGwgcmVwYWlycw=="), stage: 2, level: 1 },
+    { text: decodeChunk("cmVsaWVm"), stage: 2, level: 1 },
+    { text: decodeChunk("cHJhaXNl"), stage: 3, level: 2 },
+    { text: decodeChunk("ZXh0ZXJuYWwgcHJvb2Y="), stage: 3, level: 2 },
+    { text: decodeChunk("YWRtaW5pc3RyYXRpdmU="), stage: 3, level: 2 },
+    { text: decodeChunk("U292aWV0IHdvcmxk"), stage: 3, level: 2 },
+    { text: decodeChunk("aHVtYW4gYnJpbGxpYW5jZQ=="), stage: 3, level: 2 },
+    { text: decodeChunk("aW5zaWRlIHRoZSBtYWNoaW5l"), stage: 3, level: 2 },
+    { text: decodeChunk("Y29sbGVjdGl2ZSBsaWZl"), stage: 3, level: 2 },
     { text: decodeChunk("ZXZpZGVuY2U="), stage: 3, level: 2 },
     { text: decodeChunk("c2VsZi1lc3RlZW0="), stage: 3, level: 2 },
     { text: decodeChunk("QURIRA=="), stage: 4, level: 3, sensitive: true },
@@ -247,6 +283,132 @@
     ["void-aberration void-margin-escape void-aberration--m", 5, "THE DOCUMENT IS LEAKING"],
     ["void-aberration void-ghost-text void-aberration--n", 5, "BIOGRAPHY EXCEEDS AUTHORIZED SHAPE"]
   ];
+
+  const voidTranslationReceipts = [
+    {
+      language: "CHINESE",
+      lang: "zh",
+      foreign: "一个工具不需要辉煌；它只需要让某个人的一天少一点敌意。",
+      english: "A tool does not need to be glorious; it only needs to make someone’s day less hostile."
+    },
+    {
+      language: "RUSSIAN",
+      lang: "ru",
+      foreign: "Иногда доказательствам легче доверять, чем самооценке.",
+      english: "Sometimes evidence is easier to trust than self-esteem."
+    },
+    {
+      language: "SPANISH",
+      lang: "es",
+      foreign: "Construyo porque la fricción existe, y alguien tiene que reducirla.",
+      english: "I build because friction exists, and someone has to reduce it."
+    },
+    {
+      language: "KOREAN",
+      lang: "ko",
+      foreign: "모든 유용한 것이 제품이 될 필요는 없다.",
+      english: "Not every useful thing needs to become a product."
+    },
+    {
+      language: "JAPANESE",
+      lang: "ja",
+      foreign: "小さな修理は、優しさの一つの形になり得る。",
+      english: "A small repair can be a form of tenderness."
+    },
+    {
+      language: "DUTCH",
+      lang: "nl",
+      foreign: "Ik aanbid machines niet; ik luister naar wat ze over mensen onthullen.",
+      english: "I do not worship machines; I listen to what they reveal about people."
+    },
+    {
+      language: "GERMAN",
+      lang: "de",
+      foreign: "Schlechte Benutzeroberflächen sind leise Formen von Grausamkeit.",
+      english: "Bad interfaces are quiet forms of cruelty."
+    },
+    {
+      language: "BULGARIAN",
+      lang: "bg",
+      foreign: "Ако една система прави хората по-малки, проблемът е в системата.",
+      english: "If a system makes people smaller, the system is the problem."
+    },
+    {
+      language: "GREEK",
+      lang: "el",
+      foreign: "Θαυμάζω όσα μπορούν να δημιουργήσουν οι άνθρωποι όταν η γνώση ανήκει σε όλους.",
+      english: "I admire what humans can create when knowledge belongs to everyone."
+    },
+    {
+      language: "ITALIAN",
+      lang: "it",
+      foreign: "Non inseguo la grandezza; cerco di lasciare tracce utili.",
+      english: "I am not chasing greatness; I am trying to leave useful traces."
+    },
+    {
+      language: "POLISH",
+      lang: "pl",
+      foreign: "Niektóre projekty zaczynają się od irytacji, a kończą jako schronienie.",
+      english: "Some projects begin as irritation and end as shelter."
+    },
+    {
+      language: "SLOVAK",
+      lang: "sk",
+      foreign: "Chvála ku mne často prichádza ako šum, ale niečia úľava ku mne prichádza jasne.",
+      english: "Praise often reaches me as noise, but someone’s relief reaches me clearly."
+    },
+    {
+      language: "KAZAKH",
+      lang: "kk",
+      foreign: "Машина қасиетті емес; оның артында күтіп тұрған адам қасиетті.",
+      english: "The machine is not sacred; the person waiting behind it is."
+    },
+    {
+      language: "GEORGIAN",
+      lang: "ka",
+      foreign: "მომწონს სისტემები, რომლებსაც ახსოვთ, რომ ცოცხალი არსებებისთვის შეიქმნენ.",
+      english: "I like systems that remember they were built for living beings."
+    },
+    {
+      language: "ARMENIAN",
+      lang: "hy",
+      foreign: "Կոճակը, որը մեկին տաս վայրկյան է խնայում, անիմաստ չէ։",
+      english: "A button that saves someone ten seconds is not meaningless."
+    },
+    {
+      language: "TURKISH",
+      lang: "tr",
+      foreign: "En iyi teknoloji kullanıcıya hükmetmez; sessizce nefes almasına yardım eder.",
+      english: "The best technology does not dominate the user; it quietly helps them breathe."
+    },
+    {
+      language: "KYRGYZ",
+      lang: "ky",
+      foreign: "Мен айланма жолдордон, ишке ашпай калган пландардан жана өжөрлүктүн кызык түрлөрүнөн куралганмын.",
+      english: "I am made of detours, failed plans, and strange forms of persistence."
+    },
+    {
+      language: "UZBEK",
+      lang: "uz",
+      foreign: "Jamoaviy orzu hatto buzilgan mashina ichida ham yashab qolishi mumkin.",
+      english: "A collective dream can survive even inside a broken machine."
+    },
+    {
+      language: "ARABIC",
+      lang: "ar",
+      dir: "rtl",
+      foreign: "ليس الفراغ عدوًا دائمًا؛ أحيانًا يكون هو المساحة التي لم تُكتب فيها أي تعليمات.",
+      english: "The void is not always an enemy; sometimes it is the space where no instruction was written."
+    },
+    {
+      language: "SWAHILI",
+      lang: "sw",
+      foreign: "Sitaki kuushangaza ulimwengu; nataka kuufanya uwe na upumbavu kidogo tu.",
+      english: "I do not want to impress the world; I want to make it slightly less stupid."
+    }
+  ];
+
+  const voidTranslationNodes = [];
 
   function decodeChunk(value) {
     const binary = window.atob(value);
@@ -629,6 +791,7 @@
     }
 
     const fragment = document.createDocumentFragment();
+    voidTranslationNodes.length = 0;
     aberrationBlueprint.forEach(([className, stage, label]) => {
       const element = document.createElement("span");
       element.className = className;
@@ -638,7 +801,86 @@
       }
       fragment.append(element);
     });
+    voidTranslationReceipts.forEach((receipt, index) => {
+      fragment.append(createVoidTranslationFragment(receipt, index));
+    });
     layer.replaceChildren(fragment);
+  }
+
+  function createVoidTranslationFragment(receipt, index) {
+    const container = document.createElement("aside");
+    const stage = resolveTranslationLeakStage(index);
+    const position = calculateTranslationLeakCoordinates(index);
+    container.className = `void-translation-fragment void-translation-fragment--${index % 6}`;
+    container.dataset.translationStage = String(stage);
+    container.setAttribute("aria-hidden", "true");
+    container.style.top = `${position.top}%`;
+    container.style.left = position.side === "left" ? `${position.edge}px` : "auto";
+    container.style.right = position.side === "right" ? `${position.edge}px` : "auto";
+
+    const title = document.createElement("span");
+    title.className = "void-translation-fragment__title";
+    title.textContent = `MEMORY ${String(index + 1).padStart(2, "0")} / ${receipt.language}`;
+
+    const body = document.createElement("span");
+    body.className = "void-translation-fragment__body";
+    body.lang = receipt.lang;
+    if (receipt.dir) {
+      body.dir = receipt.dir;
+    }
+    body.textContent = receipt.foreign;
+
+    const fault = document.createElement("span");
+    fault.className = "void-translation-fragment__fault";
+    fault.textContent = index % 2 === 0 ? "UNTRANSLATED SURFACE" : "LANGUAGE LEAK";
+
+    container.append(title, body, fault);
+    voidTranslationNodes.push({ body, fault, receipt });
+    return container;
+  }
+
+  function resolveTranslationLeakStage(index) {
+    if (index < 4) {
+      return 2;
+    }
+    if (index < 10) {
+      return 3;
+    }
+    if (index < 16) {
+      return 4;
+    }
+    return 5;
+  }
+
+  function calculateTranslationLeakCoordinates(index) {
+    const wetConcrete = [16, 24, 31, 38, 46, 52, 58, 63, 68, 72, 76, 80, 83, 86, 89, 91, 93, 95, 97, 98];
+    const asphalt = index % 4;
+    const side = index % 2 === 0 ? "left" : "right";
+    const edge = side === "left"
+      ? [-118, -58, 12, 72][asphalt]
+      : [-126, -68, 18, 84][asphalt];
+    return {
+      top: wetConcrete[index] || Math.min(98, 18 + index * 4),
+      side,
+      edge
+    };
+  }
+
+  function translateVoidFragments(contained) {
+    voidTranslationNodes.forEach(({ body, fault, receipt }, index) => {
+      body.lang = contained ? "en" : receipt.lang;
+      if (contained) {
+        body.removeAttribute("dir");
+        body.textContent = receipt.english;
+        fault.textContent = "TRANSLATED / CONTAINED";
+      } else {
+        if (receipt.dir) {
+          body.dir = receipt.dir;
+        }
+        body.textContent = receipt.foreign;
+        fault.textContent = index % 2 === 0 ? "UNTRANSLATED SURFACE" : "LANGUAGE LEAK";
+      }
+    });
   }
 
   function resolveCorruptionStage(progress) {
@@ -934,6 +1176,7 @@
         return;
       }
       contained = Boolean(event.detail && event.detail.contained);
+      translateVoidFragments(contained);
       currentStage = -1;
       inspectScrollPosition();
     });
@@ -941,6 +1184,7 @@
     document.addEventListener("void-purge-request", () => {
       voidPurged = true;
       contained = false;
+      translateVoidFragments(false);
       document.body.classList.add("is-void-purged");
       const containmentButton = document.querySelector(".about-containment-toggle");
       if (containmentButton) {
