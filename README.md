@@ -6,7 +6,7 @@ Live site: https://borishnt.github.io/me/index.html
 
 ## Description
 
-A small personal portfolio presented as a modern flat desktop interface inspired by early graphical operating systems. It uses window panels, title bars, file/archive metaphors and static project data rendered with vanilla JavaScript. The About page is a separate text-document experience with controlled scroll-based corruption.
+A small personal portfolio presented as a modern flat desktop interface inspired by early graphical operating systems. It uses window panels, title bars, file/archive metaphors and static project data rendered with vanilla JavaScript. The About page is a reconstructed personal document with controlled scroll-based corruption.
 
 ## Run Locally
 
@@ -37,6 +37,7 @@ This repository is ready for GitHub Pages. Push the files, enable Pages from the
 │   ├── css/
 │   │   └── style.css
 │   ├── js/
+│   │   ├── about.js
 │   │   ├── main.js
 │   │   └── projects.js
 │   └── img/

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Boris Hanicotte.">
-  <title>About | Boris Hanicotte</title>
+  <meta name="description" content="A personal biography of Boris Hanicotte: former medical technical support worker, developer at 42 Marseille, builder of tools, interfaces and strange systems.">
+  <title>About the Operator — Boris Hanicotte</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="about" data-corruption-stage="0">
+<body class="about-page is-corruption-stage-0" data-page="about">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="menu-shell" data-site-header>
@@ -34,124 +34,24 @@
   </header>
 
   <main id="main-content" class="about-document" data-about-document>
-    <article class="about-article" aria-labelledby="about-title">
+    <article class="about-article" data-about-article aria-labelledby="about-title">
       <header class="about-header">
-        <p class="about-kicker">personal text file / operator notes</p>
-        <h1 id="about-title">About the Operator</h1>
-        <p>My name is Boris Hanicotte.</p>
-        <p>
-          I used to work in medical technical support. Now I study software development at 42 Marseille,
-          where I negotiate with <span data-corrupt>pointers</span>, terminals, broken layouts and my own execution stack.
-        </p>
+        <p class="about-kicker">OPERATOR FILE / PERSONAL DOCUMENT</p>
+        <h1 id="about-title" class="about-heading">About the Operator</h1>
       </header>
-
-      <section class="about-section" aria-labelledby="previous-life-title">
-        <h2 id="previous-life-title">Previous Life</h2>
-        <p>
-          Before moving deeper into software, I worked around medical and technical environments:
-          support requests, practical systems, users who needed answers, machines that preferred silence,
-          and problems that had to be solved without theater.
-        </p>
-        <p>
-          That background left a useful residue. I like tools that explain themselves, interfaces that do not
-          pretend to be smarter than the operator, and systems that remain calm when something breaks.
-          <span class="inline-fragment" data-fragment>inspection pending</span>
-        </p>
-      </section>
-
-      <section class="about-section" aria-labelledby="current-system-title">
-        <h2 id="current-system-title">Current System</h2>
-        <p>
-          I now study software development at 42 Marseille. The method is direct: read, build, break,
-          inspect, repair, repeat until the machine stops making a specific complaint.
-        </p>
-        <p>
-          I write web interfaces, small utilities, Python scripts, school support tools and experiments
-          that begin as simple files and quietly become <span data-corrupt>small machines</span>.
-          <span class="inline-fragment" data-fragment>operator mismatch</span>
-        </p>
-      </section>
-
-      <section class="about-section" aria-labelledby="things-title">
-        <h2 id="things-title">Things I Build</h2>
-        <p>
-          I build tools that reduce friction, interfaces that make odd workflows more usable,
-          creative utilities for images and audio, small systems for local problems, and web experiments
-          that test what a browser can tolerate.
-        </p>
-        <p>
-          I am interested in strange interfaces, music tools, creative coding, old machines,
-          experimental systems and the exact moment when a small project becomes structurally unreasonable.
-          <span class="inline-fragment" data-fragment>document remembers you</span>
-        </p>
-      </section>
-
-      <section class="about-section" aria-labelledby="known-bugs-title">
-        <h2 id="known-bugs-title">Known Bugs</h2>
-        <ul class="about-list">
-          <li>Over-engineers small things until they resemble municipal infrastructure.</li>
-          <li>Names variables like industrial accidents when left unsupervised.</li>
-          <li>Maintains a suspicious relationship with CSS.</li>
-          <li>Sometimes debugs instead of sleeping.</li>
-          <li>Starts small projects that become machines with opinions.</li>
-        </ul>
-      </section>
-
-      <section class="about-section patch-notes" aria-labelledby="patch-notes-title">
-        <h2 id="patch-notes-title">Patch Notes</h2>
-        <dl>
-          <div>
-            <dt>v0.1</dt>
-            <dd>Learned that computers obey exactly what you wrote, not what you meant.</dd>
-          </div>
-          <div>
-            <dt>v0.4</dt>
-            <dd>Discovered that CSS has a memory and it is angry.</dd>
-          </div>
-          <div>
-            <dt>v0.7</dt>
-            <dd>Entered 42 Marseille.</dd>
-          </div>
-          <div>
-            <dt>v0.9</dt>
-            <dd>Started building tools to survive the tools.</dd>
-          </div>
-          <div>
-            <dt>v1.0</dt>
-            <dd>Pending.</dd>
-          </div>
-        </dl>
-        <p class="inline-fragment" data-fragment>signal found under paragraph</p>
-      </section>
-
-      <section class="about-section lower-document" aria-labelledby="lower-document-title" data-void-section>
-        <h2 id="lower-document-title">The Lower Document</h2>
-        <p>
-          This part of the document was not written. It accumulated.
-        </p>
-        <p>
-          The interface is now observing the operator. It remains polite because the paperwork is incomplete.
-        </p>
-        <p>
-          Somewhere below this line, the page stops being a page and becomes a corridor.
-          <span class="inline-fragment" data-fragment>void margin detected</span>
-        </p>
-        <p>
-          The void is not hostile. It is only administratively present.
-        </p>
-      </section>
+      <div data-biography-root></div>
+      <noscript>
+        <section class="about-section">
+          <h2>About the Operator</h2>
+          <p>
+            Boris Hanicotte is a former medical technical support worker now studying software development
+            at 42 Marseille. He builds tools, interfaces, utilities and strange systems.
+          </p>
+        </section>
+      </noscript>
     </article>
 
-    <div class="about-aberrations" aria-hidden="true">
-      <span class="aberration-block aberration-a"></span>
-      <span class="aberration-block aberration-b"></span>
-      <span class="aberration-block aberration-c"></span>
-      <span class="aberration-rule aberration-d"></span>
-      <span class="aberration-label aberration-e">DOC-LOWER: 42.13</span>
-      <span class="aberration-label aberration-f">MARGIN OBJECT</span>
-      <span class="cursor-fragment aberration-g"></span>
-    </div>
-
+    <div class="void-aberration-layer" data-aberration-layer aria-hidden="true"></div>
     <div class="void-popup-stack" data-popup-stack aria-live="polite"></div>
   </main>
 
@@ -169,5 +69,6 @@
 
   <script src="assets/js/projects.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/about.js"></script>
 </body>
 </html>

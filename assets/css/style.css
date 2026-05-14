@@ -754,7 +754,7 @@ h1 {
   box-shadow: var(--sunken);
 }
 
-body[data-page="about"] {
+body.about-page {
   background: var(--paper);
 }
 
@@ -762,14 +762,14 @@ body[data-page="about"] {
   position: relative;
   width: min(calc(100vw - 28px), 820px);
   margin: 0 auto;
-  padding: 32px 0 96px;
+  padding: 32px 0 110px;
 }
 
 .about-article {
   position: relative;
   z-index: 1;
   color: var(--text);
-  font-size: 1.02rem;
+  font-size: 1.03rem;
   line-height: 1.78;
 }
 
@@ -787,8 +787,12 @@ body[data-page="about"] {
   text-transform: uppercase;
 }
 
+.about-heading {
+  color: var(--text);
+}
+
 .about-article h1 {
-  max-width: 760px;
+  max-width: 780px;
   margin-bottom: 1rem;
   font-size: clamp(2.25rem, 7vw, 4.2rem);
   line-height: 1;
@@ -796,29 +800,34 @@ body[data-page="about"] {
 
 .about-section {
   position: relative;
-  margin-top: 2.3rem;
+  margin-top: 2.35rem;
   border-top: 2px solid var(--dust);
   padding-top: 1.35rem;
 }
 
+.about-section:first-child {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
 .about-section h2 {
   margin: 0 0 0.8rem;
-  color: var(--text);
   font-family: var(--mono);
   font-size: 0.95rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.about-section p {
-  max-width: 760px;
+.about-paragraph {
+  max-width: 780px;
   margin-bottom: 1rem;
 }
 
 .about-list {
   display: grid;
   gap: 0.35rem;
-  margin: 0;
+  margin: 0 0 1.1rem;
   padding-left: 1.25rem;
 }
 
@@ -826,67 +835,96 @@ body[data-page="about"] {
   color: var(--steel);
 }
 
-.patch-notes dl {
+.patch-notes {
   display: grid;
   gap: 0;
-  margin: 0 0 1rem;
+  margin: 0 0 1.2rem;
   border: 2px solid var(--ink);
   background: var(--paper);
   box-shadow: var(--raised);
 }
 
-.patch-notes div {
-  display: grid;
-  grid-template-columns: 84px minmax(0, 1fr);
+.patch-line {
+  margin: 0;
   border-bottom: 1px solid var(--steel);
+  padding: 0.58rem 0.7rem;
+  font-size: 0.94rem;
 }
 
-.patch-notes div:last-child {
+.patch-line:last-child {
   border-bottom: 0;
 }
 
-.patch-notes dt,
-.patch-notes dd {
-  margin: 0;
-  padding: 0.62rem 0.7rem;
-}
-
-.patch-notes dt {
-  border-right: 1px solid var(--steel);
-  background: var(--dust);
+.patch-version {
   font-family: var(--mono);
-  font-size: 0.76rem;
   font-weight: 900;
 }
 
-.inline-fragment {
-  display: none;
-  border: 1px solid var(--steel);
-  padding: 0.05rem 0.22rem;
-  background: var(--dust);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 0.78em;
+.about-fragment {
+  color: inherit;
 }
 
-[data-corrupt].is-corrupted {
-  border-bottom: 1px solid var(--steel);
-  color: var(--ink);
+.about-fragment--corruptible {
+  border-bottom: 1px solid var(--dust);
+}
+
+.about-fragment--sensitive {
+  border-bottom-color: var(--steel);
+}
+
+.is-zalgo-light,
+.is-zalgo-medium,
+.is-zalgo-heavy {
   font-family: var(--mono);
+}
+
+.is-zalgo-light {
+  text-shadow: 1px 0 0 var(--dust);
+}
+
+.is-zalgo-medium,
+.is-zalgo-heavy {
   text-shadow: 1px 0 0 var(--steel);
 }
 
-body[data-corruption-stage="1"] .about-section:nth-of-type(2n) p:first-of-type,
-body[data-corruption-stage="2"] .about-section:nth-of-type(2n) p:first-of-type,
-body[data-corruption-stage="3"] .about-section:nth-of-type(2n) p:first-of-type,
-body[data-corruption-stage="4"] .about-section:nth-of-type(2n) p:first-of-type {
+.void-annotation {
+  display: none;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.7rem 0 0;
+  border: 1px solid var(--steel);
+  padding: 0.08rem 0.32rem;
+  background: var(--paper);
+  color: var(--steel);
+  font-family: var(--mono);
+  font-size: 0.67rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.is-corruption-stage-1 .void-annotation[data-annotation-stage="1"],
+.is-corruption-stage-2 .void-annotation[data-annotation-stage="1"],
+.is-corruption-stage-2 .void-annotation[data-annotation-stage="2"],
+.is-corruption-stage-3 .void-annotation[data-annotation-stage="1"],
+.is-corruption-stage-3 .void-annotation[data-annotation-stage="2"],
+.is-corruption-stage-3 .void-annotation[data-annotation-stage="3"],
+.is-corruption-stage-4 .void-annotation:not([data-annotation-stage="5"]),
+.is-corruption-stage-5 .void-annotation {
+  display: block;
+}
+
+.is-corruption-stage-1 .about-section:nth-of-type(2n) .about-paragraph:first-of-type,
+.is-corruption-stage-2 .about-section:nth-of-type(2n) .about-paragraph:first-of-type,
+.is-corruption-stage-3 .about-section:nth-of-type(2n) .about-paragraph:first-of-type,
+.is-corruption-stage-4 .about-section:nth-of-type(2n) .about-paragraph:first-of-type,
+.is-corruption-stage-5 .about-section:nth-of-type(2n) .about-paragraph:first-of-type {
   letter-spacing: 0.01em;
 }
 
-body[data-corruption-stage="1"] .about-section::after,
-body[data-corruption-stage="2"] .about-section::after,
-body[data-corruption-stage="3"] .about-section::after,
-body[data-corruption-stage="4"] .about-section::after {
+.is-corruption-stage-2 .about-section:nth-of-type(3n)::after,
+.is-corruption-stage-3 .about-section:nth-of-type(3n)::after,
+.is-corruption-stage-4 .about-section:nth-of-type(3n)::after,
+.is-corruption-stage-5 .about-section:nth-of-type(3n)::after {
   position: absolute;
   top: 0.55rem;
   right: 0;
@@ -894,29 +932,26 @@ body[data-corruption-stage="4"] .about-section::after {
   padding: 0.05rem 0.25rem;
   background: var(--paper);
   color: var(--steel);
-  content: "document note";
+  content: "inspection pending";
   font-family: var(--mono);
   font-size: 0.62rem;
   font-weight: 900;
   text-transform: uppercase;
 }
 
-body[data-corruption-stage="2"] .inline-fragment,
-body[data-corruption-stage="3"] .inline-fragment,
-body[data-corruption-stage="4"] .inline-fragment {
-  display: inline;
-}
-
-body[data-corruption-stage="3"] .about-section:nth-of-type(3n),
-body[data-corruption-stage="4"] .about-section:nth-of-type(3n) {
+.is-corruption-stage-3 .about-section:nth-of-type(4n),
+.is-corruption-stage-4 .about-section:nth-of-type(4n),
+.is-corruption-stage-5 .about-section:nth-of-type(4n) {
   box-shadow: inset 0 -2px 0 var(--steel);
 }
 
-.lower-document {
+.about-section--lower,
+.about-section--void {
   padding-bottom: 1.5rem;
 }
 
-body[data-corruption-stage="4"] .lower-document {
+.is-corruption-stage-4 .about-section--lower,
+.is-corruption-stage-5 .about-section--lower {
   border: 2px solid var(--ink);
   padding: 1rem;
   background: var(--ink);
@@ -924,73 +959,90 @@ body[data-corruption-stage="4"] .lower-document {
   box-shadow: var(--sunken);
 }
 
-body[data-corruption-stage="4"] .lower-document h2,
-body[data-corruption-stage="4"] .lower-document p {
+.is-corruption-stage-4 .about-section--lower h2,
+.is-corruption-stage-4 .about-section--lower p,
+.is-corruption-stage-4 .about-section--lower li,
+.is-corruption-stage-5 .about-section--lower h2,
+.is-corruption-stage-5 .about-section--lower p,
+.is-corruption-stage-5 .about-section--lower li {
   color: var(--paper);
 }
 
-body[data-corruption-stage="4"] .lower-document .inline-fragment {
-  border-color: var(--paper);
-  background: var(--steel);
+.is-corruption-stage-5 .about-section--void {
+  border: 2px solid var(--ink);
+  padding: 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: var(--sunken);
+}
+
+.is-corruption-stage-5 .about-section--void h2,
+.is-corruption-stage-5 .about-section--void p {
   color: var(--paper);
 }
 
-.about-aberrations {
+.is-corruption-stage-4 .about-section--lower .about-fragment,
+.is-corruption-stage-5 .about-section--lower .about-fragment,
+.is-corruption-stage-5 .about-section--void .about-fragment {
+  border-bottom-color: var(--paper);
+}
+
+.void-aberration-layer {
   position: absolute;
   inset: 0;
-  display: none;
   pointer-events: none;
 }
 
-body[data-corruption-stage="3"] .about-aberrations,
-body[data-corruption-stage="4"] .about-aberrations {
-  display: block;
-}
-
-.aberration-block,
-.aberration-rule,
-.aberration-label,
-.cursor-fragment {
+.void-aberration {
   position: absolute;
   z-index: 0;
+  display: none;
   font-family: var(--mono);
 }
 
-.aberration-block {
+.is-corruption-stage-3 .void-aberration[data-aberration-stage="3"],
+.is-corruption-stage-4 .void-aberration[data-aberration-stage="3"],
+.is-corruption-stage-4 .void-aberration[data-aberration-stage="4"],
+.is-corruption-stage-5 .void-aberration {
+  display: block;
+}
+
+.void-aberration--block {
   width: 28px;
   height: 18px;
   border: 2px solid var(--ink);
   background: var(--ink);
 }
 
-.aberration-a {
-  top: 28%;
-  left: -52px;
+.void-aberration--box {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--steel);
+  background: var(--paper);
+  box-shadow: var(--sunken);
 }
 
-.aberration-b {
-  top: 58%;
-  right: -44px;
-  background: var(--steel);
-}
-
-.aberration-c {
-  top: 82%;
-  left: -34px;
-  width: 14px;
-  height: 54px;
-  background: var(--dust);
-}
-
-.aberration-rule {
-  top: 70%;
-  right: -18px;
-  width: 96px;
+.void-aberration--rule {
+  width: 112px;
   height: 2px;
   background: var(--ink);
 }
 
-.aberration-label {
+.void-aberration--marker {
+  width: 10px;
+  height: 88px;
+  border-left: 3px solid var(--steel);
+  border-right: 2px solid var(--ink);
+}
+
+.void-aberration--cursor {
+  width: 12px;
+  height: 24px;
+  border-left: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+
+.void-aberration--stamp {
   border: 1px solid var(--steel);
   padding: 0.08rem 0.25rem;
   background: var(--paper);
@@ -999,23 +1051,45 @@ body[data-corruption-stage="4"] .about-aberrations {
   font-weight: 900;
 }
 
-.aberration-e {
-  top: 46%;
-  left: -86px;
+.void-aberration--a {
+  top: 22%;
+  left: -52px;
 }
 
-.aberration-f {
-  top: 92%;
-  right: -74px;
+.void-aberration--b {
+  top: 57%;
+  right: -44px;
+  background: var(--steel);
 }
 
-.cursor-fragment {
-  top: 64%;
+.void-aberration--c {
+  top: 66%;
+  left: -62px;
+}
+
+.void-aberration--d {
+  top: 74%;
+  right: -34px;
+}
+
+.void-aberration--e {
+  top: 82%;
   left: -26px;
-  width: 11px;
-  height: 24px;
-  border-left: 3px solid var(--ink);
-  border-bottom: 3px solid var(--ink);
+}
+
+.void-aberration--f {
+  top: 88%;
+  right: -22px;
+}
+
+.void-aberration--g {
+  top: 92%;
+  left: -92px;
+}
+
+.void-aberration--h {
+  top: 97%;
+  right: -106px;
 }
 
 .void-popup-stack {
@@ -1024,7 +1098,7 @@ body[data-corruption-stage="4"] .about-aberrations {
   bottom: 50px;
   z-index: 45;
   display: grid;
-  width: min(320px, calc(100vw - 24px));
+  width: min(330px, calc(100vw - 24px));
   gap: 6px;
   pointer-events: none;
 }
@@ -1037,7 +1111,7 @@ body[data-corruption-stage="4"] .about-aberrations {
   pointer-events: auto;
 }
 
-.void-popup-title {
+.void-popup__titlebar {
   display: flex;
   min-height: 24px;
   align-items: center;
@@ -1053,7 +1127,7 @@ body[data-corruption-stage="4"] .about-aberrations {
   text-transform: uppercase;
 }
 
-.void-popup-close {
+.void-popup__close {
   width: 20px;
   height: 18px;
   border: 2px solid var(--ink);
@@ -1067,16 +1141,16 @@ body[data-corruption-stage="4"] .about-aberrations {
   line-height: 1;
 }
 
-.void-popup-close:hover,
-.void-popup-close:focus-visible {
+.void-popup__close:hover,
+.void-popup__close:focus-visible {
   background: var(--paper);
 }
 
-.void-popup-close:active {
+.void-popup__close:active {
   box-shadow: var(--sunken);
 }
 
-.void-popup-body {
+.void-popup__message {
   margin: 0;
   padding: 0.72rem;
   font-size: 0.9rem;
@@ -1241,35 +1315,33 @@ body[data-corruption-stage="4"] .about-aberrations {
   }
 
   .about-document {
-    width: calc(100vw - 24px);
-    padding-top: 20px;
+    width: auto;
+    margin: 0;
+    padding: 20px 16px 110px;
   }
 
   .about-article {
     font-size: 1rem;
+    overflow-wrap: break-word;
   }
 
-  .about-section::after,
-  body[data-corruption-stage="1"] .about-section::after,
-  body[data-corruption-stage="2"] .about-section::after,
-  body[data-corruption-stage="3"] .about-section::after,
-  body[data-corruption-stage="4"] .about-section::after {
+  .is-corruption-stage-2 .about-section:nth-of-type(3n)::after,
+  .is-corruption-stage-3 .about-section:nth-of-type(3n)::after,
+  .is-corruption-stage-4 .about-section:nth-of-type(3n)::after,
+  .is-corruption-stage-5 .about-section:nth-of-type(3n)::after {
     position: static;
     display: inline-block;
     margin-bottom: 0.75rem;
   }
 
-  .about-aberrations {
+  .void-aberration-layer {
     display: none !important;
   }
 
-  .patch-notes div {
-    grid-template-columns: 1fr;
-  }
-
-  .patch-notes dt {
-    border-right: 0;
-    border-bottom: 1px solid var(--steel);
+  .is-corruption-stage-4 .about-section--lower,
+  .is-corruption-stage-5 .about-section--lower,
+  .is-corruption-stage-5 .about-section--void {
+    padding: 0.85rem;
   }
 
   .void-popup-stack {
