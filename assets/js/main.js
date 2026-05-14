@@ -209,6 +209,11 @@
     }
   }
 
+  function startTaskbarClock() {
+    updateTaskbarStatus();
+    window.setInterval(updateTaskbarStatus, 1000);
+  }
+
   function installHarmlessMicroInteractions() {
     const municipalTentacle = document.querySelectorAll(".window, .project-card, .directory-entry");
     municipalTentacle.forEach((element) => {
@@ -222,7 +227,7 @@
     markActiveNavigation();
     setupNavigationToggle();
     renderProjectSections();
-    updateTaskbarStatus();
+    startTaskbarClock();
     installHarmlessMicroInteractions();
   }
 
