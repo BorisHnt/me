@@ -216,7 +216,11 @@
     { text: decodeChunk("YnJva2VuIGludGVyZmFjZXM="), stage: 2, level: 1 },
     { text: decodeChunk("ZXhlY3V0aW9uIHN0YWNr"), stage: 2, level: 1 },
     { text: decodeChunk("ZG9jdW1lbnRhdGlvbg=="), stage: 2, level: 1 },
-    { text: decodeChunk("ZnJpY3Rpb24="), stage: 2, level: 1 },
+    { text: decodeChunk("ZnJpY3Rpb24="), stage: 2, level: 4 },
+    { text: decodeChunk("bW9uZXk="), stage: 3, level: 4 },
+    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 3, level: 4 },
+    { text: decodeChunk("ZG9lcyBub3Qgd29yayB2ZXJ5IHdlbGw="), stage: 3, level: 4 },
+    { text: decodeChunk("YnJva2VuIG9iamVjdHM="), stage: 3, level: 4 },
     { text: decodeChunk("c21hbGwgcmVwYWlycw=="), stage: 2, level: 1 },
     { text: decodeChunk("cmVsaWVm"), stage: 2, level: 1 },
     { text: decodeChunk("cHJhaXNl"), stage: 3, level: 2 },
@@ -227,7 +231,7 @@
     { text: decodeChunk("aW5zaWRlIHRoZSBtYWNoaW5l"), stage: 3, level: 2 },
     { text: decodeChunk("Y29sbGVjdGl2ZSBsaWZl"), stage: 3, level: 2 },
     { text: decodeChunk("ZXZpZGVuY2U="), stage: 3, level: 2 },
-    { text: decodeChunk("c2VsZi1lc3RlZW0="), stage: 3, level: 2 },
+    { text: decodeChunk("c2VsZi1lc3RlZW0="), stage: 3, level: 4 },
     { text: decodeChunk("QURIRA=="), stage: 4, level: 3, sensitive: true },
     { text: decodeChunk("YXV0aXN0aWMgc2hhcGUgb2YgdGhlIG1pbmQ="), stage: 4, level: 3, sensitive: true },
     { text: decodeChunk("ZHlzdGh5bWlh"), stage: 4, level: 3, sensitive: true },
@@ -281,7 +285,13 @@
     ["void-aberration void-redaction void-aberration--k", 4],
     ["void-aberration void-redaction void-aberration--l", 5],
     ["void-aberration void-margin-escape void-aberration--m", 5, "THE DOCUMENT IS LEAKING"],
-    ["void-aberration void-ghost-text void-aberration--n", 5, "BIOGRAPHY EXCEEDS AUTHORIZED SHAPE"]
+    ["void-aberration void-ghost-text void-aberration--n", 5, "BIOGRAPHY EXCEEDS AUTHORIZED SHAPE"],
+    ["void-aberration void-scroll-tear void-aberration--o", 3, "SCROLL OFFSET REFUSED"],
+    ["void-aberration void-scroll-tear void-aberration--p", 4, "READING PLANE DAMAGED"],
+    ["void-aberration void-bug-container void-aberration--q", 4, "FRICTION MONEY SADNESS"],
+    ["void-aberration void-bug-container void-aberration--r", 5, "SELF-ESTEEM OBJECT FILE BROKEN"],
+    ["void-aberration void-text-glitch void-aberration--s", 5, "DOES NOT WORK VERY WELL"],
+    ["void-aberration void-text-glitch void-aberration--t", 5, "BROKEN OBJECTS REQUEST MERCY"]
   ];
 
   const voidTranslationReceipts = [
@@ -813,10 +823,11 @@
     const position = calculateTranslationLeakCoordinates(index);
     container.className = `void-translation-fragment void-translation-fragment--${index % 6}`;
     container.dataset.translationStage = String(stage);
+    container.dataset.translationIndex = String(index + 1);
     container.setAttribute("aria-hidden", "true");
     container.style.top = `${position.top}%`;
-    container.style.left = position.side === "left" ? `${position.edge}px` : "auto";
-    container.style.right = position.side === "right" ? `${position.edge}px` : "auto";
+    container.style.left = `calc(50% + ${position.offset}px)`;
+    container.style.right = "auto";
 
     const title = document.createElement("span");
     title.className = "void-translation-fragment__title";
@@ -854,31 +865,72 @@
 
   function calculateTranslationLeakCoordinates(index) {
     const wetConcrete = [16, 24, 31, 38, 46, 52, 58, 63, 68, 72, 76, 80, 83, 86, 89, 91, 93, 95, 97, 98];
-    const asphalt = index % 4;
-    const side = index % 2 === 0 ? "left" : "right";
-    const edge = side === "left"
-      ? [-118, -58, 12, 72][asphalt]
-      : [-126, -68, 18, 84][asphalt];
+    const asphalt = index % 8;
+    const offset = [-455, -330, -210, -80, 70, 185, 295, -145][asphalt];
     return {
       top: wetConcrete[index] || Math.min(98, 18 + index * 4),
-      side,
-      edge
+      offset
     };
   }
 
   function translateVoidFragments(contained) {
+    const purged = document.body.classList.contains("is-void-purged");
     voidTranslationNodes.forEach(({ body, fault, receipt }, index) => {
       body.lang = contained ? "en" : receipt.lang;
-      if (contained) {
+      if (contained || purged) {
         body.removeAttribute("dir");
         body.textContent = receipt.english;
-        fault.textContent = "TRANSLATED / CONTAINED";
+        fault.textContent = purged ? `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}` : "TRANSLATED / CONTAINED";
       } else {
-        if (receipt.dir) {
-          body.dir = receipt.dir;
-        }
-        body.textContent = receipt.foreign;
-        fault.textContent = index % 2 === 0 ? "UNTRANSLATED SURFACE" : "LANGUAGE LEAK";
+        restoreForeignVoidFragment(body, fault, receipt, index);
+      }
+    });
+  }
+
+  function restoreForeignVoidFragment(body, fault, receipt, index) {
+    body.lang = receipt.lang;
+    if (receipt.dir) {
+      body.dir = receipt.dir;
+    } else {
+      body.removeAttribute("dir");
+    }
+    body.textContent = receipt.foreign;
+    fault.textContent = index % 2 === 0 ? "UNTRANSLATED SURFACE" : "LANGUAGE LEAK";
+  }
+
+  function arrangePurgedTranslations() {
+    voidTranslationNodes.forEach(({ body, fault, receipt }, index) => {
+      const element = body.closest(".void-translation-fragment");
+      if (!element) {
+        return;
+      }
+      body.lang = "en";
+      body.removeAttribute("dir");
+      body.textContent = receipt.english;
+      fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
+      element.style.top = `${7 + index * 4.6}%`;
+      element.style.left = "max(12px, calc(50% - 635px))";
+      element.style.right = "auto";
+    });
+  }
+
+  function cleanExistingPopupsFromVoid(stack) {
+    if (!stack) {
+      return;
+    }
+    Array.from(stack.querySelectorAll(".void-popup")).forEach((popup, index) => {
+      popup.classList.remove("void-popup--damaged");
+      popup.classList.add("void-popup--cleaned");
+      popup.querySelectorAll(".void-popup__false-close").forEach((node) => node.remove());
+
+      const title = popup.querySelector(".void-popup__title");
+      if (title) {
+        title.textContent = `SYSTEM CLEANED ${String(index + 1).padStart(2, "0")}`;
+      }
+
+      const message = popup.querySelector(".void-popup__message");
+      if (message) {
+        message.textContent = "Decorative contamination removed. Window retained for administrative reasons.";
       }
     });
   }
@@ -1006,6 +1058,8 @@
     const noticeDamage = calculatePopupDamageAfterBureaucracy(notice);
     const popup = document.createElement("section");
     popup.className = "void-popup";
+    popup.dataset.cleanTitle = notice.title;
+    popup.dataset.cleanMessage = notice.message;
     if (noticeDamage >= 3) {
       popup.classList.add("void-popup--damaged");
     }
@@ -1016,6 +1070,7 @@
     titlebar.className = "void-popup__titlebar";
 
     const title = document.createElement("span");
+    title.className = "void-popup__title";
     title.textContent = noticeDamage >= 4 ? generateUnauthorizedZalgoLeak(notice.title, 2) : notice.title;
 
     const close = document.createElement("button");
@@ -1132,6 +1187,7 @@
     let sewerProtocol = false;
     let contained = false;
     let voidPurged = false;
+    let scrollDamageTimer = 0;
 
     renderBiography(sections, documentRoot);
     deployAberrations(aberrationLayer);
@@ -1148,6 +1204,7 @@
       const rawProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       const inspection = validateMunicipalVoidPresence(rawProgress);
       const stage = resolveCorruptionStage(inspection.progress);
+      registerScrollDamage(stage);
 
       if (stage !== currentStage) {
         currentStage = stage;
@@ -1171,11 +1228,28 @@
       window.requestAnimationFrame(inspectScrollPosition);
     }
 
+    function registerScrollDamage(stage) {
+      const scrollMayLeak = stage >= 3 && !contained && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
+      if (!scrollMayLeak) {
+        document.body.classList.remove("is-scroll-damaged");
+        return;
+      }
+
+      document.body.classList.add("is-scroll-damaged");
+      document.body.dataset.scrollDamage = String((Number(document.body.dataset.scrollDamage || 0) + 1) % 7);
+      window.clearTimeout(scrollDamageTimer);
+      scrollDamageTimer = window.setTimeout(() => {
+        document.body.classList.remove("is-scroll-damaged");
+      }, stage >= 5 ? 260 : 150);
+    }
+
     document.addEventListener("void-containment-change", (event) => {
       if (voidPurged) {
         return;
       }
       contained = Boolean(event.detail && event.detail.contained);
+      document.body.classList.remove("is-scroll-damaged");
+      window.clearTimeout(scrollDamageTimer);
       translateVoidFragments(contained);
       currentStage = -1;
       inspectScrollPosition();
@@ -1184,8 +1258,10 @@
     document.addEventListener("void-purge-request", () => {
       voidPurged = true;
       contained = false;
-      translateVoidFragments(false);
+      document.body.classList.remove("is-scroll-damaged");
+      window.clearTimeout(scrollDamageTimer);
       document.body.classList.add("is-void-purged");
+      arrangePurgedTranslations();
       const containmentButton = document.querySelector(".about-containment-toggle");
       if (containmentButton) {
         containmentButton.setAttribute("aria-pressed", "false");
@@ -1193,7 +1269,7 @@
         containmentButton.disabled = true;
       }
       if (popupStack) {
-        popupStack.replaceChildren();
+        cleanExistingPopupsFromVoid(popupStack);
       }
       restoreDocumentAfterSoulCleaning(fragments);
       console.info("[about] void removal phrase accepted: decorative contamination withdrawn");
