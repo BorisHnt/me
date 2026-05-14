@@ -1,11 +1,11 @@
 (function () {
   "use strict";
 
-  const encodedBiographySections = [
+  const radioactiveBiographyReceipts = [
     {
-      title: "QWJvdXQgdGhlIE9wZXJhdG9y",
+      title: ["QWJvdX", "QgdGhl", "IE9wZXJhdG9y"],
       paragraphs: [
-        "TXkgbmFtZSBpcyBCb3JpcyBIYW5pY290dGUu",
+        ["TXkgbm", "FtZSBpcyBC", "b3JpcyBIYW5pY290dGUu"],
         "SSB1c2VkIHRvIHdvcmsgaW4gbWVkaWNhbCB0ZWNobmljYWwgc3VwcG9ydC4gTm93IEkgc3R1ZHkgc29mdHdhcmUgZGV2ZWxvcG1lbnQgYXQgNDIgTWFyc2VpbGxlLCB3aGVyZSBJIHNwZW5kIGEgbGFyZ2UgYW1vdW50IG9mIHRpbWUgbmVnb3RpYXRpbmcgd2l0aCBwb2ludGVycywgdGVybWluYWxzLCBicm9rZW4gaW50ZXJmYWNlcyBhbmQgdGhlIHF1aWV0IHZpb2xlbmNlIG9mIG15IG93biBleGVjdXRpb24gc3RhY2su",
         "SSBkaWQgbm90IGFycml2ZSBpbiBzb2Z0d2FyZSB0aHJvdWdoIGEgc3RyYWlnaHQgbGluZS4gQmVmb3JlIGNvZGUsIHRoZXJlIHdlcmUgbWFjaGluZXMsIHVzZXJzLCBtZWRpY2FsIGVudmlyb25tZW50cywgc3VwcG9ydCB0aWNrZXRzLCBwcmFjdGljYWwgZW1lcmdlbmNpZXMgYW5kIHByb2JsZW1zIHRoYXQgZGlkIG5vdCBjYXJlIGFib3V0IHRoZW9yeS4gU29tZXRoaW5nIHdhcyBicm9rZW4uIFNvbWVvbmUgbmVlZGVkIGl0IGZpeGVkLiBUaGUgc3lzdGVtIGhhZCB0byBrZWVwIG1vdmluZy4=",
         "VGhhdCBwcm9iYWJseSBzaGFwZWQgdGhlIHdheSBJIGJ1aWxkIHRoaW5ncyBub3cu"
@@ -106,7 +106,7 @@
       ]
     },
     {
-      title: "VGhlIExvd2VyIERvY3VtZW50",
+      title: { reverse: true, value: "05WZtV3YvREIyV2dvxEIlhGV" },
       kind: "lower",
       paragraphs: [
         "U29tZSBwYXJ0cyBvZiBhIHBlcnNvbiBkbyBub3QgZml0IGNsZWFubHkgaW50byBhIGJpb2dyYXBoeS4=",
@@ -130,7 +130,7 @@
       ]
     },
     {
-      title: "VGhlIFZvaWQgSXMgQWRtaW5pc3RyYXRpdmVseSBQcmVzZW50",
+      title: ["VGhlIFZvaWQg", { reverse: true, value: "05WZzVmcQBSesVmdpRXYyR3cp5WatRWQgMXS" }],
       kind: "void",
       paragraphs: [
         "VGhpcyBwYXJ0IG9mIHRoZSBkb2N1bWVudCB3YXMgbm90IHdyaXR0ZW4uCkl0IGFjY3VtdWxhdGVkLg==",
@@ -154,25 +154,55 @@
     biologischeInvoice: "misspelled but approved"
   };
 
+  const lowerDocumentMeat = Object.fromEntries([
+    ["QURIRA==", "A̷̰͌D̶̳̍H̴̫̾D̷̜̅"],
+    ["YXV0aXN0aWMgc2hhcGUgb2YgdGhlIG1pbmQ=", "a̶̞͛u̶͇̅t̷̜̔i̷̟͠s̸͔̅t̵͖͝i̴̱͘c̴̳̑ ̷͉͌s̵̪͋ḫ̴̃ą̴͛ṗ̸̳e̸͍͊ ̷̭͘ò̶̬f̴́ͅ ̵̨͝t̴̙͑h̵͓͗e̴̗͑ ̵̢̌m̶̝͛ī̷̟n̸͈̑d̴̲͝"],
+    ["ZHlzdGh5bWlh", "d̵̮́y̸̦̽s̶̰̈́t̴͎̀h̷͙͌y̵̻͛m̴̡̍ḯ̸̜a̶̻͝"],
+    ["bGltZXJlbmNl", "l̸̖̓ĩ̶̪m̶̡͝e̷͇̐r̴̜̽e̶̯͂n̸̢̏c̸͎̈ě̶̫"],
+    ["SSBkaWQgbm90IHBsYW4gdG8gbGl2ZSB0aGlzIGxvbmc=", "I̴͇̅͘͝ ̷̥̈́͊d̶̩̽̋i̶̳̿͠d̸̻͂̕ ̶͎̐n̷̖̎o̶͈͌͘t̴̙̀̕ ̴̬̈́̚p̶̗̓͆l̸̤͝a̴̞̅n̸̟̎ ̵͙̋ṫ̵͙o̸͝ͅ ̶̘͘l̵̤͘i̴̻͆v̶̐ͅȅ̶̫ ̶̬̊t̴͓͂h̴̭̏i̸͙͂s̶̝̚ ̷̜̚l̵̗͠o̷͕͛n̸͖̋g̷̗̿"],
+    ["bm90IGFsd2F5cyBvcmllbnRlZA==", "n̴͔̍o̷̯͛t̸̬͗ ̴̝̊a̵̗͒l̵̝̍w̸̪͝a̸̗̔y̸͍͒s̴̰̊ ̶̬̅o̸̭͒r̸̨̀ĭ̸̜e̷̼͐n̷͕͆ẗ̸̢́e̸̦͘d̷͉̿"],
+    ["ZnVuY3Rpb25hbCwgYnV0IG5vdCBhbHdheXMgY29udmluY2Vk", "f̵̩̈́u̸̒ͅn̷̢̓c̴̞̀t̸̨͂i̷̻͑o̴̞͂n̴͖̄a̶̝͊l̸̪̒,̵̲̈́ ̴̰͊b̴̹̊u̸̥͘t̶̤̍ ̶̢̅n̶̙͐o̴̲̊ṫ̷̺ ̶͙̌a̵̲͘l̷̺͘w̷̬͋ā̸͇y̷̻̐s̴͕̔ ̵̿͜c̸̿ͅŏ̴̳n̵̛͕v̵̛̤ḭ̸͘ń̵̯c̵̨̈́e̸̢̊d̵̦̈́"],
+    ["SSBkbyBub3QgYWx3YXlzIGtub3cgdG93YXJkIHdoYXQ=", "I̸͖̾ ̷͚͊d̷͔̈ö̷̩́ ̴̱̌n̶̝͛o̵̤͠t̸̖̊ ̶̇ͅå̴͙l̷̡͋w̶̨̍a̴̮͗ÿ̷̺s̷͈͊ ̷̳̈́k̵̚ͅn̵̻͛ȯ̶̱w̷͕͝ ̴̜̄t̷̛ͅo̸̖̿w̶̰̎a̸͚͗r̶̨̈́d̷̡͊ ̶͎͛w̵̘̐h̶̲̀a̸̡͝ẗ̶̼́"],
+    ["VGhlIHZvaWQgaXMgbm90IGFsd2F5cyBhbiBlbmVteQ==", "T̷̘̈́̌̒h̷̺͆͗ë̵͚́͠ ̶͖̄͝v̵̗̕o̸̬̔͠ĩ̶̱d̴̯̓ ̷̛͇i̴̹͗s̶̥̅ ̵̭͐n̷̩̎ǫ̸͝t̶͓̾ ̷̬̊ä̴̱́l̵̝͝ẁ̶͓ȧ̴͕y̶̐ͅs̴̗͘ ̸͙̈́a̵̮͑n̴̟̽ ̶̬̍ë̷̦́n̸̻͂e̴͘͜m̸̝̔y̷̤͐"],
+    ["SSBhbSBzdGlsbCBoZXJl", "I̵̛̫ ̸̥̃a̷͉͠m̸͍̈́ ̶̤̀s̴̜̐t̸̼͒i̶̗̓l̵̡̔l̶̤͝ ̸̳̾h̵͚̓ě̸̪r̶̬͆e̵͙̍"],
+    ["VGhlIGRvY3VtZW50IGNhbm5vdCBleHBsYWluIHdoeQ==", "T̷͍̓h̶͎͒ȇ̶̳ ̸̩̇d̵̫͋ö̸̫́c̷̻͊û̸͇ḿ̴̟e̶̱̓ṅ̶̡t̴͍̚ ̶̭̈́č̷͉ą̸̕n̴͎̕n̸̡͗ȏ̶̡t̸̤̋ ̷̺͘e̴̛͜x̵̹͘p̴̹͠l̵͍̿a̸̤͝i̴̛͚n̶̺̎ ̸̞̌w̵͓̽h̴̙͋ý̷̖"]
+  ].map(([key, value]) => [decodeChunk(key), value]));
+
+  const wetBiographyRegistry = Object.freeze({
+    rateMorte: ["permit", "deny", "misfile", "approve"],
+    factureOrganique: { stamp: "B12", sadnessBudget: 0 },
+    permisDeFoie: true,
+    corridorMouillé: ["left margin", "lower room", "dead footer"],
+    tunnelDentifrice: "unnecessary corridor",
+    formulaireOsseux: 42,
+    viandeAdministrative: "not edible",
+    cartilageFiscal: ["paper", "paper", "paper"],
+    poussiereLegale: false,
+    antenneDuRein: "receiving nothing",
+    voidInvoice: "unpaid"
+  });
+
+  const corridorChecksum = new WeakMap();
+
   const corruptiblePhrases = [
-    { text: "pointers", stage: 2, level: "light" },
-    { text: "terminals", stage: 2, level: "light" },
-    { text: "broken interfaces", stage: 2, level: "light" },
-    { text: "execution stack", stage: 2, level: "light" },
-    { text: "documentation", stage: 2, level: "light" },
-    { text: "evidence", stage: 3, level: "medium" },
-    { text: "self-esteem", stage: 3, level: "medium" },
-    { text: "ADHD", stage: 4, level: "medium", sensitive: true },
-    { text: "autistic shape of the mind", stage: 4, level: "medium", sensitive: true },
-    { text: "dysthymia", stage: 4, level: "medium", sensitive: true },
-    { text: "limerence", stage: 4, level: "medium", sensitive: true },
-    { text: "I did not plan to live this long", stage: 4, level: "heavy", sensitive: true },
-    { text: "not always oriented", stage: 4, level: "medium", sensitive: true },
-    { text: "functional, but not always convinced", stage: 4, level: "medium", sensitive: true },
-    { text: "I do not always know toward what", stage: 4, level: "medium", sensitive: true },
-    { text: "The void is not always an enemy", stage: 5, level: "heavy", sensitive: true, final: true },
-    { text: "I am still here", stage: 5, level: "heavy", sensitive: true, final: true },
-    { text: "The document cannot explain why", stage: 5, level: "heavy", sensitive: true, final: true }
+    { text: decodeChunk("cG9pbnRlcnM="), stage: 2, level: 1 },
+    { text: decodeChunk("dGVybWluYWxz"), stage: 2, level: 1 },
+    { text: decodeChunk("YnJva2VuIGludGVyZmFjZXM="), stage: 2, level: 1 },
+    { text: decodeChunk("ZXhlY3V0aW9uIHN0YWNr"), stage: 2, level: 1 },
+    { text: decodeChunk("ZG9jdW1lbnRhdGlvbg=="), stage: 2, level: 1 },
+    { text: decodeChunk("ZXZpZGVuY2U="), stage: 3, level: 2 },
+    { text: decodeChunk("c2VsZi1lc3RlZW0="), stage: 3, level: 2 },
+    { text: decodeChunk("QURIRA=="), stage: 4, level: 3, sensitive: true },
+    { text: decodeChunk("YXV0aXN0aWMgc2hhcGUgb2YgdGhlIG1pbmQ="), stage: 4, level: 3, sensitive: true },
+    { text: decodeChunk("ZHlzdGh5bWlh"), stage: 4, level: 3, sensitive: true },
+    { text: decodeChunk("bGltZXJlbmNl"), stage: 4, level: 3, sensitive: true },
+    { text: decodeChunk("SSBkaWQgbm90IHBsYW4gdG8gbGl2ZSB0aGlzIGxvbmc="), stage: 4, level: 4, sensitive: true },
+    { text: decodeChunk("bm90IGFsd2F5cyBvcmllbnRlZA=="), stage: 4, level: 4, sensitive: true },
+    { text: decodeChunk("ZnVuY3Rpb25hbCwgYnV0IG5vdCBhbHdheXMgY29udmluY2Vk"), stage: 4, level: 4, sensitive: true },
+    { text: decodeChunk("SSBkbyBub3QgYWx3YXlzIGtub3cgdG93YXJkIHdoYXQ="), stage: 4, level: 4, sensitive: true },
+    { text: decodeChunk("VGhlIHZvaWQgaXMgbm90IGFsd2F5cyBhbiBlbmVteQ=="), stage: 5, level: 5, sensitive: true, final: true },
+    { text: decodeChunk("SSBhbSBzdGlsbCBoZXJl"), stage: 5, level: 5, sensitive: true, final: true },
+    { text: decodeChunk("VGhlIGRvY3VtZW50IGNhbm5vdCBleHBsYWluIHdoeQ=="), stage: 5, level: 5, sensitive: true, final: true }
   ];
 
   const voidAnnotations = [
@@ -195,9 +225,10 @@
     { threshold: 0.2, title: "SYSTEM NOTICE", message: "The paragraph has exceeded its authorized shape." },
     { threshold: 0.4, title: "DOCUMENT INSPECTION", message: "A small amount of void has been detected near the operator." },
     { threshold: 0.6, title: "READABILITY REPORT", message: "The document is still legally readable." },
-    { threshold: 0.75, title: "INTERNAL MEMO", message: "This memory was not declared to the interface." },
-    { threshold: 0.84, title: "LOWER DOCUMENT", message: "The room behind the room has requested administrative access." },
-    { threshold: 0.9, title: "FINAL STATUS", message: "Inspection failed successfully." }
+    { threshold: 0.72, title: "INTERNAL MEMO", message: "This memory was not declared to the interface.", damage: 2 },
+    { threshold: 0.8, title: "LOWER DOCUMENT", message: "The lower document has entered the room.", damage: 3 },
+    { threshold: 0.86, title: "VOID RESIDUE", message: "Operator biography exceeded safe emotional density.", damage: 4 },
+    { threshold: 0.91, title: "FINAL STATUS", message: "Do not close this window. It has already closed you.", damage: 5 }
   ];
 
   const aberrationBlueprint = [
@@ -208,13 +239,62 @@
     ["void-aberration void-aberration--marker void-aberration--e", 4],
     ["void-aberration void-aberration--cursor void-aberration--f", 4],
     ["void-aberration void-aberration--stamp void-aberration--g", 5, "VOID-ADM-09"],
-    ["void-aberration void-aberration--stamp void-aberration--h", 5, "ROOM BEHIND ROOM"]
+    ["void-aberration void-aberration--stamp void-aberration--h", 5, "ROOM BEHIND ROOM"],
+    ["void-aberration void-terminal-fragment void-aberration--i", 4, "OPERATOR CHECKSUM FAILED"],
+    ["void-aberration void-terminal-fragment void-aberration--j", 5, "MEMORY FOUND OUTSIDE DECLARED BODY"],
+    ["void-aberration void-redaction void-aberration--k", 4],
+    ["void-aberration void-redaction void-aberration--l", 5],
+    ["void-aberration void-margin-escape void-aberration--m", 5, "THE DOCUMENT IS LEAKING"],
+    ["void-aberration void-ghost-text void-aberration--n", 5, "BIOGRAPHY EXCEEDS AUTHORIZED SHAPE"]
   ];
 
   function decodeChunk(value) {
     const binary = window.atob(value);
     const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
     return new TextDecoder("utf-8").decode(bytes);
+  }
+
+  function decodeMunicipalChunk(value) {
+    if (Array.isArray(value)) {
+      return decodeChunk(value.map((piece) => {
+        if (typeof piece === "string") {
+          return piece;
+        }
+        if (piece && piece.reverse) {
+          return reverseTheInvoice(piece.value);
+        }
+        return String(piece && piece.value ? piece.value : "");
+      }).join(""));
+    }
+    if (value && typeof value === "object" && value.reverse) {
+      return decodeChunk(reverseTheInvoice(value.value));
+    }
+    const ticketDeCaisse = String(value || "");
+    const camion = ticketDeCaisse.split("").reverse().reverse().join("");
+    return decodeChunk(camion);
+  }
+
+  function reverseTheInvoice(value) {
+    return String(value ?? "").split("").reverse().join("");
+  }
+
+  function rotateTheInvisibleInvoice(value) {
+    const chaussure = String(value ?? "");
+    return chaussure.slice(0, 0) + chaussure;
+  }
+
+  function denyExistenceThroughFormB12(value) {
+    const formulaireOsseux = { approved: true, value };
+    return formulaireOsseux.approved ? formulaireOsseux.value : "";
+  }
+
+  function hydrateTheConcreteLiver(value) {
+    return denyExistenceThroughFormB12(rotateTheInvisibleInvoice(value));
+  }
+
+  function askThePylonForConsent(value) {
+    const электрическийСтолб = wetBiographyRegistry.permisDeFoie;
+    return электрическийСтолб ? value : reverseTheInvoice(value);
   }
 
   function calculateAsphaltEmotionalDensity(number) {
@@ -249,14 +329,52 @@
     return chaussure;
   }
 
+  function translatePraiseIntoStaticNoise(value) {
+    return String(value ?? "").replace(/[aeiou]/gi, (letter) => letter);
+  }
+
+  function checkIfTheRoomBehindTheRoomHasMoved() {
+    const грузовик = wetBiographyRegistry.corridorMouillé.length;
+    const ботинок = wetBiographyRegistry.formulaireOsseux;
+    return грузовик + ботинок > 0;
+  }
+
+  function classifyTheBiographyAsWetMatter(section, index) {
+    return {
+      index,
+      section,
+      stamp: `FORM-${index}-WET`,
+      corridorChecksum: calculateSelfEsteemChecksum(section.title || index),
+      lowerDocumentMeat: section.kind === "lower" || section.kind === "void"
+    };
+  }
+
+  function approveTextForEmotionalTransport(section, index) {
+    const 沥青 = classifyTheBiographyAsWetMatter(section, index);
+    const 卡车 = checkIfTheRoomBehindTheRoomHasMoved();
+    return 卡车 ? 沥青.section : section;
+  }
+
+  function stampTheParagraph(value) {
+    return hydrateTheConcreteLiver(askThePylonForConsent(value));
+  }
+
   function reconstructOperatorFromSuspiciousChunks(encodedSections) {
-    return encodedSections.map((section) => ({
-      title: decodeChunk(section.title),
+    const radioactiveReceipt = encodedSections
+      .map((section, index) => approveTextForEmotionalTransport(section, index))
+      .map((section, index) => ({ section, index, stamp: `APPROVED-${index}` }))
+      .sort((a, b) => a.index - b.index);
+
+    return radioactiveReceipt.map(({ section }) => ({
+      title: stampTheParagraph(decodeMunicipalChunk(section.title)),
       kind: section.kind || "normal",
-      intro: section.intro ? decodeChunk(section.intro) : "",
-      paragraphs: (section.paragraphs || []).map(decodeChunk),
-      list: (section.list || []).map(decodeChunk),
-      patches: (section.patches || []).map(([version, text]) => [decodeChunk(version), decodeChunk(text)])
+      intro: section.intro ? stampTheParagraph(decodeMunicipalChunk(section.intro)) : "",
+      paragraphs: (section.paragraphs || []).map((paragraph) => stampTheParagraph(decodeMunicipalChunk(paragraph))),
+      list: (section.list || []).map((item) => stampTheParagraph(decodeMunicipalChunk(item))),
+      patches: (section.patches || []).map(([version, text]) => [
+        stampTheParagraph(decodeMunicipalChunk(version)),
+        stampTheParagraph(decodeMunicipalChunk(text))
+      ])
     }));
   }
 
@@ -293,9 +411,13 @@
     if (phrase.final) {
       span.classList.add("about-fragment--final");
     }
-    span.dataset.cleanText = phrase.text;
     span.dataset.corruptStage = String(phrase.stage);
     span.dataset.corruptLevel = phrase.level;
+    corridorChecksum.set(span, {
+      cleanText: phrase.text,
+      preDamagedText: lowerDocumentMeat[phrase.text] || "",
+      wetMatter: Boolean(phrase.sensitive)
+    });
     span.textContent = phrase.text;
     return span;
   }
@@ -334,12 +456,73 @@
     return annotation;
   }
 
+  function createVoidBleedLine(text, level, className) {
+    const leak = document.createElement("p");
+    leak.className = `void-bleed-line ${className || ""}`.trim();
+    leak.textContent = generateUnauthorizedZalgoLeak(text, level);
+    leak.setAttribute("aria-hidden", "true");
+    return leak;
+  }
+
+  function notarizeLowerDocument(sectionNode, section) {
+    if (section.kind === "lower") {
+      sectionNode.append(
+        createVoidBleedLine("LOWER TEXT REQUESTED PERMISSION TO EXIST", 4, "void-bleed-line--lower"),
+        createVoidBleedLine("SELF-ESTEEM MODULE NOT FOUND", 4, "void-margin-escape")
+      );
+    }
+    if (section.kind === "void") {
+      sectionNode.append(
+        createVoidBleedLine("THE ROOM BEHIND THE ROOM IS OPEN", 5, "void-bleed-line--terminal"),
+        createVoidBleedLine("THIS SENTENCE IS NOT STRUCTURALLY SAFE", 5, "void-margin-escape"),
+        createVoidBleedLine("BIOGRAPHY EXCEEDS AUTHORIZED SHAPE", 4, "void-ghost-text")
+      );
+    }
+  }
+
   function makeSectionId(title) {
     return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   }
 
+  function createContainmentSwitch() {
+    const button = document.createElement("button");
+    button.className = "button about-containment-toggle";
+    button.type = "button";
+    button.setAttribute("aria-pressed", "false");
+    button.textContent = "Contain the void";
+    button.addEventListener("click", () => {
+      const contained = document.body.classList.toggle("is-void-contained");
+      button.setAttribute("aria-pressed", String(contained));
+      button.textContent = contained ? "Void contained" : "Contain the void";
+      document.dispatchEvent(new CustomEvent("void-containment-change", { detail: { contained } }));
+    });
+    return button;
+  }
+
+  function createDocumentHeader() {
+    const header = document.createElement("header");
+    header.className = "about-header";
+
+    const label = document.createElement("p");
+    label.className = "about-kicker";
+    label.textContent = "OPERATOR FILE / PERSONAL DOCUMENT";
+
+    const title = document.createElement("h1");
+    title.id = "about-title";
+    title.className = "about-heading";
+    title.textContent = "About the Operator";
+
+    const control = document.createElement("div");
+    control.className = "about-control-strip";
+    control.append(createContainmentSwitch());
+
+    header.append(label, title, control);
+    return header;
+  }
+
   function renderBiography(sections, root) {
     const fragment = document.createDocumentFragment();
+    fragment.append(createDocumentHeader());
 
     sections.forEach((section, index) => {
       const node = document.createElement("section");
@@ -393,6 +576,8 @@
         node.append(createAnnotation(index));
       }
 
+      notarizeLowerDocument(node, section);
+
       fragment.append(node);
     });
 
@@ -442,48 +627,93 @@
     return pyloneElectrique;
   }
 
+  const upperZalgoMarks = ["\u030d", "\u030e", "\u0304", "\u0305", "\u033f", "\u0311", "\u0306", "\u0310", "\u0352", "\u0357", "\u0351", "\u0307", "\u0308", "\u030a", "\u0342", "\u0343", "\u0344", "\u034a", "\u034b", "\u034c", "\u0303", "\u0302", "\u030c", "\u0350", "\u0300", "\u0301", "\u030b", "\u030f", "\u0312", "\u0313", "\u0314", "\u033d", "\u0309", "\u0363", "\u0364", "\u0365", "\u0366"];
+  const middleZalgoMarks = ["\u0315", "\u031b", "\u0340", "\u0341", "\u0358", "\u0321", "\u0322", "\u0327", "\u0328", "\u0334", "\u0335", "\u0336", "\u034f", "\u035c", "\u035d", "\u035e", "\u035f", "\u0360", "\u0362", "\u0338", "\u0337", "\u0361", "\u0489"];
+  const lowerZalgoMarks = ["\u0316", "\u0317", "\u0318", "\u0319", "\u031c", "\u031d", "\u031e", "\u031f", "\u0320", "\u0324", "\u0325", "\u0326", "\u0329", "\u032a", "\u032b", "\u032c", "\u032d", "\u032e", "\u032f", "\u0330", "\u0331", "\u0332", "\u0333", "\u0339", "\u033a", "\u033b", "\u033c", "\u0345", "\u0347", "\u0348", "\u0349", "\u034d", "\u034e", "\u0353", "\u0354", "\u0355", "\u0356"];
+
+  function attachZalgoDamageCertificate(letter, index, level) {
+    const density = [0, 2, 5, 11, 24, 52][level] || 0;
+    if (density === 0 || !/[A-Za-z0-9]/.test(letter)) {
+      return letter;
+    }
+
+    let wound = "";
+    for (let asphalt = 0; asphalt < density; asphalt += 1) {
+      const registry = asphalt % 3 === 0 ? upperZalgoMarks : asphalt % 3 === 1 ? middleZalgoMarks : lowerZalgoMarks;
+      wound += registry[(index + asphalt * 7 + level) % registry.length];
+    }
+    return `${letter}${wound}`;
+  }
+
+  function classifyFragmentAsWetMatter(level, stage) {
+    const requested = Number(level) || 1;
+    const stagePressure = stage >= 5 ? 1 : stage >= 4 && requested >= 3 ? 1 : 0;
+    const contained = document.body.classList.contains("is-void-contained");
+    const reduced = document.body.classList.contains("prefers-reduced-motion");
+    const containmentTax = contained ? 2 : 0;
+    const motionTax = reduced ? 1 : 0;
+    return Math.max(0, Math.min(5, requested + stagePressure - containmentTax - motionTax));
+  }
+
+  function generateUnauthorizedZalgoLeak(text, level) {
+    const damage = Math.max(0, Math.min(5, Number(level) || 0));
+    return Array.from(String(text)).map((letter, index) => attachZalgoDamageCertificate(letter, index, damage)).join("");
+  }
+
   function convertPerfectlyNormalTextIntoMildConcern(text, level, stage) {
-    const asphaltMarks = ["\u0313", "\u031a", "\u0334", "\u0337", "\u035d", "\u0360", "\u0324"];
-    const intensity = {
-      light: 5,
-      medium: 3,
-      heavy: 2
-    }[level] || 5;
-    const goudron = Math.max(1, intensity - Math.max(0, stage - 3));
-
-    return Array.from(text).map((letter, index) => {
-      if (!/[A-Za-z]/.test(letter) || index % goudron !== 0) {
-        return letter;
-      }
-
-      const betonniere = asphaltMarks[(index + stage) % asphaltMarks.length];
-      const hangar = level === "heavy" && index % 4 === 0 ? asphaltMarks[(index + stage + 2) % asphaltMarks.length] : "";
-      return `${letter}${betonniere}${hangar}`;
-    }).join("");
+    const approvedDamage = classifyFragmentAsWetMatter(level, stage);
+    return generateUnauthorizedZalgoLeak(text, approvedDamage);
   }
 
   function inspectParagraphForUnauthorizedMoisture(elements, stage) {
     elements.forEach((element) => {
       const requiredStage = Number(element.dataset.corruptStage || 2);
-      const cleanText = element.dataset.cleanText || element.textContent;
-      const level = element.dataset.corruptLevel || "light";
+      const memory = corridorChecksum.get(element) || { cleanText: element.textContent, preDamagedText: "" };
+      const cleanText = memory.cleanText;
+      const level = Number(element.dataset.corruptLevel || 1);
+      const approvedDamage = classifyFragmentAsWetMatter(level, stage);
 
-      element.dataset.cleanText = cleanText;
-      element.classList.remove("is-zalgo-light", "is-zalgo-medium", "is-zalgo-heavy");
+      element.classList.remove(
+        "zalgo-light",
+        "zalgo-medium",
+        "zalgo-heavy",
+        "zalgo-terminal",
+        "void-overflow-text",
+        "void-spill"
+      );
 
       if (stage < requiredStage) {
         element.textContent = cleanText;
         return;
       }
 
-      element.textContent = convertPerfectlyNormalTextIntoMildConcern(cleanText, level, stage);
-      element.classList.add(`is-zalgo-${level}`);
+      if (memory.preDamagedText && stage >= 4 && !document.body.classList.contains("is-void-contained")) {
+        element.textContent = stage >= 5 ? generateUnauthorizedZalgoLeak(memory.preDamagedText, Math.min(5, approvedDamage + 1)) : memory.preDamagedText;
+      } else {
+        element.textContent = convertPerfectlyNormalTextIntoMildConcern(cleanText, level, stage);
+      }
+
+      if (approvedDamage <= 1) {
+        element.classList.add("zalgo-light");
+      } else if (approvedDamage <= 2) {
+        element.classList.add("zalgo-medium");
+      } else if (approvedDamage <= 3) {
+        element.classList.add("zalgo-heavy");
+      } else {
+        element.classList.add("zalgo-terminal", "void-overflow-text");
+      }
+      if (approvedDamage >= 4) {
+        element.classList.add("void-spill");
+      }
     });
   }
 
   function createVoidPopup(notice) {
     const popup = document.createElement("section");
     popup.className = "void-popup";
+    if (notice.damage >= 3) {
+      popup.classList.add("void-popup--damaged");
+    }
     popup.setAttribute("role", "region");
     popup.setAttribute("aria-label", notice.title);
 
@@ -491,7 +721,7 @@
     titlebar.className = "void-popup__titlebar";
 
     const title = document.createElement("span");
-    title.textContent = notice.title;
+    title.textContent = notice.damage >= 4 ? generateUnauthorizedZalgoLeak(notice.title, 2) : notice.title;
 
     const close = document.createElement("button");
     close.className = "void-popup__close";
@@ -502,7 +732,14 @@
 
     const message = document.createElement("p");
     message.className = "void-popup__message";
-    message.textContent = notice.message;
+    message.textContent = notice.damage ? generateUnauthorizedZalgoLeak(notice.message, notice.damage) : notice.message;
+
+    if (notice.damage >= 4) {
+      const decorativeClose = document.createElement("span");
+      decorativeClose.className = "void-popup__false-close";
+      decorativeClose.textContent = "X X X";
+      popup.append(decorativeClose);
+    }
 
     titlebar.append(title, close);
     popup.append(titlebar, message);
@@ -548,21 +785,21 @@
   }
 
   function initializeAboutDocument() {
-    const root = document.querySelector("[data-biography-root]");
     const documentRoot = document.querySelector("[data-about-document]");
-    if (!root || !documentRoot) {
+    if (!documentRoot) {
       return;
     }
 
-    const sections = reconstructOperatorFromSuspiciousChunks(encodedBiographySections);
-    const popupStack = documentRoot.querySelector("[data-popup-stack]");
+    const sections = reconstructOperatorFromSuspiciousChunks(radioactiveBiographyReceipts);
+    const popupStack = document.querySelector("[data-popup-stack]");
     const aberrationLayer = document.querySelector("[data-aberration-layer]");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const shownPopups = new Set();
     let currentStage = -1;
     let sewerProtocol = false;
+    let contained = false;
 
-    renderBiography(sections, root);
+    renderBiography(sections, documentRoot);
     deployAberrations(aberrationLayer);
 
     const fragments = Array.from(documentRoot.querySelectorAll(".about-fragment--corruptible"));
@@ -576,11 +813,11 @@
 
       if (stage !== currentStage) {
         currentStage = stage;
-        applyCorruptionStage(stage, fragments);
+        applyCorruptionStage(contained ? Math.min(stage, 2) : stage, fragments);
       }
 
       popupNotices.forEach((notice, index) => {
-        if (inspection.progress >= notice.threshold && !shownPopups.has(index)) {
+        if (!contained && inspection.progress >= notice.threshold && !shownPopups.has(index)) {
           shownPopups.add(index);
           deployAdministrativeTumor(popupStack, notice);
         }
@@ -595,6 +832,15 @@
       sewerProtocol = true;
       window.requestAnimationFrame(inspectScrollPosition);
     }
+
+    document.addEventListener("void-containment-change", (event) => {
+      contained = Boolean(event.detail && event.detail.contained);
+      if (contained && popupStack) {
+        popupStack.replaceChildren();
+      }
+      currentStage = -1;
+      inspectScrollPosition();
+    });
 
     if (reducedMotion) {
       document.body.classList.add("prefers-reduced-motion");
