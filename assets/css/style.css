@@ -557,9 +557,7 @@ h1 {
   width: 17px;
   height: 17px;
   flex: 0 0 auto;
-  background-color: var(--ink);
-  -webkit-mask: url("../img/icon-app.svg") center / 17px 17px no-repeat;
-  mask: url("../img/icon-app.svg") center / 17px 17px no-repeat;
+  filter: brightness(0) saturate(100%);
 }
 
 .project-card:hover .project-title-bar,
@@ -570,7 +568,7 @@ h1 {
 
 .project-card:hover .project-icon,
 .project-card.micro-hover .project-icon {
-  background-color: var(--paper);
+  filter: brightness(0) invert(1);
 }
 
 .project-file-name {

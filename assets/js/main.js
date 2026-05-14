@@ -57,8 +57,10 @@
     const titleBar = document.createElement("div");
     titleBar.className = "project-title-bar";
 
-    const icon = document.createElement("span");
+    const icon = document.createElement("img");
     icon.className = "project-icon";
+    icon.src = "assets/img/icon-app.svg";
+    icon.alt = "";
     icon.setAttribute("aria-hidden", "true");
 
     const fileName = document.createElement("span");
