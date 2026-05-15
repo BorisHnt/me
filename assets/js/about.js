@@ -581,8 +581,9 @@
   const popupNotices = [
     { threshold: 0.06, title: "SYSTEM WELCOME", message: "Welcome to the page of the Operator." },
     { threshold: 0.2, title: "SYSTEM NOTICE", message: "The paragraph has exceeded its authorized shape." },
-    { threshold: 0.4, title: "DOCUMENT INSPECTION", message: "A small amount of void has been detected near the operator." },
-    { threshold: 0.6, title: "READABILITY REPORT", message: "The document is still legally readable." },
+    { threshold: 0.4, title: "READABILITY NOTIFICATION", message: "The document is still legally readable." },
+    { threshold: 0.52, title: "DOCUMENT INSPECTION", message: "A small amount of void has been detected near the operator." },
+    { threshold: 0.55, title: "READABILITY REPORT", message: "The document is may still be readable. Please check the integrity of the text or contact the Operator.", damage: 1 },
     { threshold: 0.72, title: "INTERNAL MEMO", message: "This memory was not declared to the interface.", damage: 2 },
     { threshold: 0.8, title: "LOWER DOCUMENT", message: "The lower document has entered the room.", damage: 3 },
     { threshold: 0.86, title: "VOID RESIDUE", message: "Operator biography exceeded safe emotional density.", damage: 4 },
