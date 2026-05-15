@@ -228,7 +228,23 @@
     wet_concrete: "wet concrete",
     intrusive_thoughts: "intrusive thoughts",
     rejected_commands: "commands I do not agree with",
-    not_recovery: "not recovery"
+    not_recovery: "not recovery",
+    wrong_kindness: "the wrong kindness",
+    lying_precision: "the mind to start lying with precision",
+    delayed_collapse: "A delayed message can feel like a collapse",
+    rupture_fragment: "a rupture",
+    private_trial: "a private trial with no judge, no evidence and no end",
+    imagined_question: "Did I imagine it?",
+    tone_change: "Why did the tone change?",
+    what_did_i_do: "What did I do?",
+    fail_to_understand: "What did I fail to understand?",
+    obsession_permission: "the obsession does not ask permission",
+    suffering_story: "The suffering can be real even when the story was not",
+    lonely_signal: "I was lonely enough to misread the signal",
+    not_mine: "Not mine",
+    emotional_device: "emotional device",
+    machine_screaming: "the machine inside me is screaming",
+    cathedral_true: "feeling too much does not make the cathedral true"
   });
 
   const smallObsessionsArchiveLedger = (() => {
@@ -554,6 +570,180 @@
     { phrase: "small operator", level: 2 }
   ];
 
+  const limerenceArchiveLedger = (() => {
+    const corridorChecksum = [
+      "l00", "l01", "l02", "l03", "l04", "l05", "l06", "l07", "l08", "l09",
+      "l10", "l11", "l12", "l13", "l14", "l15", "l16", "l17", "l18", "l19",
+      "l20", "l21", "l22", "l23", "l24", "l25", "l26", "l27", "l28", "l29",
+      "l30", "l31", "l32", "l33", "l34", "l35", "l36", "l37", "l38", "l39",
+      "l40", "l41", "l42", "l43", "l44", "l45", "l46", "l47", "l48", "l49",
+      "l50", "l51", "l52", "l53", "l54", "l55", "l56", "l57", "l58", "l59",
+      "l60", "l61", "l62", "l63", "l64", "l65", "l66", "l67", "l68", "l69",
+      "l70", "l71", "l72", "l73", "l74", "l75", "l76", "l77", "l78", "l79",
+      "l80", "l81", "l82", "l83", "l84", "l85", "l86", "l87", "l88", "l89"
+    ];
+
+    const cathedralInvoice = {
+      l15: [{ kind: "raw", value: "A look becomes evidence." }],
+      l00: [{ kind: "raw", value: "Limerence is difficult to describe without making it sound more beautiful than it is." }],
+      l47: [{ kind: "raw", value: "It edits hope." }],
+      l04: [{ kind: "raw", value: "It is the mind building a cathedral around a person who never asked to become architecture." }],
+      l32: [{ kind: "raw", value: "A distance can feel like withdrawal." }],
+      l75: [{ kind: "raw", value: "Maybe that is the only ethical way to survive limerence." }],
+      l23: [{ kind: "raw", value: "But the speed." }],
+      l61: [{ kind: "raw", value: "Not a rescue mission." }],
+      l10: [{ kind: "raw", value: "A date." }],
+      l86: [{ kind: "raw", value: "But sometimes the most honest thing I can do is leave the building." }],
+      l38: [{ kind: "raw", value: "Did I imagine it?" }],
+      l71: [{ kind: "raw", value: "Not an emotional device." }],
+      l01: [{ kind: "raw", value: "It is not simply love." }],
+      l54: [{ kind: "raw", value: "That is the humiliating part." }],
+      l21: [{ kind: "raw", value: "Not the desire itself." }],
+      l65: [{ kind: "raw", value: "With their own history, fatigue, fears, desires, limits and right to remain separate from the cathedral built inside my head." }],
+      l12: [{ kind: "raw", value: "Someone who answered with the wrong kindness." }],
+      l44: [{ kind: "raw", value: "It is exhausting because the obsession does not ask permission." }],
+      l80: [{ kind: "raw", value: "The cathedral can be beautiful from the inside." }],
+      l06: [{ kind: "raw", value: "It can fall from nowhere." }],
+      l30: [{ kind: "raw", value: "A delayed message can feel like a collapse." }],
+      l58: [{ kind: "raw", value: "Not a cure." }],
+      l41: [{ kind: "raw", value: "Why did they disappear?" }],
+      l73: [{ kind: "raw", value: "A person." }],
+      l17: [{ kind: "raw", value: "A message becomes weather." }],
+      l49: [{ kind: "raw", value: "It can make an ordinary day feel like waiting for a verdict." }],
+      l35: [{ kind: "raw", value: "Then they become sharp in the wrong place." }],
+      l69: [{ kind: "raw", value: "Not a function." }],
+      l26: [{ kind: "raw", value: "The way waiting becomes architecture." }],
+      l07: [{ kind: "raw", value: "A stranger in public transport." }],
+      l83: [{ kind: "raw", value: "It has echoes." }],
+      l52: [{ kind: "raw", value: "Even if no promise was made." }],
+      l19: [{ kind: "raw", value: "The mind starts producing meaning faster than reality can correct it." }],
+      l59: [{ kind: "raw", value: "Not a missing piece." }],
+      l39: [{ kind: "raw", value: "Was that sentence warmer than the others?" }],
+      l88: [{ kind: "raw", value: "Because I felt too much." }],
+      l28: [{ kind: "raw", value: "It can feel violent." }],
+      l02: [{ kind: "raw", value: "It is not devotion." }],
+      l51: [{ kind: "raw", value: "Even if nothing official existed." }],
+      l74: [{ kind: "raw", value: "And I have to remember that even when the machine inside me is screaming." }],
+      l43: [{ kind: "raw", value: "What did I fail to understand?" }],
+      l66: [{ kind: "raw", value: "That sentence has to remain stronger than the obsession." }],
+      l13: [{ kind: "raw", value: "Someone who simply existed close enough for the mind to start lying with precision." }],
+      l22: [{ kind: "raw", value: "Not even the tenderness." }],
+      l82: [{ kind: "raw", value: "It has light." }],
+      l36: [
+        { kind: "raw", value: "Hyperfocus does not always feel like concentration. " },
+        { kind: "raw", value: "Sometimes it feels like being trapped under a single light while the rest of the world disappears. " },
+        { kind: "arr", value: ["Everything returns to the same person, the same question, ", "the same impossible calculation."] }
+      ],
+      l56: [{ kind: "raw", value: "I try to stay responsible inside that distortion." }],
+      l09: [{ kind: "raw", value: "A crush." }],
+      l31: [{ kind: "raw", value: "A cancelled plan can feel like a rupture." }],
+      l68: [{ kind: "raw", value: "Not mine." }],
+      l18: [{ kind: "raw", value: "An absence becomes a machine." }],
+      l46: [{ kind: "raw", value: "It touches memory." }],
+      l25: [{ kind: "raw", value: "The way uncertainty becomes hunger." }],
+      l57: [{ kind: "raw", value: "The other person is not a symbol." }],
+      l03: [{ kind: "raw", value: "It is not proof of depth." }],
+      l50: [{ kind: "raw", value: "And when the illusion breaks, it can feel like grief." }],
+      l76: [{ kind: "raw", value: "To refuse to turn intensity into entitlement." }],
+      l40: [{ kind: "raw", value: "Why did the tone change?" }],
+      l64: [{ kind: "raw", value: "A complete person." }],
+      l14: [{ kind: "raw", value: "Then the system changes." }],
+      l85: [{ kind: "raw", value: "It has a place where hope kneels and calls itself love." }],
+      l24: [{ kind: "raw", value: "The way a small sign becomes a structure." }],
+      l53: [{ kind: "raw", value: "Even if the other person did nothing wrong." }],
+      l60: [{ kind: "raw", value: "Not a door." }],
+      l33: [{ kind: "raw", value: "A small ambiguity can become a private trial with no judge, no evidence and no end." }],
+      l79: [{ kind: "raw", value: "To keep the other person real, even when the mind wants to make them mythical." }],
+      l08: [{ kind: "raw", value: "A friend." }],
+      l87: [{ kind: "raw", value: "Not because I did not feel anything." }],
+      l48: [{ kind: "raw", value: "It contaminates music, streets, objects, hours, sleep, appetite, silence." }],
+      l27: [{ kind: "raw", value: "The way the body reacts as if something immense has happened, even when almost nothing has happened at all." }],
+      l72: [{ kind: "raw", value: "Not proof that I can finally be saved." }],
+      l16: [{ kind: "raw", value: "A silence becomes a room." }],
+      l55: [{ kind: "raw", value: "The suffering can be real even when the story was not." }],
+      l37: [{ kind: "raw", value: "Do they care?" }],
+      l67: [{ kind: "raw", value: "They are a person." }],
+      l20: [{ kind: "raw", value: "That may be the most dangerous part." }],
+      l81: [{ kind: "raw", value: "That is why it is dangerous." }],
+      l42: [{ kind: "raw", value: "What did I do?" }],
+      l63: [{ kind: "raw", value: "They are a person." }],
+      l11: [{ kind: "raw", value: "Someone who smiled at the wrong moment." }],
+      l77: [{ kind: "raw", value: "To refuse to confuse pain with truth." }],
+      l29: [{ kind: "raw", value: "Not violent toward the other person, but violent inside the one who carries it." }],
+      l45: [{ kind: "raw", value: "It enters the room and starts rearranging the furniture." }],
+      l89: [{ kind: "raw", value: "And feeling too much does not make the cathedral true." }],
+      l05: [{ kind: "raw", value: "Sometimes it does not even begin with a story." }],
+      l62: [{ kind: "raw", value: "Not an answer sent by the universe because I was lonely enough to misread the signal." }],
+      l70: [{ kind: "raw", value: "Not a sacred object." }],
+      l34: [{ kind: "raw", value: "Thoughts become blurred." }],
+      l84: [{ kind: "raw", value: "It has rituals." }],
+      l78: [{ kind: "raw", value: "To refuse to let longing become a weapon." }]
+    };
+
+    return Object.freeze({ corridorChecksum, cathedralInvoice });
+  })();
+
+  const limerenceScramblePhrases = [
+    "A look becomes evidence",
+    "A silence becomes a room",
+    "A message becomes weather",
+    "An absence becomes a machine",
+    "producing meaning faster than reality can correct it",
+    "impossible calculation",
+    "waiting for a verdict",
+    "grief",
+    "distortion",
+    "cathedral",
+    "feeling too much",
+    "meaning",
+    "uncertainty",
+    "waiting",
+    "the same person",
+    "the same question",
+    "the story was not",
+    "mythical",
+    "leave the building"
+  ];
+
+  const limerenceLockedScramblePhrases = [
+    "A look becomes evidence",
+    "A silence becomes a room",
+    "A message becomes weather",
+    "An absence becomes a machine",
+    "producing meaning faster than reality can correct it",
+    "impossible calculation",
+    "waiting for a verdict",
+    "the story was not",
+    "mythical",
+    "feeling too much"
+  ];
+
+  const limerenceZalgoPermits = [
+    { phrase: "collapse", level: 3 },
+    { phrase: "rupture", level: 3 },
+    { phrase: "obsession", level: 3 },
+    { phrase: "grief", level: 3 },
+    { phrase: "distortion", level: 3 },
+    { phrase: "the cathedral true", level: 3 }
+  ];
+
+  const limerenceGhostThoughts = [
+    "did I imagine it",
+    "why did the tone change",
+    "what did I do",
+    "what did I fail to understand",
+    "do they care",
+    "was that sentence warmer",
+    "waiting for a verdict",
+    "the story was not real",
+    "the suffering was real",
+    "not mine",
+    "not a cure",
+    "not a door",
+    "the cathedral is not proof",
+    "leave the building"
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -741,6 +931,14 @@
     });
   }
 
+  function reconstructLimerenceDocument() {
+    return limerenceArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = limerenceArchiveLedger.cathedralInvoice[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
   function createRecoveredMaintenanceNote() {
     const note = document.createElement("aside");
     note.className = "acrostic-ledger recovered-maintenance-note";
@@ -872,6 +1070,89 @@
     mount.replaceChildren(fragment);
   }
 
+  function createLimerenceDiagnosticBadge(code, detail) {
+    const badge = document.createElement("aside");
+    badge.className = "limerence-diagnostic-badge";
+    badge.setAttribute("aria-label", "Obsession diagnostic fragment");
+
+    const core = document.createElement("span");
+    core.className = "limerence-diagnostic-badge__code";
+    core.textContent = code;
+
+    const message = document.createElement("span");
+    message.textContent = ` / ${detail}`;
+
+    badge.append(core, message);
+    return badge;
+  }
+
+  function createLimerenceDiagnosticNote(message, damaged = false) {
+    const note = document.createElement("aside");
+    note.className = damaged ? "limerence-diagnostic-note limerence-diagnostic-note--damaged" : "limerence-diagnostic-note";
+    note.setAttribute("aria-label", "Obsession system warning");
+
+    const label = document.createElement("span");
+    label.textContent = damaged ? scrambleArchiveText("WARNING", message.length) : "WARNING";
+
+    const output = document.createElement("p");
+    output.textContent = damaged ? generateUnauthorizedZalgoLeak(message, 1) : message;
+
+    const close = document.createElement("button");
+    close.className = "limerence-diagnostic-note__close";
+    close.type = "button";
+    close.setAttribute("aria-label", "Dismiss warning");
+    close.textContent = "X";
+    close.addEventListener("click", () => note.remove());
+
+    note.append(label, output, close);
+    return note;
+  }
+
+  function initializeLimerenceDocument() {
+    const mount = document.querySelector("[data-limerence-document]");
+    if (!mount) {
+      return;
+    }
+
+    const diagnosticBadges = new Map([
+      [15, ["FIXATION", "signal attached"]],
+      [30, ["RUPTURE", "internal collapse"]],
+      [44, ["OBSESSION", "loop active"]],
+      [79, ["MYTH", "person becoming symbol"]]
+    ]);
+    const diagnosticNotes = new Map([
+      [19, ["MEANING GENERATED WITHOUT EVIDENCE", false]],
+      [33, ["REALITY CORRECTION DELAYED", false]],
+      [49, ["WAITING LOOP ACTIVE", false]],
+      [62, ["PERSONHOOD WARNING: SYMBOLIZATION RISK", true]],
+      [80, ["CATHEDRAL STRUCTURE UNSTABLE", true]],
+      [89, ["INTENSITY IS NOT PROOF", true]]
+    ]);
+    const fragment = document.createDocumentFragment();
+
+    reconstructLimerenceDocument().forEach((line, index) => {
+      const paragraph = document.createElement("p");
+      appendArchiveTextWithInspections(paragraph, line, {
+        scramble: true,
+        scrambleList: limerenceScramblePhrases,
+        lockedScrambleList: limerenceLockedScramblePhrases,
+        zalgoList: limerenceZalgoPermits
+      });
+      fragment.append(paragraph);
+
+      if (diagnosticBadges.has(index)) {
+        const [code, detail] = diagnosticBadges.get(index);
+        fragment.append(createLimerenceDiagnosticBadge(code, detail));
+      }
+      if (diagnosticNotes.has(index)) {
+        const [message, damaged] = diagnosticNotes.get(index);
+        fragment.append(createLimerenceDiagnosticNote(message, damaged));
+      }
+    });
+
+    mount.replaceChildren(fragment);
+  }
+
   function generateUnauthorizedZalgoLeak(text, level) {
     const density = [0, 1, 3, 7, 14, 26][Math.max(0, Math.min(5, level))] || 0;
     return Array.from(String(text)).map((letter, index) => {
@@ -975,24 +1256,6 @@
         }
       });
     }
-  }
-
-  function initializePageFourScrollReveal() {
-    const target = document.querySelector("[data-scroll-word]");
-    if (!target) {
-      return;
-    }
-
-    const inspect = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-      if (progress > 0.6) {
-        document.body.classList.add("is-scroll-revealed");
-      }
-    };
-
-    window.addEventListener("scroll", inspect, { passive: true });
-    inspect();
   }
 
   function initializePageFivePopup() {
@@ -1187,6 +1450,80 @@
     window.addEventListener("scroll", inspectScrollForUnfiledNoise, { passive: true });
   }
 
+  function createLimerenceEchoLayer() {
+    let layer = document.querySelector("[data-limerence-echo-layer]");
+    if (layer) {
+      return layer;
+    }
+
+    layer = document.createElement("div");
+    layer.className = "limerence-echo-layer";
+    layer.dataset.limerenceEchoLayer = "";
+    layer.setAttribute("aria-hidden", "true");
+    document.body.append(layer);
+    return layer;
+  }
+
+  function pinCathedralThoughtToWrongWall(layer, progress) {
+    if (document.body.classList.contains("archive-clean")) {
+      layer.replaceChildren();
+      return;
+    }
+
+    const existing = layer.querySelectorAll(".limerence-echo").length;
+    if (existing > 11) {
+      layer.querySelector(".limerence-echo")?.remove();
+    }
+
+    const index = Math.floor(progress * 700 + Date.now() / 211) % limerenceGhostThoughts.length;
+    const echo = document.createElement("span");
+    echo.className = `limerence-echo limerence-echo--${index % 5}`;
+    echo.textContent = limerenceGhostThoughts[index];
+    echo.style.left = `${6 + ((index * 13 + Math.floor(progress * 90)) % 78)}vw`;
+    echo.style.top = `${16 + ((index * 29 + Math.floor(progress * 240)) % 64)}vh`;
+    echo.style.setProperty("--echo-tilt", `${(index % 7) - 3}deg`);
+    layer.append(echo);
+
+    window.setTimeout(() => echo.remove(), 1800 + (index % 5) * 350);
+  }
+
+  function initializeLimerenceScrollEchoes() {
+    if (!document.body.classList.contains("archive-doc-04")) {
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const layer = createLimerenceEchoLayer();
+    let bureaucraticOrgan = 0;
+    let warehouseSpleen = 0;
+
+    const inspectCathedralLoop = () => {
+      const now = Date.now();
+      if (now - bureaucraticOrgan < 150) {
+        return;
+      }
+      bureaucraticOrgan = now;
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      if (progress < 0.12) {
+        return;
+      }
+
+      warehouseSpleen += 1;
+      if (warehouseSpleen % 2 === 0 || progress > 0.58) {
+        pinCathedralThoughtToWrongWall(layer, progress);
+      }
+      if (progress > 0.68 && warehouseSpleen % 4 === 0) {
+        pinCathedralThoughtToWrongWall(layer, Math.min(1, progress + 0.12));
+      }
+    };
+
+    window.addEventListener("scroll", inspectCathedralLoop, { passive: true });
+  }
+
   function initializeVoidPage() {
     document.querySelectorAll("[data-zalgo-source]").forEach((node) => {
       attachZalgoDamageCertificate(node);
@@ -1215,13 +1552,14 @@
     initializeMaintenanceDocument();
     initializeSmallObsessionsDocument();
     initializeNeuroScramblingDocument();
+    initializeLimerenceDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
-    initializePageFourScrollReveal();
     initializePageFivePopup();
     initializeStaticArchivePopups();
     initializeSmallObsessionsScramble();
     initializeNeuroScrollGlitches();
+    initializeLimerenceScrollEchoes();
     initializeVoidPage();
   }
 
