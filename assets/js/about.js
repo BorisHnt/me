@@ -854,15 +854,15 @@
 
   function resolveTranslationLeakStage(index) {
     if (index < 4) {
-      return 2;
+      return 1;
     }
     if (index < 10) {
-      return 3;
+      return 2;
     }
     if (index < 16) {
-      return 4;
+      return 3;
     }
-    return 5;
+    return 4;
   }
 
   function calculateTranslationLeakCoordinates(index) {
@@ -943,7 +943,7 @@
       body.removeAttribute("dir");
       body.textContent = receipt.english;
       fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
-      element.style.top = `${7 + index * 4.6}%`;
+      element.style.top = `${Math.max(6, 98 - (voidTranslationNodes.length - 1 - index) * 4.6)}%`;
       element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
     });
