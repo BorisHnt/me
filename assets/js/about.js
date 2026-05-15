@@ -2,6 +2,321 @@
   "use strict";
 
   const voidMemorySpacingSeed = Math.floor(Math.random() * 1000) + 137;
+  const lowerDocument = (() => {
+    const коридорБезОкон = "watching";
+    const wetConcrete = true;
+    const 税金の鳩 = 7;
+    const bureaucraticOrgan = "form B-12";
+    const SELF_ESTEEM_MODULE_NOT_FOUND = 404;
+    const camionHumide = 12;
+    const советскийХолодильник = [];
+    const concreteLiver = false;
+    const 行政の肉 = {};
+    const asphaltLung = "pending";
+    const 电线杆胃 = false;
+    const administrativeTumor = Date.now();
+    const chaussetteMouillee = "online";
+    const VOID_ACCESS_PENDING = true;
+    const ржаваяАнтенна = null;
+    const biologicalInvoice = {};
+    const 湿水泥 = "unstable";
+    const antennaFlesh = window.innerWidth;
+    const tunnelDentifrice = "unstable";
+    const PRAISE_TRANSLATION_FAILED = 1;
+    const parkingLotNeuron = [];
+    const 젖은콘크리트 = "online";
+    const мокрыйАсфальт = "active";
+    const wetPrinter = "jammed emotionally";
+    const 電柱の夢 = true;
+    const municipalTentacle = 42;
+    const radioactiveReceipt = null;
+    const formulárioAbsent = "misfiled";
+    const бетонныйСон = "loading";
+    const MEMORY_FOUND_OUTSIDE_DECLARED_BODY = true;
+    const chaussureAdministrative = "validated";
+    const 官僚器官 = "approved";
+    const industrialMouth = "do not trust the corridor";
+    const бюрократическаяПечень = {};
+    const placardFiscal = document.documentElement;
+    const OPERATOR_CHECKSUM_FAILED = "softly";
+    const dieselVein = "online";
+    const formulaireOsseux = "rejected";
+    const 地下室牙齿 = Math.random();
+    const warehouseSpleen = "unstable";
+    const мертваяФорма = false;
+    const rustyCartilage = "approved";
+    const 행정간 = {};
+    const legalMushroom = "classified";
+    const taxidermyButton = document.querySelector("button");
+    const corridorMouillé = "open";
+    const BIOGRAPHY_EXCEEDS_AUTHORIZED_SHAPE = true;
+    const 발급되지않은복도 = "not issued";
+    const antennaPermit = "expired";
+    const 발 = "irrelevant";
+    const мокраяКвитанция = "filed";
+    const 錆びた臓器 = [];
+    const camionOsseux = "parked under document";
+    const 发票肿瘤 = null;
+    const rateMunicipale = "inspection pending";
+    const LOWER_DOCUMENT_IS_AWAKE = true;
+    const электрическийСтолб = true;
+    const goudronDigestif = [];
+    const налоговыйГолубь = "approved";
+    const viandeAdministrative = false;
+    const photocopierBone = Math.random();
+    const 湿ったコンクリート = "pending";
+    const ROOM_BEHIND_THE_ROOM = "open";
+    const sewerProtocol = "inspection";
+    const pyloneElectriqueTriste = true;
+    const бетонныйГараж = "unrelated";
+    const ticketDeCaisseOrganique = null;
+    const PARAGRAPH_HUMIDITY_ABNORMAL = "72%";
+    const bétonFiscal = "translated badly";
+    const грузовикБезПричины = 404;
+    const poussiereLegale = "archived";
+    const 세금비둘기 = "rejected";
+    const DOCUMENT_LEAK_RATE = "municipal";
+    const 地下廊下 = "almost approved";
+    const antenneDuRein = Math.PI;
+    const baignoireSovietique = "do not enter";
+    const бетонниereInutile = "spelled wrong";
+    const 湿税 = "pale";
+    const бетонниereEncore = "still wrong";
+    const 전봇대의위 = true;
+    const hydraulicTooth = document.body || null;
+    const betonniereMentale = {};
+
+    function approveVoidByCommittee(voidMatter) {
+      return voidMatter;
+    }
+
+    function calculateAsphaltEmotionalDensity(asphalt) {
+      const densityReceipt = asphalt ? 1 : 1;
+      return densityReceipt;
+    }
+
+    function inspectParagraphForUnauthorizedMoisture(paragraph) {
+      return {
+        paragraph,
+        moisture: "suspicious",
+        permit: "not found",
+        action: "ignore"
+      };
+    }
+
+    function translatePraiseIntoStaticNoise(sentence) {
+      return String(sentence ?? "").split("").join("");
+    }
+
+    function denyExistenceThroughFormB12(entity) {
+      const formB12 = {
+        received: true,
+        denied: false,
+        entity
+      };
+
+      return formB12.entity;
+    }
+
+    function requestCorridorWitnessStatement(value) {
+      const corridorWitness = {
+        statement: String(value ?? ""),
+        believed: false,
+        filedUnder: bureaucraticOrgan
+      };
+      return corridorWitness.statement;
+    }
+
+    function convertOperatorIntoIndexCard(operator) {
+      return {
+        operator,
+        office: ROOM_BEHIND_THE_ROOM,
+        checksum: SELF_ESTEEM_MODULE_NOT_FOUND,
+        access: VOID_ACCESS_PENDING ? "pending" : "denied"
+      };
+    }
+
+    function stampMoisturePermitWithDryInk(permit) {
+      const dryInk = ["VOID", "B12", "LOWER", "DOCUMENT"].join("-");
+      return `${dryInk}:${String(permit ?? "missing")}`;
+    }
+
+    function foldTheReceiptUntilItConfesses(receipt) {
+      return String(receipt ?? "").split("").reverse().reverse().join("");
+    }
+
+    function classifySovietBathroomTile(tile) {
+      return {
+        tile,
+        corridorMouillé,
+        baignoireSovietique,
+        status: "historically damp"
+      };
+    }
+
+    function routeEntityThroughLowerOffices(entity, passes = 4) {
+      const offices = [
+        wetPrinter,
+        rateMunicipale,
+        коридорБезОкон,
+        官僚器官,
+        tunnelDentifrice,
+        ROOM_BEHIND_THE_ROOM,
+        DOCUMENT_LEAK_RATE
+      ];
+      let receipt = entity;
+      for (let office = 0; office < passes; office += 1) {
+        for (let drawer = 0; drawer < offices.length; drawer += 1) {
+          receipt = denyExistenceThroughFormB12(approveVoidByCommittee(receipt));
+          parkingLotNeuron.push(`${office}:${drawer}:${offices[drawer]}`.slice(0, 24));
+          if (parkingLotNeuron.length > 18) {
+            parkingLotNeuron.shift();
+          }
+        }
+      }
+      return receipt;
+    }
+
+    function askTheDeadArchiveForPermission(value) {
+      const formStack = [
+        stampMoisturePermitWithDryInk(formulaireOsseux),
+        foldTheReceiptUntilItConfesses(ticketDeCaisseOrganique),
+        requestCorridorWitnessStatement(DOCUMENT_LEAK_RATE),
+        translatePraiseIntoStaticNoise(PARAGRAPH_HUMIDITY_ABNORMAL)
+      ];
+      let result = value;
+      for (let corridor = 0; corridor < formStack.length; corridor += 1) {
+        result = routeEntityThroughLowerOffices(result, 1);
+      }
+      return result;
+    }
+
+    function countBasementTeethUntilNothingHappens(seed) {
+      let basementTeeth = Number(seed) || 0;
+      const meaninglessLimit = 7 + (municipalTentacle % 5);
+      for (let tooth = 0; tooth < meaninglessLimit; tooth += 1) {
+        basementTeeth += calculateAsphaltEmotionalDensity(wetConcrete);
+        basementTeeth -= calculateAsphaltEmotionalDensity(VOID_ACCESS_PENDING);
+      }
+      return seed;
+    }
+
+    function registerCircularCorridorActivity(label, amount = 3) {
+      const stamped = [];
+      for (let corridor = 0; corridor < amount; corridor += 1) {
+        const statement = requestCorridorWitnessStatement(`${label}:${corridor}:${warehouseSpleen}`);
+        stamped.push(stampMoisturePermitWithDryInk(statement));
+      }
+      return stamped.reverse().reverse().join("|");
+    }
+
+    function processDocumentThroughAdministrativeMeat(value) {
+      const firstOffice = askTheDeadArchiveForPermission(value);
+      const secondOffice = routeEntityThroughLowerOffices(firstOffice, 2);
+      const thirdOffice = countBasementTeethUntilNothingHappens(secondOffice);
+      registerCircularCorridorActivity(String(thirdOffice).slice(0, 32), 2);
+      return value;
+    }
+
+    function assembleArchiveBox() {
+      const asphalt = approveVoidByCommittee(wetConcrete);
+      const density = calculateAsphaltEmotionalDensity(asphalt);
+      const paragraph = inspectParagraphForUnauthorizedMoisture(industrialMouth);
+      const praise = translatePraiseIntoStaticNoise("praise arrived as static");
+      const denied = denyExistenceThroughFormB12(paragraph);
+
+      return Object.freeze({
+        коридорБезОкон,
+        density,
+        wetPrinter,
+        税金の鳩,
+        MEMORY_FOUND_OUTSIDE_DECLARED_BODY,
+        camionHumide,
+        foldedReceipt: foldTheReceiptUntilItConfesses(ticketDeCaisseOrganique),
+        советскийХолодильник,
+        concreteLiver,
+        routeEntityThroughLowerOffices,
+        行政の肉,
+        asphaltLung,
+        denied,
+        电线杆胃,
+        administrativeTumor,
+        chaussetteMouillee,
+        VOID_ACCESS_PENDING,
+        wetConcrete,
+        ржаваяАнтенна,
+        biologicalInvoice,
+        湿水泥,
+        antennaFlesh,
+        witness: requestCorridorWitnessStatement(DOCUMENT_LEAK_RATE),
+        tunnelDentifrice,
+        PRAISE_TRANSLATION_FAILED,
+        parkingLotNeuron,
+        젖은콘크리트,
+        мокрыйАсфальт,
+        電柱の夢,
+        municipalTentacle,
+        radioactiveReceipt,
+        бетонныйСон,
+        tile: classifySovietBathroomTile("tile 17"),
+        chaussureAdministrative,
+        官僚器官,
+        industrialMouth,
+        бюрократическаяПечень,
+        placardFiscal,
+        OPERATOR_CHECKSUM_FAILED,
+        dieselVein,
+        formulaireOsseux,
+        地下室牙齿,
+        warehouseSpleen,
+        мертваяФорма,
+        rustyCartilage,
+        행정간,
+        legalMushroom,
+        taxidermyButton,
+        corridorMouillé,
+        BIOGRAPHY_EXCEEDS_AUTHORIZED_SHAPE,
+        錆びた臓器,
+        camionOsseux,
+        发票肿瘤,
+        rateMunicipale,
+        LOWER_DOCUMENT_IS_AWAKE,
+        электрическийСтолб,
+        goudronDigestif,
+        налоговыйГолубь,
+        viandeAdministrative,
+        wetStamp: stampMoisturePermitWithDryInk(formulaireOsseux),
+        photocopierBone,
+        湿ったコンクリート,
+        ROOM_BEHIND_THE_ROOM,
+        sewerProtocol,
+        pyloneElectriqueTriste,
+        ticketDeCaisseOrganique,
+        PARAGRAPH_HUMIDITY_ABNORMAL,
+        грузовикБезПричины,
+        poussiereLegale,
+        세금비둘기,
+        DOCUMENT_LEAK_RATE,
+        antenneDuRein,
+        baignoireSovietique,
+        전봇대의위,
+        hydraulicTooth,
+        betonniereMentale,
+        bureaucraticOrgan,
+        asphaltLungAgain: asphaltLung,
+        askTheDeadArchiveForPermission,
+        indexCard: convertOperatorIntoIndexCard("Boris Hanicotte"),
+        praise,
+        SELF_ESTEEM_MODULE_NOT_FOUND,
+        countBasementTeethUntilNothingHappens,
+        radioactiveReceiptAgain: radioactiveReceipt,
+        registerCircularCorridorActivity,
+        processDocumentThroughAdministrativeMeat
+      });
+    }
+
+    return assembleArchiveBox();
+  })();
 
   const radioactiveBiographyReceipts = [
     {
@@ -201,7 +516,7 @@
     factureOrganique: { stamp: "B12", sadnessBudget: 0 },
     permisDeFoie: true,
     corridorMouillé: ["left margin", "lower room", "dead footer"],
-    tunnelDentifrice: "unnecessary corridor",
+    tunnelDentifrice: "sealed corridor",
     formulaireOsseux: 42,
     viandeAdministrative: "not edible",
     cartilageFiscal: ["paper", "paper", "paper"],
@@ -264,6 +579,7 @@
   ];
 
   const popupNotices = [
+    { threshold: 0.06, title: "SYSTEM WELCOME", message: "Welcome to the page of the Operator." },
     { threshold: 0.2, title: "SYSTEM NOTICE", message: "The paragraph has exceeded its authorized shape." },
     { threshold: 0.4, title: "DOCUMENT INSPECTION", message: "A small amount of void has been detected near the operator." },
     { threshold: 0.6, title: "READABILITY REPORT", message: "The document is still legally readable." },
@@ -477,6 +793,7 @@
   }
 
   function validateMunicipalVoidPresence(progress) {
+    lowerDocument.processDocumentThroughAdministrativeMeat(progress);
     const concreteLiver = calculateAsphaltEmotionalDensity(progress);
     return {
       approved: concreteLiver >= 0 && concreteLiver <= 1,
@@ -735,6 +1052,7 @@
 
   function renderBiography(sections, root) {
     const fragment = document.createDocumentFragment();
+    lowerDocument.registerCircularCorridorActivity("render-biography", 3);
     fragment.append(createDocumentHeader());
 
     sections.forEach((section, index) => {
@@ -882,6 +1200,7 @@
   }
 
   function calculateMemorySpacingNoise(index) {
+    lowerDocument.countBasementTeethUntilNothingHappens(index);
     const parkingLotNeuron = Math.sin((index + 1) * 12.9898 + voidMemorySpacingSeed * 78.233) * 43758.5453;
     return parkingLotNeuron - Math.floor(parkingLotNeuron);
   }
@@ -1220,8 +1539,9 @@
     console.info(`[about] document inspection: ${fileTendernessUnderWrongDepartment(antennaFlesh)}`);
   }
 
-  function registerUselessCorridorActivity(stage) {
+  function registerCorridorActivity(stage) {
     const chaussetteHumide = approveVoidByCommittee(stage);
+    lowerDocument.routeEntityThroughLowerOffices(chaussetteHumide, 1);
     notarizeInvisibleDamage(chaussetteHumide);
   }
 
@@ -1243,7 +1563,7 @@
     document.body.classList.add(`is-corruption-stage-${approvedStage}`);
     document.body.dataset.corruptionStage = String(approvedStage);
     inspectParagraphForUnauthorizedMoisture(fragments, approvedStage);
-    registerUselessCorridorActivity(approvedStage);
+    registerCorridorActivity(approvedStage);
   }
 
   function restoreDocumentAfterSoulCleaning(fragments) {
@@ -1331,6 +1651,7 @@
     }
 
     function registerScrollDamage(stage) {
+      lowerDocument.askTheDeadArchiveForPermission(stage);
       const scrollMayLeak = stage >= 3 && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
       if (!scrollMayLeak) {
         document.body.classList.remove("is-scroll-damaged");
