@@ -500,6 +500,101 @@ body.archive-shell {
   line-height: 1.25;
 }
 
+.neuro-glitch-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.neuro-glitch-pop {
+  position: absolute;
+  display: inline-block;
+  max-width: min(280px, 46vw);
+  border: 2px solid var(--ink);
+  padding: 0.16rem 0.35rem;
+  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--steel);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(0.58rem, 1vw, 0.72rem);
+  font-weight: 900;
+  line-height: 1.1;
+  opacity: 0;
+  text-transform: uppercase;
+  animation: neuro-glitch-pop 1.15s steps(2, end) forwards;
+}
+
+.neuro-glitch-pop::before,
+.neuro-glitch-pop::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: var(--ink);
+}
+
+.neuro-glitch-pop::before {
+  top: -8px;
+  left: -14px;
+  width: var(--glitch-width, 48px);
+}
+
+.neuro-glitch-pop::after {
+  right: -18px;
+  bottom: -7px;
+  width: calc(var(--glitch-width, 48px) * 0.7);
+}
+
+.neuro-glitch-pop--1 {
+  background: var(--dust);
+  box-shadow: -4px 4px 0 var(--ink);
+}
+
+.neuro-glitch-pop--2 {
+  border-style: dashed;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 3px -3px 0 var(--dust);
+}
+
+.neuro-glitch-pop--3 {
+  padding-left: 1.1rem;
+  background: var(--paper);
+  box-shadow: inset -3px -3px 0 var(--dust), 3px 3px 0 var(--steel);
+}
+
+.archive-clean .neuro-glitch-layer {
+  display: none;
+}
+
+@keyframes neuro-glitch-pop {
+  0% {
+    opacity: 0;
+    clip-path: inset(45% 0 45% 0);
+  }
+  12% {
+    opacity: 0.95;
+    clip-path: inset(0 0 58% 0);
+  }
+  28% {
+    opacity: 0.72;
+    clip-path: inset(24% 0 12% 0);
+  }
+  47% {
+    opacity: 0.95;
+    clip-path: inset(0 0 0 0);
+  }
+  76% {
+    opacity: 0.62;
+    clip-path: inset(12% 0 28% 0);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(48% 0 48% 0);
+  }
+}
+
 .diagnostic-code {
   display: inline-block;
   min-width: 2.1rem;
@@ -680,7 +775,8 @@ body.archive-shell {
 
   .archive-stamp,
   .archive-artifact,
-  .void-ghost {
+  .void-ghost,
+  .neuro-glitch-layer {
     display: none;
   }
 
@@ -692,7 +788,8 @@ body.archive-shell {
 
 @media (prefers-reduced-motion: reduce) {
   .archive-artifact,
-  .void-ghost {
+  .void-ghost,
+  .neuro-glitch-layer {
     display: none;
   }
 }

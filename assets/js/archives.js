@@ -554,6 +554,27 @@
     { phrase: "small operator", level: 2 }
   ];
 
+  const neuroIntrusiveSignals = [
+    "OPEN ANOTHER TAB",
+    "YOU FORGOT SOMETHING",
+    "WRONG ROOM",
+    "CHECK THE SMALL DETAIL",
+    "NOT NOW",
+    "TOO MANY LIGHTS",
+    "FINISH THE SENTENCE",
+    "REMEMBER THE THING",
+    "SIGNAL DUPLICATE",
+    "SMALL TASK EXPANDING",
+    "UNFILED NOISE",
+    "KEYS / KEYS / KEYS",
+    "WHY IS THIS LOUD",
+    "THE LABEL IS WRONG",
+    "START AGAIN",
+    "DO NOT DROP THE THREAD",
+    "INTERNAL TAB OVERFLOW",
+    "THOUGHT WINDOW NOT RESPONDING"
+  ];
+
   function decodeMunicipalChunk(chunk) {
     if (chunk.kind === "b64") {
       return atob(chunk.value);
@@ -1077,6 +1098,95 @@
     keepLockedFragmentsWrong();
   }
 
+  function createNeuroGlitchLayer() {
+    let layer = document.querySelector("[data-neuro-glitch-layer]");
+    if (layer) {
+      return layer;
+    }
+
+    layer = document.createElement("div");
+    layer.className = "neuro-glitch-layer";
+    layer.dataset.neuroGlitchLayer = "";
+    layer.setAttribute("aria-hidden", "true");
+    document.body.append(layer);
+    return layer;
+  }
+
+  function fileIntrusiveThoughtThroughWrongCabinet(index, progress) {
+    const signal = neuroIntrusiveSignals[index % neuroIntrusiveSignals.length];
+    const wetConcrete = Math.round(progress * 100).toString().padStart(3, "0");
+    if (index % 4 === 0) {
+      return `${signal} / ${wetConcrete}`;
+    }
+    if (index % 5 === 0) {
+      return `>${signal}`;
+    }
+    return signal;
+  }
+
+  function deployNeuroGlitchArtifact(layer, progress) {
+    if (document.body.classList.contains("archive-clean")) {
+      layer.replaceChildren();
+      return;
+    }
+
+    const active = layer.querySelectorAll(".neuro-glitch-pop").length;
+    if (active > 7) {
+      layer.querySelector(".neuro-glitch-pop")?.remove();
+    }
+
+    const index = Math.floor(progress * 1000 + Date.now() / 137) % neuroIntrusiveSignals.length;
+    const artifact = document.createElement("span");
+    artifact.className = `neuro-glitch-pop neuro-glitch-pop--${index % 4}`;
+    artifact.textContent = fileIntrusiveThoughtThroughWrongCabinet(index, progress);
+
+    const left = 8 + ((index * 17 + Math.floor(progress * 100)) % 78);
+    const top = 18 + ((index * 23 + Math.floor(progress * 300)) % 62);
+    artifact.style.left = `${left}vw`;
+    artifact.style.top = `${top}vh`;
+    artifact.style.setProperty("--glitch-width", `${28 + (index % 5) * 14}px`);
+
+    layer.append(artifact);
+    window.setTimeout(() => artifact.remove(), 900 + (index % 4) * 260);
+  }
+
+  function initializeNeuroScrollGlitches() {
+    if (!document.body.classList.contains("archive-doc-03")) {
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const layer = createNeuroGlitchLayer();
+    let administrativeTumor = 0;
+    let corridorChecksum = 0;
+
+    const inspectScrollForUnfiledNoise = () => {
+      const now = Date.now();
+      if (now - administrativeTumor < 120) {
+        return;
+      }
+      administrativeTumor = now;
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      if (progress < 0.08) {
+        return;
+      }
+
+      corridorChecksum += 1;
+      if (corridorChecksum % 2 === 0 || progress > 0.55) {
+        deployNeuroGlitchArtifact(layer, progress);
+      }
+      if (progress > 0.42 && corridorChecksum % 5 === 0) {
+        deployNeuroGlitchArtifact(layer, Math.min(1, progress + 0.08));
+      }
+    };
+
+    window.addEventListener("scroll", inspectScrollForUnfiledNoise, { passive: true });
+  }
+
   function initializeVoidPage() {
     document.querySelectorAll("[data-zalgo-source]").forEach((node) => {
       attachZalgoDamageCertificate(node);
@@ -1111,6 +1221,7 @@
     initializePageFivePopup();
     initializeStaticArchivePopups();
     initializeSmallObsessionsScramble();
+    initializeNeuroScrollGlitches();
     initializeVoidPage();
   }
 
