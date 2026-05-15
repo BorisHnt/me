@@ -2,7 +2,7 @@
   "use strict";
 
   const expectedArchiveWords = ["clean", "the", "soul", "from", "the", "void"];
-  const recoveredSentence = "CLEAN THE SOUL FROM THE VOID";
+  const recoveredSentence = expectedArchiveWords.map((word) => word.toUpperCase()).join(" ");
   const upperMarks = ["\u030d", "\u030e", "\u0304", "\u0305", "\u033f", "\u0311", "\u0306", "\u0310", "\u0352", "\u0357", "\u0307", "\u0308", "\u030a", "\u0342", "\u0343", "\u0344"];
   const lowerMarks = ["\u0316", "\u0317", "\u0318", "\u0319", "\u031c", "\u031d", "\u031e", "\u031f", "\u0320", "\u0324", "\u0325", "\u0326", "\u0329", "\u032a", "\u032b", "\u0330"];
   const middleMarks = ["\u0315", "\u031b", "\u0340", "\u0341", "\u0358", "\u0321", "\u0322", "\u0327", "\u0334", "\u0335", "\u0336", "\u034f", "\u0338", "\u0337"];
@@ -261,7 +261,14 @@
     money_private: "Things that do not need to become money",
     absence_plan: "absence of a plan",
     absence_vision: "absence of a vision",
-    future_no_answer: "the future does not answer when I call it"
+    future_no_answer: "the future does not answer when I call it",
+    void_empty_pressure: "A place can be empty and still contain pressure",
+    void_clean_identity: "No clean identity",
+    void_stable_answer: "No stable answer",
+    void_large_why: "there is no why large enough",
+    void_contamination_identity: "contamination for identity",
+    void_life_continue: "a life can continue there without knowing what it is supposed to become",
+    void_stopped_closing: "it has stopped trying to close"
   });
 
   const smallObsessionsArchiveLedger = (() => {
@@ -1115,6 +1122,168 @@
     "CAREER FORM: unreadable"
   ];
 
+  const voidArchiveLedger = (() => {
+    const corridorChecksum = [
+      "v00", "v01", "v02", "v03", "v04", "v05", "v06", "v07", "v08", "v09",
+      "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v18", "v19",
+      "v20", "v21", "v22", "v23", "v24", "v25", "v26", "v27", "v28", "v29",
+      "v30", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39",
+      "v40", "v41", "v42", "v43", "v44", "v45", "v46", "v47", "v48", "v49",
+      "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59",
+      "v60", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v69",
+      "v70", "v71", "v72", "v73", "v74"
+    ];
+
+    const nullCorridor = {
+      v00: [{ kind: "raw", value: "The void is not always an enemy." }],
+      v01: [{ kind: "raw", value: "Sometimes it is only the space where no instruction was written." }],
+      v02: [{ kind: "raw", value: "Sometimes it is the room behind the room." }],
+      v03: [{ kind: "raw", value: "Sometimes it is the silence after the machine stops asking for input." }],
+      v04: [{ kind: "raw", value: "Sometimes it is what remains when every obvious version of the future has failed to load." }],
+      v05: [{ kind: "raw", value: "I used to think emptiness meant absence." }],
+      v06: [{ kind: "raw", value: "Now I am less sure." }],
+      v07: [{ kind: "raw", value: "Some empty spaces are hostile." }],
+      v08: [{ kind: "raw", value: "Some are unfinished." }],
+      v09: [{ kind: "raw", value: "Some are waiting for a shape." }],
+      v10: [{ kind: "raw", value: "There are voids that swallow." }],
+      v11: [{ kind: "raw", value: "There are voids that preserve." }],
+      v12: [{ kind: "raw", value: "There are voids that do nothing at all, and that may be the most frightening part." }],
+      v13: [{ kind: "raw", value: "A place can be empty and still contain pressure." }],
+      v14: [{ kind: "raw", value: "An unwritten future is not peaceful by default." }],
+      v15: [{ kind: "raw", value: "It can feel like standing in front of a white screen that refuses to become a page." }],
+      v16: [{ kind: "raw", value: "It can feel like being alive after the script ended, while the cursor keeps blinking with no mercy and no suggestion." }],
+      v17: [{ kind: "raw", value: "I spent a long time thinking the void meant failure." }],
+      v18: [{ kind: "raw", value: "No plan." }],
+      v19: [{ kind: "raw", value: "No certainty." }],
+      v20: [{ kind: "raw", value: "No clean identity." }],
+      v21: [{ kind: "raw", value: "No obvious path." }],
+      v22: [{ kind: "raw", value: "No stable answer to the question everyone seems allowed to ask:" }],
+      v23: [{ kind: "raw", value: "What are you going to do with your life?" }],
+      v24: [{ kind: "raw", value: "But maybe the void is not the opposite of life." }],
+      v25: [{ kind: "raw", value: "Maybe it is what appears when life stops pretending to be organized." }],
+      v26: [{ kind: "raw", value: "Maybe it is the raw space under the map." }],
+      v27: [{ kind: "raw", value: "The place where meaning has not been assigned yet." }],
+      v28: [{ kind: "raw", value: "The corridor between old instructions and the next form of movement." }],
+      v29: [{ kind: "raw", value: "That does not make it comfortable." }],
+      v30: [{ kind: "raw", value: "The void is not kind." }],
+      v31: [{ kind: "raw", value: "It does not explain itself." }],
+      v32: [{ kind: "raw", value: "It does not hold your hand." }],
+      v33: [{ kind: "raw", value: "It does not promise that anything will become beautiful later." }],
+      v34: [{ kind: "raw", value: "But it is not always lying." }],
+      v35: [{ kind: "raw", value: "Sometimes the void is honest in a way that hope is not." }],
+      v36: [{ kind: "raw", value: "Hope can decorate." }],
+      v37: [{ kind: "raw", value: "Hope can sell you a future with clean typography and a fake progress bar." }],
+      v38: [{ kind: "raw", value: "The void does not sell." }],
+      v39: [{ kind: "raw", value: "It only remains." }],
+      v40: [{ kind: "raw", value: "And maybe, sometimes, remaining is the only true thing." }],
+      v41: [{ kind: "raw", value: "I am still here." }],
+      v42: [{ kind: "raw", value: "Not because I solved the system." }],
+      v43: [{ kind: "raw", value: "Not because I found the correct doctrine." }],
+      v44: [{ kind: "raw", value: "Not because the pain became useful." }],
+      v45: [{ kind: "raw", value: "Not because the machine finally explained itself." }],
+      v46: [{ kind: "raw", value: "I am still here in the stupid, physical, unfinished sense." }],
+      v47: [{ kind: "raw", value: "I drink coffee." }],
+      v48: [{ kind: "raw", value: "I write code." }],
+      v49: [{ kind: "raw", value: "I make broken pages." }],
+      v50: [{ kind: "raw", value: "I listen to violent music." }],
+      v51: [{ kind: "raw", value: "I collect small stones and shells like evidence that matter can survive being thrown around by water." }],
+      v52: [{ kind: "raw", value: "I repair what I can." }],
+      v53: [{ kind: "raw", value: "I fail often." }],
+      v54: [{ kind: "raw", value: "I try again without making a religion out of it." }],
+      v55: [{ kind: "raw", value: "The document cannot explain why." }],
+      v56: [{ kind: "raw", value: "Maybe there is no why large enough." }],
+      v57: [{ kind: "raw", value: "Maybe the sentence was never a cure." }],
+      v58: [{ kind: "raw", value: "Maybe it was only a maintenance command." }],
+      v59: [{ kind: "raw", value: "Not erasure." }],
+      v60: [{ kind: "raw", value: "Not victory." }],
+      v61: [{ kind: "raw", value: "Not pretending nothing happened." }],
+      v62: [{ kind: "raw", value: "Only a slow removal of what does not belong anymore." }],
+      v63: [{ kind: "raw", value: "A way to keep the structure without worshipping the damage." }],
+      v64: [{ kind: "raw", value: "A way to stop mistaking contamination for identity." }],
+      v65: [{ kind: "raw", value: "The void is not always an enemy." }],
+      v66: [{ kind: "raw", value: "Sometimes it is the unlit part of the room where the next object is waiting." }],
+      v67: [{ kind: "raw", value: "Sometimes it is the place where a person sits down, exhausted, and finally stops performing certainty." }],
+      v68: [{ kind: "raw", value: "Sometimes it is only space." }],
+      v69: [{ kind: "raw", value: "And space can be terrifying." }],
+      v70: [{ kind: "raw", value: "But space can also be used." }],
+      v71: [{ kind: "raw", value: "A tool can be built there. A song can begin there. A small repair can happen there. A body can rest there. A life can continue there without knowing what it is supposed to become." }],
+      v72: [{ kind: "raw", value: "I am still here." }],
+      v73: [{ kind: "raw", value: "The document cannot explain why." }],
+      v74: [{ kind: "raw", value: "But it has stopped trying to close." }]
+    };
+
+    return Object.freeze({ corridorChecksum, nullCorridor });
+  })();
+
+  const voidScramblePhrases = [
+    "failed to load",
+    "No stable answer",
+    "The void is not kind",
+    "It only remains",
+    "I am still here",
+    "there is no why large enough",
+    "maintenance command",
+    "it has stopped trying to close",
+    "No instruction was written",
+    "the raw space under the map",
+    "meaning has not been assigned yet",
+    "the cursor keeps blinking",
+    "remaining is the only true thing"
+  ];
+
+  const voidLockedScramblePhrases = [
+    "failed to load",
+    "No stable answer",
+    "The void is not kind",
+    "It only remains",
+    "I am still here",
+    "maintenance command",
+    "it has stopped trying to close"
+  ];
+
+  const voidZalgoPermits = [
+    { phrase: "the room behind the room", level: 4 },
+    { phrase: "every obvious version of the future has failed to load", level: 4 },
+    { phrase: "emptiness meant absence", level: 4 },
+    { phrase: "Some empty spaces are hostile", level: 4 },
+    { phrase: "It only remains", level: 4 },
+    { phrase: "I am still here", level: 4 },
+    { phrase: "The document cannot explain why", level: 4 },
+    { phrase: "maintenance command", level: 4 },
+    { phrase: "contamination for identity", level: 4 },
+    { phrase: "it has stopped trying to close", level: 5 },
+    { phrase: "VOID", level: 5 }
+  ];
+
+  const voidContaminationFragments = [
+    "VOID", "VØID", "∅", "NULL", "NIL", "EMPTY", "NOTHINGNESS", "VACUUM", "ABYSS", "HOLLOW", "BLANK",
+    "VIDE", "NÉANT", "ABÎME", "VACÍO", "VAZIO", "VUOTO", "LEERE", "NICHTS", "LEEGTE", "TOMHET",
+    "TYHJYYS", "PRAZNO", "PRÓŻNIA", "ΚΕΝΟ", "ΑΒΥΣΣΟΣ", "ПУСТОТА", "НИЧТО", "БЕЗДНА", "ПОРОЖНЕЧА",
+    "BOŞLUK", "HİÇLİK", "BO‘SHLIQ", "ҚУЫС", "ԴԱՏԱՐԿՈՒԹՅՈՒՆ", "ՈՉԻՆՉ", "სიცარიელე", "არაფერი",
+    "فراغ", "عدم", "هاوية", "پوچی", "هیچ", "空", "空白", "虚空", "虚無", "無", "공허", "허무", "심연",
+    "UTUPU", "OMBWE", "GOL", "VID", "BUIT", "BUITAT", "HUTS", "FOLÚS", "FOLAMH", "GWAG", "TOMRUM",
+    "TÓM", "TÜHJUS", "TUŠTUMA", "PRÁZDNOTA", "PRAZNINA", "BOSHLLËK", "ŚŪNYATĀ", "शून्यता", "শূন্যতা",
+    "வெற்றிடம்", "ಶೂನ್ಯತೆ", "ความว่างเปล่า", "ទទេ", "HƯ KHÔNG", "KOSONG", "WALANG LAMAN", "ÒFO",
+    "ባዶ", "ХООСОН", "खाली", "ਖਾਲੀ", "खाली", "BOŞ", "БҒШ", "MALPLENO", "VAKUO", "NADA", "RIEN",
+    "EI MITÄÄN", "VOID_ACCESS_PENDING", "VOID_RESIDUE_DETECTED", "NO_INSTRUCTION_FOUND",
+    "DOCUMENT_HAS_NO_INSIDE", "ROOM_BEHIND_ROOM", "EMPTY_SPACE_DECLARED", "NULL_CORRIDOR",
+    "INSTRUCTIONLESS_AREA", "THE_PAGE_IS_HOLLOW", "NO_STABLE_ANSWER", "SIGNAL_LOST_IN_VOID",
+    "MEANING_NOT_ASSIGNED", "FUTURE_FAILED_TO_LOAD", "ERR_VOID_404", "VOID_OVERFLOW",
+    "VOID_PROCESS_STILL_RUNNING"
+  ];
+
+  const voidRepeatingFragments = [
+    "I AM STILL HERE",
+    "THE DOCUMENT CANNOT EXPLAIN WHY",
+    "IT ONLY REMAINS",
+    "VOID",
+    "NOT EMPTY",
+    "NO INSTRUCTION",
+    "STILL HERE",
+    "NO STABLE ANSWER",
+    "FUTURE FAILED TO LOAD"
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -1264,10 +1433,14 @@
       "is-limerence-scroll-shaking",
       "is-unplanned-scroll-degrading",
       "is-unplanned-scroll-resisting",
-      "is-unplanned-scroll-tearing"
+      "is-unplanned-scroll-tearing",
+      "is-void-scroll-tearing"
     );
     if (document.body.classList.contains("archive-doc-05")) {
       document.body.dataset.unplannedStage = "0";
+    }
+    if (document.body.classList.contains("archive-doc-06")) {
+      document.body.dataset.voidStage = "0";
     }
 
     document.querySelectorAll(".redacted-fragment[data-redaction-id]").forEach((fragment) => {
@@ -1281,15 +1454,18 @@
     });
     document.querySelectorAll(".archive-scramble-fragment").forEach((fragment) => {
       fragment.textContent = fragment.dataset.scrambleSource || fragment.textContent;
-      fragment.classList.add("is-unscrambled");
+      fragment.classList.remove("archive-scramble-fragment", "archive-scramble-fragment--locked");
+      fragment.classList.add("archive-restored-fragment", "is-unscrambled");
     });
     document.querySelectorAll(".archive-zalgo-fragment[data-zalgo-source]").forEach((fragment) => {
       fragment.textContent = fragment.dataset.zalgoSource;
-      fragment.classList.add("is-unscrambled");
+      fragment.classList.remove("archive-zalgo-fragment");
+      fragment.classList.add("archive-restored-fragment", "is-unscrambled");
     });
     document.querySelectorAll(".zalgo-fragment[data-zalgo-source]").forEach((fragment) => {
       fragment.textContent = fragment.dataset.zalgoSource;
-      fragment.classList.add("is-unscrambled");
+      fragment.classList.remove("zalgo-fragment", "is-zalgo-light", "is-zalgo-medium", "is-zalgo-heavy");
+      fragment.classList.add("archive-restored-fragment", "is-unscrambled");
     });
     document.querySelectorAll("[data-resolve-void]").forEach((fragment) => {
       fragment.textContent = "VOID";
@@ -1298,13 +1474,18 @@
     document.querySelectorAll(".limerence-intrusion").forEach((fragment) => {
       fragment.remove();
     });
-    document.querySelectorAll(".limerence-echo, .neuro-glitch-pop, .unplanned-lag-fragment, .unplanned-inline-invasion, .unplanned-terminal-invasion").forEach((fragment) => {
+    document.querySelectorAll(".limerence-echo, .neuro-glitch-pop, .unplanned-lag-fragment, .unplanned-inline-invasion, .unplanned-terminal-invasion, .void-detached-fragment").forEach((fragment) => {
       fragment.remove();
     });
     document.querySelectorAll(".is-unplanned-fractured-line").forEach((fragment) => {
       fragment.classList.remove("is-unplanned-fractured-line");
       fragment.style.removeProperty("--fracture-tilt");
       fragment.style.removeProperty("--fracture-nudge");
+    });
+    document.querySelectorAll(".is-void-fractured-line").forEach((fragment) => {
+      fragment.classList.remove("is-void-fractured-line");
+      fragment.style.removeProperty("--void-line-tilt");
+      fragment.style.removeProperty("--void-line-pull");
     });
     document.querySelectorAll(".limerence-diagnostic-note--damaged").forEach((fragment) => {
       fragment.classList.remove("limerence-diagnostic-note--damaged");
@@ -1352,6 +1533,14 @@
   function reconstructUnplannedAgeDocument() {
     return unplannedAgeArchiveLedger.corridorChecksum.map((permit) => {
       const truckMouth = unplannedAgeArchiveLedger.outdatedFolder[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
+  function reconstructVoidDocument() {
+    return voidArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = voidArchiveLedger.nullCorridor[permit] || [];
       inspectParagraphForUnauthorizedMoisture(permit);
       return truckMouth.map(decodeMunicipalChunk).join("");
     });
@@ -1591,6 +1780,48 @@
       });
       fragment.append(paragraph);
     });
+
+    mount.replaceChildren(fragment);
+  }
+
+  function createVoidRecoveryFragment() {
+    const line = document.createElement("p");
+    line.className = "void-recovery-line";
+    line.append("Recovered terminal fragment: ");
+
+    const fragment = document.createElement("span");
+    fragment.className = "void-recovery-fragment";
+    fragment.role = "button";
+    fragment.tabIndex = 0;
+    fragment.dataset.resolveVoid = "";
+    fragment.setAttribute("aria-label", "Corrupted recovered fragment");
+    fragment.textContent = generateUnauthorizedZalgoLeak("VOID", 5);
+    line.append(fragment);
+
+    return line;
+  }
+
+  function initializeVoidDocument() {
+    const mount = document.querySelector("[data-void-document]");
+    if (!mount) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    reconstructVoidDocument().forEach((line, index) => {
+      const paragraph = document.createElement("p");
+      appendArchiveTextWithInspections(paragraph, line, {
+        scramble: true,
+        scrambleList: voidScramblePhrases,
+        lockedScrambleList: voidLockedScramblePhrases,
+        zalgoList: voidZalgoPermits
+      });
+      if (index > 46) {
+        paragraph.classList.add("void-collapse-paragraph");
+      }
+      fragment.append(paragraph);
+    });
+    fragment.append(createVoidRecoveryFragment());
 
     mount.replaceChildren(fragment);
   }
@@ -2255,6 +2486,140 @@
     inspectOutdatedScroll();
   }
 
+  function createVoidVortexLayer() {
+    let layer = document.querySelector("[data-void-vortex-layer]");
+    if (layer) {
+      return layer;
+    }
+
+    layer = document.createElement("div");
+    layer.className = "void-vortex-layer";
+    layer.dataset.voidVortexLayer = "";
+    layer.setAttribute("aria-hidden", "true");
+
+    const core = document.createElement("span");
+    core.className = "void-vortex-core";
+    core.textContent = "∅";
+    layer.append(core);
+
+    voidContaminationFragments.forEach((fragment, index) => {
+      const debris = document.createElement("span");
+      debris.className = `void-vortex-fragment void-vortex-fragment--${index % 8}`;
+      const shouldDamage = index % 9 === 0;
+      debris.textContent = shouldDamage ? generateUnauthorizedZalgoLeak(fragment, index % 2 === 0 ? 2 : 3) : fragment;
+      debris.style.left = `${4 + ((index * 17) % 88)}vw`;
+      debris.style.top = `${8 + ((index * 29) % 82)}vh`;
+      debris.style.setProperty("--void-spin", `${(index % 11) - 5}deg`);
+      debris.style.setProperty("--void-delay", `${(index % 17) * -0.21}s`);
+      layer.append(debris);
+    });
+
+    document.body.append(layer);
+    return layer;
+  }
+
+  function fractureVoidParagraphs(progress, index) {
+    if (document.body.classList.contains("archive-clean")) {
+      document.querySelectorAll(".is-void-fractured-line").forEach((node) => {
+        node.classList.remove("is-void-fractured-line");
+        node.style.removeProperty("--void-line-tilt");
+        node.style.removeProperty("--void-line-pull");
+      });
+      return;
+    }
+
+    const paragraphs = Array.from(document.querySelectorAll("[data-void-document] p"));
+    if (!paragraphs.length || progress < 0.16) {
+      return;
+    }
+
+    const target = paragraphs[(index * 7 + Math.floor(progress * 61)) % paragraphs.length];
+    target.classList.add("is-void-fractured-line");
+    target.style.setProperty("--void-line-tilt", `${((index % 13) - 6) * Math.min(0.9, progress)}deg`);
+    target.style.setProperty("--void-line-pull", `${((index % 7) - 3) * Math.min(22, progress * 24)}px`);
+  }
+
+  function deployVoidDetachedFragment(layer, progress, index) {
+    if (!layer || document.body.classList.contains("archive-clean") || progress < 0.22) {
+      return;
+    }
+
+    const existing = layer.querySelectorAll(".void-detached-fragment");
+    if (existing.length > (progress > 0.76 ? 44 : 24)) {
+      existing[0].remove();
+    }
+
+    const fragment = document.createElement("span");
+    fragment.className = `void-detached-fragment void-detached-fragment--${index % 6}`;
+    const source = index % 3 === 0
+      ? voidRepeatingFragments[index % voidRepeatingFragments.length]
+      : voidContaminationFragments[(index * 11) % voidContaminationFragments.length];
+    fragment.textContent = index % 4 === 0 ? generateUnauthorizedZalgoLeak(source, progress > 0.7 ? 4 : 3) : source;
+    fragment.style.left = `${8 + ((index * 23) % 78)}vw`;
+    fragment.style.top = `${12 + ((index * 31) % 74)}vh`;
+    fragment.style.setProperty("--void-float-tilt", `${((index % 15) - 7) * 1.8}deg`);
+    fragment.style.setProperty("--void-float-duration", `${1.4 + (index % 6) * 0.25}s`);
+    layer.append(fragment);
+
+    window.setTimeout(() => fragment.remove(), 2600 + (index % 5) * 300);
+  }
+
+  function initializeVoidVortexDestruction() {
+    if (!document.body.classList.contains("archive-doc-06")) {
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const layer = createVoidVortexLayer();
+    let radioactiveReceipt = 0;
+    let corridorChecksum = 0;
+    let concreteLiver = 0;
+
+    const inspectVoidScroll = () => {
+      if (document.body.classList.contains("archive-clean")) {
+        layer.replaceChildren();
+        document.body.classList.remove("is-void-scroll-tearing");
+        fractureVoidParagraphs(0, 0);
+        return;
+      }
+
+      const now = Date.now();
+      if (now - radioactiveReceipt < 95) {
+        return;
+      }
+      radioactiveReceipt = now;
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      const stage = progress > 0.84 ? 5 : progress > 0.68 ? 4 : progress > 0.5 ? 3 : progress > 0.3 ? 2 : progress > 0.12 ? 1 : 0;
+      document.body.dataset.voidStage = String(stage);
+      layer.style.setProperty("--void-pull", String(progress));
+      layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.18 + progress * 0.8)));
+
+      corridorChecksum += 1;
+      document.body.classList.add("is-void-scroll-tearing");
+      window.clearTimeout(concreteLiver);
+      concreteLiver = window.setTimeout(() => {
+        document.body.classList.remove("is-void-scroll-tearing");
+      }, 220);
+
+      if (stage > 0 && corridorChecksum % 2 === 0) {
+        fractureVoidParagraphs(progress, corridorChecksum);
+      }
+      if (stage > 1 && (corridorChecksum % 2 === 0 || progress > 0.72)) {
+        deployVoidDetachedFragment(layer, progress, corridorChecksum);
+      }
+      if (stage > 3 && corridorChecksum % 3 === 0) {
+        deployVoidDetachedFragment(layer, Math.min(1, progress + 0.18), corridorChecksum + 13);
+      }
+    };
+
+    window.addEventListener("scroll", inspectVoidScroll, { passive: true });
+    inspectVoidScroll();
+  }
+
   function initializeVoidPage() {
     document.querySelectorAll("[data-zalgo-source]").forEach((node) => {
       attachZalgoDamageCertificate(node);
@@ -2285,6 +2650,7 @@
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
     initializeUnplannedAgeDocument();
+    initializeVoidDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
     initializeStaticArchivePopups();
@@ -2292,6 +2658,7 @@
     initializeNeuroScrollGlitches();
     initializeLimerenceScrollEchoes();
     initializeUnplannedAgeDegradation();
+    initializeVoidVortexDestruction();
     initializeVoidPage();
   }
 

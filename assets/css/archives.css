@@ -1395,6 +1395,7 @@ body.archive-shell {
 }
 
 .void-page .essay {
+  position: relative;
   border: 2px solid var(--ink);
   padding: 1rem;
   background: var(--ink);
@@ -1404,7 +1405,204 @@ body.archive-shell {
 }
 
 .void-page .essay p {
+  position: relative;
   color: var(--paper);
+}
+
+.archive-doc-06 .archive-document {
+  position: relative;
+  border-color: var(--ink);
+}
+
+.archive-doc-06 .archive-scramble-fragment {
+  border: 1px solid var(--paper);
+  padding: 0 0.12em;
+  background: var(--steel);
+  color: var(--paper);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.archive-doc-06 .archive-scramble-fragment--locked {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: inset 2px 2px 0 var(--steel), 3px 3px 0 var(--dust);
+}
+
+.archive-doc-06 .archive-zalgo-fragment {
+  display: inline-block;
+  overflow: visible;
+  color: var(--paper);
+  font-family: var(--mono);
+  font-weight: 900;
+  line-height: 0.72;
+  text-shadow:
+    2px 0 0 var(--steel),
+    -2px 0 0 var(--dust),
+    0 3px 0 var(--ink);
+}
+
+.void-recovery-line {
+  border: 2px solid var(--paper);
+  padding: 0.6rem;
+  background: var(--steel);
+  box-shadow: 6px 6px 0 var(--ink);
+  font-family: var(--mono);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.void-vortex-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  overflow: hidden;
+  opacity: var(--void-opacity, 0.18);
+  pointer-events: none;
+}
+
+.void-vortex-core {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: clamp(90px, 18vw, 220px);
+  height: clamp(90px, 18vw, 220px);
+  border: 2px solid var(--paper);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow:
+    0 0 0 8px var(--steel),
+    0 0 0 16px var(--dust),
+    inset 0 0 0 2px var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-weight: 900;
+  transform: translate(-50%, -50%) rotate(calc(var(--void-pull, 0) * 340deg));
+  animation: void-core-collapse 2.6s steps(8, end) infinite;
+}
+
+.void-vortex-fragment {
+  position: absolute;
+  max-width: min(280px, 44vw);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(0.62rem, 1.2vw, 1.1rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  transform:
+    rotate(calc(var(--void-spin, 0deg) + var(--void-pull, 0) * 90deg))
+    translate(
+      calc((50vw - 50%) * var(--void-pull, 0) * 0.42),
+      calc((54vh - 50%) * var(--void-pull, 0) * 0.42)
+    );
+  text-shadow:
+    2px 0 0 var(--paper),
+    -2px 0 0 var(--dust);
+  animation: void-fragment-orbit 4.8s steps(9, end) infinite;
+  animation-delay: var(--void-delay, 0s);
+}
+
+.void-vortex-fragment--2,
+.void-vortex-fragment--5 {
+  color: var(--steel);
+}
+
+.void-vortex-fragment--3,
+.void-vortex-fragment--7 {
+  border: 2px solid var(--ink);
+  padding: 0.08rem 0.22rem;
+  background: var(--paper);
+  box-shadow: 4px 4px 0 var(--steel);
+}
+
+.void-detached-fragment {
+  position: fixed;
+  z-index: 37;
+  max-width: min(380px, 54vw);
+  border: 2px solid var(--paper);
+  padding: 0.18rem 0.42rem;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 5px 5px 0 var(--steel);
+  font-family: var(--mono);
+  font-size: clamp(0.72rem, 1.45vw, 1.35rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  transform: rotate(var(--void-float-tilt, 0deg));
+  animation: void-detached-collapse var(--void-float-duration, 1.6s) steps(6, end) forwards;
+  pointer-events: none;
+}
+
+.void-detached-fragment--1,
+.void-detached-fragment--4 {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.void-detached-fragment--2 {
+  border-style: dashed;
+  background: var(--steel);
+}
+
+[data-void-stage="2"].archive-doc-06 .essay p:nth-of-type(4n),
+[data-void-stage="3"].archive-doc-06 .essay p:nth-of-type(3n),
+[data-void-stage="4"].archive-doc-06 .essay p:nth-of-type(2n),
+[data-void-stage="5"].archive-doc-06 .essay p {
+  text-shadow:
+    2px 0 0 var(--steel),
+    -2px 0 0 var(--ink),
+    0 3px 0 var(--dust);
+}
+
+[data-void-stage="3"].archive-doc-06 .essay p:nth-of-type(5n) {
+  margin-left: clamp(0px, 6vw, 80px);
+  border-left: 2px solid var(--paper);
+  padding-left: 0.65rem;
+}
+
+[data-void-stage="4"].archive-doc-06 .essay p:nth-of-type(6n),
+[data-void-stage="5"].archive-doc-06 .essay p:nth-of-type(4n) {
+  margin-right: clamp(0px, 9vw, 120px);
+  border-top: 2px solid var(--steel);
+  border-bottom: 2px solid var(--paper);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.archive-doc-06 .essay p.is-void-fractured-line {
+  border: 2px solid var(--paper);
+  padding: 0.3rem 0.45rem;
+  background: var(--ink);
+  box-shadow: 6px 6px 0 var(--steel);
+  transform: translateX(var(--void-line-pull, 0)) rotate(var(--void-line-tilt, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.is-void-scroll-tearing.archive-doc-06 .essay p:nth-of-type(2n),
+.is-void-scroll-tearing.archive-doc-06 .archive-scramble-fragment,
+.is-void-scroll-tearing.archive-doc-06 .archive-zalgo-fragment,
+.is-void-scroll-tearing.archive-doc-06 .void-recovery-fragment {
+  animation: void-text-vibration 0.16s steps(3, end);
+}
+
+[data-void-stage="5"].archive-doc-06 .archive-document::after {
+  content: "VOID / NOT EMPTY / NO INSTRUCTION / STILL HERE / VOID / NOT EMPTY";
+  position: absolute;
+  right: -16vw;
+  bottom: 10rem;
+  max-width: min(520px, 62vw);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: clamp(1rem, 3vw, 2.4rem);
+  font-weight: 900;
+  line-height: 0.86;
+  opacity: 0.45;
+  text-shadow: 4px 0 0 var(--steel), -4px 0 0 var(--ink);
+  pointer-events: none;
 }
 
 .zalgo-fragment,
@@ -1445,7 +1643,12 @@ body.archive-shell {
 }
 
 .archive-clean .archive-artifact,
-.archive-clean .void-ghost {
+.archive-clean .void-ghost,
+.archive-clean .void-vortex-layer {
+  display: none;
+}
+
+.archive-clean .void-detached-fragment {
   display: none;
 }
 
@@ -1482,6 +1685,116 @@ body.archive-shell {
   color: var(--ink);
 }
 
+.archive-clean.archive-doc-06 .archive-document,
+.archive-clean.archive-doc-06[data-void-stage] .archive-document {
+  box-shadow: none;
+}
+
+.archive-clean.archive-doc-06 .essay p,
+.archive-clean.archive-doc-06[data-void-stage] .essay p,
+.archive-clean.archive-doc-06 .essay p:nth-of-type(2n),
+.archive-clean.archive-doc-06 .essay p:nth-of-type(3n),
+.archive-clean.archive-doc-06 .essay p:nth-of-type(4n),
+.archive-clean.archive-doc-06 .essay p:nth-of-type(5n),
+.archive-clean.archive-doc-06 .essay p:nth-of-type(6n) {
+  margin-right: 0;
+  margin-left: 0;
+  border: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+  text-shadow: none;
+  transform: none;
+  animation: none;
+}
+
+.archive-clean.archive-doc-06 .essay p.is-void-fractured-line {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.archive-clean.archive-doc-06 .archive-document::after {
+  display: none;
+}
+
+@keyframes void-core-collapse {
+  0%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+  25% {
+    clip-path: inset(12% 0 0 0);
+  }
+  48% {
+    clip-path: inset(0 20% 0 0);
+  }
+  74% {
+    clip-path: inset(0 0 18% 0);
+  }
+}
+
+@keyframes void-fragment-orbit {
+  0%,
+  100% {
+    opacity: 0.2;
+    clip-path: inset(0 0 0 0);
+  }
+  38% {
+    opacity: 0.78;
+    clip-path: inset(0 0 45% 0);
+  }
+  62% {
+    opacity: 0.42;
+    clip-path: inset(22% 0 0 0);
+  }
+}
+
+@keyframes void-detached-collapse {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 80% 0 0);
+  }
+  20% {
+    opacity: 0.92;
+    clip-path: inset(0 0 0 0);
+  }
+  58% {
+    opacity: 0.64;
+    clip-path: inset(14% 0 22% 0);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(48% 0 48% 0);
+  }
+}
+
+@keyframes void-text-vibration {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+  }
+  22% {
+    transform: translate(3px, -2px) skewX(-2deg);
+  }
+  45% {
+    transform: translate(-4px, 1px) skewX(1.4deg);
+    clip-path: inset(0 0 18% 0);
+  }
+  72% {
+    transform: translate(2px, 3px) skewX(-1deg);
+    clip-path: inset(14% 0 0 0);
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @media (max-width: 900px) {
   .archive-grid,
   .recovery-grid {
@@ -1499,7 +1812,9 @@ body.archive-shell {
   .void-ghost,
   .neuro-glitch-layer,
   .limerence-echo-layer,
-  .unplanned-pressure-layer {
+  .unplanned-pressure-layer,
+  .void-vortex-layer,
+  .void-detached-fragment {
     display: none;
   }
 
@@ -1528,6 +1843,8 @@ body.archive-shell {
   .neuro-glitch-layer,
   .limerence-echo-layer,
   .unplanned-pressure-layer,
+  .void-vortex-layer,
+  .void-detached-fragment,
   .unplanned-inline-invasion,
   .unplanned-terminal-invasion {
     display: none;
@@ -1539,5 +1856,15 @@ body.archive-shell {
     animation: none !important;
     text-shadow: none !important;
     transform: none !important;
+  }
+
+  .archive-doc-06 .essay p,
+  .archive-doc-06 .archive-scramble-fragment,
+  .archive-doc-06 .archive-zalgo-fragment,
+  .archive-doc-06 .void-recovery-fragment {
+    animation: none !important;
+    text-shadow: none !important;
+    transform: none !important;
+    clip-path: none !important;
   }
 }
