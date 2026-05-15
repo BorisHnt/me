@@ -1100,6 +1100,17 @@
   }
 
   function revealArchiveRedactions() {
+    document.body.classList.add("archive-clean");
+    document.body.classList.remove(
+      "is-limerence-scroll-shaking",
+      "is-unplanned-scroll-degrading",
+      "is-unplanned-scroll-resisting",
+      "is-unplanned-scroll-tearing"
+    );
+    if (document.body.classList.contains("archive-doc-05")) {
+      document.body.dataset.unplannedStage = "0";
+    }
+
     document.querySelectorAll(".redacted-fragment[data-redaction-id]").forEach((fragment) => {
       const phrase = maintenanceRedactionRegistry[fragment.dataset.redactionId];
       if (!phrase) {
@@ -1117,8 +1128,30 @@
       fragment.textContent = fragment.dataset.zalgoSource;
       fragment.classList.add("is-unscrambled");
     });
+    document.querySelectorAll(".zalgo-fragment[data-zalgo-source]").forEach((fragment) => {
+      fragment.textContent = fragment.dataset.zalgoSource;
+      fragment.classList.add("is-unscrambled");
+    });
+    document.querySelectorAll("[data-resolve-void]").forEach((fragment) => {
+      fragment.textContent = "VOID";
+      fragment.setAttribute("aria-label", "Recovered fragment: VOID");
+    });
     document.querySelectorAll(".limerence-intrusion").forEach((fragment) => {
       fragment.remove();
+    });
+    document.querySelectorAll(".limerence-echo, .neuro-glitch-pop, .unplanned-lag-fragment, .unplanned-inline-invasion, .unplanned-terminal-invasion").forEach((fragment) => {
+      fragment.remove();
+    });
+    document.querySelectorAll(".is-unplanned-fractured-line").forEach((fragment) => {
+      fragment.classList.remove("is-unplanned-fractured-line");
+      fragment.style.removeProperty("--fracture-tilt");
+      fragment.style.removeProperty("--fracture-nudge");
+    });
+    document.querySelectorAll(".limerence-diagnostic-note--damaged").forEach((fragment) => {
+      fragment.classList.remove("limerence-diagnostic-note--damaged");
+    });
+    document.querySelectorAll("[data-clean-text]").forEach((fragment) => {
+      fragment.textContent = fragment.dataset.cleanText;
     });
     document.querySelectorAll(".unplanned-pressure-line").forEach((fragment, index) => {
       fragment.textContent = unplannedPressureFragments[index % unplannedPressureFragments.length];
@@ -1319,9 +1352,11 @@
 
     const label = document.createElement("span");
     label.textContent = damaged ? scrambleArchiveText("WARNING", message.length) : "WARNING";
+    label.dataset.cleanText = "WARNING";
 
     const output = document.createElement("p");
     output.textContent = damaged ? generateUnauthorizedZalgoLeak(message, 1) : message;
+    output.dataset.cleanText = message;
 
     const close = document.createElement("button");
     close.className = "limerence-diagnostic-note__close";
@@ -1492,7 +1527,6 @@
     if (entry) {
       entry.addEventListener("input", () => {
         if (entry.value.trim() === recoveredSentence) {
-          document.body.classList.add("archive-clean");
           entry.disabled = true;
           if (status) {
             status.textContent = "UNSEALED";
@@ -1641,6 +1675,11 @@
     let corridorChecksum = 0;
 
     const inspectScrollForUnfiledNoise = () => {
+      if (document.body.classList.contains("archive-clean")) {
+        layer.replaceChildren();
+        return;
+      }
+
       const now = Date.now();
       if (now - administrativeTumor < 120) {
         return;
@@ -1759,6 +1798,13 @@
     let rustyCartilage = 0;
 
     const inspectCathedralLoop = () => {
+      if (document.body.classList.contains("archive-clean")) {
+        layer.replaceChildren();
+        document.body.classList.remove("is-limerence-scroll-shaking");
+        document.querySelectorAll(".limerence-intrusion").forEach((node) => node.remove());
+        return;
+      }
+
       const now = Date.now();
       if (now - bureaucraticOrgan < 150) {
         return;
@@ -1947,6 +1993,20 @@
       const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       const stage = progress > 0.82 ? 4 : progress > 0.62 ? 3 : progress > 0.42 ? 2 : progress > 0.2 ? 1 : 0;
       const efficiency = document.body.classList.contains("archive-clean") ? 1 : calculateUnplannedScrollEfficiency(progress);
+
+      if (document.body.classList.contains("archive-clean")) {
+        document.body.dataset.unplannedStage = "0";
+        document.body.classList.remove("is-unplanned-scroll-degrading", "is-unplanned-scroll-resisting", "is-unplanned-scroll-tearing");
+        layer.style.setProperty("--pressure-opacity", "0");
+        layer.style.setProperty("--scroll-efficiency", "1");
+        layer.style.setProperty("--resistance-intensity", "0");
+        if (status) {
+          status.textContent = "SCROLL EFFICIENCY: 100%";
+        }
+        fractureUnplannedParagraphs(0, 0);
+        layer.querySelectorAll(".unplanned-lag-fragment").forEach((fragment) => fragment.remove());
+        return;
+      }
 
       document.body.dataset.unplannedStage = String(stage);
       layer.style.setProperty("--pressure-opacity", String(Math.min(0.22, 0.035 + progress * 0.2)));

@@ -568,6 +568,11 @@ body.archive-shell {
   display: none;
 }
 
+.archive-clean .neuro-diagnostic-note,
+.archive-clean .neuro-diagnostic-badge {
+  box-shadow: var(--sunken);
+}
+
 .archive-doc-04 .archive-document {
   border-color: var(--ink);
 }
@@ -755,6 +760,16 @@ body.archive-shell {
 
 .archive-clean .limerence-intrusion {
   display: none;
+}
+
+.archive-clean .limerence-diagnostic-note p {
+  line-height: 1.25;
+}
+
+.archive-clean.is-limerence-scroll-shaking.archive-doc-04 .essay > p:nth-of-type(3n),
+.archive-clean.is-limerence-scroll-shaking.archive-doc-04 .archive-scramble-fragment,
+.archive-clean.is-limerence-scroll-shaking.archive-doc-04 .redacted-fragment {
+  animation: none;
 }
 
 .is-limerence-scroll-shaking.archive-doc-04 .essay > p:nth-of-type(3n),
@@ -963,6 +978,28 @@ body.archive-shell {
   display: none;
 }
 
+.archive-clean .archive-scramble-fragment,
+.archive-clean .archive-scramble-fragment--locked,
+.archive-clean .archive-scramble-fragment.is-unscrambled,
+.archive-clean .archive-zalgo-fragment,
+.archive-clean .archive-zalgo-fragment.is-unscrambled {
+  display: inline;
+  min-width: 0 !important;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  text-shadow: none;
+  animation: none;
+}
+
 [data-unplanned-stage="2"].archive-doc-05 .essay p:nth-of-type(3n),
 [data-unplanned-stage="3"].archive-doc-05 .essay p:nth-of-type(2n),
 [data-unplanned-stage="4"].archive-doc-05 .essay p {
@@ -1041,6 +1078,44 @@ body.archive-shell {
   line-height: 1.05;
   opacity: 0.34;
   pointer-events: none;
+}
+
+.archive-clean.archive-doc-05 .archive-document,
+.archive-clean.archive-doc-05[data-unplanned-stage] .archive-document {
+  box-shadow: none;
+}
+
+.archive-clean.archive-doc-05 .essay p,
+.archive-clean.archive-doc-05[data-unplanned-stage] .essay p,
+.archive-clean.archive-doc-05 .essay p:nth-of-type(2n),
+.archive-clean.archive-doc-05 .essay p:nth-of-type(3n),
+.archive-clean.archive-doc-05 .essay p:nth-of-type(4n),
+.archive-clean.archive-doc-05 .essay p:nth-of-type(5n),
+.archive-clean.archive-doc-05 .essay p:nth-of-type(6n),
+.archive-clean.archive-doc-05 .essay p:nth-of-type(7n) {
+  margin-right: 0;
+  margin-left: 0;
+  border: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  text-shadow: none;
+  transform: none;
+  animation: none;
+}
+
+.archive-clean.archive-doc-05 .essay p.is-unplanned-fractured-line {
+  border-left: 0;
+  padding-left: 0;
+  transform: none;
+}
+
+.archive-clean.archive-doc-05 .archive-hidden-the {
+  text-shadow: none;
+}
+
+.archive-clean.archive-doc-05 .archive-document::after {
+  display: none;
 }
 
 @keyframes unplanned-form-waiting {
@@ -1375,8 +1450,27 @@ body.archive-shell {
 }
 
 .archive-clean .zalgo-fragment {
+  display: inline;
+  overflow: visible;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: 1.35;
+  text-decoration: none;
   text-shadow: none;
+}
+
+.archive-clean .void-recovery-fragment {
+  display: inline;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
 }
 
 .archive-clean.void-page .essay {
