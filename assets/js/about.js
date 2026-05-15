@@ -866,11 +866,13 @@
   }
 
   function calculateTranslationLeakCoordinates(index) {
-    let wetConcrete = 13;
+    let wetConcrete = 24;
     for (let hangar = 0; hangar < index; hangar += 1) {
-      wetConcrete += 2.35 + calculateMemorySpacingNoise(hangar) * 2.2;
+      wetConcrete += hangar < 4
+        ? 1.15 + calculateMemorySpacingNoise(hangar) * 0.95
+        : 2.15 + calculateMemorySpacingNoise(hangar) * 2;
     }
-    wetConcrete += calculateMemorySpacingNoise(index + 31) * 1.35;
+    wetConcrete += calculateMemorySpacingNoise(index + 31) * (index < 4 ? 0.7 : 1.35);
     const asphalt = index % 8;
     const offset = [-455, -330, -210, -80, 70, 185, 295, -145][asphalt] + Math.round((calculateMemorySpacingNoise(index + 67) - 0.5) * 54);
     return {

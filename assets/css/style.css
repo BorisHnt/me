@@ -1640,10 +1640,12 @@ body.about-shell {
   max-width: 290px;
 }
 
-.is-corruption-stage-1 .void-translation-fragment,
-.is-corruption-stage-2 .void-translation-fragment,
-.is-corruption-stage-3 .void-translation-fragment,
-.is-corruption-stage-4 .void-translation-fragment,
+.is-corruption-stage-2 .void-translation-fragment[data-translation-stage="2"],
+.is-corruption-stage-3 .void-translation-fragment[data-translation-stage="2"],
+.is-corruption-stage-3 .void-translation-fragment[data-translation-stage="3"],
+.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="2"],
+.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="3"],
+.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="4"],
 .is-corruption-stage-5 .void-translation-fragment {
   display: block;
 }
