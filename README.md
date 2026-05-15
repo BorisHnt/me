@@ -37,7 +37,7 @@ This repository is ready for GitHub Pages. Push the files, enable Pages from the
 │   ├── index.html
 │   ├── 01-maintenance.html
 │   ├── 02-small-obsessions.html
-│   ├── 03-neuro-weather.html
+│   ├── 03-neuro-scrambling.html
 │   ├── 04-limerence.html
 │   ├── 05-unplanned-age.html
 │   └── 06-void.html

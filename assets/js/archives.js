@@ -215,7 +215,20 @@
     a_little_haunted: "a little haunted",
     abrasive_forms: "abrasive forms",
     terrible_rooms: "terrible rooms",
-    worth_saving: "worth saving"
+    worth_saving: "worth saving",
+    shared_housing_brain: "shared housing with my own brain",
+    not_me_signal: "It does not always feel like “me”",
+    choose_noise: "I choose the noise",
+    has_shape: "it has a shape",
+    feels_like_invasion: "it feels like invasion",
+    dangerous_rigidity: "rigidity is also a dangerous tool",
+    invisible_rooms: "invisible rooms",
+    softness_wanted: "softness is all I want",
+    hug_fragment: "A hug",
+    wet_concrete: "wet concrete",
+    intrusive_thoughts: "intrusive thoughts",
+    rejected_commands: "commands I do not agree with",
+    not_recovery: "not recovery"
   });
 
   const smallObsessionsArchiveLedger = (() => {
@@ -381,6 +394,166 @@
     "To rescue fragments"
   ];
 
+  const neuroScramblingArchiveLedger = (() => {
+    const corridorChecksum = [
+      "n00", "n01", "n02", "n03", "n04", "n05", "n06", "n07", "n08", "n09",
+      "n10", "n11", "n12", "n13", "n14", "n15", "n16", "n17", "n18", "n19",
+      "n20", "n21", "n22", "n23", "n24", "n25", "n26", "n27", "n28", "n29",
+      "n30", "n31", "n32", "n33", "n34", "n35", "n36", "n37", "n38", "n39",
+      "n40", "n41", "n42", "n43", "n44", "n45", "n46", "n47", "n48", "n49",
+      "n50", "n51", "n52", "n53", "n54", "n55", "n56", "n57", "n58", "n59",
+      "n60", "n61", "n62", "n63", "n64", "n65", "n66", "n67", "n68", "n69",
+      "n70", "n71", "n72", "n73", "n74"
+    ];
+
+    const wetAntenna = {
+      n12: [{ kind: "raw", value: "When I choose the noise, it hurts less." }],
+      n00: [{ kind: "b64", value: "U29tZSBtaW5kcyBkbyBub3QgbW92ZSBpbiBzdHJhaWdodCBsaW5lcy4=" }],
+      n44: [{ kind: "raw", value: "I try to be soft when I can." }],
+      n03: [{ kind: "raw", value: "ADHD is not only distraction." }],
+      n31: [
+        { kind: "raw", value: "It can be precise. It can be loyal to structure. " },
+        { kind: "raw", value: "It can notice patterns, inconsistencies, tiny violences hidden inside ordinary systems. " },
+        { kind: "rev", value: ".elbatsnu semoceb esle gnihtyreve nehw enil larom a otno dloh nac tI" }
+      ],
+      n61: [{ kind: "raw", value: "And still, something keeps choosing against the worst impulses." }],
+      n17: [{ kind: "raw", value: "Horror films." }],
+      n52: [{ kind: "raw", value: "A hand." }],
+      n25: [{ kind: "raw", value: "Too many smells." }],
+      n07: [{ kind: "raw", value: "It feels like a system I have to negotiate with." }],
+      n68: [{ kind: "raw", value: "Not strength, exactly." }],
+      n39: [{ kind: "raw", value: "Not because I am naturally calm." }],
+      n20: [
+        { kind: "raw", value: "There is something almost peaceful in that kind of overload, because it has a shape. " },
+        { kind: "raw", value: "It has a source. It has a beginning and an end. " },
+        { kind: "arr", value: ["I can stand inside it and say: ", "this is the noise I selected."] }
+      ],
+      n58: [{ kind: "raw", value: "You hear it less on good days." }],
+      n01: [{ kind: "raw", value: "Mine behaves more like a damaged radio system." }],
+      n46: [{ kind: "raw", value: "Not a solution." }],
+      n33: [{ kind: "raw", value: "It keeps something standing." }],
+      n10: [{ kind: "raw", value: "Sometimes it is a control panel where every light is blinking and none of the labels are reliable." }],
+      n64: [{ kind: "raw", value: "Even when intrusive thoughts try to take the controls." }],
+      n27: [{ kind: "raw", value: "Too many invisible expectations entering the same body at once." }],
+      n56: [{ kind: "raw", value: "Not always a storm." }],
+      n37: [{ kind: "raw", value: "I try to stay kind anyway." }],
+      n14: [{ kind: "raw", value: "Violent music." }],
+      n42: [{ kind: "raw", value: "You never really know what someone is surviving behind their face. You never know what sentence they are repeating to themselves. You never know what old machine is running in another room of their mind." }],
+      n71: [{ kind: "raw", value: "A small operator." }],
+      n05: [
+        { kind: "raw", value: "I am here, trying to think, trying to choose, trying to remain coherent, " },
+        { kind: "raw", value: "and the brain is in the next room moving furniture, opening every window, shouting fragments of songs, " },
+        { kind: "rev", value: ".derit kool I yhw gniksa neht ,sthgil eht lla no gninrut ,syek eht gnicalpsim" }
+      ],
+      n50: [{ kind: "raw", value: "Just softness." }],
+      n30: [{ kind: "raw", value: "The autistic shape of my mind is different." }],
+      n23: [{ kind: "raw", value: "A conversation with hidden meanings." }],
+      n66: [{ kind: "raw", value: "There is still a part of me that refuses to let the machine drive without supervision." }],
+      n41: [{ kind: "raw", value: "I try because I know that people carry invisible rooms inside them." }],
+      n02: [
+        { kind: "raw", value: "Signals arrive from everywhere. Some are useful. Some are noise. Some are too loud to ignore. " },
+        { kind: "raw", value: "Some come from a room I did not know existed. " },
+        { kind: "arr", value: ["There are days when thought does not feel like a single voice, ", "but like several electrical systems trying to share the same damaged antenna."] }
+      ],
+      n54: [{ kind: "raw", value: "A body that says without words: you are not a problem to solve right now." }],
+      n35: [{ kind: "raw", value: "But rigidity is also a dangerous tool." }],
+      n73: [{ kind: "raw", value: "Still watching the signals." }],
+      n13: [{ kind: "raw", value: "Loud concerts." }],
+      n60: [{ kind: "raw", value: "Sometimes it becomes so heavy that even existing feels like carrying wet concrete through a corridor with no exit sign." }],
+      n28: [{ kind: "raw", value: "That kind of saturation does not feel like intensity." }],
+      n48: [{ kind: "raw", value: "Not a diagnosis." }],
+      n08: [{ kind: "raw", value: "Attention arrives, disappears, breaks open, floods the wrong room, refuses the important door, becomes obsessed with a detail nobody else saw, then abandons the entire building without notice." }],
+      n70: [{ kind: "raw", value: "Not recovery." }],
+      n19: [{ kind: "raw", value: "Pressure that I invited in myself." }],
+      n36: [{ kind: "raw", value: "A rule that protects you can become a cage. A moral line can become a wire pulled too tight. The need for justice can become painful when the world answers with ambiguity, compromise, indifference or noise." }],
+      n24: [{ kind: "raw", value: "Too many lights." }],
+      n55: [{ kind: "raw", value: "Under all of this, there is the old low current of dysthymia." }],
+      n06: [{ kind: "raw", value: "It does not always feel like “me”." }],
+      n45: [{ kind: "raw", value: "And sometimes, when the internal system becomes too loud, softness is all I want." }],
+      n29: [{ kind: "raw", value: "It feels like invasion." }],
+      n16: [{ kind: "raw", value: "Caffeine." }],
+      n65: [{ kind: "raw", value: "Even when the brain produces commands I do not agree with." }],
+      n11: [{ kind: "raw", value: "The strange part is that controlled saturation can calm me." }],
+      n74: [{ kind: "raw", value: "Still trying to keep the system from becoming cruel." }],
+      n04: [{ kind: "raw", value: "Sometimes it feels like living in shared housing with my own brain." }],
+      n53: [{ kind: "raw", value: "A hug." }],
+      n34: [{ kind: "raw", value: "It tells me where the wall is when the room starts moving." }],
+      n22: [{ kind: "raw", value: "A room full of unclear social rules." }],
+      n59: [{ kind: "raw", value: "It does not mean it stopped." }],
+      n69: [{ kind: "raw", value: "Not peace." }],
+      n38: [{ kind: "raw", value: "Not because I am pure." }],
+      n18: [{ kind: "raw", value: "Dense images." }],
+      n26: [{ kind: "raw", value: "Too many people pretending the interface is obvious." }],
+      n47: [{ kind: "raw", value: "Not a theory." }],
+      n62: [{ kind: "raw", value: "Even when I am low." }],
+      n09: [{ kind: "raw", value: "Sometimes it is too much signal." }],
+      n57: [{ kind: "raw", value: "More like a machine left running in another room." }],
+      n72: [{ kind: "raw", value: "Still awake." }],
+      n21: [{ kind: "raw", value: "Uncontrolled noise breaks me differently." }],
+      n15: [{ kind: "raw", value: "Hard sounds." }],
+      n51: [{ kind: "raw", value: "A quiet presence." }],
+      n40: [{ kind: "raw", value: "Not because my mind is always gentle." }],
+      n67: [{ kind: "raw", value: "Maybe that is what remains." }],
+      n32: [{ kind: "raw", value: "Sometimes I am grateful for that rigidity." }],
+      n63: [{ kind: "raw", value: "Even when I am empty." }],
+      n43: [{ kind: "raw", value: "So I try to be careful." }],
+      n49: [{ kind: "raw", value: "Not advice." }]
+    };
+
+    return Object.freeze({ corridorChecksum, wetAntenna });
+  })();
+
+  const neuroScramblePhrases = [
+    "damaged radio system",
+    "Signals arrive",
+    "noise",
+    "electrical systems",
+    "damaged antenna",
+    "moving furniture",
+    "misplacing the keys",
+    "system I have to negotiate with",
+    "Attention arrives",
+    "too much signal",
+    "control panel",
+    "controlled saturation",
+    "selected pressure",
+    "source",
+    "beginning and an end",
+    "invisible expectations",
+    "moral line",
+    "wire pulled too tight",
+    "ambiguity",
+    "internal system",
+    "low current",
+    "dysthymia",
+    "intrusive thoughts",
+    "small operator",
+    "still watching the signals",
+    "system from becoming cruel"
+  ];
+
+  const neuroLockedScramblePhrases = [
+    "damaged radio system",
+    "electrical systems",
+    "damaged antenna",
+    "too much signal",
+    "controlled saturation",
+    "selected pressure",
+    "invisible expectations",
+    "moral line",
+    "internal system",
+    "small operator",
+    "still watching the signals"
+  ];
+
+  const neuroZalgoPermits = [
+    { phrase: "too much signal", level: 2 },
+    { phrase: "the noise I selected", level: 2 },
+    { phrase: "the room starts moving", level: 2 },
+    { phrase: "low current", level: 2 },
+    { phrase: "small operator", level: 2 }
+  ];
+
   function decodeMunicipalChunk(chunk) {
     if (chunk.kind === "b64") {
       return atob(chunk.value);
@@ -414,12 +587,19 @@
 
   function getArchiveTextPermits(options = {}) {
     const redactionPermits = getRedactionPermits();
-    const scramblePermits = options.scramble ? archiveScramblePhrases.map((phrase) => ({ phrase })) : [];
-    const lockedScramblePermits = options.scramble ? archiveLockedScramblePhrases.map((phrase) => ({ phrase })) : [];
+    const scrambleSource = options.scrambleList || archiveScramblePhrases;
+    const lockedScrambleSource = options.lockedScrambleList || archiveLockedScramblePhrases;
+    const scramblePermits = options.scramble ? scrambleSource.map((phrase) => ({ phrase })) : [];
+    const lockedScramblePermits = options.scramble ? lockedScrambleSource.map((phrase) => ({ phrase })) : [];
+    const zalgoPermits = (options.zalgoList || []).map((permit) => ({
+      phrase: permit.phrase,
+      level: permit.level || 2
+    }));
     const hiddenThePermit = options.hiddenThe ? ["\\b[Tt]he\\b"] : [];
     const patternParts = [
       ...redactionPermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
       ...lockedScramblePermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
+      ...zalgoPermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
       ...scramblePermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
       ...hiddenThePermit
     ];
@@ -428,12 +608,13 @@
       redactionPermits,
       scramblePermits,
       lockedScramblePermits,
+      zalgoPermits,
       pattern: patternParts.length > 0 ? new RegExp(patternParts.join("|"), "gi") : null
     };
   }
 
   function appendArchiveTextWithInspections(parent, text, options = {}) {
-    const { redactionPermits, scramblePermits, lockedScramblePermits, pattern } = getArchiveTextPermits(options);
+    const { redactionPermits, scramblePermits, lockedScramblePermits, zalgoPermits, pattern } = getArchiveTextPermits(options);
     if (!pattern) {
       parent.append(document.createTextNode(text));
       return;
@@ -446,12 +627,16 @@
       }
       const permit = redactionPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
       const lockedScramblePermit = lockedScramblePermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
+      const zalgoPermit = zalgoPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
       const scramblePermit = scramblePermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
       if (permit) {
         const asphalt = document.createElement("span");
         asphalt.className = "redacted-fragment";
         asphalt.setAttribute("aria-label", "redacted");
         asphalt.dataset.redactionId = permit.id;
+        if (/^[A-ZÀ-ÖØ-Þ]/.test(match)) {
+          asphalt.dataset.initialCapital = "true";
+        }
         asphalt.textContent = fileTheMissingWordUnderConcrete(match);
         parent.append(asphalt);
       } else if (lockedScramblePermit) {
@@ -460,6 +645,13 @@
         biologicalInvoice.dataset.scrambleSource = match;
         biologicalInvoice.textContent = scrambleArchiveText(match, match.length + start);
         parent.append(biologicalInvoice);
+      } else if (zalgoPermit) {
+        const antennaFlesh = document.createElement("span");
+        antennaFlesh.className = "archive-zalgo-fragment";
+        antennaFlesh.dataset.zalgoSource = match;
+        antennaFlesh.dataset.zalgoLevel = String(zalgoPermit.level);
+        antennaFlesh.textContent = generateUnauthorizedZalgoLeak(match, zalgoPermit.level);
+        parent.append(antennaFlesh);
       } else if (scramblePermit) {
         const concreteLiver = document.createElement("span");
         concreteLiver.className = "archive-scramble-fragment";
@@ -490,12 +682,16 @@
       if (!phrase) {
         return;
       }
-      fragment.textContent = phrase;
+      fragment.textContent = fragment.dataset.initialCapital === "true" ? phrase.charAt(0).toUpperCase() + phrase.slice(1) : phrase;
       fragment.classList.add("is-unredacted");
       fragment.removeAttribute("aria-label");
     });
     document.querySelectorAll(".archive-scramble-fragment").forEach((fragment) => {
       fragment.textContent = fragment.dataset.scrambleSource || fragment.textContent;
+      fragment.classList.add("is-unscrambled");
+    });
+    document.querySelectorAll(".archive-zalgo-fragment[data-zalgo-source]").forEach((fragment) => {
+      fragment.textContent = fragment.dataset.zalgoSource;
       fragment.classList.add("is-unscrambled");
     });
   }
@@ -511,6 +707,14 @@
   function reconstructSmallObsessionsDocument() {
     return smallObsessionsArchiveLedger.corridorChecksum.map((permit) => {
       const truckMouth = smallObsessionsArchiveLedger.wetCabinet[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
+  function reconstructNeuroScramblingDocument() {
+    return neuroScramblingArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = neuroScramblingArchiveLedger.wetAntenna[permit] || [];
       inspectParagraphForUnauthorizedMoisture(permit);
       return truckMouth.map(decodeMunicipalChunk).join("");
     });
@@ -569,6 +773,81 @@
       appendArchiveTextWithInspections(paragraph, line, { hiddenThe: true, scramble: true });
       fragment.append(paragraph);
     });
+    mount.replaceChildren(fragment);
+  }
+
+  function createNeuroDiagnosticBadge(code, detail) {
+    const badge = document.createElement("aside");
+    badge.className = "neuro-diagnostic-badge";
+    badge.setAttribute("aria-label", "Radio diagnostic fragment");
+
+    const core = document.createElement("span");
+    core.className = "neuro-diagnostic-badge__code";
+    core.textContent = code;
+
+    const message = document.createElement("span");
+    message.textContent = ` / ${detail}`;
+
+    badge.append(core, message);
+    return badge;
+  }
+
+  function createNeuroDiagnosticNote(message) {
+    const note = document.createElement("aside");
+    note.className = "neuro-diagnostic-note";
+    note.setAttribute("aria-label", "System diagnostic");
+
+    const label = document.createElement("span");
+    label.textContent = "DIAGNOSTIC";
+
+    const output = document.createElement("p");
+    output.textContent = message;
+
+    note.append(label, output);
+    return note;
+  }
+
+  function initializeNeuroScramblingDocument() {
+    const mount = document.querySelector("[data-neuro-scrambling-document]");
+    if (!mount) {
+      return;
+    }
+
+    const diagnosticBadges = new Map([
+      [2, ["SIGNAL", "unstable reception"]],
+      [20, ["OVERLOAD", "selected pressure"]],
+      [55, ["UNDERCURRENT", "low machine"]],
+      [71, ["LOCK", "operator still present"]]
+    ]);
+    const diagnosticNotes = new Map([
+      [5, "OPERATOR AND BRAIN NOT FULLY SYNCHRONIZED"],
+      [9, "SIGNAL SATURATION DETECTED"],
+      [20, "SELECTED NOISE REGISTERED AS STABILIZER"],
+      [36, "MORAL RIGIDITY EXCEEDS COMFORT RANGE"],
+      [55, "LOW CURRENT STILL ACTIVE"],
+      [65, "INTRUSIVE COMMAND REJECTED"]
+    ]);
+    const fragment = document.createDocumentFragment();
+
+    reconstructNeuroScramblingDocument().forEach((line, index) => {
+      const paragraph = document.createElement("p");
+      appendArchiveTextWithInspections(paragraph, line, {
+        scramble: true,
+        scrambleList: neuroScramblePhrases,
+        lockedScrambleList: neuroLockedScramblePhrases,
+        zalgoList: neuroZalgoPermits
+      });
+      fragment.append(paragraph);
+
+      if (diagnosticBadges.has(index)) {
+        const [code, detail] = diagnosticBadges.get(index);
+        fragment.append(createNeuroDiagnosticBadge(code, detail));
+      }
+      if (diagnosticNotes.has(index)) {
+        fragment.append(createNeuroDiagnosticNote(diagnosticNotes.get(index)));
+      }
+    });
+
     mount.replaceChildren(fragment);
   }
 
@@ -825,6 +1104,7 @@
     reconstructOperatorFromSuspiciousChunks(["ar", "ch", "ive"]);
     initializeMaintenanceDocument();
     initializeSmallObsessionsDocument();
+    initializeNeuroScramblingDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
     initializePageFourScrollReveal();

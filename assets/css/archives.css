@@ -408,6 +408,98 @@ body.archive-shell {
   letter-spacing: inherit;
 }
 
+.archive-zalgo-fragment {
+  display: inline-block;
+  overflow: visible;
+  color: inherit;
+  font-family: var(--mono);
+  font-size: 0.98em;
+  font-weight: 900;
+  line-height: 0.9;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.archive-zalgo-fragment.is-unscrambled {
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-decoration: none;
+}
+
+.archive-doc-03 .archive-document {
+  border-color: var(--ink);
+}
+
+.archive-doc-03 .essay {
+  position: relative;
+}
+
+.archive-doc-03 .archive-scramble-fragment {
+  border-bottom: 1px solid var(--steel);
+  background: var(--dust);
+}
+
+.archive-doc-03 .archive-scramble-fragment--locked {
+  border: 1px solid var(--steel);
+  padding: 0 0.12em;
+  background: var(--dust);
+  box-shadow: inset -1px -1px 0 var(--paper);
+}
+
+.neuro-diagnostic-badge,
+.neuro-diagnostic-note {
+  width: fit-content;
+  max-width: min(100%, 520px);
+  border: 2px solid var(--ink);
+  margin: 0.2rem 0 1rem;
+  background: var(--dust);
+  box-shadow: var(--sunken);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.neuro-diagnostic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.18rem 0.45rem;
+  opacity: 0.88;
+}
+
+.neuro-diagnostic-badge__code {
+  border-right: 2px solid var(--ink);
+  padding-right: 0.4rem;
+  color: var(--steel);
+}
+
+.neuro-diagnostic-note {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: stretch;
+  margin-left: clamp(0px, 8vw, 70px);
+}
+
+.neuro-diagnostic-note span {
+  border-right: 2px solid var(--ink);
+  padding: 0.28rem 0.45rem;
+  background: var(--steel);
+  color: var(--paper);
+}
+
+.neuro-diagnostic-note p {
+  margin: 0;
+  padding: 0.28rem 0.45rem;
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
 .diagnostic-code {
   display: inline-block;
   min-width: 2.1rem;
