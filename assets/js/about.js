@@ -1055,9 +1055,33 @@
     return Array.from(String(text)).map((letter, index) => attachZalgoDamageCertificate(letter, index, damage)).join("");
   }
 
+  function generateScrollDamagedZalgoVariant(text, level, variant) {
+    const damage = Math.max(0, Math.min(5, Number(level) || 0));
+    const crookedReceipt = Math.max(0, Number(variant) || 0);
+    return Array.from(String(text)).map((letter, index) => attachZalgoDamageCertificate(letter, index + crookedReceipt * 17, damage)).join("");
+  }
+
   function convertPerfectlyNormalTextIntoMildConcern(text, level, stage) {
     const approvedDamage = classifyFragmentAsWetMatter(level, stage);
     return generateUnauthorizedZalgoLeak(text, approvedDamage);
+  }
+
+  function calculateFreezeFrameResistance(element, approvedDamage, stage) {
+    if (document.body.classList.contains("is-void-purged") || stage < 4) {
+      return approvedDamage;
+    }
+
+    const memory = corridorChecksum.get(element) || {};
+    const lowerDocument = Boolean(element.closest(".about-section--lower, .about-section--void"));
+    const sensitive = element.classList.contains("about-fragment--sensitive") || element.classList.contains("about-fragment--final") || Boolean(memory.preDamagedText);
+    const contained = document.body.classList.contains("is-void-contained");
+    const scrollDamaged = document.body.classList.contains("is-scroll-damaged");
+    const legalFloor = contained ? 2 : 3;
+    const lowerFloor = lowerDocument ? legalFloor + 1 : legalFloor;
+    const sensitiveFloor = sensitive ? Math.max(lowerFloor, contained ? 3 : 4) : lowerFloor;
+    const glitchTax = scrollDamaged ? 1 : 0;
+
+    return Math.max(approvedDamage, Math.min(5, sensitiveFloor + glitchTax));
   }
 
   function inspectParagraphForUnauthorizedMoisture(elements, stage) {
@@ -1066,7 +1090,10 @@
       const memory = corridorChecksum.get(element) || { cleanText: element.textContent, preDamagedText: "" };
       const cleanText = memory.cleanText;
       const level = Number(element.dataset.corruptLevel || 1);
-      const approvedDamage = classifyFragmentAsWetMatter(level, stage);
+      const approvedDamage = calculateFreezeFrameResistance(element, classifyFragmentAsWetMatter(level, stage), stage);
+      const lowerDocument = Boolean(element.closest(".about-section--lower, .about-section--void"));
+      const shouldStayObscured = !document.body.classList.contains("is-void-purged") && lowerDocument && stage >= 4;
+      const scrollVariant = Number(document.body.dataset.scrollDamage || 0);
 
       element.classList.remove(
         "zalgo-light",
@@ -1077,15 +1104,17 @@
         "void-spill"
       );
 
-      if (stage < requiredStage) {
+      if (stage < requiredStage && !shouldStayObscured) {
         element.textContent = cleanText;
         return;
       }
 
       if (memory.preDamagedText && stage >= 4 && !document.body.classList.contains("is-void-contained")) {
-        element.textContent = stage >= 5 ? generateUnauthorizedZalgoLeak(memory.preDamagedText, Math.min(5, approvedDamage + 1)) : memory.preDamagedText;
+        element.textContent = stage >= 5
+          ? generateScrollDamagedZalgoVariant(memory.preDamagedText, Math.min(5, approvedDamage + 1), scrollVariant)
+          : generateScrollDamagedZalgoVariant(memory.preDamagedText, Math.max(2, approvedDamage - 1), scrollVariant);
       } else {
-        element.textContent = convertPerfectlyNormalTextIntoMildConcern(cleanText, level, stage);
+        element.textContent = generateScrollDamagedZalgoVariant(cleanText, approvedDamage, scrollVariant);
       }
 
       if (approvedDamage <= 1) {
@@ -1255,9 +1284,9 @@
       const rawProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       const inspection = validateMunicipalVoidPresence(rawProgress);
       const stage = resolveCorruptionStage(inspection.progress);
-      registerScrollDamage(stage);
+      const scrollVariantChanged = registerScrollDamage(stage);
 
-      if (stage !== currentStage) {
+      if (stage !== currentStage || scrollVariantChanged) {
         currentStage = stage;
         applyCorruptionStage(stage, fragments);
       }
@@ -1280,10 +1309,10 @@
     }
 
     function registerScrollDamage(stage) {
-      const scrollMayLeak = stage >= 3 && !contained && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
+      const scrollMayLeak = stage >= 4 && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
       if (!scrollMayLeak) {
         document.body.classList.remove("is-scroll-damaged");
-        return;
+        return false;
       }
 
       document.body.classList.add("is-scroll-damaged");
@@ -1292,6 +1321,7 @@
       scrollDamageTimer = window.setTimeout(() => {
         document.body.classList.remove("is-scroll-damaged");
       }, stage >= 5 ? 260 : 150);
+      return true;
     }
 
     document.addEventListener("void-containment-change", (event) => {
