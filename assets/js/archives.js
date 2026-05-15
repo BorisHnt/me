@@ -905,6 +905,9 @@
       fragment.textContent = fragment.dataset.zalgoSource;
       fragment.classList.add("is-unscrambled");
     });
+    document.querySelectorAll(".limerence-intrusion").forEach((fragment) => {
+      fragment.remove();
+    });
   }
 
   function reconstructMaintenanceRitualDocument() {
@@ -1487,6 +1490,49 @@
     window.setTimeout(() => echo.remove(), 1800 + (index % 5) * 350);
   }
 
+  function duplicateThoughtInsideCathedralDocument(progress, pulse) {
+    if (document.body.classList.contains("archive-clean")) {
+      document.querySelectorAll(".limerence-intrusion").forEach((node) => node.remove());
+      return;
+    }
+
+    const essay = document.querySelector("[data-limerence-document]");
+    if (!essay) {
+      return;
+    }
+
+    const existing = Array.from(essay.querySelectorAll(".limerence-intrusion"));
+    const maxIntrusions = progress > 0.72 ? 42 : progress > 0.48 ? 30 : 18;
+    while (existing.length > maxIntrusions) {
+      existing.shift()?.remove();
+    }
+
+    const paragraphs = Array.from(essay.querySelectorAll("p"));
+    if (paragraphs.length === 0) {
+      return;
+    }
+
+    const index = (Math.floor(progress * 900) + pulse * 3) % limerenceGhostThoughts.length;
+    const repeated = 1 + (progress > 0.45 ? 1 : 0) + (progress > 0.68 ? 1 : 0) + (pulse % 5 === 0 ? 1 : 0);
+    const thought = limerenceGhostThoughts[index];
+    const intrusion = document.createElement("aside");
+    intrusion.className = `limerence-intrusion limerence-intrusion--${index % 6}`;
+    intrusion.setAttribute("aria-hidden", "true");
+
+    for (let asphalt = 0; asphalt < repeated; asphalt += 1) {
+      const line = document.createElement("span");
+      const output = asphalt % 2 === 0 ? thought : scrambleArchiveText(thought, index + asphalt + pulse);
+      line.textContent = output;
+      intrusion.append(line);
+    }
+
+    const placement = Math.min(
+      paragraphs.length - 1,
+      Math.max(0, Math.floor(progress * paragraphs.length) + ((index % 9) - 4))
+    );
+    paragraphs[placement].after(intrusion);
+  }
+
   function initializeLimerenceScrollEchoes() {
     if (!document.body.classList.contains("archive-doc-04")) {
       return;
@@ -1498,6 +1544,7 @@
     const layer = createLimerenceEchoLayer();
     let bureaucraticOrgan = 0;
     let warehouseSpleen = 0;
+    let rustyCartilage = 0;
 
     const inspectCathedralLoop = () => {
       const now = Date.now();
@@ -1513,11 +1560,21 @@
       }
 
       warehouseSpleen += 1;
+      document.body.classList.add("is-limerence-scroll-shaking");
+      window.clearTimeout(rustyCartilage);
+      rustyCartilage = window.setTimeout(() => {
+        document.body.classList.remove("is-limerence-scroll-shaking");
+      }, 180);
+
       if (warehouseSpleen % 2 === 0 || progress > 0.58) {
         pinCathedralThoughtToWrongWall(layer, progress);
       }
+      if (warehouseSpleen % 3 === 0 || progress > 0.52) {
+        duplicateThoughtInsideCathedralDocument(progress, warehouseSpleen);
+      }
       if (progress > 0.68 && warehouseSpleen % 4 === 0) {
         pinCathedralThoughtToWrongWall(layer, Math.min(1, progress + 0.12));
+        duplicateThoughtInsideCathedralDocument(Math.min(1, progress + 0.08), warehouseSpleen + 1);
       }
     };
 

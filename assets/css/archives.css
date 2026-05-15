@@ -694,8 +694,73 @@ body.archive-shell {
   box-shadow: inset -3px -3px 0 var(--paper), 3px 3px 0 var(--steel);
 }
 
+.limerence-intrusion {
+  display: grid;
+  gap: 2px;
+  width: fit-content;
+  max-width: min(100%, 660px);
+  border: 2px solid var(--ink);
+  margin: 0.15rem 0 1.05rem clamp(0px, 6vw, 76px);
+  padding: 0.22rem 0.42rem;
+  background: var(--dust);
+  box-shadow: var(--sunken);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(0.7rem, 1.1vw, 0.88rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.limerence-intrusion::before {
+  content: "THOUGHT LOOP";
+  display: block;
+  border-bottom: 2px solid var(--ink);
+  margin: -0.22rem -0.42rem 0.16rem;
+  padding: 0.12rem 0.34rem;
+  background: var(--steel);
+  color: var(--paper);
+  font-size: 0.62rem;
+}
+
+.limerence-intrusion span {
+  display: block;
+}
+
+.limerence-intrusion--1,
+.limerence-intrusion--4 {
+  margin-left: 0;
+  background: var(--paper);
+}
+
+.limerence-intrusion--2 {
+  width: min(100%, 760px);
+  border-style: dashed;
+}
+
+.limerence-intrusion--3 {
+  margin-right: clamp(0px, 8vw, 90px);
+  margin-left: auto;
+  box-shadow: inset -3px -3px 0 var(--paper), var(--raised);
+}
+
+.limerence-intrusion--5 {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .archive-clean .limerence-echo-layer {
   display: none;
+}
+
+.archive-clean .limerence-intrusion {
+  display: none;
+}
+
+.is-limerence-scroll-shaking.archive-doc-04 .essay > p:nth-of-type(3n),
+.is-limerence-scroll-shaking.archive-doc-04 .archive-scramble-fragment,
+.is-limerence-scroll-shaking.archive-doc-04 .redacted-fragment {
+  animation: limerence-text-vibration 0.18s steps(2, end);
 }
 
 @keyframes neuro-glitch-pop {
@@ -745,6 +810,24 @@ body.archive-shell {
   100% {
     opacity: 0;
     clip-path: inset(45% 0 45% 0);
+  }
+}
+
+@keyframes limerence-text-vibration {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(1px, 0);
+  }
+  50% {
+    transform: translate(-1px, 1px);
+  }
+  75% {
+    transform: translate(1px, -1px);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }
 
