@@ -944,7 +944,7 @@
       body.textContent = receipt.english;
       fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
       element.style.top = "auto";
-      element.style.bottom = `${92 + (voidTranslationNodes.length - 1 - index) * 22}px`;
+      element.style.bottom = `${90 + (voidTranslationNodes.length - 1 - index) * 90}px`;
       element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
     });
