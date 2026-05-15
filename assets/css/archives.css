@@ -796,7 +796,7 @@ body.archive-shell {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  opacity: var(--pressure-opacity, 0.04);
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -809,6 +809,7 @@ body.archive-shell {
   font-weight: 900;
   line-height: 1.05;
   text-transform: uppercase;
+  opacity: var(--pressure-opacity, 0.04);
   text-shadow: 2px 0 0 var(--paper), -2px 0 0 var(--dust);
   animation: unplanned-pressure-idle 5s steps(4, end) infinite;
   animation-delay: var(--pressure-delay, 0s);
@@ -817,6 +818,84 @@ body.archive-shell {
 .unplanned-pressure-line--1,
 .unplanned-pressure-line--3 {
   color: var(--steel);
+}
+
+.unplanned-form-fragment {
+  position: absolute;
+  max-width: min(260px, 36vw);
+  border: 2px solid var(--steel);
+  padding: 0.28rem 0.42rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset -2px -2px 0 var(--dust), inset 2px 2px 0 var(--paper);
+  font-family: var(--mono);
+  font-size: clamp(0.62rem, 0.95vw, 0.82rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  opacity: calc(var(--resistance-intensity, 0) * 0.72);
+  animation: unplanned-form-waiting 4.6s steps(3, end) infinite;
+  animation-delay: var(--form-delay, 0s);
+}
+
+.unplanned-form-fragment--1,
+.unplanned-form-fragment--4 {
+  background: var(--dust);
+}
+
+.unplanned-pixel-debris {
+  position: absolute;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  opacity: calc(var(--resistance-intensity, 0) * 0.45);
+  box-shadow: 8px 0 0 var(--dust), 16px 0 0 var(--steel);
+}
+
+.unplanned-pixel-debris--1,
+.unplanned-pixel-debris--4 {
+  background: var(--steel);
+  box-shadow: -10px 0 0 var(--paper), 12px 0 0 var(--ink);
+}
+
+.unplanned-scroll-status {
+  position: fixed;
+  right: 12px;
+  bottom: 46px;
+  border: 2px solid var(--ink);
+  padding: 0.18rem 0.36rem;
+  background: var(--dust);
+  color: var(--ink);
+  box-shadow: var(--raised);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  opacity: calc(0.16 + var(--resistance-intensity, 0) * 0.7);
+}
+
+.unplanned-lag-fragment {
+  position: fixed;
+  z-index: 1;
+  max-width: min(280px, 46vw);
+  border: 2px solid var(--ink);
+  padding: 0.18rem 0.34rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--steel), inset -2px -2px 0 var(--dust);
+  font-family: var(--mono);
+  font-size: clamp(0.64rem, 1vw, 0.88rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: unplanned-lag-fragment var(--lag-duration, 1.5s) steps(4, end) forwards;
+}
+
+.unplanned-lag-fragment--1,
+.unplanned-lag-fragment--3 {
+  background: var(--dust);
+  color: var(--ink);
 }
 
 .archive-clean .unplanned-pressure-layer {
@@ -838,6 +917,66 @@ body.archive-shell {
 .is-unplanned-scroll-degrading.archive-doc-05 .archive-scramble-fragment,
 .is-unplanned-scroll-degrading.archive-doc-05 .archive-zalgo-fragment {
   animation: unplanned-resolution-loss 0.26s steps(2, end);
+}
+
+.is-unplanned-scroll-resisting.archive-doc-05 .archive-document {
+  box-shadow:
+    inset 0 -4px 0 var(--steel),
+    inset 0 4px 0 var(--dust);
+}
+
+.is-unplanned-scroll-resisting.archive-doc-05 .essay p:nth-of-type(5n),
+.is-unplanned-scroll-resisting.archive-doc-05 .archive-hidden-the {
+  text-shadow:
+    2px 0 0 var(--dust),
+    -2px 0 0 var(--paper),
+    0 2px 0 var(--steel);
+}
+
+[data-unplanned-stage="4"].archive-doc-05 .archive-document::after {
+  content: "FORM DOES NOT BECOME KINDER / FORM DOES NOT BECOME KINDER / FORM DOES NOT BECOME KINDER";
+  position: absolute;
+  right: -10vw;
+  bottom: 7rem;
+  max-width: min(360px, 50vw);
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  color: var(--steel);
+  font-family: var(--mono);
+  font-size: clamp(0.66rem, 1.4vw, 1rem);
+  font-weight: 900;
+  line-height: 1.05;
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+@keyframes unplanned-form-waiting {
+  0%,
+  100% {
+    box-shadow: inset -2px -2px 0 var(--dust), inset 2px 2px 0 var(--paper);
+  }
+  48% {
+    box-shadow: inset 2px 2px 0 var(--steel), inset -2px -2px 0 var(--paper);
+  }
+}
+
+@keyframes unplanned-lag-fragment {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 80% 0 0);
+  }
+  18% {
+    opacity: 0.72;
+    clip-path: inset(0 0 0 0);
+  }
+  52% {
+    opacity: 0.4;
+    clip-path: inset(18% 0 0 0);
+  }
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 60% 0);
+  }
 }
 
 @keyframes neuro-glitch-pop {

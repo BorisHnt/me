@@ -905,6 +905,32 @@
     "The form does not become kinder."
   ];
 
+  const unplannedAdministrativeFragments = [
+    "FORM 05-A / PURPOSE REQUIRED",
+    "FUTURE FIELD: UNRESOLVED",
+    "DIRECTION: NOT DECLARED",
+    "SOCIAL SHAPE: INCOMPLETE",
+    "EXPECTED TRAJECTORY: MISSING",
+    "AGE INDEX: OUTDATED",
+    "INTERNAL COMPASS: LOW POWER",
+    "ASSIGNMENT FIELD: EMPTY",
+    "BRIEFING NOT RECEIVED",
+    "RESOLUTION LOSS DETECTED"
+  ];
+
+  const unplannedLagFragments = [
+    "write something in the box",
+    "become legible",
+    "purpose required",
+    "future not indexed",
+    "the form is still waiting",
+    "not a destination",
+    "older than expected",
+    "low-resolution future",
+    "signature missing",
+    "enough for now"
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -1764,7 +1790,62 @@
       layer.append(line);
     });
 
+    unplannedAdministrativeFragments.forEach((fragment, index) => {
+      const form = document.createElement("span");
+      form.className = `unplanned-form-fragment unplanned-form-fragment--${index % 5}`;
+      form.textContent = fragment;
+      form.style.left = `${6 + (index % 5) * 18}vw`;
+      form.style.top = `${12 + (index % 6) * 14}vh`;
+      form.style.setProperty("--form-delay", `${index * 0.23}s`);
+      layer.append(form);
+    });
+
+    for (let index = 0; index < 18; index += 1) {
+      const pixel = document.createElement("span");
+      pixel.className = `unplanned-pixel-debris unplanned-pixel-debris--${index % 6}`;
+      pixel.style.left = `${3 + ((index * 17) % 92)}vw`;
+      pixel.style.top = `${8 + ((index * 23) % 84)}vh`;
+      pixel.style.width = `${10 + (index % 5) * 9}px`;
+      pixel.style.height = `${4 + (index % 4) * 3}px`;
+      layer.append(pixel);
+    }
+
+    const status = document.createElement("span");
+    status.className = "unplanned-scroll-status";
+    status.dataset.scrollEfficiency = "";
+    status.textContent = "SCROLL EFFICIENCY: 100%";
+    layer.append(status);
+
     return layer;
+  }
+
+  function calculateUnplannedScrollEfficiency(progress) {
+    const wetConcrete = Math.max(0, Math.min(1, progress));
+    const administrativeTumor = 1 - wetConcrete * wetConcrete * 0.72;
+    return Math.max(0.28, Math.min(1, administrativeTumor));
+  }
+
+  function deployUnplannedLagFragment(layer, progress, index) {
+    if (!layer || document.body.classList.contains("archive-clean")) {
+      return;
+    }
+
+    const existing = layer.querySelectorAll(".unplanned-lag-fragment");
+    if (existing.length > 8) {
+      existing[0].remove();
+    }
+
+    const fragment = document.createElement("span");
+    fragment.className = `unplanned-lag-fragment unplanned-lag-fragment--${index % 4}`;
+    fragment.textContent = unplannedLagFragments[index % unplannedLagFragments.length];
+    fragment.style.left = `${8 + ((index * 19) % 74)}vw`;
+    fragment.style.top = `${18 + Math.min(62, progress * 64 + (index % 5) * 4)}vh`;
+    fragment.style.setProperty("--lag-duration", `${1.2 + (index % 4) * 0.28}s`);
+    layer.append(fragment);
+
+    window.setTimeout(() => {
+      fragment.remove();
+    }, 2200);
   }
 
   function initializeUnplannedAgeDegradation() {
@@ -1774,16 +1855,25 @@
 
     const layer = createUnplannedPressureLayer();
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const status = layer.querySelector("[data-scroll-efficiency]");
     let wetPrinter = 0;
     let legalMushroom = 0;
+    let radioactiveReceipt = 0;
+    let corridorChecksum = 0;
 
     const inspectOutdatedScroll = () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
       const stage = progress > 0.82 ? 4 : progress > 0.62 ? 3 : progress > 0.42 ? 2 : progress > 0.2 ? 1 : 0;
+      const efficiency = document.body.classList.contains("archive-clean") ? 1 : calculateUnplannedScrollEfficiency(progress);
 
       document.body.dataset.unplannedStage = String(stage);
       layer.style.setProperty("--pressure-opacity", String(Math.min(0.22, 0.035 + progress * 0.2)));
+      layer.style.setProperty("--scroll-efficiency", String(efficiency));
+      layer.style.setProperty("--resistance-intensity", String(1 - efficiency));
+      if (status) {
+        status.textContent = `SCROLL EFFICIENCY: ${Math.round(efficiency * 100)}%`;
+      }
 
       if (reduced) {
         return;
@@ -1801,9 +1891,52 @@
         const target = lines[wetPrinter % lines.length];
         target.textContent = wetPrinter % 8 === 0 ? scrambleArchiveText(target.textContent, wetPrinter) : unplannedPressureFragments[wetPrinter % unplannedPressureFragments.length];
       }
+
+      if (stage > 1 && wetPrinter % 3 === 0) {
+        deployUnplannedLagFragment(layer, progress, wetPrinter);
+      }
+    };
+
+    const resistUnplannedWheel = (event) => {
+      if (
+        reduced ||
+        event.defaultPrevented ||
+        event.ctrlKey ||
+        event.metaKey ||
+        document.body.classList.contains("archive-clean") ||
+        (event.target instanceof Element && event.target.closest("input, textarea, select, [contenteditable='true']"))
+      ) {
+        return;
+      }
+
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      const efficiency = calculateUnplannedScrollEfficiency(progress);
+      if (efficiency > 0.96 || Math.abs(event.deltaY) < 1) {
+        return;
+      }
+
+      event.preventDefault();
+      corridorChecksum += 1;
+      document.body.classList.add("is-unplanned-scroll-resisting");
+      window.clearTimeout(radioactiveReceipt);
+      radioactiveReceipt = window.setTimeout(() => {
+        document.body.classList.remove("is-unplanned-scroll-resisting");
+      }, 260);
+
+      window.scrollBy({
+        left: event.deltaX * efficiency,
+        top: event.deltaY * efficiency,
+        behavior: "auto"
+      });
+
+      if (progress > 0.55 && corridorChecksum % 5 === 0) {
+        deployUnplannedLagFragment(layer, progress, corridorChecksum);
+      }
     };
 
     window.addEventListener("scroll", inspectOutdatedScroll, { passive: true });
+    window.addEventListener("wheel", resistUnplannedWheel, { passive: false });
     inspectOutdatedScroll();
   }
 
