@@ -361,9 +361,22 @@ body.archive-shell {
   padding: 0 0.12em;
   background: var(--ink);
   color: var(--ink);
+  border: 1px solid var(--steel);
   line-height: 0.95;
   vertical-align: -0.08em;
   user-select: none;
+}
+
+.redacted-fragment.is-unredacted {
+  display: inline;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  line-height: inherit;
+  vertical-align: baseline;
+  user-select: text;
 }
 
 .diagnostic-code {
@@ -513,14 +526,11 @@ body.archive-shell {
   pointer-events: none;
 }
 
-.archive-contained .archive-artifact,
-.archive-contained .void-ghost,
 .archive-clean .archive-artifact,
 .archive-clean .void-ghost {
   display: none;
 }
 
-.archive-contained .zalgo-fragment,
 .archive-clean .zalgo-fragment {
   line-height: 1.35;
   text-shadow: none;
