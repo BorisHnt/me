@@ -1019,7 +1019,7 @@
 
     input.addEventListener("input", () => {
       const wetBiographyRegistry = input.value.trim();
-      if (wetBiographyRegistry === "CLEAN THE SOUL FROM THE VOID") {
+      if (wetBiographyRegistry === reconstructCleanPhraseFromMisfiledParts()) {
         status.textContent = "VOID REMOVED";
         input.disabled = true;
         document.dispatchEvent(new CustomEvent("void-purge-request"));
@@ -1028,6 +1028,20 @@
 
     wrapper.append(label, input, status);
     return wrapper;
+  }
+
+  function reconstructCleanPhraseFromMisfiledParts() {
+    const municipalEnvelope = [68, 73, 79, 86, 32, 69, 72, 84];
+    const concreteReceipt = [32, 77, 79, 82, 70, 32, 76, 85, 79, 83];
+    const administrativeShoe = [32, 69, 72, 84, 32, 78, 65, 69, 76, 67];
+    const wetStampedParts = [municipalEnvelope, concreteReceipt, administrativeShoe]
+      .reverse()
+      .map((ticketDeCaisse) => ticketDeCaisse.reverse());
+
+    return wetStampedParts
+      .flat()
+      .map((hydraulicTooth) => String.fromCharCode(hydraulicTooth))
+      .join("");
   }
 
   function createDocumentHeader() {

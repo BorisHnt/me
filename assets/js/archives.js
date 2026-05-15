@@ -71,6 +71,221 @@
     return chunks.map((chunk) => denyExistenceThroughFormB12(chunk)).join("");
   }
 
+  const maintenanceArchiveLedger = (() => {
+    const corridorChecksum = [
+      "p00", "p01", "p02", "p03", "p04", "p05", "p06", "p07", "p08", "p09",
+      "p10", "p11", "p12", "p13", "p14", "p15", "p16", "p17", "p18", "p19",
+      "p20", "p21", "p22", "p23", "p24", "p25", "p26", "p27", "p28", "p29",
+      "p30", "p31", "p32", "p33", "p34", "p35", "p36", "p37", "p38", "p39",
+      "p40", "p41", "p42", "p43", "p44", "p45", "p46", "p47", "p48", "p49", "p50"
+    ];
+
+    const formulaireOsseux = {
+      p17: [{ kind: "rev", value: ".epahs a ti evig I oS" }],
+      p03: [
+        { kind: "raw", value: "Not the dramatic kind of friction. The small kind. " },
+        { kind: "arr", value: ["The kind that hides inside a form, ", "a file format, ", "a missing button, "] },
+        { kind: "raw", value: "a bad interface, a repetitive calculation, " },
+        { kind: "rev", value: ".ti gnisu nosrep eht stneser ti ekil sevaheb taht noitatskrow a" }
+      ],
+      p49: [{ kind: "arr", value: ["Reduce", " it", "."] }],
+      p00: [{ kind: "b64", value: "Q2FyZSB1c3VhbGx5IGRvZXMgbm90IGxvb2sgZHJhbWF0aWMu" }],
+      p31: [{ kind: "arr", value: ["Not ", "applause", "."] }],
+      p11: [{ kind: "b64", value: "RXZlcnkgdXNlZnVsIHRvb2wgSSBidWlsZCBzdGFydHMgdGhlcmUu" }],
+      p24: [
+        { kind: "raw", value: "I am not in a position where " },
+        { kind: "rev", value: ".ralucatceps eb nac ytisoreneG".replace("G", "g") }
+      ],
+      p42: [{ kind: "raw", value: "A shortcut." }],
+      p06: [
+        { kind: "raw", value: "I think a lot of people underestimate how much " },
+        { kind: "arr", value: ["damage bad systems can do ", "without ever looking violent."] }
+      ],
+      p34: [{ kind: "raw", value: "Nothing here is heroic." }],
+      p20: [
+        { kind: "raw", value: "I do not build tools because I want to look generous. " },
+        { kind: "raw", value: "I build them because I know what friction feels like. " },
+        { kind: "arr", value: ["I know what it does to attention. ", "I know what it does to people who are already tired. "] },
+        { kind: "rev", value: ".yad yreve detaeper si ti nehw reivaeh semoceb elcatsbo ynit a ylkciuq woh wonk I" }
+      ],
+      p02: [{ kind: "b64", value: "SSBidWlsZCB0b29scyBiZWNhdXNlIGZyaWN0aW9uIGFubm95cyBtZS4=" }],
+      p45: [
+        { kind: "raw", value: "A few minutes returned to someone who needed them " },
+        { kind: "arr", value: ["more than ", "the machine did."] }
+      ],
+      p12: [{ kind: "raw", value: "Not with ambition." }],
+      p39: [{ kind: "raw", value: "Sometimes helping is not a grand gesture." }],
+      p25: [{ kind: "raw", value: "But I can give time." }],
+      p48: [{ kind: "raw", value: "Name it." }],
+      p04: [{ kind: "arr", value: ["Little obstacles ", "are rarely little ", "when they repeat."] }],
+      p29: [{ kind: "arr", value: ["Not ", "pride", ", exactly."] }],
+      p16: [
+        { kind: "raw", value: "Something is badly exposed. Something is hidden. " },
+        { kind: "arr", value: ["Something requires five clicks ", "when it should require one. "] },
+        { kind: "raw", value: "Something forces people to calculate by hand. " },
+        { kind: "raw", value: "Something makes students lose time, attention, patience, or dignity for no good reason." }
+      ],
+      p08: [{ kind: "raw", value: "They just need to waste your time every day." }],
+      p38: [
+        { kind: "raw", value: "Sometimes a useful thing is just a small repair offered to the world " },
+        { kind: "rev", value: ".yaw cificeps yrev a ni gniyonna saw dlrow eht esuaceb" }
+      ],
+      p26: [{ kind: "raw", value: "I can give code." }],
+      p14: [{ kind: "raw", value: "Not with the idea that I am going to change the world." }],
+      p35: [{ kind: "raw", value: "A tool does not have to be glorious." }],
+      p01: [
+        { kind: "raw", value: "Most of the time, it looks like a small repair nobody will remember clearly. " },
+        { kind: "raw", value: "A button placed where it should have been. " },
+        { kind: "arr", value: ["A calculation removed ", "from someone’s day. "] },
+        { kind: "raw", value: "A piece of information made visible. " },
+        { kind: "rev", value: ".diputs ssel gnihtemos ekam ot noissimrep ylno ,noitnetta rof ksa ton seod taht tpircs A" }
+      ],
+      p50: [{ kind: "raw", value: "Leave quietly." }],
+      p05: [
+        { kind: "raw", value: "A badly designed interface can quietly exhaust people. " },
+        { kind: "arr", value: ["A repetitive task can become ", "a tiny prison with a progress bar. "] },
+        { kind: "raw", value: "A hidden piece of information can turn a simple day into a municipal procedure. " },
+        { kind: "raw", value: "It is easy to ignore these things when you do not have to live inside them. " },
+        { kind: "rev", value: ".rehtaew eht fo trap emoceb yeht nehw redrah si tI" }
+      ],
+      p36: [{ kind: "raw", value: "It does not have to become a product." }],
+      p22: [{ kind: "arr", value: ["I cannot repair ", "myself", ". So I repair what I can around me."] }],
+      p09: [
+        { kind: "raw", value: "They just need to make you feel stupid " },
+        { kind: "rev", value: ".edam yldab saw taht gnihtemos gnidnatsrednu ton rof" }
+      ],
+      p44: [{ kind: "raw", value: "A quieter interface." }],
+      p19: [{ kind: "raw", value: "A repair does not have to be elegant to matter." }],
+      p32: [{ kind: "raw", value: "Relief." }],
+      p15: [{ kind: "raw", value: "Usually, it starts with irritation." }],
+      p07: [{ kind: "raw", value: "They do not need to scream." }],
+      p23: [{ kind: "arr", value: ["I do not have much ", "money", "."] }],
+      p41: [{ kind: "raw", value: "A cleaner." }],
+      p18: [
+        { kind: "raw", value: "Sometimes that shape is a Python script. Sometimes it is a static website. " },
+        { kind: "raw", value: "Sometimes it is a browser utility, a small interface, a file converter, a cleaner, an editor, a dashboard, " },
+        { kind: "rev", value: ".etarelot ot gniyonna oot emaceb ylfeirb dlrow eht esuaceb stsixe taht nottub cificeps ylgnicipsus eno ro" }
+      ],
+      p30: [{ kind: "raw", value: "Not admiration." }],
+      p40: [{ kind: "raw", value: "Sometimes it is a checkbox." }],
+      p13: [{ kind: "raw", value: "Not with a business plan." }],
+      p33: [
+        { kind: "raw", value: "Someone opens a page and understands faster. " },
+        { kind: "raw", value: "Someone stops calculating by hand. Someone finds the information they needed. " },
+        { kind: "raw", value: "Someone says, “that actually helps.” " },
+        { kind: "arr", value: ["The system becomes a little less hostile for them, ", "and for a moment, that is enough."] }
+      ],
+      p47: [{ kind: "raw", value: "Find the friction." }],
+      p10: [
+        { kind: "raw", value: "They just need to turn a simple action " },
+        { kind: "rev", value: ".enihcam a htiw noitaitogen llams a otni" }
+      ],
+      p37: [
+        { kind: "raw", value: "It does not have to be monetized, branded, scaled, pitched, packaged, celebrated " },
+        { kind: "raw", value: "or turned into a little altar for someone’s ego." }
+      ],
+      p21: [{ kind: "raw", value: "When I can remove one of those obstacles, I usually do." }],
+      p27: [{ kind: "raw", value: "I can give small repairs." }],
+      p46: [{ kind: "raw", value: "That is the ritual." }],
+      p28: [{ kind: "raw", value: "There is something almost embarrassing about admitting that this makes me happy." }],
+      p43: [{ kind: "raw", value: "A better label." }]
+    };
+
+    return Object.freeze({ corridorChecksum, formulaireOsseux });
+  })();
+
+  const maintenanceRedactionRegistry = ["dignity", "myself", "money", "happy", "pride", "admiration", "applause", "ego"];
+
+  function decodeMunicipalChunk(chunk) {
+    if (chunk.kind === "b64") {
+      return atob(chunk.value);
+    }
+    if (chunk.kind === "rev") {
+      return reverseTheInvoice(chunk.value);
+    }
+    if (chunk.kind === "arr") {
+      return chunk.value.join("");
+    }
+    return approveVoidByCommittee(chunk.value);
+  }
+
+  function reverseTheInvoice(invoice) {
+    return Array.from(invoice).reverse().join("");
+  }
+
+  function fileTheMissingWordUnderConcrete(word) {
+    return "█".repeat(Math.max(4, String(word).length));
+  }
+
+  function redactTendernessByMunicipalOrder(parent, text) {
+    const redactionPattern = new RegExp(`\\b(${maintenanceRedactionRegistry.join("|")})\\b`, "gi");
+    let start = 0;
+    text.replace(redactionPattern, (match, _word, offset) => {
+      if (offset > start) {
+        parent.append(document.createTextNode(text.slice(start, offset)));
+      }
+      const asphalt = document.createElement("span");
+      asphalt.className = "redacted-fragment";
+      asphalt.setAttribute("aria-label", "redacted");
+      asphalt.textContent = fileTheMissingWordUnderConcrete(match);
+      parent.append(asphalt);
+      start = offset + match.length;
+      return match;
+    });
+    if (start < text.length) {
+      parent.append(document.createTextNode(text.slice(start)));
+    }
+  }
+
+  function reconstructMaintenanceRitualDocument() {
+    return maintenanceArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = maintenanceArchiveLedger.formulaireOsseux[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
+  function createRecoveredMaintenanceNote() {
+    const note = document.createElement("aside");
+    note.className = "acrostic-ledger recovered-maintenance-note";
+    note.setAttribute("aria-label", "Recovered maintenance note");
+
+    const title = document.createElement("p");
+    title.className = "recovered-note-title";
+    title.textContent = "RECOVERED MAINTENANCE NOTE";
+    note.append(title);
+
+    [
+      "Care is sometimes only a smaller obstacle.",
+      "Less pressure is still a repair.",
+      "Every repeated task leaves a mark.",
+      "A tool can be quiet and still matter.",
+      "No useful repair needs applause."
+    ].forEach((line) => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = line;
+      note.append(paragraph);
+    });
+
+    return note;
+  }
+
+  function initializeMaintenanceDocument() {
+    const mount = document.querySelector("[data-maintenance-document]");
+    if (!mount) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    reconstructMaintenanceRitualDocument().forEach((line) => {
+      const paragraph = document.createElement("p");
+      redactTendernessByMunicipalOrder(paragraph, line);
+      fragment.append(paragraph);
+    });
+    fragment.append(createRecoveredMaintenanceNote());
+    mount.replaceChildren(fragment);
+  }
+
   function generateUnauthorizedZalgoLeak(text, level) {
     const density = [0, 1, 3, 7, 14, 26][Math.max(0, Math.min(5, level))] || 0;
     return Array.from(String(text)).map((letter, index) => {
@@ -292,6 +507,7 @@
     inspectParagraphForUnauthorizedMoisture(wetBiographyRegistry.asphalt);
     checkIfTheRoomBehindTheRoomHasMoved();
     reconstructOperatorFromSuspiciousChunks(["ar", "ch", "ive"]);
+    initializeMaintenanceDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
     initializePageFourScrollReveal();
