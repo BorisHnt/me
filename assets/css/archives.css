@@ -767,6 +767,10 @@ body.archive-shell {
   border-color: var(--steel);
 }
 
+.archive-doc-05 .essay p {
+  position: relative;
+}
+
 .archive-doc-05 .archive-hidden-the {
   font-style: italic;
   font-weight: 620;
@@ -898,7 +902,64 @@ body.archive-shell {
   color: var(--ink);
 }
 
+.unplanned-inline-invasion,
+.unplanned-terminal-invasion {
+  pointer-events: none;
+  user-select: none;
+}
+
+.unplanned-inline-invasion {
+  display: inline-block;
+  margin: 0 0.28em;
+  border: 2px solid var(--steel);
+  padding: 0.05rem 0.28rem;
+  background: var(--dust);
+  color: var(--ink);
+  box-shadow: inset -2px -2px 0 var(--paper), inset 2px 2px 0 var(--steel);
+  font-family: var(--mono);
+  font-size: 0.72em;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: rotate(var(--invasion-tilt, 0deg));
+  animation: unplanned-inline-corrosion 0.42s steps(3, end);
+}
+
+.unplanned-inline-invasion--1,
+.unplanned-inline-invasion--4 {
+  background: var(--paper);
+  color: var(--steel);
+}
+
+.unplanned-terminal-invasion {
+  display: inline-block;
+  max-width: min(420px, 82vw);
+  margin: 0.15rem 0.34rem;
+  border: 2px solid var(--ink);
+  padding: 0.18rem 0.42rem;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--steel);
+  font-family: var(--mono);
+  font-size: 0.78em;
+  font-weight: 900;
+  line-height: 1.15;
+  transform: rotate(var(--invasion-tilt, 0deg));
+  white-space: normal;
+  animation: unplanned-terminal-burn 0.52s steps(4, end);
+}
+
+.unplanned-terminal-invasion--2 {
+  border-color: var(--paper);
+  box-shadow: -3px 3px 0 var(--dust);
+}
+
 .archive-clean .unplanned-pressure-layer {
+  display: none;
+}
+
+.archive-clean .unplanned-inline-invasion,
+.archive-clean .unplanned-terminal-invasion {
   display: none;
 }
 
@@ -916,7 +977,7 @@ body.archive-shell {
 .is-unplanned-scroll-degrading.archive-doc-05 .essay p:nth-of-type(4n),
 .is-unplanned-scroll-degrading.archive-doc-05 .archive-scramble-fragment,
 .is-unplanned-scroll-degrading.archive-doc-05 .archive-zalgo-fragment {
-  animation: unplanned-resolution-loss 0.26s steps(2, end);
+  animation: unplanned-resolution-loss 0.18s steps(2, end);
 }
 
 .is-unplanned-scroll-resisting.archive-doc-05 .archive-document {
@@ -931,6 +992,38 @@ body.archive-shell {
     2px 0 0 var(--dust),
     -2px 0 0 var(--paper),
     0 2px 0 var(--steel);
+}
+
+.is-unplanned-scroll-tearing.archive-doc-05 .essay p:nth-of-type(2n),
+.is-unplanned-scroll-tearing.archive-doc-05 .archive-scramble-fragment,
+.is-unplanned-scroll-tearing.archive-doc-05 .archive-zalgo-fragment,
+.is-unplanned-scroll-tearing.archive-doc-05 .unplanned-inline-invasion,
+.is-unplanned-scroll-tearing.archive-doc-05 .unplanned-terminal-invasion {
+  animation: unplanned-life-wear 0.18s steps(3, end);
+}
+
+.archive-doc-05 .essay p.is-unplanned-fractured-line {
+  border-left: 2px solid var(--steel);
+  padding-left: 0.55rem;
+  transform: translateX(var(--fracture-nudge, 0)) rotate(var(--fracture-tilt, 0deg));
+  transform-origin: 0 50%;
+  text-shadow:
+    2px 0 0 var(--dust),
+    -1px 0 0 var(--paper);
+}
+
+[data-unplanned-stage="3"].archive-doc-05 .essay p:nth-of-type(7n) {
+  margin-left: clamp(0px, 4vw, 42px);
+  border-right: 2px solid var(--dust);
+  padding-right: 0.35rem;
+}
+
+[data-unplanned-stage="4"].archive-doc-05 .essay p:nth-of-type(6n) {
+  margin-right: clamp(0px, 7vw, 70px);
+  border-top: 2px solid var(--dust);
+  border-bottom: 2px solid var(--steel);
+  padding-top: 0.22rem;
+  padding-bottom: 0.22rem;
 }
 
 [data-unplanned-stage="4"].archive-doc-05 .archive-document::after {
@@ -979,6 +1072,63 @@ body.archive-shell {
   }
 }
 
+@keyframes unplanned-inline-corrosion {
+  0% {
+    clip-path: inset(0 70% 0 0);
+  }
+  35% {
+    clip-path: inset(18% 0 0 0);
+  }
+  70% {
+    clip-path: inset(0 0 24% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes unplanned-terminal-burn {
+  0% {
+    color: var(--ink);
+    background: var(--paper);
+    clip-path: inset(0 80% 0 0);
+  }
+  24% {
+    color: var(--paper);
+    background: var(--ink);
+    clip-path: inset(0 0 50% 0);
+  }
+  62% {
+    clip-path: inset(20% 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes unplanned-life-wear {
+  0% {
+    transform: translate(0, 0) skewX(0deg);
+    letter-spacing: inherit;
+  }
+  20% {
+    transform: translate(2px, -1px) skewX(-1.8deg);
+    letter-spacing: 0.02em;
+  }
+  42% {
+    transform: translate(-3px, 1px) skewX(1.2deg);
+    clip-path: inset(0 0 18% 0);
+  }
+  67% {
+    transform: translate(1px, 2px) skewX(-0.9deg);
+    clip-path: inset(14% 0 0 0);
+  }
+  100% {
+    transform: translate(0, 0) skewX(0deg);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @keyframes neuro-glitch-pop {
   0% {
     opacity: 0;
@@ -1009,10 +1159,10 @@ body.archive-shell {
 @keyframes unplanned-pressure-idle {
   0%,
   100% {
-    opacity: 0.55;
+    clip-path: inset(0 0 0 0);
   }
   50% {
-    opacity: 1;
+    clip-path: inset(0 0 12% 0);
   }
 }
 
@@ -1259,6 +1409,19 @@ body.archive-shell {
     display: none;
   }
 
+  .archive-doc-05 .essay p.is-unplanned-fractured-line {
+    border-left: 0;
+    padding-left: 0;
+    transform: none;
+  }
+
+  .unplanned-inline-invasion,
+  .unplanned-terminal-invasion {
+    display: block;
+    max-width: 100%;
+    margin: 0.35rem 0;
+  }
+
   .archive-controls,
   .archive-clean-entry {
     width: 100%;
@@ -1270,7 +1433,9 @@ body.archive-shell {
   .void-ghost,
   .neuro-glitch-layer,
   .limerence-echo-layer,
-  .unplanned-pressure-layer {
+  .unplanned-pressure-layer,
+  .unplanned-inline-invasion,
+  .unplanned-terminal-invasion {
     display: none;
   }
 
@@ -1279,5 +1444,6 @@ body.archive-shell {
   .archive-doc-05 .archive-zalgo-fragment {
     animation: none !important;
     text-shadow: none !important;
+    transform: none !important;
   }
 }

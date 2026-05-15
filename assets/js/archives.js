@@ -931,6 +931,31 @@
     "enough for now"
   ];
 
+  const unplannedInlineInvasions = [
+    "FORM REPEATED",
+    "LIFE.EXE DID NOT RETURN A MAP",
+    "AGE FIELD CORRUPTED",
+    "PURPOSE REQUEST TIMED OUT",
+    "UNREADABLE FUTURE",
+    "DIRECTION NOT INSTALLED",
+    "SOCIAL OBJECT FAILED",
+    "EXTRA YEARS UNASSIGNED",
+    "LOW RESOLUTION HORIZON",
+    "THE BOX IS STILL EMPTY",
+    "AGAIN / AGAIN / AGAIN",
+    "NOT A DESTINATION"
+  ];
+
+  const unplannedTerminalInvasions = [
+    "C:\\AGE\\FORM> write_purpose --required",
+    "SYSTEM: future map not found",
+    "INPUT BOX WAITING FOR A PERSON",
+    "ERROR 05: life continued after blueprint",
+    "PROCESS: become_someone.exe / stalled",
+    "STATUS: still here, not oriented",
+    "ADMIN: signature requested again"
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -1848,6 +1873,62 @@
     }, 2200);
   }
 
+  function fractureUnplannedParagraphs(progress, index) {
+    if (document.body.classList.contains("archive-clean")) {
+      document.querySelectorAll(".is-unplanned-fractured-line").forEach((node) => {
+        node.classList.remove("is-unplanned-fractured-line");
+        node.style.removeProperty("--fracture-tilt");
+        node.style.removeProperty("--fracture-nudge");
+      });
+      return;
+    }
+
+    const paragraphs = Array.from(document.querySelectorAll("[data-unplanned-age-document] p"));
+    if (!paragraphs.length || progress < 0.34) {
+      return;
+    }
+
+    const target = paragraphs[(index * 5 + Math.floor(progress * 31)) % paragraphs.length];
+    target.classList.add("is-unplanned-fractured-line");
+    target.style.setProperty("--fracture-tilt", `${((index % 7) - 3) * 0.45}deg`);
+    target.style.setProperty("--fracture-nudge", `${((index % 5) - 2) * Math.min(16, progress * 18)}px`);
+  }
+
+  function invadeUnplannedTextFlow(progress, index) {
+    if (document.body.classList.contains("archive-clean") || progress < 0.38) {
+      return;
+    }
+
+    const essay = document.querySelector("[data-unplanned-age-document]");
+    const paragraphs = Array.from(essay ? essay.querySelectorAll("p") : []);
+    if (!paragraphs.length) {
+      return;
+    }
+
+    const existing = Array.from(essay.querySelectorAll(".unplanned-inline-invasion, .unplanned-terminal-invasion"));
+    const maxInvasions = progress > 0.78 ? 34 : progress > 0.58 ? 22 : 12;
+    if (existing.length >= maxInvasions) {
+      existing[index % existing.length].remove();
+    }
+
+    const target = paragraphs[(index * 9 + Math.floor(progress * 47)) % paragraphs.length];
+    const terminal = progress > 0.56 && index % 3 === 0;
+    const fragment = document.createElement("span");
+    fragment.className = terminal
+      ? `unplanned-terminal-invasion unplanned-terminal-invasion--${index % 4}`
+      : `unplanned-inline-invasion unplanned-inline-invasion--${index % 5}`;
+    fragment.textContent = terminal
+      ? unplannedTerminalInvasions[index % unplannedTerminalInvasions.length]
+      : unplannedInlineInvasions[index % unplannedInlineInvasions.length];
+    fragment.style.setProperty("--invasion-tilt", `${((index % 9) - 4) * 0.7}deg`);
+
+    if (target.childNodes.length > 2 && index % 2 === 0) {
+      target.insertBefore(fragment, target.childNodes[Math.min(target.childNodes.length - 1, 2 + (index % target.childNodes.length))]);
+    } else {
+      target.append(" ", fragment);
+    }
+  }
+
   function initializeUnplannedAgeDegradation() {
     if (!document.body.classList.contains("archive-doc-05")) {
       return;
@@ -1895,6 +1976,14 @@
       if (stage > 1 && wetPrinter % 3 === 0) {
         deployUnplannedLagFragment(layer, progress, wetPrinter);
       }
+
+      if (stage > 1 && wetPrinter % 2 === 0) {
+        fractureUnplannedParagraphs(progress, wetPrinter);
+      }
+
+      if (stage > 1 && (wetPrinter % 3 === 0 || progress > 0.72)) {
+        invadeUnplannedTextFlow(progress, wetPrinter);
+      }
     };
 
     const resistUnplannedWheel = (event) => {
@@ -1919,9 +2008,11 @@
       event.preventDefault();
       corridorChecksum += 1;
       document.body.classList.add("is-unplanned-scroll-resisting");
+      document.body.classList.add("is-unplanned-scroll-tearing");
       window.clearTimeout(radioactiveReceipt);
       radioactiveReceipt = window.setTimeout(() => {
         document.body.classList.remove("is-unplanned-scroll-resisting");
+        document.body.classList.remove("is-unplanned-scroll-tearing");
       }, 260);
 
       window.scrollBy({
@@ -1932,6 +2023,11 @@
 
       if (progress > 0.55 && corridorChecksum % 5 === 0) {
         deployUnplannedLagFragment(layer, progress, corridorChecksum);
+      }
+
+      if (progress > 0.42 && corridorChecksum % 3 === 0) {
+        fractureUnplannedParagraphs(progress, corridorChecksum);
+        invadeUnplannedTextFlow(progress, corridorChecksum);
       }
     };
 
