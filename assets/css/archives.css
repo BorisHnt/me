@@ -393,6 +393,21 @@ body.archive-shell {
   letter-spacing: 0.01em;
 }
 
+.archive-scramble-fragment--locked {
+  border-bottom: 1px solid var(--steel);
+  background: var(--dust);
+}
+
+.archive-scramble-fragment.is-unscrambled {
+  display: inline;
+  min-width: 0;
+  border-bottom: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+
 .diagnostic-code {
   display: inline-block;
   min-width: 2.1rem;

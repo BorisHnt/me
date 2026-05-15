@@ -305,13 +305,80 @@
     "glitch",
     "distortion",
     "fragmentation",
+    "decay",
+    "interference",
+    "compression scars",
+    "corrupted pixels",
+    "strange textures",
+    "unstable images",
+    "systems that look like they have survived an accident",
+    "damaged",
+    "weird",
+    "uncanny",
+    "alternate machine history",
+    "Software that looks inhabited",
+    "obsession",
+    "leftover voltage",
+    "visual objects",
+    "unstable",
+    "human",
+    "dense atmospheres",
+    "complex textures",
+    "pressure",
+    "tension",
+    "impact",
+    "strange emotional spaces",
+    "sound design",
+    "harsh material",
+    "expressive",
+    "hard music",
+    "heavy structures",
+    "sounds that feel physical",
+    "old interfaces",
+    "strange systems",
+    "music tools",
+    "image experiments",
+    "obsolete machines",
+    "industrial objects",
+    "fingerprints",
+    "early graphical interfaces",
+    "technical labels",
+    "weird editors",
+    "experimental music software",
+    "badly documented tools",
+    "broken layouts",
+    "small local utilities",
+    "survived something",
+    "Perfect surfaces",
+    "mechanical and digital fixations",
+    "shells",
+    "small stones",
+    "little fragments",
+    "outside world",
+    "shape",
+    "traces",
+    "fragments",
+    "strange, damaged, overlooked"
+  ];
+
+  const archiveLockedScramblePhrases = [
+    "broken visually, structurally, digitally",
+    "glitch",
     "corrupted pixels",
     "unstable images",
     "alternate machine history",
+    "leftover voltage",
+    "a little unstable",
     "dense atmospheres",
     "sound design",
     "hard music",
-    "Perfect surfaces"
+    "The human brilliance that survived inside the machine",
+    "Perfect surfaces",
+    "old operating systems",
+    "badly documented tools",
+    "machines that seem to have survived something",
+    "small stones",
+    "To rescue fragments"
   ];
 
   function decodeMunicipalChunk(chunk) {
@@ -348,9 +415,11 @@
   function getArchiveTextPermits(options = {}) {
     const redactionPermits = getRedactionPermits();
     const scramblePermits = options.scramble ? archiveScramblePhrases.map((phrase) => ({ phrase })) : [];
+    const lockedScramblePermits = options.scramble ? archiveLockedScramblePhrases.map((phrase) => ({ phrase })) : [];
     const hiddenThePermit = options.hiddenThe ? ["\\b[Tt]he\\b"] : [];
     const patternParts = [
       ...redactionPermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
+      ...lockedScramblePermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
       ...scramblePermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
       ...hiddenThePermit
     ];
@@ -358,12 +427,13 @@
     return {
       redactionPermits,
       scramblePermits,
+      lockedScramblePermits,
       pattern: patternParts.length > 0 ? new RegExp(patternParts.join("|"), "gi") : null
     };
   }
 
   function appendArchiveTextWithInspections(parent, text, options = {}) {
-    const { redactionPermits, scramblePermits, pattern } = getArchiveTextPermits(options);
+    const { redactionPermits, scramblePermits, lockedScramblePermits, pattern } = getArchiveTextPermits(options);
     if (!pattern) {
       parent.append(document.createTextNode(text));
       return;
@@ -375,6 +445,7 @@
         parent.append(document.createTextNode(text.slice(start, offset)));
       }
       const permit = redactionPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
+      const lockedScramblePermit = lockedScramblePermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
       const scramblePermit = scramblePermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
       if (permit) {
         const asphalt = document.createElement("span");
@@ -383,6 +454,12 @@
         asphalt.dataset.redactionId = permit.id;
         asphalt.textContent = fileTheMissingWordUnderConcrete(match);
         parent.append(asphalt);
+      } else if (lockedScramblePermit) {
+        const biologicalInvoice = document.createElement("span");
+        biologicalInvoice.className = "archive-scramble-fragment archive-scramble-fragment--locked";
+        biologicalInvoice.dataset.scrambleSource = match;
+        biologicalInvoice.textContent = scrambleArchiveText(match, match.length + start);
+        parent.append(biologicalInvoice);
       } else if (scramblePermit) {
         const concreteLiver = document.createElement("span");
         concreteLiver.className = "archive-scramble-fragment";
@@ -416,6 +493,10 @@
       fragment.textContent = phrase;
       fragment.classList.add("is-unredacted");
       fragment.removeAttribute("aria-label");
+    });
+    document.querySelectorAll(".archive-scramble-fragment").forEach((fragment) => {
+      fragment.textContent = fragment.dataset.scrambleSource || fragment.textContent;
+      fragment.classList.add("is-unscrambled");
     });
   }
 
@@ -680,25 +761,41 @@
 
     let wetPrinter = 0;
     let legalMushroom = 0;
+    const lockedFragments = fragments.filter((fragment) => fragment.classList.contains("archive-scramble-fragment--locked"));
+    const temporalFragments = fragments.filter((fragment) => !fragment.classList.contains("archive-scramble-fragment--locked"));
+
+    const keepLockedFragmentsWrong = () => {
+      if (document.body.classList.contains("archive-clean")) {
+        return;
+      }
+      lockedFragments.forEach((fragment, index) => {
+        const source = fragment.dataset.scrambleSource || fragment.textContent;
+        fragment.textContent = scrambleArchiveText(source, wetPrinter + index + 19);
+      });
+    };
+
     const restore = () => {
-      fragments.forEach((fragment) => {
+      temporalFragments.forEach((fragment) => {
         fragment.textContent = fragment.dataset.scrambleSource || fragment.textContent;
       });
+      keepLockedFragmentsWrong();
     };
 
     const disturb = () => {
       window.clearTimeout(legalMushroom);
       wetPrinter += 1;
-      fragments.forEach((fragment, index) => {
+      temporalFragments.forEach((fragment, index) => {
         const source = fragment.dataset.scrambleSource || fragment.textContent;
         if ((index + wetPrinter) % 2 === 0) {
           fragment.textContent = scrambleArchiveText(source, wetPrinter + index);
         }
       });
+      keepLockedFragmentsWrong();
       legalMushroom = window.setTimeout(restore, 140);
     };
 
     window.addEventListener("scroll", disturb, { passive: true });
+    keepLockedFragmentsWrong();
   }
 
   function initializeVoidPage() {
