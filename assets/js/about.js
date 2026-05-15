@@ -934,6 +934,7 @@
   }
 
   function arrangePurgedTranslations() {
+    const purgedElements = [];
     voidTranslationNodes.forEach(({ body, fault, receipt }, index) => {
       const element = body.closest(".void-translation-fragment");
       if (!element) {
@@ -944,9 +945,16 @@
       body.textContent = receipt.english;
       fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
       element.style.top = "auto";
-      element.style.bottom = `${150 + (voidTranslationNodes.length - 1 - index) * 90}px`;
+      element.style.bottom = "auto";
       element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
+      purgedElements.push(element);
+    });
+
+    let lowerReceiptPile = 150;
+    purgedElements.slice().reverse().forEach((element) => {
+      element.style.bottom = `${lowerReceiptPile}px`;
+      lowerReceiptPile += element.offsetHeight + 10;
     });
   }
 
@@ -1383,6 +1391,9 @@
     window.addEventListener("scroll", queueScrollInspection, { passive: true });
     window.addEventListener("resize", () => {
       fileTheDeviceUnderTheCorrectWrongShelf();
+      if (voidPurged) {
+        arrangePurgedTranslations();
+      }
       queueScrollInspection();
     });
     inspectScrollPosition();
