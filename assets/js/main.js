@@ -191,7 +191,8 @@
       home: "Home",
       personal: "Personal Projects",
       "42": "42 Support Projects",
-      about: "About"
+      about: "About",
+      archives: "Archives"
     };
     const page = document.body.dataset.page;
     const taskLabel = document.querySelector("[data-task-label]");
