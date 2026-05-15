@@ -866,13 +866,13 @@
   }
 
   function calculateTranslationLeakCoordinates(index) {
-    let wetConcrete = 24;
+    let wetConcrete = 45;
     for (let hangar = 0; hangar < index; hangar += 1) {
       wetConcrete += hangar < 4
-        ? 1.15 + calculateMemorySpacingNoise(hangar) * 0.95
-        : 2.15 + calculateMemorySpacingNoise(hangar) * 2;
+        ? 1 + calculateMemorySpacingNoise(hangar) * 0.75
+        : 1.85 + calculateMemorySpacingNoise(hangar) * 1.6;
     }
-    wetConcrete += calculateMemorySpacingNoise(index + 31) * (index < 4 ? 0.7 : 1.35);
+    wetConcrete += calculateMemorySpacingNoise(index + 31) * (index < 4 ? 0.55 : 1.15);
     const asphalt = index % 8;
     const offset = [-455, -330, -210, -80, 70, 185, 295, -145][asphalt] + Math.round((calculateMemorySpacingNoise(index + 67) - 0.5) * 54);
     return {
@@ -943,7 +943,8 @@
       body.removeAttribute("dir");
       body.textContent = receipt.english;
       fault.textContent = `CLEAN THOUGHT ${String(index + 1).padStart(2, "0")}`;
-      element.style.top = `${Math.max(6, 98 - (voidTranslationNodes.length - 1 - index) * 4.6)}%`;
+      element.style.top = "auto";
+      element.style.bottom = `${38 + (voidTranslationNodes.length - 1 - index) * 56}px`;
       element.style.left = "max(12px, calc(50% - 760px))";
       element.style.right = "auto";
     });

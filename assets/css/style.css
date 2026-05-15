@@ -1640,17 +1640,7 @@ body.about-shell {
   max-width: 290px;
 }
 
-.is-corruption-stage-1 .void-translation-fragment[data-translation-stage="1"],
-.is-corruption-stage-2 .void-translation-fragment[data-translation-stage="1"],
-.is-corruption-stage-2 .void-translation-fragment[data-translation-stage="2"],
-.is-corruption-stage-3 .void-translation-fragment[data-translation-stage="1"],
-.is-corruption-stage-3 .void-translation-fragment[data-translation-stage="2"],
-.is-corruption-stage-3 .void-translation-fragment[data-translation-stage="3"],
-.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="1"],
-.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="2"],
-.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="3"],
-.is-corruption-stage-4 .void-translation-fragment[data-translation-stage="4"],
-.is-corruption-stage-5 .void-translation-fragment {
+.about-shell:not(.is-void-purged) .void-translation-fragment {
   display: block;
 }
 
@@ -1751,6 +1741,7 @@ body.is-handheld-device.is-void-purged .void-artifact-layer {
 }
 
 body.is-handheld-device.is-void-purged .void-translation-fragment {
+  position: static !important;
   width: 100%;
   justify-self: center;
 }
