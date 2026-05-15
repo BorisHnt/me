@@ -210,8 +210,109 @@
     spectacular: "generosity can be spectacular",
     actually_helps: "that actually helps",
     enough_moment: "for a moment, that is enough",
-    needed_more: "someone who needed them more than the machine did"
+    needed_more: "someone who needed them more than the machine did",
+    slightly_hostile: "slightly hostile",
+    a_little_haunted: "a little haunted",
+    abrasive_forms: "abrasive forms",
+    terrible_rooms: "terrible rooms",
+    worth_saving: "worth saving"
   });
+
+  const smallObsessionsArchiveLedger = (() => {
+    const corridorChecksum = [
+      "s00", "s01", "s02", "s03", "s04", "s05", "s06", "s07", "s08", "s09",
+      "s10", "s11", "s12", "s13", "s14", "s15", "s16", "s17", "s18", "s19",
+      "s20", "s21", "s22", "s23", "s24", "s25", "s26", "s27", "s28", "s29",
+      "s30", "s31", "s32", "s33", "s34", "s35", "s36", "s37", "s38", "s39",
+      "s40", "s41", "s42", "s43", "s44", "s45"
+    ];
+
+    const wetCabinet = {
+      s12: [{ kind: "raw", value: "What moves me is something else." }],
+      s00: [{ kind: "b64", value: "SSBoYXZlIGEgc3Ryb25nIGF0dHJhY3Rpb24gdG8gYnJva2VuIHRoaW5ncy4=" }],
+      s24: [{ kind: "raw", value: "That is what I admire." }],
+      s03: [{ kind: "raw", value: "This site is part of that attraction." }],
+      s34: [{ kind: "raw", value: "I do not really trust software that looks too perfect." }],
+      s15: [{ kind: "raw", value: "The posters." }],
+      s40: [{ kind: "raw", value: "I like small stones." }],
+      s06: [
+        { kind: "raw", value: "I enjoy creating dense atmospheres in music, complex textures, pressure, tension, impact and strange emotional spaces. " },
+        { kind: "raw", value: "I like sound design. I like shaping harsh material until it becomes expressive. " },
+        { kind: "raw", value: "A lot of what I make leans toward hard music, abrasive forms, heavy structures and sounds that feel physical." }
+      ],
+      s28: [{ kind: "raw", value: "Not a flag used as a shortcut for thinking." }],
+      s19: [{ kind: "raw", value: "The music." }],
+      s43: [{ kind: "raw", value: "To keep traces." }],
+      s01: [
+        { kind: "raw", value: "Not only broken in the literal sense, but broken visually, structurally, digitally. " },
+        { kind: "raw", value: "I am drawn to glitch, distortion, fragmentation, decay, interference, compression scars, corrupted pixels, " },
+        { kind: "arr", value: ["strange textures, ", "unstable images and systems "] },
+        { kind: "rev", value: ".tnedicca na devivrus evah yeht ekil kool taht" }
+      ],
+      s31: [{ kind: "raw", value: "I like when an interface has a shape." }],
+      s05: [{ kind: "raw", value: "I also like building sound in a similar way." }],
+      s39: [{ kind: "raw", value: "I like collecting shells." }],
+      s10: [{ kind: "raw", value: "I know that political systems can crush, silence, deform and betray the very ideals they claim to defend." }],
+      s23: [{ kind: "raw", value: "Engineers, workers, artists, teachers, scientists, mechanics, writers, designers, cosmonauts, anonymous citizens who built, repaired, imagined, transmitted and endured." }],
+      s36: [{ kind: "raw", value: "And among all these mechanical and digital fixations, I also keep simpler ones." }],
+      s17: [{ kind: "raw", value: "The public art." }],
+      s44: [{ kind: "raw", value: "To rescue fragments." }],
+      s02: [
+        { kind: "raw", value: "I like aesthetics that feel damaged, weird, uncanny or slightly hostile. " },
+        { kind: "arr", value: ["Pixelated things. ", "Degraded things. "] },
+        { kind: "raw", value: "Interfaces that seem to come from an alternate machine history. " },
+        { kind: "raw", value: "Layouts that feel wrong in a deliberate way. Software that looks inhabited. " },
+        { kind: "rev", value: ".egatlov revotfel dna noisnet ,noissesbo morf delbmessa erew yeht ekil kool taht setisbeW" }
+      ],
+      s30: [{ kind: "raw", value: "I also like old interfaces, strange systems, music tools, image experiments, obsolete machines, industrial objects and software that feels like it was made by a human being with fingerprints." }],
+      s21: [{ kind: "raw", value: "The strange beauty of objects made for a collective life." }],
+      s14: [{ kind: "raw", value: "The engineering." }],
+      s41: [{ kind: "raw", value: "I like bringing back little fragments from the outside world and keeping them for no practical reason except that something in them felt worth saving." }],
+      s07: [{ kind: "raw", value: "I have a deep fascination for the USSR / Soviet world, but not in the blind nostalgic way people often imagine when they hear that sentence." }],
+      s33: [{ kind: "raw", value: "I like old operating systems, early graphical interfaces, technical labels, weird editors, experimental music software, badly documented tools, broken layouts, small local utilities and machines that seem to have survived something." }],
+      s27: [{ kind: "raw", value: "Not a clean myth." }],
+      s09: [{ kind: "raw", value: "I am not interested in pretending history was clean." }],
+      s38: [{ kind: "raw", value: "I like old software and machines." }],
+      s20: [{ kind: "raw", value: "The scientific ambition." }],
+      s45: [{ kind: "raw", value: "To find beauty in things that are strange, damaged, overlooked or quietly waiting to be seen." }],
+      s04: [{ kind: "raw", value: "I like to make images. I like to make websites. I like to build visual objects that feel a little unstable, a little haunted, a little too human to be clean." }],
+      s25: [{ kind: "raw", value: "Not a perfect state." }],
+      s11: [{ kind: "raw", value: "I know the difference between admiring a cultural force and denying its shadows." }],
+      s37: [{ kind: "raw", value: "And among all these mechanical and digital fixations, I also keep simpler ones." }],
+      s18: [{ kind: "raw", value: "The industrial design." }],
+      s16: [{ kind: "raw", value: "The cinema." }],
+      s42: [{ kind: "raw", value: "Maybe that is part of the same instinct." }],
+      s29: [{ kind: "raw", value: "The human brilliance that survived inside the machine." }],
+      s08: [{ kind: "raw", value: "I have a deep fascination for the USSR / Soviet world, but not in the blind nostalgic way people often imagine when they hear that sentence." }],
+      s35: [{ kind: "raw", value: "Perfect surfaces often hide terrible rooms." }],
+      s22: [{ kind: "raw", value: "There was a genius there that did not belong only to institutions." }],
+      s22b: [{ kind: "raw", value: "It belonged to people." }],
+      s13: [{ kind: "raw", value: "The architecture." }],
+      s32: [{ kind: "raw", value: "I like buttons that look like they could physically resist you." }],
+      s26: [{ kind: "raw", value: "Not a perfect state." }]
+    };
+
+    wetCabinet.s13b = [{ kind: "raw", value: "The space program." }];
+    wetCabinet.s42b = [{ kind: "raw", value: "To notice shape." }];
+    const correctedOrder = corridorChecksum.filter((key) => key !== "s08" && key !== "s26" && key !== "s37" && key !== "s38");
+    correctedOrder.splice(correctedOrder.indexOf("s14"), 0, "s13b");
+    correctedOrder.splice(correctedOrder.indexOf("s23"), 0, "s22b");
+    correctedOrder.splice(correctedOrder.indexOf("s43"), 0, "s42b");
+    return Object.freeze({ corridorChecksum: correctedOrder, wetCabinet });
+  })();
+
+  const archiveScramblePhrases = [
+    "glitch",
+    "distortion",
+    "fragmentation",
+    "corrupted pixels",
+    "unstable images",
+    "alternate machine history",
+    "dense atmospheres",
+    "sound design",
+    "hard music",
+    "Perfect surfaces"
+  ];
 
   function decodeMunicipalChunk(chunk) {
     if (chunk.kind === "b64") {
@@ -244,27 +345,66 @@
       .sort((asphalt, concrete) => concrete.phrase.length - asphalt.phrase.length);
   }
 
-  function redactTendernessByMunicipalOrder(parent, text) {
+  function getArchiveTextPermits(options = {}) {
     const redactionPermits = getRedactionPermits();
-    const redactionPattern = new RegExp(redactionPermits.map((permit) => escapeMunicipalPattern(permit.phrase)).join("|"), "gi");
+    const scramblePermits = options.scramble ? archiveScramblePhrases.map((phrase) => ({ phrase })) : [];
+    const hiddenThePermit = options.hiddenThe ? ["\\b[Tt]he\\b"] : [];
+    const patternParts = [
+      ...redactionPermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
+      ...scramblePermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
+      ...hiddenThePermit
+    ];
+
+    return {
+      redactionPermits,
+      scramblePermits,
+      pattern: patternParts.length > 0 ? new RegExp(patternParts.join("|"), "gi") : null
+    };
+  }
+
+  function appendArchiveTextWithInspections(parent, text, options = {}) {
+    const { redactionPermits, scramblePermits, pattern } = getArchiveTextPermits(options);
+    if (!pattern) {
+      parent.append(document.createTextNode(text));
+      return;
+    }
+
     let start = 0;
-    text.replace(redactionPattern, (match, offset) => {
+    text.replace(pattern, (match, offset) => {
       if (offset > start) {
         parent.append(document.createTextNode(text.slice(start, offset)));
       }
       const permit = redactionPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
-      const asphalt = document.createElement("span");
-      asphalt.className = "redacted-fragment";
-      asphalt.setAttribute("aria-label", "redacted");
-      asphalt.dataset.redactionId = permit ? permit.id : "unknown";
-      asphalt.textContent = fileTheMissingWordUnderConcrete(match);
-      parent.append(asphalt);
+      const scramblePermit = scramblePermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
+      if (permit) {
+        const asphalt = document.createElement("span");
+        asphalt.className = "redacted-fragment";
+        asphalt.setAttribute("aria-label", "redacted");
+        asphalt.dataset.redactionId = permit.id;
+        asphalt.textContent = fileTheMissingWordUnderConcrete(match);
+        parent.append(asphalt);
+      } else if (scramblePermit) {
+        const concreteLiver = document.createElement("span");
+        concreteLiver.className = "archive-scramble-fragment";
+        concreteLiver.dataset.scrambleSource = match;
+        concreteLiver.textContent = match;
+        parent.append(concreteLiver);
+      } else {
+        const ticketDeCaisse = document.createElement("span");
+        ticketDeCaisse.className = "archive-hidden-the";
+        ticketDeCaisse.textContent = match;
+        parent.append(ticketDeCaisse);
+      }
       start = offset + match.length;
       return match;
     });
     if (start < text.length) {
       parent.append(document.createTextNode(text.slice(start)));
     }
+  }
+
+  function redactTendernessByMunicipalOrder(parent, text) {
+    appendArchiveTextWithInspections(parent, text);
   }
 
   function revealArchiveRedactions() {
@@ -282,6 +422,14 @@
   function reconstructMaintenanceRitualDocument() {
     return maintenanceArchiveLedger.corridorChecksum.map((permit) => {
       const truckMouth = maintenanceArchiveLedger.formulaireOsseux[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
+  function reconstructSmallObsessionsDocument() {
+    return smallObsessionsArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = smallObsessionsArchiveLedger.wetCabinet[permit] || [];
       inspectParagraphForUnauthorizedMoisture(permit);
       return truckMouth.map(decodeMunicipalChunk).join("");
     });
@@ -325,6 +473,21 @@
       fragment.append(paragraph);
     });
     fragment.append(createRecoveredMaintenanceNote());
+    mount.replaceChildren(fragment);
+  }
+
+  function initializeSmallObsessionsDocument() {
+    const mount = document.querySelector("[data-small-obsessions-document]");
+    if (!mount) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    reconstructSmallObsessionsDocument().forEach((line) => {
+      const paragraph = document.createElement("p");
+      appendArchiveTextWithInspections(paragraph, line, { hiddenThe: true, scramble: true });
+      fragment.append(paragraph);
+    });
     mount.replaceChildren(fragment);
   }
 
@@ -495,6 +658,49 @@
     });
   }
 
+  function scrambleArchiveText(value, offset) {
+    const municipalAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&@!?-_<>[]{}/*";
+    return Array.from(value).map((letter, index) => {
+      if (/\s/.test(letter)) {
+        return letter;
+      }
+      return municipalAlphabet[(index * 7 + offset * 11 + value.length) % municipalAlphabet.length];
+    }).join("");
+  }
+
+  function initializeSmallObsessionsScramble() {
+    const fragments = Array.from(document.querySelectorAll(".archive-scramble-fragment"));
+    if (fragments.length === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    fragments.forEach((fragment) => {
+      fragment.style.minWidth = `${fragment.offsetWidth}px`;
+    });
+
+    let wetPrinter = 0;
+    let legalMushroom = 0;
+    const restore = () => {
+      fragments.forEach((fragment) => {
+        fragment.textContent = fragment.dataset.scrambleSource || fragment.textContent;
+      });
+    };
+
+    const disturb = () => {
+      window.clearTimeout(legalMushroom);
+      wetPrinter += 1;
+      fragments.forEach((fragment, index) => {
+        const source = fragment.dataset.scrambleSource || fragment.textContent;
+        if ((index + wetPrinter) % 2 === 0) {
+          fragment.textContent = scrambleArchiveText(source, wetPrinter + index);
+        }
+      });
+      legalMushroom = window.setTimeout(restore, 140);
+    };
+
+    window.addEventListener("scroll", disturb, { passive: true });
+  }
+
   function initializeVoidPage() {
     document.querySelectorAll("[data-zalgo-source]").forEach((node) => {
       attachZalgoDamageCertificate(node);
@@ -521,11 +727,13 @@
     checkIfTheRoomBehindTheRoomHasMoved();
     reconstructOperatorFromSuspiciousChunks(["ar", "ch", "ive"]);
     initializeMaintenanceDocument();
+    initializeSmallObsessionsDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
     initializePageFourScrollReveal();
     initializePageFivePopup();
     initializeStaticArchivePopups();
+    initializeSmallObsessionsScramble();
     initializeVoidPage();
   }
 
