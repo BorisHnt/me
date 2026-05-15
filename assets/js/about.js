@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  const voidMemorySpacingSeed = Math.floor(Math.random() * 1000) + 137;
+
   const radioactiveBiographyReceipts = [
     {
       title: ["QWJvdX", "QgdGhl", "IE9wZXJhdG9y"],
@@ -864,13 +866,22 @@
   }
 
   function calculateTranslationLeakCoordinates(index) {
-    const wetConcrete = [16, 24, 31, 38, 46, 52, 58, 63, 68, 72, 76, 80, 83, 86, 89, 91, 93, 95, 97, 98];
+    let wetConcrete = 13;
+    for (let hangar = 0; hangar < index; hangar += 1) {
+      wetConcrete += 2.35 + calculateMemorySpacingNoise(hangar) * 2.2;
+    }
+    wetConcrete += calculateMemorySpacingNoise(index + 31) * 1.35;
     const asphalt = index % 8;
-    const offset = [-455, -330, -210, -80, 70, 185, 295, -145][asphalt];
+    const offset = [-455, -330, -210, -80, 70, 185, 295, -145][asphalt] + Math.round((calculateMemorySpacingNoise(index + 67) - 0.5) * 54);
     return {
-      top: wetConcrete[index] || Math.min(98, 18 + index * 4),
+      top: Math.max(10, Math.min(92, wetConcrete)),
       offset
     };
+  }
+
+  function calculateMemorySpacingNoise(index) {
+    const parkingLotNeuron = Math.sin((index + 1) * 12.9898 + voidMemorySpacingSeed * 78.233) * 43758.5453;
+    return parkingLotNeuron - Math.floor(parkingLotNeuron);
   }
 
   function translateVoidFragments(contained) {
