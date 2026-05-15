@@ -2502,13 +2502,31 @@
     core.textContent = "∅";
     layer.append(core);
 
+    Array.from({ length: 7 }).forEach((_, index) => {
+      const ring = document.createElement("span");
+      ring.className = `void-vortex-ring void-vortex-ring--${index}`;
+      ring.style.setProperty("--void-ring-size", `${18 + index * 11}vmin`);
+      ring.style.setProperty("--void-ring-tilt", `${(index % 2 === 0 ? 1 : -1) * (index * 7 + 11)}deg`);
+      ring.style.setProperty("--void-ring-delay", `${index * -0.18}s`);
+      layer.append(ring);
+    });
+
+    const fragmentCount = Math.max(1, voidContaminationFragments.length - 1);
     voidContaminationFragments.forEach((fragment, index) => {
       const debris = document.createElement("span");
       debris.className = `void-vortex-fragment void-vortex-fragment--${index % 8}`;
       const shouldDamage = index % 9 === 0;
+      const depth = index / fragmentCount;
+      const arm = index % 5;
+      const angle = index * 37 + arm * 72;
+      const radius = Math.max(4, 51 - depth * 45);
       debris.textContent = shouldDamage ? generateUnauthorizedZalgoLeak(fragment, index % 2 === 0 ? 2 : 3) : fragment;
-      debris.style.left = `${4 + ((index * 17) % 88)}vw`;
-      debris.style.top = `${8 + ((index * 29) % 82)}vh`;
+      debris.style.setProperty("--void-angle", `${angle}deg`);
+      debris.style.setProperty("--void-radius", `${radius}vmin`);
+      debris.style.setProperty("--void-active-radius", `${radius}vmin`);
+      debris.style.setProperty("--void-depth", String(depth));
+      debris.dataset.voidRadius = String(radius);
+      debris.dataset.voidDepth = String(depth);
       debris.style.setProperty("--void-spin", `${(index % 11) - 5}deg`);
       debris.style.setProperty("--void-delay", `${(index % 17) * -0.21}s`);
       layer.append(debris);
@@ -2597,6 +2615,22 @@
       document.body.dataset.voidStage = String(stage);
       layer.style.setProperty("--void-pull", String(progress));
       layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.18 + progress * 0.8)));
+      layer.style.setProperty("--void-core-rotation", `${progress * 760}deg`);
+      layer.style.setProperty("--void-ring-rotation", `${progress * 1040}deg`);
+      layer.style.setProperty("--void-ring-scale", String(Math.max(0.68, 1 - progress * 0.3)));
+      layer.style.setProperty("--void-ring-opacity", String(Math.min(0.7, 0.18 + progress * 0.55)));
+      layer.style.setProperty("--void-orbit-rotation", `${progress * 980}deg`);
+      layer.style.setProperty("--void-counter-rotation", `${progress * 470}deg`);
+      layer.style.setProperty("--void-skew", `${progress * -18}deg`);
+
+      layer.querySelectorAll(".void-vortex-fragment").forEach((fragment) => {
+        const radius = Number(fragment.dataset.voidRadius || 30);
+        const depth = Number(fragment.dataset.voidDepth || 0);
+        const collapsedRadius = Math.max(2.8, radius * (1 - progress * 0.86));
+        const opacity = Math.min(0.96, 0.24 + (1 - depth) * 0.5 + progress * 0.25);
+        fragment.style.setProperty("--void-active-radius", `${collapsedRadius}vmin`);
+        fragment.style.setProperty("--void-fragment-opacity", String(opacity));
+      });
 
       corridorChecksum += 1;
       document.body.classList.add("is-void-scroll-tearing");

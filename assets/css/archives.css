@@ -1464,26 +1464,62 @@ body.archive-shell {
   position: absolute;
   left: 50%;
   top: 54%;
-  width: clamp(90px, 18vw, 220px);
-  height: clamp(90px, 18vw, 220px);
+  width: clamp(72px, 12vw, 150px);
+  height: clamp(72px, 12vw, 150px);
   border: 2px solid var(--paper);
   background: var(--ink);
   color: var(--paper);
+  border-radius: 50%;
   box-shadow:
-    0 0 0 8px var(--steel),
-    0 0 0 16px var(--dust),
-    inset 0 0 0 2px var(--paper);
+    0 0 0 5px var(--steel),
+    0 0 0 11px var(--dust),
+    0 0 0 17px var(--ink),
+    inset 0 0 0 2px var(--paper),
+    inset 18px -10px 0 var(--steel),
+    inset -14px 16px 0 var(--ink);
   display: grid;
   place-items: center;
   font-family: var(--mono);
-  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-size: clamp(2.1rem, 7vw, 5.6rem);
   font-weight: 900;
-  transform: translate(-50%, -50%) rotate(calc(var(--void-pull, 0) * 340deg));
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(var(--void-core-rotation, 0deg));
   animation: void-core-collapse 2.6s steps(8, end) infinite;
+}
+
+.void-vortex-ring {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: var(--void-ring-size);
+  height: var(--void-ring-size);
+  border: 2px solid var(--ink);
+  border-top-color: var(--paper);
+  border-right-color: var(--steel);
+  border-radius: 50%;
+  opacity: var(--void-ring-opacity, 0.22);
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--void-ring-tilt) + var(--void-ring-rotation, 0deg)))
+    scale(var(--void-ring-scale, 1));
+  animation: void-ring-collapse 3.2s steps(12, end) infinite;
+  animation-delay: var(--void-ring-delay, 0s);
+}
+
+.void-vortex-ring--1,
+.void-vortex-ring--4 {
+  border-style: dashed;
+}
+
+.void-vortex-ring--2,
+.void-vortex-ring--5 {
+  border-width: 3px 1px 2px 1px;
 }
 
 .void-vortex-fragment {
   position: absolute;
+  left: 50%;
+  top: 54%;
   max-width: min(280px, 44vw);
   color: var(--ink);
   font-family: var(--mono);
@@ -1491,12 +1527,14 @@ body.archive-shell {
   font-weight: 900;
   line-height: 0.95;
   text-transform: uppercase;
+  opacity: var(--void-fragment-opacity, 0.44);
   transform:
-    rotate(calc(var(--void-spin, 0deg) + var(--void-pull, 0) * 90deg))
-    translate(
-      calc((50vw - 50%) * var(--void-pull, 0) * 0.42),
-      calc((54vh - 50%) * var(--void-pull, 0) * 0.42)
-    );
+    translate(-50%, -50%)
+    rotate(calc(var(--void-angle, 0deg) + var(--void-orbit-rotation, 0deg)))
+    translateX(var(--void-active-radius, var(--void-radius, 30vmin)))
+    rotate(calc(88deg + var(--void-spin, 0deg) - var(--void-counter-rotation, 0deg)))
+    skewX(var(--void-skew, 0deg));
+  transform-origin: center;
   text-shadow:
     2px 0 0 var(--paper),
     -2px 0 0 var(--dust);
@@ -1752,6 +1790,22 @@ body.archive-shell {
   62% {
     opacity: 0.42;
     clip-path: inset(22% 0 0 0);
+  }
+}
+
+@keyframes void-ring-collapse {
+  0%,
+  100% {
+    clip-path: inset(0 0 0 0 round 50%);
+  }
+  26% {
+    clip-path: inset(0 42% 0 0 round 50%);
+  }
+  53% {
+    clip-path: inset(18% 0 0 0 round 50%);
+  }
+  78% {
+    clip-path: inset(0 0 36% 0 round 50%);
   }
 }
 
