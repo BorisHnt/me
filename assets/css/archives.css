@@ -763,6 +763,83 @@ body.archive-shell {
   animation: limerence-text-vibration 0.18s steps(2, end);
 }
 
+.archive-doc-05 .archive-document {
+  border-color: var(--steel);
+}
+
+.archive-doc-05 .archive-hidden-the {
+  font-style: italic;
+  font-weight: 620;
+  letter-spacing: 0.035em;
+  text-shadow: 1px 0 0 var(--dust), -1px 0 0 var(--paper);
+}
+
+.archive-doc-05 .archive-scramble-fragment {
+  border-bottom: 1px solid var(--steel);
+  background: var(--paper);
+  box-shadow: inset -1px -1px 0 var(--dust);
+}
+
+.archive-doc-05 .archive-scramble-fragment--locked {
+  border: 2px solid var(--steel);
+  padding: 0 0.14em;
+  background: var(--dust);
+}
+
+.archive-doc-05 .archive-zalgo-fragment {
+  line-height: 0.85;
+  text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--dust);
+}
+
+.unplanned-pressure-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: var(--pressure-opacity, 0.04);
+  pointer-events: none;
+}
+
+.unplanned-pressure-line {
+  position: absolute;
+  max-width: min(320px, 44vw);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: clamp(0.72rem, 1.2vw, 1rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-shadow: 2px 0 0 var(--paper), -2px 0 0 var(--dust);
+  animation: unplanned-pressure-idle 5s steps(4, end) infinite;
+  animation-delay: var(--pressure-delay, 0s);
+}
+
+.unplanned-pressure-line--1,
+.unplanned-pressure-line--3 {
+  color: var(--steel);
+}
+
+.archive-clean .unplanned-pressure-layer {
+  display: none;
+}
+
+[data-unplanned-stage="2"].archive-doc-05 .essay p:nth-of-type(3n),
+[data-unplanned-stage="3"].archive-doc-05 .essay p:nth-of-type(2n),
+[data-unplanned-stage="4"].archive-doc-05 .essay p {
+  text-shadow: 1px 0 0 var(--dust), -1px 0 0 var(--paper);
+}
+
+[data-unplanned-stage="3"].archive-doc-05 .archive-document,
+[data-unplanned-stage="4"].archive-doc-05 .archive-document {
+  box-shadow: inset 0 -2px 0 var(--steel);
+}
+
+.is-unplanned-scroll-degrading.archive-doc-05 .essay p:nth-of-type(4n),
+.is-unplanned-scroll-degrading.archive-doc-05 .archive-scramble-fragment,
+.is-unplanned-scroll-degrading.archive-doc-05 .archive-zalgo-fragment {
+  animation: unplanned-resolution-loss 0.26s steps(2, end);
+}
+
 @keyframes neuro-glitch-pop {
   0% {
     opacity: 0;
@@ -787,6 +864,31 @@ body.archive-shell {
   100% {
     opacity: 0;
     clip-path: inset(48% 0 48% 0);
+  }
+}
+
+@keyframes unplanned-pressure-idle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes unplanned-resolution-loss {
+  0% {
+    text-shadow: 0 0 0 var(--ink);
+  }
+  33% {
+    text-shadow: 2px 0 0 var(--dust), -1px 0 0 var(--steel);
+  }
+  66% {
+    text-shadow: -2px 0 0 var(--dust), 1px 0 0 var(--paper);
+  }
+  100% {
+    text-shadow: 0 0 0 var(--ink);
   }
 }
 
@@ -1013,7 +1115,8 @@ body.archive-shell {
   .archive-artifact,
   .void-ghost,
   .neuro-glitch-layer,
-  .limerence-echo-layer {
+  .limerence-echo-layer,
+  .unplanned-pressure-layer {
     display: none;
   }
 
@@ -1027,7 +1130,15 @@ body.archive-shell {
   .archive-artifact,
   .void-ghost,
   .neuro-glitch-layer,
-  .limerence-echo-layer {
+  .limerence-echo-layer,
+  .unplanned-pressure-layer {
     display: none;
+  }
+
+  .archive-doc-05 .essay p,
+  .archive-doc-05 .archive-scramble-fragment,
+  .archive-doc-05 .archive-zalgo-fragment {
+    animation: none !important;
+    text-shadow: none !important;
   }
 }

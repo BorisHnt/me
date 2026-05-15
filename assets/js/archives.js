@@ -244,7 +244,13 @@
     not_mine: "Not mine",
     emotional_device: "emotional device",
     machine_screaming: "the machine inside me is screaming",
-    cathedral_true: "feeling too much does not make the cathedral true"
+    cathedral_true: "feeling too much does not make the cathedral true",
+    did_not_ask_here: "I did not ask to be here",
+    want_none: "There are days when I want none of that",
+    anyone_particular: "I do not want to become anyone in particular",
+    nothing_more_ambitious: "Sometimes I would like to do nothing more ambitious than live",
+    pixelated_future: "the future feel pixelated at the edges",
+    enough_for_now: "Maybe that is enough for now"
   });
 
   const smallObsessionsArchiveLedger = (() => {
@@ -744,6 +750,161 @@
     "leave the building"
   ];
 
+  const unplannedAgeArchiveLedger = (() => {
+    const corridorChecksum = [
+      "u00", "u01", "u02", "u03", "u04", "u05", "u06", "u07", "u08", "u09",
+      "u10", "u11", "u12", "u13", "u14", "u15", "u16", "u17", "u18", "u19",
+      "u20", "u21", "u22", "u23", "u24", "u25", "u26", "u27", "u28", "u29",
+      "u30", "u31", "u32", "u33", "u34", "u35", "u36", "u37", "u38", "u39",
+      "u40", "u41", "u42", "u43", "u44", "u45", "u46", "u47", "u48", "u49",
+      "u50", "u51", "u52", "u53", "u54", "u55", "u56", "u57", "u58", "u59",
+      "u60", "u61", "u62", "u63", "u64", "u65", "u66", "u67", "u68", "u69",
+      "u70", "u71", "u72", "u73", "u74", "u75", "u76", "u77", "u78", "u79",
+      "u80", "u81", "u82"
+    ];
+
+    const outdatedFolder = {
+      u00: [{ kind: "b64", value: "SSBkaWQgbm90IHBsYW4gdG8gbGl2ZSB0aGlzIGxvbmcu" }],
+      u01: [{ kind: "raw", value: "That sentence is not here for drama." }],
+      u02: [{ kind: "raw", value: "It is here because it is structurally true." }],
+      u03: [{ kind: "raw", value: "Some version of me did not imagine this age." }],
+      u04: [{ kind: "raw", value: "Did not prepare a map for it." }],
+      u05: [{ kind: "raw", value: "Did not write instructions." }],
+      u06: [{ kind: "raw", value: "Did not leave a clean folder structure." }],
+      u07: [{ kind: "raw", value: "So now I am here, older than expected, and sometimes I do not know what to do with the extra years." }],
+      u08: [{ kind: "raw", value: "That can feel absurd." }],
+      u09: [{ kind: "raw", value: "Like waking up inside a building after the blueprint ended." }],
+      u10: [{ kind: "raw", value: "Like arriving late to a meeting nobody explained." }],
+      u11: [{ kind: "raw", value: "Like being kept in a story after the point where I expected the lights to go out." }],
+      u12: [{ kind: "raw", value: "I often feel outdated." }],
+      u13: [{ kind: "raw", value: "Not old in the noble sense." }],
+      u14: [{ kind: "raw", value: "Not wise." }],
+      u15: [{ kind: "raw", value: "Not complete." }],
+      u16: [{ kind: "raw", value: "Outdated like a device still running, but no longer certain which system it was supposed to serve." }],
+      u17: [{ kind: "raw", value: "Outdated like a format that still opens, but not cleanly." }],
+      u18: [{ kind: "raw", value: "Outdated like a machine that continues to function while quietly wondering why it was not decommissioned." }],
+      u19: [{ kind: "raw", value: "The hardest part is not only being lost." }],
+      u20: [{ kind: "raw", value: "It is the vagueness of it." }],
+      u21: [{ kind: "raw", value: "Not knowing what to do with one’s life is not always a loud crisis." }],
+      u22: [{ kind: "raw", value: "Sometimes it is just a fog that never fully leaves." }],
+      u23: [{ kind: "raw", value: "A blurred horizon." }],
+      u24: [{ kind: "raw", value: "A weak internal compass." }],
+      u25: [{ kind: "raw", value: "A persistent sense that everyone else received a clearer briefing." }],
+      u26: [{ kind: "raw", value: "I am here, but not always oriented." }],
+      u27: [{ kind: "raw", value: "I am functional, but not always convinced." }],
+      u28: [{ kind: "raw", value: "I am building, but I do not always know toward what." }],
+      u29: [{ kind: "raw", value: "I did not ask to be here." }],
+      u30: [{ kind: "raw", value: "And sometimes I resent the fact that existence seems to come with an assignment." }],
+      u31: [{ kind: "raw", value: "Become someone." }],
+      u32: [{ kind: "raw", value: "Build a future." }],
+      u33: [{ kind: "raw", value: "Produce meaning." }],
+      u34: [{ kind: "raw", value: "Declare a direction." }],
+      u35: [{ kind: "raw", value: "Turn yourself into a stable social object." }],
+      u36: [{ kind: "raw", value: "Become legible." }],
+      u37: [{ kind: "raw", value: "Become useful." }],
+      u38: [{ kind: "raw", value: "Become a shape others can quickly understand." }],
+      u39: [{ kind: "raw", value: "There are days when I want none of that." }],
+      u40: [{ kind: "raw", value: "There are days when I do not want to become anyone in particular." }],
+      u41: [{ kind: "raw", value: "I do not want a grand trajectory." }],
+      u42: [{ kind: "raw", value: "I do not want a mythology." }],
+      u43: [{ kind: "raw", value: "I do not want to optimize myself into a clean answer." }],
+      u44: [{ kind: "raw", value: "Sometimes I would like to do nothing more ambitious than live." }],
+      u45: [{ kind: "raw", value: "Quietly." }],
+      u46: [{ kind: "raw", value: "Softly." }],
+      u47: [{ kind: "raw", value: "Without performance." }],
+      u48: [{ kind: "raw", value: "Without turning every surviving day into a justification." }],
+      u49: [{ kind: "raw", value: "But society does not love that." }],
+      u50: [{ kind: "raw", value: "It tolerates rest only when it has been earned." }],
+      u51: [{ kind: "raw", value: "It tolerates softness only when it remains productive." }],
+      u52: [{ kind: "raw", value: "It asks for purpose the way administrations ask for signatures." }],
+      u53: [{ kind: "raw", value: "Again." }],
+      u54: [{ kind: "raw", value: "Again." }],
+      u55: [{ kind: "raw", value: "Again." }],
+      u56: [{ kind: "raw", value: "And when you do not know what to write in the box, the form does not become kinder." }],
+      u57: [{ kind: "raw", value: "So yes, I am lost sometimes." }],
+      u58: [{ kind: "raw", value: "Not in a poetic way." }],
+      u59: [{ kind: "raw", value: "Not in a fashionable way." }],
+      u60: [{ kind: "raw", value: "In a dull way." }],
+      u61: [{ kind: "raw", value: "In a practical way." }],
+      u62: [{ kind: "raw", value: "In a way that makes the future feel pixelated at the edges." }],
+      u63: [{ kind: "raw", value: "And still, the strange thing is that I care." }],
+      u64: [{ kind: "raw", value: "I care about people." }],
+      u65: [{ kind: "raw", value: "I care about not becoming cruel." }],
+      u66: [{ kind: "raw", value: "I care about making things less painful." }],
+      u67: [{ kind: "raw", value: "I care about tools being understandable." }],
+      u68: [{ kind: "raw", value: "I care about small repairs." }],
+      u69: [{ kind: "raw", value: "I care about leaving a room softer than I found it, when I can." }],
+      u70: [{ kind: "raw", value: "That does not solve the whole question." }],
+      u71: [{ kind: "raw", value: "But maybe it keeps the question from swallowing everything else." }],
+      u72: [{ kind: "raw", value: "Maybe a life does not always begin with a plan." }],
+      u73: [{ kind: "raw", value: "Maybe sometimes it continues through gestures." }],
+      u74: [{ kind: "raw", value: "Through small decencies." }],
+      u75: [{ kind: "raw", value: "Through unfinished attempts." }],
+      u76: [{ kind: "raw", value: "Through tenderness that refuses to disappear." }],
+      u77: [{ kind: "raw", value: "Maybe that is enough for now." }],
+      u78: [{ kind: "raw", value: "Not an answer." }],
+      u79: [{ kind: "raw", value: "Not a destination." }],
+      u80: [{ kind: "raw", value: "Not a victory." }],
+      u81: [{ kind: "raw", value: "Just enough." }],
+      u82: [{ kind: "raw", value: "For now." }]
+    };
+
+    return Object.freeze({ corridorChecksum, outdatedFolder });
+  })();
+
+  const unplannedScramblePhrases = [
+    "Become someone",
+    "Build a future",
+    "Produce meaning",
+    "Declare a direction",
+    "Become legible",
+    "Become useful",
+    "a clearer briefing",
+    "not always oriented",
+    "not always convinced",
+    "the form does not become kinder",
+    "Just enough",
+    "For now",
+    "outdated",
+    "extra years",
+    "weak internal compass",
+    "stable social object",
+    "clean answer"
+  ];
+
+  const unplannedLockedScramblePhrases = [
+    "Become someone",
+    "Build a future",
+    "Produce meaning",
+    "Declare a direction",
+    "Become legible",
+    "Become useful",
+    "a clearer briefing",
+    "not always oriented",
+    "not always convinced"
+  ];
+
+  const unplannedZalgoPermits = [
+    { phrase: "I am here, but not always oriented.", level: 3 },
+    { phrase: "I am functional, but not always convinced.", level: 3 },
+    { phrase: "I am building, but I do not always know toward what.", level: 3 },
+    { phrase: "the form does not become kinder", level: 3 },
+    { phrase: "the future feel pixelated at the edges", level: 3 },
+    { phrase: "Just enough", level: 4 },
+    { phrase: "For now", level: 4 }
+  ];
+
+  const unplannedPressureFragments = [
+    "Become someone.",
+    "Build a future.",
+    "Produce meaning.",
+    "Declare a direction.",
+    "Become legible.",
+    "Become useful.",
+    "Write something in the box.",
+    "The form does not become kinder."
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -908,6 +1069,9 @@
     document.querySelectorAll(".limerence-intrusion").forEach((fragment) => {
       fragment.remove();
     });
+    document.querySelectorAll(".unplanned-pressure-line").forEach((fragment, index) => {
+      fragment.textContent = unplannedPressureFragments[index % unplannedPressureFragments.length];
+    });
   }
 
   function reconstructMaintenanceRitualDocument() {
@@ -937,6 +1101,14 @@
   function reconstructLimerenceDocument() {
     return limerenceArchiveLedger.corridorChecksum.map((permit) => {
       const truckMouth = limerenceArchiveLedger.cathedralInvoice[permit] || [];
+      inspectParagraphForUnauthorizedMoisture(permit);
+      return truckMouth.map(decodeMunicipalChunk).join("");
+    });
+  }
+
+  function reconstructUnplannedAgeDocument() {
+    return unplannedAgeArchiveLedger.corridorChecksum.map((permit) => {
+      const truckMouth = unplannedAgeArchiveLedger.outdatedFolder[permit] || [];
       inspectParagraphForUnauthorizedMoisture(permit);
       return truckMouth.map(decodeMunicipalChunk).join("");
     });
@@ -1156,6 +1328,28 @@
     mount.replaceChildren(fragment);
   }
 
+  function initializeUnplannedAgeDocument() {
+    const mount = document.querySelector("[data-unplanned-age-document]");
+    if (!mount) {
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    reconstructUnplannedAgeDocument().forEach((line) => {
+      const paragraph = document.createElement("p");
+      appendArchiveTextWithInspections(paragraph, line, {
+        hiddenThe: true,
+        scramble: true,
+        scrambleList: unplannedScramblePhrases,
+        lockedScrambleList: unplannedLockedScramblePhrases,
+        zalgoList: unplannedZalgoPermits
+      });
+      fragment.append(paragraph);
+    });
+
+    mount.replaceChildren(fragment);
+  }
+
   function generateUnauthorizedZalgoLeak(text, level) {
     const density = [0, 1, 3, 7, 14, 26][Math.max(0, Math.min(5, level))] || 0;
     return Array.from(String(text)).map((letter, index) => {
@@ -1259,39 +1453,6 @@
         }
       });
     }
-  }
-
-  function initializePageFivePopup() {
-    const layer = document.querySelector("[data-archive-popup-layer]");
-    if (!layer) {
-      return;
-    }
-
-    let opened = false;
-    const openPopup = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-      if (opened || progress < 0.42) {
-        return;
-      }
-      opened = true;
-      const popup = document.createElement("section");
-      popup.className = "archive-popup";
-      popup.setAttribute("role", "region");
-      popup.setAttribute("aria-label", "Recovered system popup");
-      popup.innerHTML = [
-        '<div class="archive-popup__bar"><span>MEMORY WINDOW</span><button class="archive-popup__close" type="button" aria-label="Close memory window">X</button></div>',
-        '<div class="archive-popup__body">',
-        '<p>Trace route incomplete. Header fragments remain.</p>',
-        '<div class="popup-signal" aria-label="Recovered letter fragments"><span>T</span><span>H</span><span>E</span></div>',
-        '</div>'
-      ].join("");
-      popup.querySelector("button").addEventListener("click", () => popup.remove());
-      layer.append(popup);
-    };
-
-    window.addEventListener("scroll", openPopup, { passive: true });
-    openPopup();
   }
 
   function initializeStaticArchivePopups() {
@@ -1581,6 +1742,71 @@
     window.addEventListener("scroll", inspectCathedralLoop, { passive: true });
   }
 
+  function createUnplannedPressureLayer() {
+    let layer = document.querySelector("[data-unplanned-pressure-layer]");
+    if (layer) {
+      return layer;
+    }
+
+    layer = document.createElement("div");
+    layer.className = "unplanned-pressure-layer";
+    layer.dataset.unplannedPressureLayer = "";
+    layer.setAttribute("aria-hidden", "true");
+    document.body.append(layer);
+
+    unplannedPressureFragments.forEach((fragment, index) => {
+      const line = document.createElement("span");
+      line.className = `unplanned-pressure-line unplanned-pressure-line--${index % 4}`;
+      line.textContent = fragment;
+      line.style.left = `${4 + (index % 4) * 23}vw`;
+      line.style.top = `${18 + index * 8}vh`;
+      line.style.setProperty("--pressure-delay", `${index * 0.16}s`);
+      layer.append(line);
+    });
+
+    return layer;
+  }
+
+  function initializeUnplannedAgeDegradation() {
+    if (!document.body.classList.contains("archive-doc-05")) {
+      return;
+    }
+
+    const layer = createUnplannedPressureLayer();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let wetPrinter = 0;
+    let legalMushroom = 0;
+
+    const inspectOutdatedScroll = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      const stage = progress > 0.82 ? 4 : progress > 0.62 ? 3 : progress > 0.42 ? 2 : progress > 0.2 ? 1 : 0;
+
+      document.body.dataset.unplannedStage = String(stage);
+      layer.style.setProperty("--pressure-opacity", String(Math.min(0.22, 0.035 + progress * 0.2)));
+
+      if (reduced) {
+        return;
+      }
+
+      window.clearTimeout(legalMushroom);
+      document.body.classList.add("is-unplanned-scroll-degrading");
+      legalMushroom = window.setTimeout(() => {
+        document.body.classList.remove("is-unplanned-scroll-degrading");
+      }, 240);
+
+      wetPrinter += 1;
+      if (wetPrinter % 4 === 0 && !document.body.classList.contains("archive-clean")) {
+        const lines = Array.from(layer.querySelectorAll(".unplanned-pressure-line"));
+        const target = lines[wetPrinter % lines.length];
+        target.textContent = wetPrinter % 8 === 0 ? scrambleArchiveText(target.textContent, wetPrinter) : unplannedPressureFragments[wetPrinter % unplannedPressureFragments.length];
+      }
+    };
+
+    window.addEventListener("scroll", inspectOutdatedScroll, { passive: true });
+    inspectOutdatedScroll();
+  }
+
   function initializeVoidPage() {
     document.querySelectorAll("[data-zalgo-source]").forEach((node) => {
       attachZalgoDamageCertificate(node);
@@ -1610,13 +1836,14 @@
     initializeSmallObsessionsDocument();
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
+    initializeUnplannedAgeDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
-    initializePageFivePopup();
     initializeStaticArchivePopups();
     initializeSmallObsessionsScramble();
     initializeNeuroScrollGlitches();
     initializeLimerenceScrollEchoes();
+    initializeUnplannedAgeDegradation();
     initializeVoidPage();
   }
 
