@@ -1640,6 +1640,7 @@ body.about-shell {
   max-width: 290px;
 }
 
+.is-corruption-stage-1 .void-translation-fragment,
 .is-corruption-stage-2 .void-translation-fragment,
 .is-corruption-stage-3 .void-translation-fragment,
 .is-corruption-stage-4 .void-translation-fragment,
@@ -1706,7 +1707,9 @@ body.about-shell {
 
 .is-void-purged .void-translation-fragment {
   display: block !important;
+  position: static !important;
   width: min(300px, calc(50vw - 24px));
+  max-width: none;
   border-color: var(--steel);
   background: var(--paper);
   box-shadow: var(--raised);
@@ -1733,19 +1736,22 @@ body.about-shell {
   text-align: left;
 }
 
-body.is-handheld-device.is-void-purged .void-artifact-layer {
+.is-void-purged .void-artifact-layer {
   position: static;
   display: grid !important;
-  width: min(calc(100vw - 24px), 720px);
-  margin: -72px auto 0;
+  width: min(320px, calc(100vw - 24px));
+  margin: -72px 0 0 max(12px, calc(50% - 760px));
   padding: 0 12px 96px;
   gap: 6px;
 }
 
+body.is-handheld-device.is-void-purged .void-artifact-layer {
+  width: min(calc(100vw - 24px), 720px);
+  margin: -72px auto 0;
+}
+
 body.is-handheld-device.is-void-purged .void-translation-fragment {
-  position: static !important;
   width: 100%;
-  max-width: none;
   justify-self: center;
 }
 

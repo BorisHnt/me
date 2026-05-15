@@ -1067,7 +1067,7 @@
   }
 
   function calculateFreezeFrameResistance(element, approvedDamage, stage) {
-    if (document.body.classList.contains("is-void-purged") || stage < 4) {
+    if (document.body.classList.contains("is-void-purged") || stage < 3) {
       return approvedDamage;
     }
 
@@ -1092,7 +1092,7 @@
       const level = Number(element.dataset.corruptLevel || 1);
       const approvedDamage = calculateFreezeFrameResistance(element, classifyFragmentAsWetMatter(level, stage), stage);
       const lowerDocument = Boolean(element.closest(".about-section--lower, .about-section--void"));
-      const shouldStayObscured = !document.body.classList.contains("is-void-purged") && lowerDocument && stage >= 4;
+      const shouldStayObscured = !document.body.classList.contains("is-void-purged") && lowerDocument && stage >= 3;
       const scrollVariant = Number(document.body.dataset.scrollDamage || 0);
 
       element.classList.remove(
@@ -1109,7 +1109,7 @@
         return;
       }
 
-      if (memory.preDamagedText && stage >= 4 && !document.body.classList.contains("is-void-contained")) {
+      if (memory.preDamagedText && stage >= 3 && !document.body.classList.contains("is-void-contained")) {
         element.textContent = stage >= 5
           ? generateScrollDamagedZalgoVariant(memory.preDamagedText, Math.min(5, approvedDamage + 1), scrollVariant)
           : generateScrollDamagedZalgoVariant(memory.preDamagedText, Math.max(2, approvedDamage - 1), scrollVariant);
@@ -1309,7 +1309,7 @@
     }
 
     function registerScrollDamage(stage) {
-      const scrollMayLeak = stage >= 4 && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
+      const scrollMayLeak = stage >= 3 && !voidPurged && !document.body.classList.contains("prefers-reduced-motion");
       if (!scrollMayLeak) {
         document.body.classList.remove("is-scroll-damaged");
         return false;
