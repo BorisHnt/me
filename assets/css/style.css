@@ -266,9 +266,71 @@ p {
   margin-left: clamp(0px, 5vw, 64px);
 }
 
+.offset-d {
+  margin-top: -2px;
+  margin-left: clamp(0px, 7vw, 112px);
+}
+
 .directory-window {
   grid-column: 1 / -1;
   width: min(880px, 100%);
+}
+
+.archives-app-window {
+  grid-column: 1 / -1;
+  width: min(560px, 100%);
+}
+
+.archives-app-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.85rem;
+}
+
+.archives-app-body h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.archives-app-body p {
+  margin-bottom: 0.7rem;
+  color: var(--text);
+}
+
+.archives-app-icon {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--ink);
+  background: var(--dust);
+  box-shadow: var(--sunken);
+  position: relative;
+}
+
+.archives-app-icon::before,
+.archives-app-icon::after {
+  position: absolute;
+  border: 2px solid var(--ink);
+  content: "";
+}
+
+.archives-app-icon::before {
+  top: 6px;
+  left: 6px;
+  width: 15px;
+  height: 11px;
+  background: var(--paper);
+}
+
+.archives-app-icon::after {
+  right: 6px;
+  bottom: 6px;
+  width: 15px;
+  height: 13px;
+  background: var(--steel);
 }
 
 .page-window {
@@ -1863,12 +1925,14 @@ body.is-handheld-device.is-void-purged .void-translation-fragment {
   }
 
   .offset-b,
-  .offset-c {
+  .offset-c,
+  .offset-d {
     margin-top: 0;
     margin-left: 0;
   }
 
-  .directory-window {
+  .directory-window,
+  .archives-app-window {
     width: 100%;
   }
 

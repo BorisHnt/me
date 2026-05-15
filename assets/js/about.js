@@ -1019,7 +1019,7 @@
 
     input.addEventListener("input", () => {
       const wetBiographyRegistry = input.value.trim();
-      if (wetBiographyRegistry === "Clean the soul from the Void") {
+      if (wetBiographyRegistry === "CLEAN THE SOUL FROM THE VOID") {
         status.textContent = "VOID REMOVED";
         input.disabled = true;
         document.dispatchEvent(new CustomEvent("void-purge-request"));
