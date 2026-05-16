@@ -3008,6 +3008,133 @@
     return overlay;
   }
 
+  function shakeVoidBeforeFinalExit(layer, duration) {
+    if (!layer) {
+      return;
+    }
+
+    const rings = Array.from(layer.querySelectorAll(".void-vortex-ring"));
+    const fragments = Array.from(layer.querySelectorAll(".void-vortex-fragment"));
+    const start = performance.now();
+    let lastShakeFrame = -1;
+    let shakeX = 0;
+    let shakeY = 0;
+    let glitchPermit = 0;
+
+    const animate = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(1, elapsed / duration);
+      const amplitude = progress * 10;
+      const shakeFrame = Math.floor(elapsed / 33);
+
+      if (shakeFrame !== lastShakeFrame) {
+        const direction = shakeFrame % 2 === 0 ? 1 : -1;
+        shakeX = direction * amplitude * (((shakeFrame * 17) % 100) / 100);
+        shakeY = -direction * amplitude * (((shakeFrame * 29) % 100) / 100);
+        lastShakeFrame = shakeFrame;
+      }
+
+      layer.style.transform = `translate(${shakeX.toFixed(2)}px, ${shakeY.toFixed(2)}px)`;
+      layer.style.setProperty("--void-opacity", "1");
+
+      rings.forEach((ring, index) => {
+        const tilt = Number(ring.dataset.voidRingTilt || 0);
+        const ringScale = 0.74 + progress * 0.16;
+        ring.style.opacity = String(Math.min(1, 0.38 + progress * 0.58));
+        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + progress * (90 + index * 8)}deg) scale(${ringScale})`;
+      });
+
+      fragments.forEach((fragment, index) => {
+        const angle = Number(fragment.dataset.voidAngle || 0);
+        const spin = Number(fragment.dataset.voidSpin || 0);
+        const activeRadius = 2.4 + progress * (1.8 + (index % 5) * 0.22);
+        fragment.style.setProperty("--void-fragment-opacity", String(Math.min(1, 0.32 + progress * 0.72)));
+        fragment.style.transform = [
+          "translate(-50%, -50%)",
+          `rotate(${angle + progress * (120 + (index % 9) * 8)}deg)`,
+          `translateX(${activeRadius}vmin)`,
+          `rotate(${88 + spin - progress * 90}deg)`,
+          `skewX(${progress * -9}deg)`
+        ].join(" ");
+      });
+
+      if (progress > 0.18 && glitchPermit < 1) {
+        document.body.classList.add("is-void-final-instability");
+        glitchPermit = 1;
+      }
+      if (progress > 0.36 && glitchPermit < 2) {
+        deployVoidDetachedFragment(layer, 1, 777);
+        deployVoidInlineCard(1, 777);
+        glitchPermit = 2;
+      }
+      if (progress > 0.54 && glitchPermit < 3) {
+        deployVoidDetachedFragment(layer, 1, 991);
+        deployVoidDetachedFragment(layer, 1, 1009);
+        displaceVoidParagraphCoordinates(1, 991);
+        glitchPermit = 3;
+      }
+      if (progress > 0.72 && glitchPermit < 4) {
+        deployVoidInlineCard(1, 1201);
+        fractureVoidParagraphs(1, 1201);
+        glitchPermit = 4;
+      }
+
+      if (progress < 1 && document.body.classList.contains("is-void-final-lock")) {
+        window.requestAnimationFrame(animate);
+      }
+    };
+
+    window.requestAnimationFrame(animate);
+  }
+
+  function unfoldVoidVortexAfterFinalShake(layer, duration) {
+    if (!layer) {
+      return;
+    }
+
+    const rings = Array.from(layer.querySelectorAll(".void-vortex-ring"));
+    const fragments = Array.from(layer.querySelectorAll(".void-vortex-fragment"));
+    const start = performance.now();
+
+    const animate = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(1, elapsed / duration);
+      const unfolding = 1 - Math.pow(1 - progress, 4);
+
+      layer.style.transform = "translate(0, 0)";
+      layer.style.setProperty("--void-opacity", "1");
+
+      rings.forEach((ring, index) => {
+        const tilt = Number(ring.dataset.voidRingTilt || 0);
+        const ringScale = 0.88 + unfolding * (1.04 + index * 0.05);
+        ring.style.opacity = String(Math.min(1, 0.72 + progress * 0.28));
+        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + unfolding * (620 + index * 33)}deg) scale(${ringScale})`;
+      });
+
+      fragments.forEach((fragment, index) => {
+        const angle = Number(fragment.dataset.voidAngle || 0);
+        const radius = Number(fragment.dataset.voidRadius || 30);
+        const spin = Number(fragment.dataset.voidSpin || 0);
+        const finalRadius = radius * (1.2 + (index % 5) * 0.065);
+        const activeRadius = 4 + unfolding * finalRadius;
+        fragment.style.setProperty("--void-fragment-opacity", "1");
+        fragment.style.transform = [
+          "translate(-50%, -50%)",
+          `rotate(${angle + unfolding * (760 + (index % 9) * 26)}deg)`,
+          `translateX(${activeRadius}vmin)`,
+          `rotate(${88 + spin - unfolding * 360}deg)`,
+          `skewX(${progress * -8}deg)`
+        ].join(" ");
+      });
+
+      if (progress < 1 && document.body.classList.contains("is-void-final-lock")) {
+        window.requestAnimationFrame(animate);
+      }
+    };
+
+    window.requestAnimationFrame(animate);
+  }
+
   function triggerVoidFinalExit(layer) {
     if (document.body.classList.contains("archive-clean") || document.body.classList.contains("is-void-final-lock")) {
       return;
@@ -3018,19 +3145,22 @@
     document.body.classList.add("is-void-final-lock");
     document.documentElement.classList.add("is-void-final-lock-root");
     layer?.style.setProperty("--void-opacity", "1");
+    layer?.style.setProperty("--void-ring-opacity", "1");
+
+    shakeVoidBeforeFinalExit(layer, reducedMotion ? 900 : 8000);
 
     window.setTimeout(() => {
-      document.body.classList.add("is-void-final-instability");
-    }, reducedMotion ? 50 : 1000);
+      unfoldVoidVortexAfterFinalShake(layer, reducedMotion ? 500 : 2200);
+    }, reducedMotion ? 950 : 8000);
 
     window.setTimeout(() => {
       document.body.classList.add("is-void-final-explosion");
       overlay.classList.add("is-visible");
-    }, reducedMotion ? 250 : 3400);
+    }, reducedMotion ? 1500 : 10300);
 
     window.setTimeout(() => {
       window.location.href = "index.html";
-    }, reducedMotion ? 1200 : 5600);
+    }, reducedMotion ? 2600 : 12600);
   }
 
   function deployVoidInlineCard(progress, index) {

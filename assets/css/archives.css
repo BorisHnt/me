@@ -1713,12 +1713,13 @@ html.is-void-final-lock-root,
 }
 
 .is-void-final-instability .void-vortex-layer {
-  animation: void-final-crescendo 1.8s steps(16, end) infinite;
+  animation: none;
+  will-change: transform;
 }
 
 .is-void-final-instability .void-vortex-ring {
   border-width: 4px;
-  animation-duration: 0.58s;
+  animation-duration: 0.46s;
 }
 
 .is-void-final-instability .void-vortex-fragment {
@@ -1729,22 +1730,16 @@ html.is-void-final-lock-root,
 }
 
 .is-void-final-explosion .void-vortex-layer {
-  animation: void-final-explosion 1.2s steps(9, end) forwards;
+  animation: void-final-collapse-flash 0.36s steps(4, end) forwards;
 }
 
 .is-void-final-explosion .void-vortex-ring {
-  animation-duration: 0.18s;
-  transform: translate(-50%, -50%) rotate(140deg) scale(2.4) !important;
+  animation-duration: 0.14s;
 }
 
 .is-void-final-explosion .void-vortex-fragment {
   opacity: 1;
-  transform:
-    translate(-50%, -50%)
-    rotate(calc(var(--void-angle, 0deg) * 1.8))
-    translateX(96vmin)
-    rotate(-240deg)
-    skewX(-24deg) !important;
+  animation-duration: 0.14s;
 }
 
 .void-final-error {
@@ -2079,48 +2074,22 @@ html.is-void-final-lock-root,
   }
 }
 
-@keyframes void-final-crescendo {
-  0%,
-  100% {
-    transform: translate(0, 0) skewX(0deg);
-    filter: none;
-  }
-  16% {
-    transform: translate(3px, -2px) skewX(-1deg);
-  }
-  31% {
-    transform: translate(-8px, 4px) skewX(2deg);
-  }
-  48% {
-    transform: translate(13px, -7px) skewX(-4deg);
-  }
-  64% {
-    transform: translate(-21px, 11px) skewX(6deg);
-  }
-  82% {
-    transform: translate(34px, -18px) skewX(-9deg);
-    filter: contrast(1.6);
-  }
-}
-
-@keyframes void-final-explosion {
+@keyframes void-final-collapse-flash {
   0% {
     opacity: 1;
-    transform: scale(1) rotate(0deg);
     clip-path: inset(0 0 0 0);
   }
-  28% {
-    transform: scale(1.18) rotate(8deg);
-    clip-path: inset(12% 0 0 0);
+  35% {
+    opacity: 1;
+    clip-path: inset(0 0 42% 0);
   }
-  58% {
-    transform: scale(1.55) rotate(-21deg);
-    clip-path: inset(0 18% 24% 0);
+  62% {
+    opacity: 0.9;
+    clip-path: inset(28% 0 0 0);
   }
   100% {
-    opacity: 0.08;
-    transform: scale(2.7) rotate(54deg);
-    clip-path: inset(48% 48% 48% 48%);
+    opacity: 0;
+    clip-path: inset(50% 0 50% 0);
   }
 }
 
