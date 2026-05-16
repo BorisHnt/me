@@ -2979,6 +2979,60 @@
     return Math.max(0.9, 1 - progress * 0.08);
   }
 
+  function createVoidFinalErrorOverlay() {
+    let overlay = document.querySelector("[data-void-final-error]");
+    if (overlay) {
+      return overlay;
+    }
+
+    overlay = document.createElement("div");
+    overlay.className = "void-final-error";
+    overlay.dataset.voidFinalError = "";
+    overlay.setAttribute("role", "status");
+    overlay.setAttribute("aria-live", "assertive");
+
+    const title = document.createElement("p");
+    title.className = "void-final-error__title";
+    title.textContent = "ERR_VOID_EXIT";
+
+    const message = document.createElement("p");
+    message.className = "void-final-error__message";
+    message.textContent = "ARCHIVE STRUCTURE FAILED. RETURNING TO ARCHIVES.";
+
+    const footer = document.createElement("p");
+    footer.className = "void-final-error__footer";
+    footer.textContent = "DOCUMENT CANNOT HOLD THE OPERATOR ANY LONGER.";
+
+    overlay.append(title, message, footer);
+    document.body.append(overlay);
+    return overlay;
+  }
+
+  function triggerVoidFinalExit(layer) {
+    if (document.body.classList.contains("archive-clean") || document.body.classList.contains("is-void-final-lock")) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const overlay = createVoidFinalErrorOverlay();
+    document.body.classList.add("is-void-final-lock");
+    document.documentElement.classList.add("is-void-final-lock-root");
+    layer?.style.setProperty("--void-opacity", "1");
+
+    window.setTimeout(() => {
+      document.body.classList.add("is-void-final-instability");
+    }, reducedMotion ? 50 : 1000);
+
+    window.setTimeout(() => {
+      document.body.classList.add("is-void-final-explosion");
+      overlay.classList.add("is-visible");
+    }, reducedMotion ? 250 : 3400);
+
+    window.setTimeout(() => {
+      window.location.href = "index.html";
+    }, reducedMotion ? 1200 : 5600);
+  }
+
   function deployVoidInlineCard(progress, index) {
     if (document.body.classList.contains("archive-clean") || progress < 0.1) {
       return;
@@ -3045,6 +3099,7 @@
     let corridorChecksum = 0;
     let concreteLiver = 0;
     let asphaltLung = 0;
+    let finalDownScrolls = 0;
 
     const inspectVoidScroll = () => {
       if (document.body.classList.contains("archive-clean")) {
@@ -3119,6 +3174,20 @@
       }
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      const isAtFinalVoid = maxScroll > 0 && window.scrollY >= maxScroll - 8;
+      if (isAtFinalVoid && event.deltaY > 0) {
+        event.preventDefault();
+        finalDownScrolls += 1;
+        document.body.dataset.voidExitPressure = String(finalDownScrolls);
+        if (finalDownScrolls >= 6) {
+          triggerVoidFinalExit(layer);
+        }
+        return;
+      }
+      if (event.deltaY < 0 || progress < 0.98) {
+        finalDownScrolls = 0;
+        delete document.body.dataset.voidExitPressure;
+      }
       if (progress < 0.5) {
         return;
       }
