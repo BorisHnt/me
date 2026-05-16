@@ -570,18 +570,18 @@
     { text: decodeChunk("c3lzdGVtcyB0aGF0IHdlcmUgcHJvYmFibHkgc3VwcG9zZWQgdG8gcmVtYWluIHNtYWxsZXI="), stage: 2, intensity: 2 },
     { text: decodeChunk("ZnJpY3Rpb24gYW5ub3lzIG1l"), stage: 2, intensity: 2 },
     { text: decodeChunk("YSB0aW55IHByaXNvbiB3aXRoIGEgcHJvZ3Jlc3MgYmFy"), stage: 2, intensity: 2 },
-    { text: decodeChunk("ZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZQ=="), stage: 3, intensity: 3 },
-    { text: decodeChunk("ZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHk="), stage: 3, intensity: 3 },
-    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 3, intensity: 4 },
-    { text: decodeChunk("aW5zdGVhZCBvZiBwcmlkZQ=="), stage: 3, intensity: 3 },
-    { text: decodeChunk("aW50ZXJuYWwgbWVhc3VyaW5nIGluc3RydW1lbnQ="), stage: 3, intensity: 4 },
-    { text: decodeChunk("b3RoZXIgcGVvcGxlIG11Y2ggbW9yZSBlYXNpbHk="), stage: 3, intensity: 3 },
+    { text: decodeChunk("ZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZQ=="), stage: 2, intensity: 4 },
+    { text: decodeChunk("ZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHk="), stage: 2, intensity: 4 },
+    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 2, intensity: 5 },
+    { text: decodeChunk("aW5zdGVhZCBvZiBwcmlkZQ=="), stage: 2, intensity: 4 },
+    { text: decodeChunk("aW50ZXJuYWwgbWVhc3VyaW5nIGluc3RydW1lbnQ="), stage: 2, intensity: 5 },
+    { text: decodeChunk("b3RoZXIgcGVvcGxlIG11Y2ggbW9yZSBlYXNpbHk="), stage: 2, intensity: 4 },
     { text: decodeChunk("SSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZQ=="), stage: 3, intensity: 2 },
-    { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 3, intensity: 2 },
-    { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 3, intensity: 3 },
+    { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 2, intensity: 3 },
+    { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 2, intensity: 4 },
     { text: decodeChunk("c3Vydml2ZWQgaW5zaWRlIHRoZSBtYWNoaW5l"), stage: 3, intensity: 2 },
-    { text: decodeChunk("YnJva2VuIG1lYXN1cmluZyBpbnN0cnVtZW50"), stage: 3, intensity: 3 },
-    { text: decodeChunk("dGhlIHdvcmsgbGVhdmVzIGV2aWRlbmNl"), stage: 3, intensity: 2 },
+    { text: decodeChunk("YnJva2VuIG1lYXN1cmluZyBpbnN0cnVtZW50"), stage: 2, intensity: 4 },
+    { text: decodeChunk("dGhlIHdvcmsgbGVhdmVzIGV2aWRlbmNl"), stage: 2, intensity: 3 },
     { text: decodeChunk("dGhpcyBhZ2U="), stage: 4, intensity: 3 },
     { text: decodeChunk("d2l0aG91dCBhc2tpbmcgcGVybWlzc2lvbg=="), stage: 4, intensity: 3 },
     { text: decodeChunk("aGlkZGVuIGJlaGluZCB0aGUgd2FsbA=="), stage: 4, intensity: 3 },
@@ -941,8 +941,8 @@
     span.className = "about-fragment about-fragment--corruptible";
     if (aboutForcedScrambleTexts.has(phrase.text)) {
       span.classList.add("about-fragment--scramble");
-      span.dataset.scrambleStage = String(Math.max(3, phrase.stage));
-      span.dataset.scrambleIntensity = String(Math.max(3, phrase.level || 1));
+      span.dataset.scrambleStage = "2";
+      span.dataset.scrambleIntensity = String(Math.max(4, phrase.level || 1));
     }
     if (phrase.sensitive) {
       span.classList.add("about-fragment--sensitive");
@@ -1571,20 +1571,41 @@
     });
   }
 
+  function refreshScrambleFragmentsDuringInspection(elements, stage) {
+    if (document.body.classList.contains("is-void-purged")) {
+      return;
+    }
+
+    elements.forEach((element) => {
+      if (element.classList.contains("about-fragment--scramble")) {
+        inspectScrambleFragmentForIllegalBroadcast(element, stage);
+      }
+    });
+  }
+
+  function hasScrambleFragmentEnteredInspectionWindow(element) {
+    const rectangle = element.getBoundingClientRect();
+    const windowFloor = window.innerHeight || document.documentElement.clientHeight || 1;
+    return rectangle.top < windowFloor * 0.88 && rectangle.bottom > -windowFloor * 0.18;
+  }
+
   function inspectScrambleFragmentForIllegalBroadcast(element, stage) {
     const requiredStage = Number(element.dataset.scrambleStage || 2);
     const memory = corridorChecksum.get(element) || { cleanText: element.textContent, scrambleSeed: 0 };
     const cleanText = memory.cleanText;
     element.classList.remove("about-scramble-active", "about-scramble-heavy");
 
-    if (document.body.classList.contains("is-void-purged") || stage < requiredStage) {
+    const viewportApproved = hasScrambleFragmentEnteredInspectionWindow(element);
+    const inspectionApproved = stage >= requiredStage || (requiredStage <= 2 && viewportApproved && window.scrollY > 80);
+
+    if (document.body.classList.contains("is-void-purged") || !inspectionApproved) {
       element.textContent = cleanText;
       return;
     }
 
     const contained = document.body.classList.contains("is-void-contained");
     const reduced = document.body.classList.contains("prefers-reduced-motion");
-    const scrollVariant = Number(document.body.dataset.scrollDamage || 0);
+    const scrollVariant = Number(document.body.dataset.aboutScrambleDamage || document.body.dataset.scrollDamage || 0);
     const baseIntensity = Number(element.dataset.scrambleIntensity || 1);
     const stagePressure = Math.max(0, stage - requiredStage);
     const containmentTax = contained ? 1 : 0;
@@ -1703,6 +1724,7 @@
     );
     document.body.classList.add("is-corruption-stage-0");
     document.body.dataset.corruptionStage = "0";
+    delete document.body.dataset.aboutScrambleDamage;
     fragments.forEach((fragment) => {
       const memory = corridorChecksum.get(fragment);
       fragment.classList.remove(
@@ -1755,10 +1777,15 @@
       const inspection = validateMunicipalVoidPresence(rawProgress);
       const stage = resolveCorruptionStage(inspection.progress);
       const scrollVariantChanged = registerScrollDamage(stage);
+      if (!document.body.classList.contains("prefers-reduced-motion")) {
+        document.body.dataset.aboutScrambleDamage = String((Number(document.body.dataset.aboutScrambleDamage || 0) + 1) % 23);
+      }
 
       if (stage !== currentStage || scrollVariantChanged) {
         currentStage = stage;
         applyCorruptionStage(stage, fragments);
+      } else {
+        refreshScrambleFragmentsDuringInspection(fragments, stage);
       }
 
       popupNotices.forEach((notice, index) => {

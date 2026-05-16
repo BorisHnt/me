@@ -1037,17 +1037,38 @@ body.about-shell {
   display: inline;
   font-family: var(--mono);
   font-weight: 900;
-  letter-spacing: 0.015em;
-  background: var(--dust);
+  letter-spacing: 0.035em;
+  border: 1px solid var(--steel);
+  padding: 0 0.12em;
+  background: var(--paper);
   color: var(--ink);
-  text-shadow: 1px 0 0 var(--paper);
+  box-shadow: 2px 2px 0 var(--dust);
+  text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
+  animation: about-scramble-pulse 0.18s steps(2, end);
 }
 
 .about-scramble-heavy {
   background: var(--ink);
   color: var(--paper);
-  box-shadow: 2px 2px 0 var(--steel);
-  text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust);
+  box-shadow: 3px 3px 0 var(--steel), -2px 0 0 var(--dust);
+  text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust), 0 2px 0 var(--ink);
+}
+
+@keyframes about-scramble-pulse {
+  0% {
+    outline: 0 solid transparent;
+    text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
+  }
+
+  45% {
+    outline: 1px solid var(--steel);
+    text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust);
+  }
+
+  100% {
+    outline: 0 solid transparent;
+    text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
+  }
 }
 
 .zalgo-light,
@@ -2167,6 +2188,12 @@ body.is-handheld-device.is-void-purged .void-translation-fragment {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .void-aberration,
+  .void-popup--damaged,
+  .about-scramble-active {
+    animation: none !important;
   }
 
   .void-aberration,
