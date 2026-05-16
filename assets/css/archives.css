@@ -1606,7 +1606,16 @@ body.archive-shell {
   inset: 0;
   z-index: 36;
   overflow: hidden;
-  opacity: var(--void-opacity, 0.18);
+  opacity: var(--void-opacity, 0.005);
+  pointer-events: none;
+}
+
+.void-darkness-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 34;
+  background: var(--ink);
+  opacity: var(--void-darkness, 0);
   pointer-events: none;
 }
 
@@ -1743,6 +1752,31 @@ body.archive-shell {
   transform-origin: 50% 50%;
 }
 
+.archive-doc-06 .essay p.is-void-coordinate-glitch {
+  animation: void-coordinate-displacement 0.28s steps(2, end) 2;
+}
+
+.archive-doc-06 .essay p.is-void-consumed-line {
+  clip-path: inset(0 var(--void-bite-right, 22%) 0 var(--void-bite-left, 0%));
+  opacity: var(--void-consume-opacity, 0.72);
+}
+
+.archive-doc-06 .essay p.is-void-consumed-line::after {
+  content: "VOID";
+  position: absolute;
+  right: -2.5rem;
+  top: 50%;
+  border: 2px solid var(--paper);
+  padding: 0.05rem 0.18rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  transform: translateY(-50%) rotate(8deg);
+  opacity: 0.78;
+}
+
 .is-void-scroll-tearing.archive-doc-06 .essay p:nth-of-type(2n),
 .is-void-scroll-tearing.archive-doc-06 .archive-scramble-fragment,
 .is-void-scroll-tearing.archive-doc-06 .archive-zalgo-fragment,
@@ -1806,6 +1840,7 @@ body.archive-shell {
 .archive-clean .archive-artifact,
 .archive-clean .void-ghost,
 .archive-clean .void-vortex-layer,
+.archive-clean .void-darkness-overlay,
 .archive-clean .void-scroll-chasm {
   display: none;
 }
@@ -1882,6 +1917,18 @@ body.archive-shell {
   transform: none;
 }
 
+.archive-clean.archive-doc-06 .essay p.is-void-coordinate-glitch,
+.archive-clean.archive-doc-06 .essay p.is-void-consumed-line {
+  clip-path: none;
+  opacity: 1;
+  animation: none;
+  transform: none;
+}
+
+.archive-clean.archive-doc-06 .essay p.is-void-consumed-line::after {
+  display: none;
+}
+
 .archive-clean.archive-doc-06 .archive-document::after {
   display: none;
 }
@@ -1955,6 +2002,28 @@ body.archive-shell {
   }
 }
 
+@keyframes void-coordinate-displacement {
+  0%,
+  100% {
+    transform: translateX(var(--void-line-pull, 0)) rotate(var(--void-line-tilt, 0deg));
+  }
+  18% {
+    transform: translateX(var(--void-coordinate-jump, 80px)) rotate(var(--void-line-tilt, 0deg));
+  }
+  33% {
+    transform: translateX(0) rotate(var(--void-line-tilt, 0deg));
+  }
+  51% {
+    transform: translateX(var(--void-coordinate-jump, 80px)) rotate(var(--void-line-tilt, 0deg));
+  }
+  68% {
+    transform: translateX(calc(var(--void-coordinate-jump, 80px) * -0.35)) rotate(var(--void-line-tilt, 0deg));
+  }
+  84% {
+    transform: translateX(var(--void-coordinate-jump, 80px)) rotate(var(--void-line-tilt, 0deg));
+  }
+}
+
 @keyframes void-text-vibration {
   0% {
     transform: translate(0, 0) skewX(0deg);
@@ -1995,6 +2064,7 @@ body.archive-shell {
   .limerence-echo-layer,
   .unplanned-pressure-layer,
   .void-vortex-layer,
+  .void-darkness-overlay,
   .void-scroll-chasm,
   .void-detached-fragment {
     display: none;
@@ -2026,6 +2096,7 @@ body.archive-shell {
   .limerence-echo-layer,
   .unplanned-pressure-layer,
   .void-vortex-layer,
+  .void-darkness-overlay,
   .void-scroll-chasm,
   .void-detached-fragment,
   .unplanned-inline-invasion,

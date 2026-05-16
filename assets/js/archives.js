@@ -1736,10 +1736,14 @@
       fragment.style.removeProperty("--fracture-tilt");
       fragment.style.removeProperty("--fracture-nudge");
     });
-    document.querySelectorAll(".is-void-fractured-line").forEach((fragment) => {
-      fragment.classList.remove("is-void-fractured-line");
+    document.querySelectorAll(".is-void-fractured-line, .is-void-coordinate-glitch, .is-void-consumed-line").forEach((fragment) => {
+      fragment.classList.remove("is-void-fractured-line", "is-void-coordinate-glitch", "is-void-consumed-line");
       fragment.style.removeProperty("--void-line-tilt");
       fragment.style.removeProperty("--void-line-pull");
+      fragment.style.removeProperty("--void-coordinate-jump");
+      fragment.style.removeProperty("--void-bite-left");
+      fragment.style.removeProperty("--void-bite-right");
+      fragment.style.removeProperty("--void-consume-opacity");
     });
     document.querySelectorAll(".limerence-diagnostic-note--damaged").forEach((fragment) => {
       fragment.classList.remove("limerence-diagnostic-note--damaged");
@@ -2789,11 +2793,17 @@
     layer.dataset.voidVortexLayer = "";
     layer.setAttribute("aria-hidden", "true");
 
-    Array.from({ length: 7 }).forEach((_, index) => {
+    const darkness = document.createElement("div");
+    darkness.className = "void-darkness-overlay";
+    darkness.dataset.voidDarknessOverlay = "";
+    darkness.setAttribute("aria-hidden", "true");
+    document.body.append(darkness);
+
+    Array.from({ length: 8 }).forEach((_, index) => {
       const ring = document.createElement("span");
       ring.className = `void-vortex-ring void-vortex-ring--${index}`;
       ring.dataset.voidRingTilt = String((index % 2 === 0 ? 1 : -1) * (index * 7 + 11));
-      ring.style.setProperty("--void-ring-size", `${18 + index * 11}vmin`);
+      ring.style.setProperty("--void-ring-size", `${34 + index * 14}vmin`);
       ring.style.setProperty("--void-ring-tilt", `${ring.dataset.voidRingTilt}deg`);
       ring.style.setProperty("--void-ring-delay", `${index * -0.18}s`);
       layer.append(ring);
@@ -2825,7 +2835,7 @@
       const depth = index / fragmentCount;
       const arm = index % 7;
       const angle = index * 31 + arm * 51;
-      const radius = Math.max(3.5, 64 - depth * 58);
+      const radius = Math.max(5, 92 - depth * 84);
       debris.textContent = shouldDamage ? generateUnauthorizedZalgoLeak(fragment, index % 2 === 0 ? 2 : 3) : fragment;
       debris.style.setProperty("--void-angle", `${angle}deg`);
       debris.style.setProperty("--void-radius", `${radius}vmin`);
@@ -2874,10 +2884,14 @@
 
   function fractureVoidParagraphs(progress, index) {
     if (document.body.classList.contains("archive-clean")) {
-      document.querySelectorAll(".is-void-fractured-line").forEach((node) => {
-        node.classList.remove("is-void-fractured-line");
+      document.querySelectorAll(".is-void-fractured-line, .is-void-coordinate-glitch, .is-void-consumed-line").forEach((node) => {
+        node.classList.remove("is-void-fractured-line", "is-void-coordinate-glitch", "is-void-consumed-line");
         node.style.removeProperty("--void-line-tilt");
         node.style.removeProperty("--void-line-pull");
+        node.style.removeProperty("--void-coordinate-jump");
+        node.style.removeProperty("--void-bite-left");
+        node.style.removeProperty("--void-bite-right");
+        node.style.removeProperty("--void-consume-opacity");
       });
       return;
     }
@@ -2891,6 +2905,49 @@
     target.classList.add("is-void-fractured-line");
     target.style.setProperty("--void-line-tilt", `${((index % 13) - 6) * Math.min(0.9, progress)}deg`);
     target.style.setProperty("--void-line-pull", `${((index % 7) - 3) * Math.min(22, progress * 24)}px`);
+  }
+
+  function displaceVoidParagraphCoordinates(progress, index) {
+    if (document.body.classList.contains("archive-clean") || progress < 0.22) {
+      return;
+    }
+
+    const paragraphs = Array.from(document.querySelectorAll("[data-void-document] p:not(.void-recovery-line)"));
+    if (!paragraphs.length) {
+      return;
+    }
+
+    const target = paragraphs[(index * 17 + Math.floor(progress * 113)) % paragraphs.length];
+    const distance = 10 + ((index * 37 + Math.floor(progress * 1000)) % 241);
+    const direction = index % 2 === 0 ? 1 : -1;
+    target.classList.add("is-void-coordinate-glitch");
+    target.style.setProperty("--void-coordinate-jump", `${direction * distance}px`);
+
+    window.setTimeout(() => {
+      target.classList.remove("is-void-coordinate-glitch");
+      target.style.removeProperty("--void-coordinate-jump");
+    }, 120 + (index % 4) * 70);
+  }
+
+  function consumeVoidParagraphs(progress, index) {
+    if (document.body.classList.contains("archive-clean") || progress < 0.58) {
+      return;
+    }
+
+    const paragraphs = Array.from(document.querySelectorAll("[data-void-document] p:not(.void-recovery-line)"));
+    if (!paragraphs.length) {
+      return;
+    }
+
+    const lowerStart = Math.floor(paragraphs.length * 0.46);
+    const target = paragraphs[
+      lowerStart + ((index * 19 + Math.floor(progress * 170)) % Math.max(1, paragraphs.length - lowerStart))
+    ];
+    const bite = Math.min(48, Math.floor((progress - 0.54) * 84) + (index % 13));
+    target.classList.add("is-void-consumed-line");
+    target.style.setProperty("--void-bite-left", `${index % 3 === 0 ? Math.floor(bite * 0.35) : 0}%`);
+    target.style.setProperty("--void-bite-right", `${bite}%`);
+    target.style.setProperty("--void-consume-opacity", String(Math.max(0.34, 1 - progress * 0.48)));
   }
 
   function deployVoidDetachedFragment(layer, progress, index) {
@@ -2919,7 +2976,7 @@
   }
 
   function calculateVoidScrollEfficiency(progress) {
-    return Math.max(0.18, 1 - progress * 0.76);
+    return Math.max(0.5, 1 - progress * 0.5);
   }
 
   function deployVoidInlineCard(progress, index) {
@@ -2992,6 +3049,7 @@
     const inspectVoidScroll = () => {
       if (document.body.classList.contains("archive-clean")) {
         layer.replaceChildren();
+        document.querySelector("[data-void-darkness-overlay]")?.style.setProperty("--void-darkness", "0");
         document.body.classList.remove("is-void-scroll-tearing");
         fractureVoidParagraphs(0, 0);
         return;
@@ -3008,7 +3066,11 @@
       const stage = progress > 0.84 ? 5 : progress > 0.68 ? 4 : progress > 0.5 ? 3 : progress > 0.3 ? 2 : progress > 0.12 ? 1 : 0;
       document.body.dataset.voidStage = String(stage);
       layer.style.setProperty("--void-pull", String(progress));
-      layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.18 + progress * 0.8)));
+      layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.005 + progress * 0.915)));
+      document.querySelector("[data-void-darkness-overlay]")?.style.setProperty(
+        "--void-darkness",
+        String(progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.45))
+      );
       layer.style.setProperty("--void-ring-rotation", `${progress * 1040}deg`);
       layer.style.setProperty("--void-ring-scale", String(Math.max(0.68, 1 - progress * 0.3)));
       layer.style.setProperty("--void-ring-opacity", String(Math.min(0.7, 0.18 + progress * 0.55)));
@@ -3026,6 +3088,15 @@
 
       if (stage > 0 && corridorChecksum % 2 === 0) {
         fractureVoidParagraphs(progress, corridorChecksum);
+      }
+      if (stage > 1 && corridorChecksum % 2 === 0) {
+        displaceVoidParagraphCoordinates(progress, corridorChecksum);
+      }
+      if (stage > 2 && corridorChecksum % 3 === 0) {
+        displaceVoidParagraphCoordinates(progress, corridorChecksum + 7);
+      }
+      if (stage > 3 && corridorChecksum % 2 === 0) {
+        consumeVoidParagraphs(progress, corridorChecksum);
       }
       if (stage > 1 && (corridorChecksum % 2 === 0 || progress > 0.72)) {
         deployVoidDetachedFragment(layer, progress, corridorChecksum);
@@ -3068,6 +3139,12 @@
 
       if (progress > 0.24 && asphaltLung % 2 === 0) {
         deployVoidInlineCard(progress, corridorChecksum + asphaltLung + 31);
+      }
+      if (progress > 0.32) {
+        displaceVoidParagraphCoordinates(progress, corridorChecksum + asphaltLung + 19);
+      }
+      if (progress > 0.62 && asphaltLung % 3 === 0) {
+        consumeVoidParagraphs(progress, corridorChecksum + asphaltLung + 41);
       }
       asphaltLung += 1;
     };
