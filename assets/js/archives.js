@@ -2947,7 +2947,7 @@
     target.classList.add("is-void-consumed-line");
     target.style.setProperty("--void-bite-left", `${index % 3 === 0 ? Math.floor(bite * 0.35) : 0}%`);
     target.style.setProperty("--void-bite-right", `${bite}%`);
-    target.style.setProperty("--void-consume-opacity", String(Math.max(0.34, 1 - progress * 0.48)));
+    target.style.setProperty("--void-consume-opacity", String(Math.max(0.86, 1 - progress * 0.14)));
   }
 
   function deployVoidDetachedFragment(layer, progress, index) {
@@ -3069,7 +3069,7 @@
       layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.005 + progress * 0.915)));
       document.querySelector("[data-void-darkness-overlay]")?.style.setProperty(
         "--void-darkness",
-        String(progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.45))
+        String(progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.05))
       );
       layer.style.setProperty("--void-ring-rotation", `${progress * 1040}deg`);
       layer.style.setProperty("--void-ring-scale", String(Math.max(0.68, 1 - progress * 0.3)));
