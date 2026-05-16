@@ -2803,7 +2803,8 @@
       const ring = document.createElement("span");
       ring.className = `void-vortex-ring void-vortex-ring--${index}`;
       ring.dataset.voidRingTilt = String((index % 2 === 0 ? 1 : -1) * (index * 7 + 11));
-      ring.style.setProperty("--void-ring-size", `${34 + index * 14}vmin`);
+      ring.dataset.voidRingSize = String(34 + index * 14);
+      ring.style.setProperty("--void-ring-size", `${ring.dataset.voidRingSize}vmin`);
       ring.style.setProperty("--void-ring-tilt", `${ring.dataset.voidRingTilt}deg`);
       ring.style.setProperty("--void-ring-delay", `${index * -0.18}s`);
       layer.append(ring);
@@ -3039,9 +3040,8 @@
 
       rings.forEach((ring, index) => {
         const tilt = Number(ring.dataset.voidRingTilt || 0);
-        const ringScale = 0.74 + progress * 0.16;
         ring.style.opacity = String(Math.min(1, 0.38 + progress * 0.58));
-        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + progress * (90 + index * 8)}deg) scale(${ringScale})`;
+        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + progress * (90 + index * 8)}deg)`;
       });
 
       fragments.forEach((fragment, index) => {
@@ -3106,17 +3106,18 @@
 
       rings.forEach((ring, index) => {
         const tilt = Number(ring.dataset.voidRingTilt || 0);
-        const ringScale = 0.88 + unfolding * (1.04 + index * 0.05);
+        const baseSize = Number(ring.dataset.voidRingSize || 34 + index * 14);
+        ring.style.setProperty("--void-ring-size", `${baseSize + unfolding * (42 + index * 10)}vmin`);
         ring.style.opacity = String(Math.min(1, 0.72 + progress * 0.28));
-        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + unfolding * (620 + index * 33)}deg) scale(${ringScale})`;
+        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + unfolding * (620 + index * 33)}deg)`;
       });
 
       fragments.forEach((fragment, index) => {
         const angle = Number(fragment.dataset.voidAngle || 0);
         const radius = Number(fragment.dataset.voidRadius || 30);
         const spin = Number(fragment.dataset.voidSpin || 0);
-        const finalRadius = radius * (1.2 + (index % 5) * 0.065);
-        const activeRadius = 4 + unfolding * finalRadius;
+        const finalRadius = radius * (1.7 + (index % 5) * 0.12);
+        const activeRadius = 3 + unfolding * finalRadius;
         fragment.style.setProperty("--void-fragment-opacity", "1");
         fragment.style.transform = [
           "translate(-50%, -50%)",

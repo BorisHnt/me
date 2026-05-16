@@ -1703,12 +1703,12 @@ html.is-void-final-lock-root,
 }
 
 .is-void-final-lock .void-vortex-layer {
-  z-index: 115;
+  z-index: 70;
   opacity: 1;
 }
 
 .is-void-final-lock .void-darkness-overlay {
-  z-index: 110;
+  z-index: 1;
   opacity: 1;
 }
 
@@ -1756,7 +1756,6 @@ html.is-void-final-lock-root,
   text-align: center;
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.98);
 }
 
 .void-final-error.is-visible {
@@ -2095,23 +2094,23 @@ html.is-void-final-lock-root,
 
 @keyframes void-final-error-arrival {
   0% {
-    transform: scale(1.08);
+    transform: translateX(0);
     clip-path: inset(0 100% 0 0);
   }
   33% {
-    transform: scale(0.96);
+    transform: translateX(0);
     clip-path: inset(0 0 0 0);
   }
   52% {
-    transform: translateX(18px) scale(1);
+    transform: translateX(18px);
     clip-path: inset(0 0 34% 0);
   }
   67% {
-    transform: translateX(-12px) scale(1);
+    transform: translateX(-12px);
     clip-path: inset(0 0 0 0);
   }
   100% {
-    transform: translateX(0) scale(1);
+    transform: translateX(0);
     clip-path: inset(0 0 0 0);
   }
 }
