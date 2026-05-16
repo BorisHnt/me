@@ -1460,33 +1460,6 @@ body.archive-shell {
   pointer-events: none;
 }
 
-.void-vortex-core {
-  position: absolute;
-  left: 50%;
-  top: 54%;
-  width: clamp(72px, 12vw, 150px);
-  height: clamp(72px, 12vw, 150px);
-  border: 2px solid var(--paper);
-  background: var(--ink);
-  color: var(--paper);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 5px var(--steel),
-    0 0 0 11px var(--dust),
-    0 0 0 17px var(--ink),
-    inset 0 0 0 2px var(--paper),
-    inset 18px -10px 0 var(--steel),
-    inset -14px 16px 0 var(--ink);
-  display: grid;
-  place-items: center;
-  font-family: var(--mono);
-  font-size: clamp(2.1rem, 7vw, 5.6rem);
-  font-weight: 900;
-  line-height: 1;
-  transform: translate(-50%, -50%) rotate(var(--void-core-rotation, 0deg));
-  animation: void-core-collapse 2.6s steps(8, end) infinite;
-}
-
 .void-vortex-ring {
   position: absolute;
   left: 50%;
@@ -1759,22 +1732,6 @@ body.archive-shell {
 
 .archive-clean.archive-doc-06 .archive-document::after {
   display: none;
-}
-
-@keyframes void-core-collapse {
-  0%,
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-  25% {
-    clip-path: inset(12% 0 0 0);
-  }
-  48% {
-    clip-path: inset(0 20% 0 0);
-  }
-  74% {
-    clip-path: inset(0 0 18% 0);
-  }
 }
 
 @keyframes void-fragment-orbit {

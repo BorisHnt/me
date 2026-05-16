@@ -265,9 +265,26 @@
     void_empty_pressure: "A place can be empty and still contain pressure",
     void_clean_identity: "No clean identity",
     void_stable_answer: "No stable answer",
+    void_screaming_silence: "A silence so dense it begins to sound like screaming",
+    void_inner_movement: "the small inner movement that usually tells a person to stand up, answer, begin, continue, repair, speak, want",
+    void_comfortable_disappearance: "It makes disappearance feel almost comfortable",
+    void_toxic_friend: "The void is a toxic friend",
+    void_removes_person: "It offers a kind of peace that slowly removes the person receiving it",
+    void_without_soul: "Almost without a soul sometimes",
+    void_explain_either: "I cannot always explain why either",
+    void_ridiculous_anchors: "Temporary, imperfect, almost ridiculous anchors",
+    void_less_absent: "for a moment I feel a little less absent",
+    void_not_own_room: "the void does not own the whole room",
+    void_occupy_everything: "Only refuse to let it occupy everything",
     void_large_why: "there is no why large enough",
     void_contamination_identity: "contamination for identity",
+    void_open_window: "A way to open one window in a room that forgot it had walls",
     void_life_continue: "a life can continue there without knowing what it is supposed to become",
+    void_whole_house: "the whole house does not have to belong to them",
+    void_breath: "There can be breath without revelation",
+    void_continuation: "There can be continuation without explanation",
+    void_still_being: "still being here",
+    void_not_life_yet: "everything that did not become a life yet",
     void_stopped_closing: "it has stopped trying to close"
   });
 
@@ -1123,94 +1140,212 @@
   ];
 
   const voidArchiveLedger = (() => {
-    const corridorChecksum = [
-      "v00", "v01", "v02", "v03", "v04", "v05", "v06", "v07", "v08", "v09",
-      "v10", "v11", "v12", "v13", "v14", "v15", "v16", "v17", "v18", "v19",
-      "v20", "v21", "v22", "v23", "v24", "v25", "v26", "v27", "v28", "v29",
-      "v30", "v31", "v32", "v33", "v34", "v35", "v36", "v37", "v38", "v39",
-      "v40", "v41", "v42", "v43", "v44", "v45", "v46", "v47", "v48", "v49",
-      "v50", "v51", "v52", "v53", "v54", "v55", "v56", "v57", "v58", "v59",
-      "v60", "v61", "v62", "v63", "v64", "v65", "v66", "v67", "v68", "v69",
-      "v70", "v71", "v72", "v73", "v74"
+    const lowerDocumentMeat = [
+      "The void is not always an enemy.",
+      "That may be the worst part.",
+      "If it were only hostile, it would be easier to reject.",
+      "If it only attacked, I could call it violence.",
+      "If it only destroyed, I could name it as danger and keep it outside the room.",
+      "But the void does not always arrive like an attack.",
+      "Sometimes it sits there.",
+      "Quietly.",
+      "Patiently.",
+      "Almost politely.",
+      "A presence that observes.",
+      "A silence with weight.",
+      "A silence so dense it begins to sound like screaming.",
+      "Sometimes it is only the space where no instruction was written.",
+      "Sometimes it is the room behind the room.",
+      "Sometimes it is the silence after the machine stops asking for input.",
+      "Sometimes it is what remains when every obvious version of the future has failed to load.",
+      "It absorbs things.",
+      "Energy first.",
+      "Then time.",
+      "Then intention.",
+      "Then the small inner movement that usually tells a person to stand up, answer, begin, continue, repair, speak, want.",
+      "It does not always take everything at once.",
+      "That would be too honest.",
+      "It drains slowly.",
+      "It makes absence feel normal.",
+      "It makes stillness feel like rest.",
+      "It makes disappearance feel almost comfortable.",
+      "I used to think emptiness meant absence.",
+      "Now I am less sure.",
+      "Some empty spaces are hostile.",
+      "Some are unfinished.",
+      "Some are waiting for a shape.",
+      "Some are not empty at all.",
+      "Some are occupied by something that does not move.",
+      "There are voids that swallow.",
+      "There are voids that preserve.",
+      "There are voids that do nothing at all, and that may be the most frightening part.",
+      "A place can be empty and still contain pressure.",
+      "An unwritten future is not peaceful by default.",
+      "It can feel like standing in front of a white screen that refuses to become a page.",
+      "It can feel like being alive after the script ended, while the cursor keeps blinking with no mercy and no suggestion.",
+      "I spent a long time thinking the void meant failure.",
+      "No plan.",
+      "No certainty.",
+      "No clean identity.",
+      "No obvious path.",
+      "No stable answer to the question everyone seems allowed to ask:",
+      "What are you going to do with your life?",
+      "But maybe the void is not the opposite of life.",
+      "Maybe it is what appears when life stops pretending to be organized.",
+      "Maybe it is the raw space under the map.",
+      "The place where meaning has not been assigned yet.",
+      "The corridor between old instructions and the next form of movement.",
+      "That does not make it comfortable.",
+      "The void is not kind.",
+      "It does not explain itself.",
+      "It does not hold your hand.",
+      "It does not promise that anything will become beautiful later.",
+      "But it is not always lying.",
+      "Sometimes the void is honest in a way that hope is not.",
+      "Hope can decorate.",
+      "Hope can delay the truth.",
+      "Hope can sell you a future with clean typography and a fake progress bar.",
+      "Hope can become a poster on the wall of a room that is still collapsing.",
+      "The void does not sell.",
+      "It only remains.",
+      "And when there is nothing left, there is at least less left to disappoint you.",
+      "That thought is ugly.",
+      "It is also sometimes comforting.",
+      "The void is a toxic friend.",
+      "It asks for nothing.",
+      "It does not demand a plan.",
+      "It does not ask you to become someone.",
+      "It does not ask you to justify your existence with productivity, ambition, clarity or a five-year answer.",
+      "It lets you sit down.",
+      "That is why it is dangerous.",
+      "Not because it hates you.",
+      "Because it understands exhaustion too well.",
+      "It offers a kind of peace that slowly removes the person receiving it.",
+      "I am still here.",
+      "Not in a heroic way.",
+      "Not in a victorious way.",
+      "Not because I solved the system.",
+      "Not because I found the correct doctrine.",
+      "Not because the pain became useful.",
+      "Not because the machine finally explained itself.",
+      "I am still here in the stupid, physical, unfinished sense.",
+      "Alive.",
+      "Functional enough.",
+      "Breathing without an answer.",
+      "Moving through days without a map.",
+      "Running on automatic mode.",
+      "Apathetic sometimes.",
+      "Hollow sometimes.",
+      "Almost without a soul sometimes.",
+      "Still here.",
+      "The document cannot explain why.",
+      "I cannot always explain why either.",
+      "Sometimes I continue because the body continues.",
+      "Sometimes because the dog is there.",
+      "Sometimes because coffee exists.",
+      "Sometimes because a song rearranges the room for three minutes.",
+      "Sometimes because a stone or a shell survives being thrown around by water and that seems like evidence of something, even if I do not know what.",
+      "Sometimes because code gives the day a small mechanical shape.",
+      "Sometimes because a broken machine comes back to life.",
+      "Sometimes because someone I helped looks relieved, and for a moment I feel a little less absent.",
+      "These are not solutions.",
+      "They are anchors.",
+      "Temporary, imperfect, almost ridiculous anchors.",
+      "But an anchor does not need to explain the ocean.",
+      "It only has to hold for a while.",
+      "I drink coffee.",
+      "I write code.",
+      "I make broken pages.",
+      "I listen to violent music.",
+      "I collect small stones and shells like evidence that matter can survive being thrown around by water.",
+      "I repair what I can.",
+      "I fail often.",
+      "I try again without making a religion out of it.",
+      "Repairing things around me is one way of not being entirely absorbed.",
+      "A tool works.",
+      "A machine restarts.",
+      "A page opens.",
+      "Someone smiles.",
+      "Someone saves time.",
+      "Someone feels less alone against a badly made system.",
+      "For a moment, the void does not own the whole room.",
+      "It is still there.",
+      "But it does not get every chair.",
+      "Maybe that is all I can do sometimes.",
+      "Not defeat it.",
+      "Not erase it.",
+      "Not pretend it never touched anything.",
+      "Only refuse to let it occupy everything.",
+      "Maybe there is no why large enough.",
+      "Maybe the sentence was never a cure.",
+      "Maybe it was only a maintenance command.",
+      "Not erasure.",
+      "Not victory.",
+      "Not purity.",
+      "Not pretending nothing happened.",
+      "Only a slow removal of what does not belong anymore.",
+      "A way to keep the structure without worshipping the damage.",
+      "A way to stop mistaking contamination for identity.",
+      "A way to open one window in a room that forgot it had walls.",
+      "The void is not always an enemy.",
+      "Sometimes it is the unlit part of the room where the next object is waiting.",
+      "Sometimes it is the place where a person sits down, exhausted, and finally stops performing certainty.",
+      "Sometimes it is only space.",
+      "And space can be terrifying.",
+      "But space can also be used.",
+      "A tool can be built there.",
+      "A song can begin there.",
+      "A small repair can happen there.",
+      "A body can rest there.",
+      "A life can continue there without knowing what it is supposed to become.",
+      "I do not think the void disappears.",
+      "Maybe that is another clean lie people tell because they need endings.",
+      "Maybe some presences remain.",
+      "Maybe some silences keep their seat.",
+      "Maybe some rooms stay dark no matter how many lamps are repaired.",
+      "But the whole house does not have to belong to them.",
+      "There can be a table.",
+      "There can be a dog sleeping somewhere.",
+      "There can be a cup of coffee cooling near a keyboard.",
+      "There can be shells in a box.",
+      "There can be a song too loud for the hour.",
+      "There can be a small program doing one useful thing.",
+      "There can be a page like this one, damaged but still open.",
+      "There can be breath without revelation.",
+      "There can be continuation without explanation.",
+      "There can be a person who does not know why he is still here,",
+      "still being here.",
+      "The document cannot explain why.",
+      "It tried.",
+      "It failed.",
+      "It became debris.",
+      "It let the void enter the margins.",
+      "It lost parts of itself to the vortex.",
+      "It repeated the same words until they stopped looking like words.",
+      "But something remains readable.",
+      "Not much.",
+      "Enough.",
+      "The void is not empty.",
+      "It is full of everything that did not become a life yet.",
+      "It is full of abandoned versions.",
+      "Unwritten instructions.",
+      "Unsentences.",
+      "Half-repairs.",
+      "Old grief.",
+      "Quiet objects.",
+      "Failed maps.",
+      "Small signals.",
+      "Soft anchors.",
+      "Things waiting without promising to become beautiful.",
+      "I am still here.",
+      "The document cannot explain why.",
+      "But it has stopped trying to close."
     ];
 
-    const nullCorridor = {
-      v00: [{ kind: "raw", value: "The void is not always an enemy." }],
-      v01: [{ kind: "raw", value: "Sometimes it is only the space where no instruction was written." }],
-      v02: [{ kind: "raw", value: "Sometimes it is the room behind the room." }],
-      v03: [{ kind: "raw", value: "Sometimes it is the silence after the machine stops asking for input." }],
-      v04: [{ kind: "raw", value: "Sometimes it is what remains when every obvious version of the future has failed to load." }],
-      v05: [{ kind: "raw", value: "I used to think emptiness meant absence." }],
-      v06: [{ kind: "raw", value: "Now I am less sure." }],
-      v07: [{ kind: "raw", value: "Some empty spaces are hostile." }],
-      v08: [{ kind: "raw", value: "Some are unfinished." }],
-      v09: [{ kind: "raw", value: "Some are waiting for a shape." }],
-      v10: [{ kind: "raw", value: "There are voids that swallow." }],
-      v11: [{ kind: "raw", value: "There are voids that preserve." }],
-      v12: [{ kind: "raw", value: "There are voids that do nothing at all, and that may be the most frightening part." }],
-      v13: [{ kind: "raw", value: "A place can be empty and still contain pressure." }],
-      v14: [{ kind: "raw", value: "An unwritten future is not peaceful by default." }],
-      v15: [{ kind: "raw", value: "It can feel like standing in front of a white screen that refuses to become a page." }],
-      v16: [{ kind: "raw", value: "It can feel like being alive after the script ended, while the cursor keeps blinking with no mercy and no suggestion." }],
-      v17: [{ kind: "raw", value: "I spent a long time thinking the void meant failure." }],
-      v18: [{ kind: "raw", value: "No plan." }],
-      v19: [{ kind: "raw", value: "No certainty." }],
-      v20: [{ kind: "raw", value: "No clean identity." }],
-      v21: [{ kind: "raw", value: "No obvious path." }],
-      v22: [{ kind: "raw", value: "No stable answer to the question everyone seems allowed to ask:" }],
-      v23: [{ kind: "raw", value: "What are you going to do with your life?" }],
-      v24: [{ kind: "raw", value: "But maybe the void is not the opposite of life." }],
-      v25: [{ kind: "raw", value: "Maybe it is what appears when life stops pretending to be organized." }],
-      v26: [{ kind: "raw", value: "Maybe it is the raw space under the map." }],
-      v27: [{ kind: "raw", value: "The place where meaning has not been assigned yet." }],
-      v28: [{ kind: "raw", value: "The corridor between old instructions and the next form of movement." }],
-      v29: [{ kind: "raw", value: "That does not make it comfortable." }],
-      v30: [{ kind: "raw", value: "The void is not kind." }],
-      v31: [{ kind: "raw", value: "It does not explain itself." }],
-      v32: [{ kind: "raw", value: "It does not hold your hand." }],
-      v33: [{ kind: "raw", value: "It does not promise that anything will become beautiful later." }],
-      v34: [{ kind: "raw", value: "But it is not always lying." }],
-      v35: [{ kind: "raw", value: "Sometimes the void is honest in a way that hope is not." }],
-      v36: [{ kind: "raw", value: "Hope can decorate." }],
-      v37: [{ kind: "raw", value: "Hope can sell you a future with clean typography and a fake progress bar." }],
-      v38: [{ kind: "raw", value: "The void does not sell." }],
-      v39: [{ kind: "raw", value: "It only remains." }],
-      v40: [{ kind: "raw", value: "And maybe, sometimes, remaining is the only true thing." }],
-      v41: [{ kind: "raw", value: "I am still here." }],
-      v42: [{ kind: "raw", value: "Not because I solved the system." }],
-      v43: [{ kind: "raw", value: "Not because I found the correct doctrine." }],
-      v44: [{ kind: "raw", value: "Not because the pain became useful." }],
-      v45: [{ kind: "raw", value: "Not because the machine finally explained itself." }],
-      v46: [{ kind: "raw", value: "I am still here in the stupid, physical, unfinished sense." }],
-      v47: [{ kind: "raw", value: "I drink coffee." }],
-      v48: [{ kind: "raw", value: "I write code." }],
-      v49: [{ kind: "raw", value: "I make broken pages." }],
-      v50: [{ kind: "raw", value: "I listen to violent music." }],
-      v51: [{ kind: "raw", value: "I collect small stones and shells like evidence that matter can survive being thrown around by water." }],
-      v52: [{ kind: "raw", value: "I repair what I can." }],
-      v53: [{ kind: "raw", value: "I fail often." }],
-      v54: [{ kind: "raw", value: "I try again without making a religion out of it." }],
-      v55: [{ kind: "raw", value: "The document cannot explain why." }],
-      v56: [{ kind: "raw", value: "Maybe there is no why large enough." }],
-      v57: [{ kind: "raw", value: "Maybe the sentence was never a cure." }],
-      v58: [{ kind: "raw", value: "Maybe it was only a maintenance command." }],
-      v59: [{ kind: "raw", value: "Not erasure." }],
-      v60: [{ kind: "raw", value: "Not victory." }],
-      v61: [{ kind: "raw", value: "Not pretending nothing happened." }],
-      v62: [{ kind: "raw", value: "Only a slow removal of what does not belong anymore." }],
-      v63: [{ kind: "raw", value: "A way to keep the structure without worshipping the damage." }],
-      v64: [{ kind: "raw", value: "A way to stop mistaking contamination for identity." }],
-      v65: [{ kind: "raw", value: "The void is not always an enemy." }],
-      v66: [{ kind: "raw", value: "Sometimes it is the unlit part of the room where the next object is waiting." }],
-      v67: [{ kind: "raw", value: "Sometimes it is the place where a person sits down, exhausted, and finally stops performing certainty." }],
-      v68: [{ kind: "raw", value: "Sometimes it is only space." }],
-      v69: [{ kind: "raw", value: "And space can be terrifying." }],
-      v70: [{ kind: "raw", value: "But space can also be used." }],
-      v71: [{ kind: "raw", value: "A tool can be built there. A song can begin there. A small repair can happen there. A body can rest there. A life can continue there without knowing what it is supposed to become." }],
-      v72: [{ kind: "raw", value: "I am still here." }],
-      v73: [{ kind: "raw", value: "The document cannot explain why." }],
-      v74: [{ kind: "raw", value: "But it has stopped trying to close." }]
-    };
+    const corridorChecksum = lowerDocumentMeat.map((_, index) => `v${String(index).padStart(2, "0")}`);
+    const nullCorridor = Object.fromEntries(
+      corridorChecksum.map((permit, index) => [permit, [{ kind: "raw", value: lowerDocumentMeat[index] }]])
+    );
 
     return Object.freeze({ corridorChecksum, nullCorridor });
   })();
@@ -1228,6 +1363,16 @@
     "the raw space under the map",
     "meaning has not been assigned yet",
     "the cursor keeps blinking",
+    "A silence so dense it begins to sound like screaming",
+    "It absorbs things",
+    "It drains slowly",
+    "Almost without a soul sometimes",
+    "The void is a toxic friend",
+    "not being entirely absorbed",
+    "the void does not own the whole room",
+    "the whole house does not have to belong to them",
+    "There can be breath without revelation",
+    "The void is not empty",
     "remaining is the only true thing"
   ];
 
@@ -1238,6 +1383,9 @@
     "It only remains",
     "I am still here",
     "maintenance command",
+    "The void is a toxic friend",
+    "Almost without a soul sometimes",
+    "The document cannot explain why",
     "it has stopped trying to close"
   ];
 
@@ -1249,6 +1397,13 @@
     { phrase: "It only remains", level: 4 },
     { phrase: "I am still here", level: 4 },
     { phrase: "The document cannot explain why", level: 4 },
+    { phrase: "A silence so dense it begins to sound like screaming", level: 4 },
+    { phrase: "It absorbs things", level: 4 },
+    { phrase: "It drains slowly", level: 4 },
+    { phrase: "Almost without a soul sometimes", level: 4 },
+    { phrase: "It became debris", level: 4 },
+    { phrase: "It lost parts of itself to the vortex", level: 5 },
+    { phrase: "The void is not empty", level: 5 },
     { phrase: "maintenance command", level: 4 },
     { phrase: "contamination for identity", level: 4 },
     { phrase: "it has stopped trying to close", level: 5 },
@@ -2497,16 +2652,12 @@
     layer.dataset.voidVortexLayer = "";
     layer.setAttribute("aria-hidden", "true");
 
-    const core = document.createElement("span");
-    core.className = "void-vortex-core";
-    core.textContent = "∅";
-    layer.append(core);
-
     Array.from({ length: 7 }).forEach((_, index) => {
       const ring = document.createElement("span");
       ring.className = `void-vortex-ring void-vortex-ring--${index}`;
+      ring.dataset.voidRingTilt = String((index % 2 === 0 ? 1 : -1) * (index * 7 + 11));
       ring.style.setProperty("--void-ring-size", `${18 + index * 11}vmin`);
-      ring.style.setProperty("--void-ring-tilt", `${(index % 2 === 0 ? 1 : -1) * (index * 7 + 11)}deg`);
+      ring.style.setProperty("--void-ring-tilt", `${ring.dataset.voidRingTilt}deg`);
       ring.style.setProperty("--void-ring-delay", `${index * -0.18}s`);
       layer.append(ring);
     });
@@ -2525,15 +2676,45 @@
       debris.style.setProperty("--void-radius", `${radius}vmin`);
       debris.style.setProperty("--void-active-radius", `${radius}vmin`);
       debris.style.setProperty("--void-depth", String(depth));
+      debris.dataset.voidAngle = String(angle);
       debris.dataset.voidRadius = String(radius);
       debris.dataset.voidDepth = String(depth);
+      debris.dataset.voidSpin = String((index % 11) - 5);
       debris.style.setProperty("--void-spin", `${(index % 11) - 5}deg`);
       debris.style.setProperty("--void-delay", `${(index % 17) * -0.21}s`);
       layer.append(debris);
     });
 
+    updateVoidVortexGeometry(layer, 0);
     document.body.append(layer);
     return layer;
+  }
+
+  function updateVoidVortexGeometry(layer, progress) {
+    layer.querySelectorAll(".void-vortex-ring").forEach((ring) => {
+      const tilt = Number(ring.dataset.voidRingTilt || 0);
+      const scale = Math.max(0.68, 1 - progress * 0.3);
+      ring.style.transform = `translate(-50%, -50%) rotate(${tilt + progress * 1040}deg) scale(${scale})`;
+      ring.style.opacity = String(Math.min(0.7, 0.18 + progress * 0.55));
+    });
+
+    layer.querySelectorAll(".void-vortex-fragment").forEach((fragment) => {
+      const angle = Number(fragment.dataset.voidAngle || 0);
+      const radius = Number(fragment.dataset.voidRadius || 30);
+      const depth = Number(fragment.dataset.voidDepth || 0);
+      const spin = Number(fragment.dataset.voidSpin || 0);
+      const collapsedRadius = Math.max(2.8, radius * (1 - progress * 0.86));
+      const opacity = Math.min(0.96, 0.24 + (1 - depth) * 0.5 + progress * 0.25);
+      fragment.style.setProperty("--void-active-radius", `${collapsedRadius}vmin`);
+      fragment.style.setProperty("--void-fragment-opacity", String(opacity));
+      fragment.style.transform = [
+        "translate(-50%, -50%)",
+        `rotate(${angle + progress * 980}deg)`,
+        `translateX(${collapsedRadius}vmin)`,
+        `rotate(${88 + spin - progress * 470}deg)`,
+        `skewX(${progress * -18}deg)`
+      ].join(" ");
+    });
   }
 
   function fractureVoidParagraphs(progress, index) {
@@ -2615,22 +2796,13 @@
       document.body.dataset.voidStage = String(stage);
       layer.style.setProperty("--void-pull", String(progress));
       layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.18 + progress * 0.8)));
-      layer.style.setProperty("--void-core-rotation", `${progress * 760}deg`);
       layer.style.setProperty("--void-ring-rotation", `${progress * 1040}deg`);
       layer.style.setProperty("--void-ring-scale", String(Math.max(0.68, 1 - progress * 0.3)));
       layer.style.setProperty("--void-ring-opacity", String(Math.min(0.7, 0.18 + progress * 0.55)));
       layer.style.setProperty("--void-orbit-rotation", `${progress * 980}deg`);
       layer.style.setProperty("--void-counter-rotation", `${progress * 470}deg`);
       layer.style.setProperty("--void-skew", `${progress * -18}deg`);
-
-      layer.querySelectorAll(".void-vortex-fragment").forEach((fragment) => {
-        const radius = Number(fragment.dataset.voidRadius || 30);
-        const depth = Number(fragment.dataset.voidDepth || 0);
-        const collapsedRadius = Math.max(2.8, radius * (1 - progress * 0.86));
-        const opacity = Math.min(0.96, 0.24 + (1 - depth) * 0.5 + progress * 0.25);
-        fragment.style.setProperty("--void-active-radius", `${collapsedRadius}vmin`);
-        fragment.style.setProperty("--void-fragment-opacity", String(opacity));
-      });
+      updateVoidVortexGeometry(layer, progress);
 
       corridorChecksum += 1;
       document.body.classList.add("is-void-scroll-tearing");
