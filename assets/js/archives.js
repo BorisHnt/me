@@ -3016,6 +3016,17 @@
 
     const rings = Array.from(layer.querySelectorAll(".void-vortex-ring"));
     const fragments = Array.from(layer.querySelectorAll(".void-vortex-fragment"));
+    const ringOrigins = rings.map((ring, index) => ({
+      tilt: Number(ring.dataset.voidRingTilt || 0),
+      transform: ring.style.transform || `translate(-50%, -50%) rotate(${Number(ring.dataset.voidRingTilt || 0)}deg)`,
+      opacity: Number(ring.style.opacity || 1)
+    }));
+    const fragmentOrigins = fragments.map((fragment, index) => ({
+      angle: Number(fragment.dataset.voidAngle || 0),
+      spin: Number(fragment.dataset.voidSpin || 0),
+      radius: Number.parseFloat(fragment.style.getPropertyValue("--void-active-radius")) || Number(fragment.dataset.voidRadius || 30),
+      opacity: Number(fragment.style.getPropertyValue("--void-fragment-opacity")) || 0.8
+    }));
     const start = performance.now();
     let lastShakeFrame = -1;
     let shakeX = 0;
@@ -3039,20 +3050,24 @@
       layer.style.setProperty("--void-opacity", "1");
 
       rings.forEach((ring, index) => {
-        const tilt = Number(ring.dataset.voidRingTilt || 0);
-        ring.style.opacity = String(Math.min(1, 0.38 + progress * 0.58));
-        ring.style.transform = `translate(-50%, -50%) rotate(${tilt + progress * (90 + index * 8)}deg)`;
+        const origin = ringOrigins[index];
+        ring.style.opacity = String(Math.min(1, origin.opacity + progress * (1 - origin.opacity)));
+        if (progress === 0) {
+          ring.style.transform = origin.transform;
+          return;
+        }
+        ring.style.transform = `translate(-50%, -50%) rotate(${origin.tilt + progress * (90 + index * 8)}deg)`;
       });
 
       fragments.forEach((fragment, index) => {
-        const angle = Number(fragment.dataset.voidAngle || 0);
-        const spin = Number(fragment.dataset.voidSpin || 0);
-        fragment.style.setProperty("--void-fragment-opacity", String(Math.min(1, 0.32 + progress * 0.72)));
+        const origin = fragmentOrigins[index];
+        const activeRadius = origin.radius;
+        fragment.style.setProperty("--void-fragment-opacity", String(Math.min(1, origin.opacity + progress * (1 - origin.opacity))));
         fragment.style.transform = [
           "translate(-50%, -50%)",
-          `rotate(${angle + progress * (120 + (index % 9) * 8)}deg)`,
-          "translateX(2.4vmin)",
-          `rotate(${88 + spin - progress * 90}deg)`,
+          `rotate(${origin.angle + progress * (120 + (index % 9) * 8)}deg)`,
+          `translateX(${activeRadius}vmin)`,
+          `rotate(${88 + origin.spin - progress * 90}deg)`,
           `skewX(${progress * -9}deg)`
         ].join(" ");
       });
@@ -3160,7 +3175,7 @@
 
     window.setTimeout(() => {
       window.location.href = "index.html";
-    }, reducedMotion ? 2600 : 12600);
+    }, reducedMotion ? 4200 : 15600);
   }
 
   function deployVoidInlineCard(progress, index) {

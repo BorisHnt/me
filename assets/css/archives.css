@@ -1743,7 +1743,7 @@ html.is-void-final-lock-root,
 .void-final-error {
   position: fixed;
   inset: 0;
-  z-index: 130;
+  z-index: 75;
   display: grid;
   place-content: center;
   gap: 0.75rem;
