@@ -2947,7 +2947,7 @@
     target.classList.add("is-void-consumed-line");
     target.style.setProperty("--void-bite-left", `${index % 3 === 0 ? Math.floor(bite * 0.35) : 0}%`);
     target.style.setProperty("--void-bite-right", `${bite}%`);
-    target.style.setProperty("--void-consume-opacity", String(Math.max(0.86, 1 - progress * 0.14)));
+    target.style.setProperty("--void-consume-opacity", String(Math.max(0.85, 1 - progress * 0.12)));
   }
 
   function deployVoidDetachedFragment(layer, progress, index) {
@@ -2976,7 +2976,7 @@
   }
 
   function calculateVoidScrollEfficiency(progress) {
-    return Math.max(0.72, 1 - progress * 0.28);
+    return Math.max(0.92, 1 - progress * 0.08);
   }
 
   function deployVoidInlineCard(progress, index) {
@@ -3116,7 +3116,7 @@
       }
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-      if (progress < 0.12) {
+      if (progress < 0.7) {
         return;
       }
 

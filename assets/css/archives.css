@@ -232,7 +232,12 @@ body.archive-shell {
 }
 
 .archive-doc-06 .document-shell {
-  z-index: 35;
+  z-index: 10;
+}
+
+.archive-shell .menu-shell,
+.archive-shell .site-footer {
+  z-index: 80;
 }
 
 .archive-document {
@@ -1763,7 +1768,7 @@ body.archive-shell {
 
 .archive-doc-06 .essay p.is-void-consumed-line {
   clip-path: inset(0 var(--void-bite-right, 22%) 0 var(--void-bite-left, 0%));
-  opacity: var(--void-consume-opacity, 0.72);
+  opacity: var(--void-consume-opacity, 0.85);
 }
 
 .archive-doc-06 .essay p.is-void-consumed-line::after {
