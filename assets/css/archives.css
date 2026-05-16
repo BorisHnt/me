@@ -1768,7 +1768,7 @@ body.archive-shell {
 
 .archive-doc-06 .essay p.is-void-consumed-line {
   clip-path: inset(0 var(--void-bite-right, 22%) 0 var(--void-bite-left, 0%));
-  opacity: var(--void-consume-opacity, 0.85);
+  opacity: var(--void-consume-opacity, 0.90);
 }
 
 .archive-doc-06 .essay p.is-void-consumed-line::after {
