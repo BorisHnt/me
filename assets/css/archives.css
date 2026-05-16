@@ -1451,6 +1451,74 @@ body.archive-shell {
   text-transform: uppercase;
 }
 
+.void-scroll-chasm {
+  position: relative;
+  min-height: clamp(1200px, 230vh, 2400px);
+  margin-top: 2rem;
+  border-top: 2px solid var(--paper);
+  overflow: hidden;
+}
+
+.void-scroll-chasm::before,
+.void-scroll-chasm::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 46vmin;
+  height: 46vmin;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  opacity: 0.22;
+  transform: translate(-50%, -50%) rotate(18deg);
+}
+
+.void-scroll-chasm::after {
+  width: 72vmin;
+  height: 72vmin;
+  border-color: var(--steel);
+  border-style: dashed;
+  opacity: 0.16;
+  transform: translate(-50%, -50%) rotate(-31deg);
+}
+
+.void-scroll-shard {
+  position: absolute;
+  z-index: 1;
+  max-width: min(360px, 52vw);
+  border: 2px solid var(--paper);
+  padding: 0.16rem 0.36rem;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 5px 5px 0 var(--steel);
+  font-family: var(--mono);
+  font-size: clamp(0.64rem, 1.4vw, 1.2rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  opacity: 0.52;
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--void-shard-tilt, 0deg))
+    scale(var(--void-shard-scale, 1));
+  pointer-events: none;
+}
+
+.void-scroll-shard--1,
+.void-scroll-shard--4,
+.void-scroll-shard--7 {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.void-scroll-shard--2,
+.void-scroll-shard--5 {
+  border-style: dashed;
+  background: var(--steel);
+  color: var(--paper);
+}
+
 .void-vortex-layer {
   position: fixed;
   inset: 0;
@@ -1655,7 +1723,8 @@ body.archive-shell {
 
 .archive-clean .archive-artifact,
 .archive-clean .void-ghost,
-.archive-clean .void-vortex-layer {
+.archive-clean .void-vortex-layer,
+.archive-clean .void-scroll-chasm {
   display: none;
 }
 
@@ -1825,6 +1894,7 @@ body.archive-shell {
   .limerence-echo-layer,
   .unplanned-pressure-layer,
   .void-vortex-layer,
+  .void-scroll-chasm,
   .void-detached-fragment {
     display: none;
   }
@@ -1855,6 +1925,7 @@ body.archive-shell {
   .limerence-echo-layer,
   .unplanned-pressure-layer,
   .void-vortex-layer,
+  .void-scroll-chasm,
   .void-detached-fragment,
   .unplanned-inline-invasion,
   .unplanned-terminal-invasion {

@@ -1956,6 +1956,43 @@
     return line;
   }
 
+  function createVoidScrollChasm() {
+    const chasm = document.createElement("div");
+    chasm.className = "void-scroll-chasm";
+    chasm.setAttribute("aria-hidden", "true");
+
+    const debrisPool = [
+      ...voidRepeatingFragments,
+      "THE PAGE KEEPS FALLING",
+      "SCROLL_DEPTH_NOT_FOUND",
+      "DOCUMENT GRAVITY INCREASED",
+      "TEXT ENTERED ORBIT",
+      "MEANING PULLED OFF AXIS",
+      "EMPTY ROOM / STILL OCCUPIED",
+      "THE MARGIN IS NOT SAFE",
+      "SOFT ANCHOR FAILURE",
+      "LOWER DOCUMENT MASS DETECTED",
+      "THE VORTEX HAS ADMINISTRATIVE PATIENCE",
+      "NOT CLOSED",
+      "NOT EMPTY",
+      "STILL HERE"
+    ];
+
+    Array.from({ length: 72 }).forEach((_, index) => {
+      const shard = document.createElement("span");
+      shard.className = `void-scroll-shard void-scroll-shard--${index % 9}`;
+      const source = debrisPool[index % debrisPool.length];
+      shard.textContent = index % 5 === 0 ? generateUnauthorizedZalgoLeak(source, index > 44 ? 4 : 3) : source;
+      shard.style.left = `${4 + ((index * 19) % 88)}%`;
+      shard.style.top = `${2 + index * 3.05}%`;
+      shard.style.setProperty("--void-shard-tilt", `${((index % 17) - 8) * 2.5}deg`);
+      shard.style.setProperty("--void-shard-scale", String(0.72 + (index % 6) * 0.11));
+      chasm.append(shard);
+    });
+
+    return chasm;
+  }
+
   function initializeVoidDocument() {
     const mount = document.querySelector("[data-void-document]");
     if (!mount) {
@@ -1977,6 +2014,7 @@
       fragment.append(paragraph);
     });
     fragment.append(createVoidRecoveryFragment());
+    fragment.append(createVoidScrollChasm());
 
     mount.replaceChildren(fragment);
   }
@@ -2662,15 +2700,30 @@
       layer.append(ring);
     });
 
-    const fragmentCount = Math.max(1, voidContaminationFragments.length - 1);
-    voidContaminationFragments.forEach((fragment, index) => {
+    const vortexDebrisPool = [
+      ...voidContaminationFragments,
+      ...voidRepeatingFragments,
+      ...voidContaminationFragments.filter((_, index) => index % 2 === 0),
+      ...voidRepeatingFragments.map((fragment) => `INWARD / ${fragment}`),
+      "THE_SCROLL_HAS_WEIGHT",
+      "DOCUMENT_ORBIT_FAILURE",
+      "TEXT_MASS_EXCEEDS_MARGIN",
+      "THE PAGE IS BEING PULLED",
+      "NO CLEAN CENTER",
+      "MEANING SPAGHETTIFIED",
+      "VOID GRAVITY: ACTIVE",
+      "THE ROOM KEEPS FALLING",
+      "EVERY LINE HAS MASS"
+    ];
+    const fragmentCount = Math.max(1, vortexDebrisPool.length - 1);
+    vortexDebrisPool.forEach((fragment, index) => {
       const debris = document.createElement("span");
       debris.className = `void-vortex-fragment void-vortex-fragment--${index % 8}`;
-      const shouldDamage = index % 9 === 0;
+      const shouldDamage = index % 7 === 0;
       const depth = index / fragmentCount;
-      const arm = index % 5;
-      const angle = index * 37 + arm * 72;
-      const radius = Math.max(4, 51 - depth * 45);
+      const arm = index % 7;
+      const angle = index * 31 + arm * 51;
+      const radius = Math.max(3.5, 64 - depth * 58);
       debris.textContent = shouldDamage ? generateUnauthorizedZalgoLeak(fragment, index % 2 === 0 ? 2 : 3) : fragment;
       debris.style.setProperty("--void-angle", `${angle}deg`);
       debris.style.setProperty("--void-radius", `${radius}vmin`);
