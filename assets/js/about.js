@@ -562,6 +562,30 @@
     { text: decodeChunk("VGhlIGRvY3VtZW50IGNhbm5vdCBleHBsYWluIHdoeQ=="), stage: 5, level: 5, sensitive: true, final: true }
   ];
 
+  const aboutScramblePhrases = [
+    { text: decodeChunk("bmVnb3RpYXRpbmcgd2l0aCBwb2ludGVycw=="), stage: 1, intensity: 1 },
+    { text: decodeChunk("cXVpZXQgdmlvbGVuY2U="), stage: 1, intensity: 1 },
+    { text: decodeChunk("ZG9jdW1lbnRhdGlvbiBpcyBvZnRlbiBhIHByYXllcg=="), stage: 2, intensity: 1 },
+    { text: decodeChunk("bG9ja2VkIGRvb3IgcHJldGVuZGluZyB0byBiZSBhIGRhc2hib2FyZA=="), stage: 2, intensity: 2 },
+    { text: decodeChunk("c3lzdGVtcyB0aGF0IHdlcmUgcHJvYmFibHkgc3VwcG9zZWQgdG8gcmVtYWluIHNtYWxsZXI="), stage: 2, intensity: 2 },
+    { text: decodeChunk("ZnJpY3Rpb24gYW5ub3lzIG1l"), stage: 2, intensity: 2 },
+    { text: decodeChunk("YSB0aW55IHByaXNvbiB3aXRoIGEgcHJvZ3Jlc3MgYmFy"), stage: 2, intensity: 2 },
+    { text: decodeChunk("SSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZQ=="), stage: 3, intensity: 2 },
+    { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 3, intensity: 2 },
+    { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 3, intensity: 3 },
+    { text: decodeChunk("c3Vydml2ZWQgaW5zaWRlIHRoZSBtYWNoaW5l"), stage: 3, intensity: 2 },
+    { text: decodeChunk("YnJva2VuIG1lYXN1cmluZyBpbnN0cnVtZW50"), stage: 3, intensity: 3 },
+    { text: decodeChunk("dGhlIHdvcmsgbGVhdmVzIGV2aWRlbmNl"), stage: 3, intensity: 2 },
+    { text: decodeChunk("dGhpcyBhZ2U="), stage: 4, intensity: 3 },
+    { text: decodeChunk("d2l0aG91dCBhc2tpbmcgcGVybWlzc2lvbg=="), stage: 4, intensity: 3 },
+    { text: decodeChunk("aGlkZGVuIGJlaGluZCB0aGUgd2FsbA=="), stage: 4, intensity: 3 },
+    { text: decodeChunk("c3RpbGwgY2FycnlpbmcgY3VycmVudA=="), stage: 4, intensity: 3 },
+    { text: decodeChunk("YSBjb3JyaWRvcg=="), stage: 5, intensity: 4 },
+    { text: decodeChunk("YWRtaW5pc3RyYXRpdmVseSBwcmVzZW50"), stage: 5, intensity: 4 }
+  ];
+
+  const aboutScrambleGlyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&@!?-_<>[]{}/*";
+
   const voidAnnotations = [
     ["inspection pending", 1],
     ["operator mismatch", 2],
@@ -882,13 +906,17 @@
 
   function findNextCorruptiblePhrase(text, startIndex) {
     let match = null;
-    corruptiblePhrases.forEach((phrase) => {
+    const decoratedPhrases = [
+      ...corruptiblePhrases.map((phrase) => ({ phrase, kind: "corruptible" })),
+      ...aboutScramblePhrases.map((phrase) => ({ phrase, kind: "scramble" }))
+    ];
+    decoratedPhrases.forEach(({ phrase, kind }) => {
       const index = text.indexOf(phrase.text, startIndex);
       if (index === -1) {
         return;
       }
       if (!match || index < match.index || (index === match.index && phrase.text.length > match.phrase.text.length)) {
-        match = { index, phrase };
+        match = { index, phrase, kind };
       }
     });
     return match;
@@ -914,6 +942,20 @@
     return span;
   }
 
+  function createScrambleFragment(phrase) {
+    const span = document.createElement("span");
+    span.className = "about-fragment about-fragment--scramble";
+    span.dataset.scrambleStage = String(phrase.stage);
+    span.dataset.scrambleIntensity = String(phrase.intensity || 1);
+    corridorChecksum.set(span, {
+      cleanText: phrase.text,
+      scrambleSeed: phrase.text.length * 13 + phrase.stage * 29,
+      wetMatter: false
+    });
+    span.textContent = phrase.text;
+    return span;
+  }
+
   function appendDecoratedText(element, text) {
     let cursor = 0;
     let match = findNextCorruptiblePhrase(text, cursor);
@@ -922,7 +964,7 @@
       if (match.index > cursor) {
         element.append(document.createTextNode(text.slice(cursor, match.index)));
       }
-      element.append(createCorruptibleFragment(match.phrase));
+      element.append(match.kind === "scramble" ? createScrambleFragment(match.phrase) : createCorruptibleFragment(match.phrase));
       cursor = match.index + match.phrase.text.length;
       match = findNextCorruptiblePhrase(text, cursor);
     }
@@ -1417,6 +1459,22 @@
     return Array.from(String(text)).map((letter, index) => attachZalgoDamageCertificate(letter, index + crookedReceipt * 17, damage)).join("");
   }
 
+  function generateAboutScrambleVariant(text, intensity, variant) {
+    const glyphTax = Math.max(1, Math.min(5, Number(intensity) || 1));
+    const receipt = Math.max(0, Number(variant) || 0);
+    return Array.from(String(text)).map((letter, index) => {
+      if (!/[A-Za-z0-9]/.test(letter)) {
+        return letter;
+      }
+      const shouldScramble = ((index + receipt + glyphTax) % Math.max(2, 7 - glyphTax)) === 0
+        || (glyphTax >= 4 && (index + receipt) % 3 === 0);
+      if (!shouldScramble) {
+        return letter;
+      }
+      return aboutScrambleGlyphs[(index * 11 + receipt * 7 + glyphTax * 17) % aboutScrambleGlyphs.length];
+    }).join("");
+  }
+
   function convertPerfectlyNormalTextIntoMildConcern(text, level, stage) {
     const approvedDamage = classifyFragmentAsWetMatter(level, stage);
     return generateUnauthorizedZalgoLeak(text, approvedDamage);
@@ -1442,6 +1500,11 @@
 
   function inspectParagraphForUnauthorizedMoisture(elements, stage) {
     elements.forEach((element) => {
+      if (element.classList.contains("about-fragment--scramble")) {
+        inspectScrambleFragmentForIllegalBroadcast(element, stage);
+        return;
+      }
+
       const requiredStage = Number(element.dataset.corruptStage || 2);
       const memory = corridorChecksum.get(element) || { cleanText: element.textContent, preDamagedText: "" };
       const cleanText = memory.cleanText;
@@ -1486,6 +1549,34 @@
         element.classList.add("void-spill");
       }
     });
+  }
+
+  function inspectScrambleFragmentForIllegalBroadcast(element, stage) {
+    const requiredStage = Number(element.dataset.scrambleStage || 2);
+    const memory = corridorChecksum.get(element) || { cleanText: element.textContent, scrambleSeed: 0 };
+    const cleanText = memory.cleanText;
+    element.classList.remove("about-scramble-active", "about-scramble-heavy");
+
+    if (document.body.classList.contains("is-void-purged") || stage < requiredStage) {
+      element.textContent = cleanText;
+      return;
+    }
+
+    const contained = document.body.classList.contains("is-void-contained");
+    const reduced = document.body.classList.contains("prefers-reduced-motion");
+    const scrollVariant = Number(document.body.dataset.scrollDamage || 0);
+    const baseIntensity = Number(element.dataset.scrambleIntensity || 1);
+    const stagePressure = Math.max(0, stage - requiredStage);
+    const containmentTax = contained ? 1 : 0;
+    const motionTax = reduced ? 1 : 0;
+    const approvedIntensity = Math.max(1, Math.min(5, baseIntensity + stagePressure - containmentTax - motionTax));
+    const variant = (memory.scrambleSeed || 0) + scrollVariant * 5 + stage * 11;
+
+    element.textContent = generateAboutScrambleVariant(cleanText, approvedIntensity, variant);
+    element.classList.add("about-scramble-active");
+    if (approvedIntensity >= 3) {
+      element.classList.add("about-scramble-heavy");
+    }
   }
 
   function createVoidPopup(notice) {
@@ -1600,7 +1691,9 @@
         "zalgo-heavy",
         "zalgo-terminal",
         "void-overflow-text",
-        "void-spill"
+        "void-spill",
+        "about-scramble-active",
+        "about-scramble-heavy"
       );
       if (memory && memory.cleanText) {
         fragment.textContent = memory.cleanText;
@@ -1629,7 +1722,7 @@
     renderBiography(sections, documentRoot);
     deployAberrations(aberrationLayer);
 
-    const fragments = Array.from(documentRoot.querySelectorAll(".about-fragment--corruptible"));
+    const fragments = Array.from(documentRoot.querySelectorAll(".about-fragment--corruptible, .about-fragment--scramble"));
 
     function inspectScrollPosition() {
       sewerProtocol = false;

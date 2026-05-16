@@ -1029,6 +1029,27 @@ body.about-shell {
   border-bottom-color: var(--steel);
 }
 
+.about-fragment--scramble {
+  border-bottom: 1px dotted var(--steel);
+}
+
+.about-scramble-active {
+  display: inline;
+  font-family: var(--mono);
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  background: var(--dust);
+  color: var(--ink);
+  text-shadow: 1px 0 0 var(--paper);
+}
+
+.about-scramble-heavy {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 2px 2px 0 var(--steel);
+  text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust);
+}
+
 .zalgo-light,
 .zalgo-medium,
 .zalgo-heavy,
@@ -1211,7 +1232,13 @@ body.about-shell {
 .is-void-purged .about-section--void h2,
 .is-void-purged .about-section--void p,
 .is-void-purged .about-fragment {
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
   color: var(--ink);
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: 0;
   text-shadow: none;
 }
 
