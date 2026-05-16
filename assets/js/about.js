@@ -361,7 +361,7 @@
         "SSBidWlsZCB0aGVtIGJlY2F1c2UgSSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZS4=",
         "QSBiYWRseSBkZXNpZ25lZCBpbnRlcmZhY2UsIGEgcmVwZXRpdGl2ZSBjYWxjdWxhdGlvbiwgYSBoaWRkZW4gcGllY2Ugb2YgaW5mb3JtYXRpb24sIGEgbWFjaGluZSB0aGF0IG1ha2VzIHRoZSB1c2VyIGFkYXB0IGluc3RlYWQgb2YgYWRhcHRpbmcgdG8gdGhlIHVzZXIg4oCUIHRoZXNlIHRoaW5ncyBsb29rIHNtYWxsIGZyb20gdGhlIG91dHNpZGUsIGJ1dCB0aGV5IHF1aWV0bHkgZXhoYXVzdCBwZW9wbGUu",
         "V2hlbiBJIGNhbiByZW1vdmUgb25lIG9mIHRob3NlIG9ic3RhY2xlcywgSSB1c3VhbGx5IGRvLg==",
-        "SSBkbyBub3QgaGF2ZSBtdWNoIG1vbmV5LiBJIGFtIG5vdCBpbiBhIHBvc2l0aW9uIHdoZXJlIGdlbmVyb3NpdHkgY2FuIGJlIHNwZWN0YWN1bGFyLiBCdXQgSSBjYW4gZ2l2ZSB0aW1lLiBJIGNhbiBnaXZlIGNvZGUuIEkgY2FuIGdpdmUgc21hbGwgcmVwYWlycy4gSSBjYW4gbWFrZSBzb21ldGhpbmcgdGhhdCBzYXZlcyBzb21lb25lIGEgZmV3IG1pbnV0ZXMsIGEgZmV3IGNsaWNrcywgYSBzbWFsbCBhbW91bnQgb2YgZnJ1c3RyYXRpb24u",
+        "SSBhbSBub3QgaW4gYSBwb3NpdGlvbiB3aGVyZSBnZW5lcm9zaXR5IGNhbiBiZSBzcGVjdGFjdWxhci4gQnV0IEkgY2FuIGdpdmUgdGltZS4gSSBjYW4gZ2l2ZSBjb2RlLiBJIGNhbiBnaXZlIHNtYWxsIHJlcGFpcnMuIEkgY2FuIG1ha2Ugc29tZXRoaW5nIHRoYXQgc2F2ZXMgc29tZW9uZSBhIGZldyBtaW51dGVzLCBhIGZldyBjbGlja3MsIGEgc21hbGwgYW1vdW50IG9mIGZydXN0cmF0aW9uLg==",
         "V2hlbiBJIGJ1aWxkIHRvb2xzIGZvciBvdGhlciBwZW9wbGUsIGVzcGVjaWFsbHkgY2xhc3NtYXRlcywgSSB1c3VhbGx5IGRvIG5vdCBhc2sgZm9yIGFueXRoaW5nIGluIHJldHVybi4=",
         "SSBtYWtlIHRoZW0gYmVjYXVzZSBJIHdhbnQgdGhlaXIgbGl2ZXMgdG8gYmUgZWFzaWVyLg==",
         "VGhhdCBpcyBhbGwu",
@@ -534,7 +534,6 @@
     { text: decodeChunk("ZXhlY3V0aW9uIHN0YWNr"), stage: 2, level: 1 },
     { text: decodeChunk("ZG9jdW1lbnRhdGlvbg=="), stage: 2, level: 1 },
     { text: decodeChunk("ZnJpY3Rpb24="), stage: 2, level: 4 },
-    { text: decodeChunk("bW9uZXk="), stage: 3, level: 4 },
     { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 3, level: 4 },
     { text: decodeChunk("ZG9lcyBub3Qgd29yayB2ZXJ5IHdlbGw="), stage: 3, level: 4 },
     { text: decodeChunk("YnJva2VuIG9iamVjdHM="), stage: 3, level: 4 },
@@ -563,31 +562,23 @@
   ];
 
   const aboutScramblePhrases = [
-    { text: decodeChunk("bmVnb3RpYXRpbmcgd2l0aCBwb2ludGVycw=="), stage: 1, intensity: 1 },
-    { text: decodeChunk("cXVpZXQgdmlvbGVuY2U="), stage: 1, intensity: 1 },
-    { text: decodeChunk("ZG9jdW1lbnRhdGlvbiBpcyBvZnRlbiBhIHByYXllcg=="), stage: 2, intensity: 1 },
-    { text: decodeChunk("bG9ja2VkIGRvb3IgcHJldGVuZGluZyB0byBiZSBhIGRhc2hib2FyZA=="), stage: 2, intensity: 2 },
-    { text: decodeChunk("c3lzdGVtcyB0aGF0IHdlcmUgcHJvYmFibHkgc3VwcG9zZWQgdG8gcmVtYWluIHNtYWxsZXI="), stage: 2, intensity: 2 },
-    { text: decodeChunk("ZnJpY3Rpb24gYW5ub3lzIG1l"), stage: 2, intensity: 2 },
-    { text: decodeChunk("YSB0aW55IHByaXNvbiB3aXRoIGEgcHJvZ3Jlc3MgYmFy"), stage: 2, intensity: 2 },
-    { text: decodeChunk("ZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZQ=="), stage: 2, intensity: 4 },
-    { text: decodeChunk("ZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHk="), stage: 2, intensity: 4 },
-    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 2, intensity: 5 },
-    { text: decodeChunk("aW5zdGVhZCBvZiBwcmlkZQ=="), stage: 2, intensity: 4 },
-    { text: decodeChunk("aW50ZXJuYWwgbWVhc3VyaW5nIGluc3RydW1lbnQ="), stage: 2, intensity: 5 },
-    { text: decodeChunk("b3RoZXIgcGVvcGxlIG11Y2ggbW9yZSBlYXNpbHk="), stage: 2, intensity: 4 },
-    { text: decodeChunk("SSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZQ=="), stage: 3, intensity: 2 },
-    { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 2, intensity: 3 },
-    { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 2, intensity: 4 },
+    { text: decodeChunk("ZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZQ=="), stage: 2, intensity: 2 },
+    { text: decodeChunk("ZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHk="), stage: 2, intensity: 2 },
+    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 2, intensity: 3 },
+    { text: decodeChunk("aW5zdGVhZCBvZiBwcmlkZQ=="), stage: 2, intensity: 2 },
+    { text: decodeChunk("aW50ZXJuYWwgbWVhc3VyaW5nIGluc3RydW1lbnQ="), stage: 2, intensity: 3 },
+    { text: decodeChunk("b3RoZXIgcGVvcGxlIG11Y2ggbW9yZSBlYXNpbHk="), stage: 2, intensity: 2 },
+    { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 2, intensity: 2 },
+    { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 2, intensity: 3 },
     { text: decodeChunk("c3Vydml2ZWQgaW5zaWRlIHRoZSBtYWNoaW5l"), stage: 3, intensity: 2 },
-    { text: decodeChunk("YnJva2VuIG1lYXN1cmluZyBpbnN0cnVtZW50"), stage: 2, intensity: 4 },
-    { text: decodeChunk("dGhlIHdvcmsgbGVhdmVzIGV2aWRlbmNl"), stage: 2, intensity: 3 },
-    { text: decodeChunk("dGhpcyBhZ2U="), stage: 4, intensity: 3 },
-    { text: decodeChunk("d2l0aG91dCBhc2tpbmcgcGVybWlzc2lvbg=="), stage: 4, intensity: 3 },
-    { text: decodeChunk("aGlkZGVuIGJlaGluZCB0aGUgd2FsbA=="), stage: 4, intensity: 3 },
-    { text: decodeChunk("c3RpbGwgY2FycnlpbmcgY3VycmVudA=="), stage: 4, intensity: 3 },
-    { text: decodeChunk("YSBjb3JyaWRvcg=="), stage: 5, intensity: 4 },
-    { text: decodeChunk("YWRtaW5pc3RyYXRpdmVseSBwcmVzZW50"), stage: 5, intensity: 4 }
+    { text: decodeChunk("YnJva2VuIG1lYXN1cmluZyBpbnN0cnVtZW50"), stage: 2, intensity: 3 },
+    { text: decodeChunk("dGhlIHdvcmsgbGVhdmVzIGV2aWRlbmNl"), stage: 2, intensity: 2 },
+    { text: decodeChunk("dGhpcyBhZ2U="), stage: 4, intensity: 2 },
+    { text: decodeChunk("d2l0aG91dCBhc2tpbmcgcGVybWlzc2lvbg=="), stage: 4, intensity: 2 },
+    { text: decodeChunk("aGlkZGVuIGJlaGluZCB0aGUgd2FsbA=="), stage: 4, intensity: 2 },
+    { text: decodeChunk("c3RpbGwgY2FycnlpbmcgY3VycmVudA=="), stage: 4, intensity: 2 },
+    { text: decodeChunk("YSBjb3JyaWRvcg=="), stage: 5, intensity: 3 },
+    { text: decodeChunk("YWRtaW5pc3RyYXRpdmVseSBwcmVzZW50"), stage: 5, intensity: 3 }
   ];
 
   const aboutScrambleGlyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&@!?-_<>[]{}/*";
@@ -942,7 +933,7 @@
     if (aboutForcedScrambleTexts.has(phrase.text)) {
       span.classList.add("about-fragment--scramble");
       span.dataset.scrambleStage = "2";
-      span.dataset.scrambleIntensity = String(Math.max(4, phrase.level || 1));
+      span.dataset.scrambleIntensity = String(Math.max(2, Math.min(3, phrase.level || 1)));
     }
     if (phrase.sensitive) {
       span.classList.add("about-fragment--sensitive");
@@ -1480,14 +1471,13 @@
   }
 
   function generateAboutScrambleVariant(text, intensity, variant) {
-    const glyphTax = Math.max(1, Math.min(5, Number(intensity) || 1));
+    const glyphTax = Math.max(1, Math.min(3, Number(intensity) || 1));
     const receipt = Math.max(0, Number(variant) || 0);
     return Array.from(String(text)).map((letter, index) => {
       if (!/[A-Za-z0-9]/.test(letter)) {
         return letter;
       }
-      const shouldScramble = ((index + receipt + glyphTax) % Math.max(2, 7 - glyphTax)) === 0
-        || (glyphTax >= 4 && (index + receipt) % 3 === 0);
+      const shouldScramble = ((index + receipt + glyphTax) % Math.max(4, 11 - glyphTax * 2)) === 0;
       if (!shouldScramble) {
         return letter;
       }

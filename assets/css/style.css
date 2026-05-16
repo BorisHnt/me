@@ -1030,44 +1030,44 @@ body.about-shell {
 }
 
 .about-fragment--scramble {
-  border-bottom: 1px dotted var(--steel);
+  border-bottom: 1px dotted var(--dust);
 }
 
 .about-scramble-active {
   display: inline;
   font-family: var(--mono);
-  font-weight: 900;
-  letter-spacing: 0.035em;
-  border: 1px solid var(--steel);
-  padding: 0 0.12em;
-  background: var(--paper);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  border: 0;
+  padding: 0;
+  background: transparent;
   color: var(--ink);
-  box-shadow: 2px 2px 0 var(--dust);
-  text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
-  animation: about-scramble-pulse 0.18s steps(2, end);
+  box-shadow: none;
+  text-shadow: 1px 0 0 var(--dust);
+  animation: about-scramble-pulse 0.28s steps(2, end);
 }
 
 .about-scramble-heavy {
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: 3px 3px 0 var(--steel), -2px 0 0 var(--dust);
-  text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust), 0 2px 0 var(--ink);
+  background: var(--dust);
+  color: var(--ink);
+  box-shadow: none;
+  text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
 }
 
 @keyframes about-scramble-pulse {
   0% {
     outline: 0 solid transparent;
-    text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
+    text-shadow: 1px 0 0 var(--dust);
   }
 
   45% {
-    outline: 1px solid var(--steel);
-    text-shadow: 2px 0 0 var(--steel), -2px 0 0 var(--dust);
+    outline: 0 solid transparent;
+    text-shadow: 1px 0 0 var(--steel);
   }
 
   100% {
     outline: 0 solid transparent;
-    text-shadow: 1px 0 0 var(--steel), -1px 0 0 var(--paper);
+    text-shadow: 1px 0 0 var(--dust);
   }
 }
 
