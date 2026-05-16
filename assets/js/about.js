@@ -570,6 +570,12 @@
     { text: decodeChunk("c3lzdGVtcyB0aGF0IHdlcmUgcHJvYmFibHkgc3VwcG9zZWQgdG8gcmVtYWluIHNtYWxsZXI="), stage: 2, intensity: 2 },
     { text: decodeChunk("ZnJpY3Rpb24gYW5ub3lzIG1l"), stage: 2, intensity: 2 },
     { text: decodeChunk("YSB0aW55IHByaXNvbiB3aXRoIGEgcHJvZ3Jlc3MgYmFy"), stage: 2, intensity: 2 },
+    { text: decodeChunk("ZGlmZmljdWx0IHJlbGF0aW9uc2hpcCB3aXRoIHByYWlzZQ=="), stage: 3, intensity: 3 },
+    { text: decodeChunk("ZG9lcyBub3QgZW50ZXIgdGhlIHN5c3RlbSBjb3JyZWN0bHk="), stage: 3, intensity: 3 },
+    { text: decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="), stage: 3, intensity: 4 },
+    { text: decodeChunk("aW5zdGVhZCBvZiBwcmlkZQ=="), stage: 3, intensity: 3 },
+    { text: decodeChunk("aW50ZXJuYWwgbWVhc3VyaW5nIGluc3RydW1lbnQ="), stage: 3, intensity: 4 },
+    { text: decodeChunk("b3RoZXIgcGVvcGxlIG11Y2ggbW9yZSBlYXNpbHk="), stage: 3, intensity: 3 },
     { text: decodeChunk("SSBrbm93IHdoYXQgZnJpY3Rpb24gZmVlbHMgbGlrZQ=="), stage: 3, intensity: 2 },
     { text: decodeChunk("dmljdG9yaWVzIGZlZWwgcmVhbCB0byBtZQ=="), stage: 3, intensity: 2 },
     { text: decodeChunk("TWluZSBvZnRlbiBmZWVsIGFkbWluaXN0cmF0aXZl"), stage: 3, intensity: 3 },
@@ -585,6 +591,14 @@
   ];
 
   const aboutScrambleGlyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&@!?-_<>[]{}/*";
+  const aboutForcedScrambleTexts = new Set([
+    decodeChunk("YSBzdHJhbmdlIHNhZG5lc3M="),
+    decodeChunk("ZXh0ZXJuYWwgcHJvb2Y="),
+    decodeChunk("c2VsZi1lc3RlZW0="),
+    decodeChunk("cHJhaXNl"),
+    decodeChunk("ZXZpZGVuY2U="),
+    decodeChunk("YWRtaW5pc3RyYXRpdmU=")
+  ]);
 
   const voidAnnotations = [
     ["inspection pending", 1],
@@ -925,6 +939,11 @@
   function createCorruptibleFragment(phrase) {
     const span = document.createElement("span");
     span.className = "about-fragment about-fragment--corruptible";
+    if (aboutForcedScrambleTexts.has(phrase.text)) {
+      span.classList.add("about-fragment--scramble");
+      span.dataset.scrambleStage = String(Math.max(3, phrase.stage));
+      span.dataset.scrambleIntensity = String(Math.max(3, phrase.level || 1));
+    }
     if (phrase.sensitive) {
       span.classList.add("about-fragment--sensitive");
     }
@@ -936,6 +955,7 @@
     corridorChecksum.set(span, {
       cleanText: phrase.text,
       preDamagedText: lowerDocumentMeat[phrase.text] || "",
+      scrambleSeed: phrase.text.length * 17 + phrase.stage * 31,
       wetMatter: Boolean(phrase.sensitive)
     });
     span.textContent = phrase.text;
