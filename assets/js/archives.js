@@ -1439,6 +1439,104 @@
     "FUTURE FAILED TO LOAD"
   ];
 
+  const voidPoeticErrors = [
+    "The silence has mass.",
+    "The room is empty, but not vacant.",
+    "The document is breathing incorrectly.",
+    "The future did not finish rendering.",
+    "The page has forgotten where it ends.",
+    "The map dissolved before the road appeared.",
+    "The void is sitting in the margins.",
+    "The answer box is waiting for a person who never arrived.",
+    "The cursor is blinking without mercy.",
+    "There is pressure inside the empty space.",
+    "The house is not fully yours anymore.",
+    "Something remains where nothing was expected.",
+    "The page is trying not to disappear.",
+    "A small signal is still emitting.",
+    "The document failed to explain the operator.",
+    "The void has taken one chair.",
+    "The void has not taken the whole room.",
+    "The sentence is losing structural integrity.",
+    "The paragraph is being pulled inward.",
+    "The margins are no longer safe.",
+    "The text is orbiting an absence.",
+    "The page is becoming debris.",
+    "The ending is still reachable, technically.",
+    "The document cannot close while the operator remains.",
+    "The void is not empty. It is occupied."
+  ];
+
+  const voidScrollErrors = [
+    "VOID RESIDUE DETECTED",
+    "NO INSTRUCTION FOUND",
+    "DOCUMENT HAS NO INSIDE",
+    "ROOM BEHIND ROOM IS OPEN",
+    "EMPTY SPACE DECLARED",
+    "NULL CORRIDOR REGISTERED",
+    "INSTRUCTIONLESS AREA EXPANDING",
+    "THE PAGE IS HOLLOW",
+    "NO STABLE ANSWER FOUND",
+    "SIGNAL LOST IN VOID",
+    "MEANING NOT ASSIGNED",
+    "FUTURE FAILED TO LOAD",
+    "ERR_VOID_404",
+    "VOID OVERFLOW",
+    "VOID PROCESS STILL RUNNING",
+    "UNDEFINED LIFE VECTOR",
+    "ANCHOR FAILURE WARNING",
+    "DOCUMENT PRESSURE RISING",
+    "UNWRITTEN FUTURE DETECTED",
+    "NO MAP ATTACHED",
+    "OPERATOR STILL PRESENT",
+    "OPERATOR PRESENCE UNEXPLAINED",
+    "BREATHING WITHOUT ANSWER",
+    "SYSTEM CANNOT JUSTIFY CONTINUATION",
+    "AUTOMATIC MODE ENABLED",
+    "SOUL INTERFACE UNRESPONSIVE",
+    "HOPE DECORATION MODULE FAILED",
+    "PROGRESS BAR IS LYING",
+    "MEANING REQUEST TIMED OUT",
+    "IDENTITY NOT FULLY MOUNTED",
+    "CERTAINTY PACKAGE CORRUPTED",
+    "ROOM OCCUPANCY: VOID",
+    "THE SILENCE IS TOO LOUD",
+    "EMPTY DOES NOT MEAN ABSENT",
+    "VOID IS OBSERVING",
+    "VOID IS NOT IDLE",
+    "DAMAGE WORSHIPPING DETECTED",
+    "CONTAMINATION MISTAKEN FOR IDENTITY",
+    "FLOOR PLAN MISSING",
+    "UNASSIGNED SPACE BREACH",
+    "THE DOCUMENT IS BEING PULLED",
+    "TEXT GRAVITY FAILURE",
+    "PARAGRAPH ORBIT DECAYING",
+    "MARGIN COLLAPSE IMMINENT",
+    "VORTEX ACCESS GRANTED",
+    "PAGE STRUCTURE LOSING MASS",
+    "SENTENCE INTEGRITY BELOW THRESHOLD",
+    "READABILITY IS LEAVING THE ROOM",
+    "THE FORM RETURNED EMPTY",
+    "NO VALID PURPOSE FIELD",
+    "LIFE FIELD LEFT BLANK",
+    "ANSWER BOX REJECTED SILENCE",
+    "THE VOID DOES NOT SELL",
+    "THE VOID ONLY REMAINS",
+    "ANCHOR TEMPORARILY HOLDING",
+    "SMALL REPAIR DETECTED",
+    "MACHINE REVIVAL LOGGED",
+    "DOG PRESENCE REGISTERED",
+    "COFFEE OBJECT STILL WARM",
+    "SHELL FRAGMENT FOUND",
+    "STONE ANCHOR FOUND",
+    "MUSIC PRESSURE ACCEPTED",
+    "CODE SHAPE GENERATED",
+    "ROOM NOT FULLY LOST",
+    "ONE CHAIR RECOVERED FROM VOID",
+    "WINDOW OPENED IN DARK ROOM",
+    "DOCUMENT FAILED TO CLOSE"
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -1589,7 +1687,8 @@
       "is-unplanned-scroll-degrading",
       "is-unplanned-scroll-resisting",
       "is-unplanned-scroll-tearing",
-      "is-void-scroll-tearing"
+      "is-void-scroll-tearing",
+      "is-void-scroll-resisting"
     );
     if (document.body.classList.contains("archive-doc-05")) {
       document.body.dataset.unplannedStage = "0";
@@ -1629,7 +1728,7 @@
     document.querySelectorAll(".limerence-intrusion").forEach((fragment) => {
       fragment.remove();
     });
-    document.querySelectorAll(".limerence-echo, .neuro-glitch-pop, .unplanned-lag-fragment, .unplanned-inline-invasion, .unplanned-terminal-invasion, .void-detached-fragment").forEach((fragment) => {
+    document.querySelectorAll(".limerence-echo, .neuro-glitch-pop, .unplanned-lag-fragment, .unplanned-inline-invasion, .unplanned-terminal-invasion, .void-detached-fragment, .void-inline-card").forEach((fragment) => {
       fragment.remove();
     });
     document.querySelectorAll(".is-unplanned-fractured-line").forEach((fragment) => {
@@ -1978,13 +2077,13 @@
       "STILL HERE"
     ];
 
-    Array.from({ length: 72 }).forEach((_, index) => {
+    Array.from({ length: 112 }).forEach((_, index) => {
       const shard = document.createElement("span");
       shard.className = `void-scroll-shard void-scroll-shard--${index % 9}`;
       const source = debrisPool[index % debrisPool.length];
       shard.textContent = index % 5 === 0 ? generateUnauthorizedZalgoLeak(source, index > 44 ? 4 : 3) : source;
       shard.style.left = `${4 + ((index * 19) % 88)}%`;
-      shard.style.top = `${2 + index * 3.05}%`;
+      shard.style.top = `${2 + index * 2.38}%`;
       shard.style.setProperty("--void-shard-tilt", `${((index % 17) - 8) * 2.5}deg`);
       shard.style.setProperty("--void-shard-scale", String(0.72 + (index % 6) * 0.11));
       chasm.append(shard);
@@ -2704,7 +2803,10 @@
       ...voidContaminationFragments,
       ...voidRepeatingFragments,
       ...voidContaminationFragments.filter((_, index) => index % 2 === 0),
+      ...voidContaminationFragments.map((fragment, index) => index % 3 === 0 ? `${fragment} / FALLING` : `${fragment} / INWARD`),
       ...voidRepeatingFragments.map((fragment) => `INWARD / ${fragment}`),
+      ...voidScrollErrors,
+      ...voidPoeticErrors.map((fragment) => fragment.toUpperCase()),
       "THE_SCROLL_HAS_WEIGHT",
       "DOCUMENT_ORBIT_FAILURE",
       "TEXT_MASS_EXCEEDS_MARGIN",
@@ -2816,6 +2918,63 @@
     window.setTimeout(() => fragment.remove(), 2600 + (index % 5) * 300);
   }
 
+  function calculateVoidScrollEfficiency(progress) {
+    return Math.max(0.18, 1 - progress * 0.76);
+  }
+
+  function deployVoidInlineCard(progress, index) {
+    if (document.body.classList.contains("archive-clean") || progress < 0.1) {
+      return;
+    }
+
+    const essay = document.querySelector("[data-void-document]");
+    if (!essay) {
+      return;
+    }
+
+    const existing = Array.from(essay.querySelectorAll(".void-inline-card"));
+    const allowed = Math.min(34, Math.floor(4 + progress * 38));
+    while (existing.length > allowed) {
+      existing.shift()?.remove();
+    }
+    if (existing.length >= allowed) {
+      return;
+    }
+
+    const paragraphs = Array.from(essay.querySelectorAll("p:not(.void-recovery-line)"));
+    if (!paragraphs.length) {
+      return;
+    }
+
+    const card = document.createElement("aside");
+    const severity = progress > 0.82 ? "terminal" : progress > 0.58 ? "unstable" : "residue";
+    card.className = `void-inline-card void-inline-card--${index % 7} void-inline-card--${severity}`;
+    card.setAttribute("aria-hidden", "true");
+    card.style.setProperty("--void-card-tilt", `${((index % 13) - 6) * Math.min(1.8, 0.6 + progress)}deg`);
+
+    const title = document.createElement("span");
+    title.className = "void-inline-card__title";
+    title.textContent = voidScrollErrors[(index * 3 + Math.floor(progress * 80)) % voidScrollErrors.length];
+
+    const message = document.createElement("p");
+    message.className = "void-inline-card__message";
+    const source = voidPoeticErrors[(index * 5 + Math.floor(progress * 120)) % voidPoeticErrors.length];
+    message.textContent = progress > 0.72 && index % 3 === 0 ? generateUnauthorizedZalgoLeak(source, 3) : source;
+
+    const footer = document.createElement("span");
+    footer.className = "void-inline-card__footer";
+    footer.textContent = `SCROLL MASS: ${String(Math.floor(progress * 100)).padStart(2, "0")}%`;
+
+    card.append(title, message, footer);
+
+    const lowerStart = Math.floor(paragraphs.length * Math.min(0.78, 0.16 + progress * 0.56));
+    const placement = Math.min(
+      paragraphs.length - 1,
+      lowerStart + ((index * 11 + Math.floor(progress * 200)) % Math.max(1, paragraphs.length - lowerStart))
+    );
+    paragraphs[placement].after(card);
+  }
+
   function initializeVoidVortexDestruction() {
     if (!document.body.classList.contains("archive-doc-06")) {
       return;
@@ -2828,6 +2987,7 @@
     let radioactiveReceipt = 0;
     let corridorChecksum = 0;
     let concreteLiver = 0;
+    let asphaltLung = 0;
 
     const inspectVoidScroll = () => {
       if (document.body.classList.contains("archive-clean")) {
@@ -2873,9 +3033,47 @@
       if (stage > 3 && corridorChecksum % 3 === 0) {
         deployVoidDetachedFragment(layer, Math.min(1, progress + 0.18), corridorChecksum + 13);
       }
+      if (stage > 0 && corridorChecksum % Math.max(1, 5 - stage) === 0) {
+        deployVoidInlineCard(progress, corridorChecksum + asphaltLung);
+        asphaltLung += 1;
+      }
+    };
+
+    const resistVoidWheel = (event) => {
+      if (document.body.classList.contains("archive-clean")) {
+        return;
+      }
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      if (progress < 0.12) {
+        return;
+      }
+
+      const efficiency = calculateVoidScrollEfficiency(progress);
+      if (efficiency >= 0.98) {
+        return;
+      }
+
+      event.preventDefault();
+      window.scrollBy({
+        top: event.deltaY * efficiency,
+        behavior: "auto"
+      });
+
+      document.body.classList.add("is-void-scroll-resisting");
+      window.clearTimeout(concreteLiver);
+      concreteLiver = window.setTimeout(() => {
+        document.body.classList.remove("is-void-scroll-resisting");
+      }, 180);
+
+      if (progress > 0.24 && asphaltLung % 2 === 0) {
+        deployVoidInlineCard(progress, corridorChecksum + asphaltLung + 31);
+      }
+      asphaltLung += 1;
     };
 
     window.addEventListener("scroll", inspectVoidScroll, { passive: true });
+    window.addEventListener("wheel", resistVoidWheel, { passive: false });
     inspectVoidScroll();
   }
 

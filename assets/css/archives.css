@@ -1453,7 +1453,7 @@ body.archive-shell {
 
 .void-scroll-chasm {
   position: relative;
-  min-height: clamp(1200px, 230vh, 2400px);
+  min-height: clamp(1800px, 360vh, 4200px);
   margin-top: 2rem;
   border-top: 2px solid var(--paper);
   overflow: hidden;
@@ -1517,6 +1517,88 @@ body.archive-shell {
   border-style: dashed;
   background: var(--steel);
   color: var(--paper);
+}
+
+.void-inline-card {
+  position: relative;
+  z-index: 2;
+  width: min(520px, 92%);
+  margin: 0.85rem 0 1rem clamp(0px, 9vw, 120px);
+  border: 2px solid var(--paper);
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 6px 6px 0 var(--steel);
+  font-family: var(--mono);
+  transform: rotate(var(--void-card-tilt, 0deg));
+  animation: void-card-arrival 0.24s steps(4, end);
+  pointer-events: none;
+}
+
+.void-inline-card::before {
+  content: "VOID PANEL";
+  display: block;
+  border-bottom: 2px solid var(--paper);
+  padding: 0.16rem 0.35rem;
+  background: var(--steel);
+  color: var(--paper);
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.void-inline-card__title,
+.void-inline-card__footer {
+  display: block;
+  padding: 0.22rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.void-inline-card__message {
+  margin: 0;
+  border-top: 2px solid var(--steel);
+  border-bottom: 2px solid var(--steel);
+  padding: 0.55rem 0.45rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 0.84rem;
+  line-height: 1.25;
+}
+
+.void-inline-card__footer {
+  text-align: right;
+  color: var(--dust);
+}
+
+.void-inline-card--1,
+.void-inline-card--4 {
+  margin-left: clamp(0px, 2vw, 28px);
+}
+
+.void-inline-card--2,
+.void-inline-card--5 {
+  margin-left: auto;
+  margin-right: clamp(0px, 4vw, 56px);
+}
+
+.void-inline-card--unstable {
+  border-style: dashed;
+  box-shadow: 9px 9px 0 var(--ink), 12px 12px 0 var(--steel);
+}
+
+.void-inline-card--terminal {
+  width: min(680px, 100%);
+  margin-top: 1.25rem;
+  margin-bottom: 1.35rem;
+  border-color: var(--dust);
+  box-shadow: 12px 12px 0 var(--steel);
+}
+
+.is-void-scroll-resisting.archive-doc-06 .void-inline-card,
+.is-void-scroll-resisting.archive-doc-06 .void-scroll-shard:nth-child(3n) {
+  animation: void-text-vibration 0.16s steps(3, end);
 }
 
 .void-vortex-layer {
@@ -1728,7 +1810,8 @@ body.archive-shell {
   display: none;
 }
 
-.archive-clean .void-detached-fragment {
+.archive-clean .void-detached-fragment,
+.archive-clean .void-inline-card {
   display: none;
 }
 
@@ -1854,6 +1937,24 @@ body.archive-shell {
   }
 }
 
+@keyframes void-card-arrival {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  45% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+  70% {
+    clip-path: inset(0 0 42% 0);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 @keyframes void-text-vibration {
   0% {
     transform: translate(0, 0) skewX(0deg);
@@ -1943,7 +2044,8 @@ body.archive-shell {
   .archive-doc-06 .essay p,
   .archive-doc-06 .archive-scramble-fragment,
   .archive-doc-06 .archive-zalgo-fragment,
-  .archive-doc-06 .void-recovery-fragment {
+  .archive-doc-06 .void-recovery-fragment,
+  .archive-doc-06 .void-inline-card {
     animation: none !important;
     text-shadow: none !important;
     transform: none !important;
