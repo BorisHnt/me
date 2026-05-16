@@ -231,6 +231,10 @@ body.archive-shell {
   padding: 18px 0 96px;
 }
 
+.archive-doc-06 .document-shell {
+  z-index: 35;
+}
+
 .archive-document {
   position: relative;
   border-top: 2px solid var(--steel);
@@ -1455,6 +1459,7 @@ body.archive-shell {
   position: relative;
   min-height: clamp(1800px, 360vh, 4200px);
   margin-top: 2rem;
+  margin-bottom: 1000px;
   border-top: 2px solid var(--paper);
   overflow: hidden;
 }
@@ -1613,7 +1618,7 @@ body.archive-shell {
 .void-darkness-overlay {
   position: fixed;
   inset: 0;
-  z-index: 34;
+  z-index: 1;
   background: var(--ink);
   opacity: var(--void-darkness, 0);
   pointer-events: none;

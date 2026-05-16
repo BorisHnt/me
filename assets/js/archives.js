@@ -2976,7 +2976,7 @@
   }
 
   function calculateVoidScrollEfficiency(progress) {
-    return Math.max(0.5, 1 - progress * 0.5);
+    return Math.max(0.72, 1 - progress * 0.28);
   }
 
   function deployVoidInlineCard(progress, index) {
