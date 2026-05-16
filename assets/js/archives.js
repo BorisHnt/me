@@ -3047,12 +3047,11 @@
       fragments.forEach((fragment, index) => {
         const angle = Number(fragment.dataset.voidAngle || 0);
         const spin = Number(fragment.dataset.voidSpin || 0);
-        const activeRadius = 2.4 + progress * (1.8 + (index % 5) * 0.22);
         fragment.style.setProperty("--void-fragment-opacity", String(Math.min(1, 0.32 + progress * 0.72)));
         fragment.style.transform = [
           "translate(-50%, -50%)",
           `rotate(${angle + progress * (120 + (index % 9) * 8)}deg)`,
-          `translateX(${activeRadius}vmin)`,
+          "translateX(2.4vmin)",
           `rotate(${88 + spin - progress * 90}deg)`,
           `skewX(${progress * -9}deg)`
         ].join(" ");
