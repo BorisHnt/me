@@ -1409,7 +1409,7 @@ body.archive-shell {
   padding: 1rem;
   background: var(--ink);
   color: var(--paper);
-  box-shadow: var(--window-shadow);
+  box-shadow: 3px 3px 0 rgb(86 90 117 / var(--void-document-shadow-opacity, 1));
   overflow: visible;
 }
 
@@ -1884,12 +1884,12 @@ body.archive-shell {
   text-decoration: none;
 }
 
-.archive-clean.void-page .essay {
+.archive-clean .void-page .essay {
   background: var(--paper);
   color: var(--ink);
 }
 
-.archive-clean.void-page .essay p {
+.archive-clean .void-page .essay p {
   color: var(--ink);
 }
 

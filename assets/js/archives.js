@@ -3050,6 +3050,7 @@
       if (document.body.classList.contains("archive-clean")) {
         layer.replaceChildren();
         document.querySelector("[data-void-darkness-overlay]")?.style.setProperty("--void-darkness", "0");
+        document.body.style.setProperty("--void-document-shadow-opacity", "1");
         document.body.classList.remove("is-void-scroll-tearing");
         fractureVoidParagraphs(0, 0);
         return;
@@ -3067,9 +3068,11 @@
       document.body.dataset.voidStage = String(stage);
       layer.style.setProperty("--void-pull", String(progress));
       layer.style.setProperty("--void-opacity", String(Math.min(0.92, 0.005 + progress * 0.915)));
+      const darknessProgress = progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.05);
+      document.body.style.setProperty("--void-document-shadow-opacity", String(1 - darknessProgress));
       document.querySelector("[data-void-darkness-overlay]")?.style.setProperty(
         "--void-darkness",
-        String(progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.05))
+        String(darknessProgress)
       );
       layer.style.setProperty("--void-ring-rotation", `${progress * 1040}deg`);
       layer.style.setProperty("--void-ring-scale", String(Math.max(0.68, 1 - progress * 0.3)));
