@@ -238,6 +238,7 @@
   function appendArchiveListing(output) {
     const block = document.createElement("div");
     block.className = "operator-terminal__block operator-terminal__links";
+    const archiveBasePath = window.location.hostname.endsWith("github.io") ? "/me" : "";
     const lines = [
       "RECOVERED ARCHIVE DOCUMENTS",
       "",
@@ -269,7 +270,7 @@
       if (/^\/archives\/.+\.html$/.test(path) || path === "/archives/index.html") {
         row.append(document.createTextNode(line.slice(0, line.indexOf(path))));
         const link = document.createElement("a");
-        link.href = path;
+        link.href = `${archiveBasePath}${path}`;
         link.textContent = path;
         row.append(link);
       } else {
