@@ -791,6 +791,9 @@ h1 {
   min-width: 86px;
   justify-content: center;
   background: var(--dust);
+  cursor: pointer;
+  appearance: none;
+  border-radius: 0;
 }
 
 .taskbar-start::before {
@@ -798,8 +801,8 @@ h1 {
   height: 17px;
   margin-right: 6px;
   background-color: var(--ink);
-  -webkit-mask: url("../img/icon-floppy.svg") center / 17px 17px no-repeat;
-  mask: url("../img/icon-floppy.svg") center / 17px 17px no-repeat;
+  -webkit-mask: url("../img/icon-spiral.svg") center / 17px 17px no-repeat;
+  mask: url("../img/icon-spiral.svg") center / 17px 17px no-repeat;
   content: "";
 }
 
@@ -821,6 +824,145 @@ h1 {
   padding: 0 0.65rem;
   background: var(--dust);
   box-shadow: var(--sunken);
+}
+
+.operator-terminal {
+  position: fixed;
+  right: clamp(12px, 8vw, 96px);
+  bottom: 58px;
+  z-index: 120;
+  display: grid;
+  width: min(760px, calc(100vw - 24px));
+  max-height: min(620px, calc(100vh - 92px));
+  grid-template-rows: auto minmax(220px, 1fr) auto;
+  border: 2px solid var(--border-dark);
+  background: var(--surface-alt);
+  box-shadow: var(--raised);
+  color: var(--text);
+}
+
+.operator-terminal[hidden] {
+  display: none;
+}
+
+.operator-terminal__titlebar {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 2px solid var(--border-dark);
+  padding: 3px 4px;
+  background: var(--titlebar-bg);
+  color: var(--titlebar-text);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.operator-terminal__icon {
+  width: 16px;
+  height: 16px;
+  background: var(--paper);
+  -webkit-mask: url("../img/icon-spiral.svg") center / 16px 16px no-repeat;
+  mask: url("../img/icon-spiral.svg") center / 16px 16px no-repeat;
+}
+
+.operator-terminal__title {
+  flex: 1;
+}
+
+.operator-terminal__close {
+  display: inline-grid;
+  width: 22px;
+  height: 20px;
+  place-items: center;
+  border: 2px solid var(--border-dark);
+  padding: 0;
+  background: var(--button-face);
+  box-shadow: var(--raised);
+  color: var(--button-text);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.operator-terminal__close:active {
+  box-shadow: var(--sunken);
+}
+
+.operator-terminal__output {
+  min-height: 0;
+  overflow: auto;
+  border: 2px solid var(--border-dark);
+  margin: 6px;
+  padding: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.38;
+  white-space: normal;
+}
+
+.operator-terminal__block,
+.operator-terminal__welcome,
+.operator-terminal__echo {
+  margin: 0 0 0.8rem;
+  color: inherit;
+  font: inherit;
+  white-space: pre-wrap;
+}
+
+.operator-terminal__echo {
+  color: var(--dust);
+  font-weight: 900;
+}
+
+.operator-terminal__links {
+  white-space: normal;
+}
+
+.operator-terminal__links a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.operator-terminal__form {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  border-top: 2px solid var(--border-dark);
+  padding: 6px;
+  background: var(--surface-alt);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.operator-terminal__prompt {
+  color: var(--ink);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.operator-terminal__input {
+  min-width: 0;
+  border: 2px solid var(--border-dark);
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+  padding: 4px 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  outline: 0;
+}
+
+.operator-terminal__input:focus {
+  outline: 1px dotted var(--ink);
+  outline-offset: -4px;
 }
 
 body.about-shell {
@@ -2094,6 +2236,21 @@ body.is-handheld-device.is-void-purged .void-translation-fragment {
 
   .taskbar-start {
     min-width: 78px;
+  }
+
+  .operator-terminal {
+    right: 6px;
+    bottom: 50px;
+    width: calc(100vw - 12px);
+    max-height: calc(100vh - 74px);
+  }
+
+  .operator-terminal__form {
+    grid-template-columns: 1fr;
+  }
+
+  .operator-terminal__prompt {
+    white-space: normal;
   }
 
   .taskbar-item {
