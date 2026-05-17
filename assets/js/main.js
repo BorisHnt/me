@@ -192,7 +192,9 @@
       personal: "Personal Projects",
       "42": "42 Support Projects",
       about: "About",
-      archives: "Archives"
+      archives: "Archives",
+      room: "Room",
+      "behind-room": "Behind Room"
     };
     const page = document.body.dataset.page;
     const taskLabel = document.querySelector("[data-task-label]");
@@ -396,6 +398,153 @@ No transmission performed.
 The machine only looked at itself.`;
   }
 
+  const terminalRuntimeState = {
+    mountedSources: new Set()
+  };
+
+  const terminalKnownPaths = new Set([
+    "index.html",
+    "personal-projects.html",
+    "42-projects.html",
+    "about.html",
+    "archives/index.html",
+    "archives/01-maintenance.html",
+    "archives/02-small-obsessions.html",
+    "archives/03-neuro-scrambling.html",
+    "archives/04-limerence.html",
+    "archives/05-unplanned-age.html",
+    "archives/06-void.html",
+    "room/index.html",
+    "room/behind-room/index.html"
+  ]);
+
+  function isRoomMounted() {
+    return terminalRuntimeState.mountedSources.has("room");
+  }
+
+  function getTerminalTreeAll() {
+    if (isRoomMounted()) {
+      return `/
+├── index.html
+├── personal-projects.html
+├── 42-projects.html
+├── about.html
+├── archives/
+│   ├── index.html
+│   ├── 01-maintenance.html
+│   ├── 02-small-obsessions.html
+│   ├── 03-neuro-scrambling.html
+│   ├── 04-limerence.html
+│   ├── 05-unplanned-age.html
+│   └── 06-void.html
+├── terminal
+│   └── mounted in footer window
+├── room/
+│   ├── index.html
+│   └── behind-room/
+│       └── index.html
+└── unmounted/
+    └── [empty]`;
+    }
+
+    return `/
+├── index.html
+├── personal-projects.html
+├── 42-projects.html
+├── about.html
+├── archives/
+│   ├── index.html
+│   ├── 01-maintenance.html
+│   ├── 02-small-obsessions.html
+│   ├── 03-neuro-scrambling.html
+│   ├── 04-limerence.html
+│   ├── 05-unplanned-age.html
+│   └── 06-void.html
+├── terminal
+│   └── mounted in footer window
+└── unmounted/
+    └── room`;
+  }
+
+  function getTerminalStatus() {
+    return `SYSTEM STATUS: PARTIAL
+TERMINAL: ONLINE
+OPERATOR: PRESENT
+ARCHIVES: 6 DOCUMENTS RECOVERED
+VOID PRESSURE: OBSERVED
+HIDDEN ROUTES: ${isRoomMounted() ? "MOUNTED" : "UNMOUNTED"}
+MOUNTED SOURCES: ${isRoomMounted() ? "room" : "none"}
+UNMOUNTED SOURCES: ${isRoomMounted() ? "none" : "room"}
+EXPLANATION: NOT FOUND`;
+  }
+
+  function normalizeTerminalPath(rawPath) {
+    return rawPath
+      .trim()
+      .replace(/^https?:\/\/borishnt\.github\.io\/me\//i, "")
+      .replace(/^\/me\//i, "")
+      .replace(/^\.?\//, "")
+      .replace(/^\/+/, "")
+      .replace(/\/+/g, "/");
+  }
+
+  function getSiteRelativePrefix() {
+    const pathname = window.location.pathname.replace(/\/+$/, "");
+    if (/\/room\/behind-room(?:\/index\.html)?$/.test(pathname)) {
+      return "../../";
+    }
+    if (/\/archives(?:\/[^/]+\.html)?$/.test(pathname) || /\/room(?:\/index\.html)?$/.test(pathname)) {
+      return "../";
+    }
+    return "";
+  }
+
+  function resolveTerminalOpenPath(path) {
+    return `${getSiteRelativePrefix()}${path}`;
+  }
+
+  function handleTerminalMount(command, output) {
+    const source = command.trim().slice("mount".length).trim().toLowerCase();
+
+    if (source === "room") {
+      if (isRoomMounted()) {
+        appendTerminalText(output, `MOUNT REQUEST: room
+STATUS: ALREADY MOUNTED`);
+        return;
+      }
+
+      terminalRuntimeState.mountedSources.add("room");
+      appendTerminalText(output, `MOUNT REQUEST: room
+STATUS: SUCCESS
+
+Mounted paths:
+room/index.html
+room/behind-room/index.html`);
+      return;
+    }
+
+    appendTerminalText(output, `MOUNT REQUEST: ${source || "[empty]"}
+STATUS: FAILED
+
+Unknown mount source.`);
+  }
+
+  function handleTerminalOpen(command, output) {
+    const path = normalizeTerminalPath(command.trim().slice("open".length));
+
+    if (!terminalKnownPaths.has(path)) {
+      appendTerminalText(output, `PATH NOT FOUND: ${path || "[empty]"}
+The requested file is either missing, hidden better than expected, or not part of this system.`);
+      return;
+    }
+
+    appendTerminalText(output, `OPENING: ${path}`);
+    return {
+      type: "open",
+      href: resolveTerminalOpenPath(path)
+    };
+  }
+
   function resolveTerminalCommand(command, output) {
     const normalized = command.trim().toLowerCase();
 
@@ -406,6 +555,9 @@ help
   Opens this command helper.
 
 clear
+  Clears the terminal output.
+
+cls
   Clears the terminal output.
 
 exit
@@ -425,11 +577,18 @@ status
   Displays the current terminal status.
 
 archives
-  Lists recovered archive documents.`);
+  Lists recovered archive documents.
+
+mount <source>
+  Mounts an unstable source into the visible tree.
+  This does not create access. It only reveals structure.
+
+open <path>
+  Opens a site path if it exists.`);
       return;
     }
 
-    if (normalized === "clear") {
+    if (normalized === "clear" || normalized === "cls") {
       return "clear";
     }
 
@@ -457,21 +616,7 @@ archives
     }
 
     if (normalized === "tree --all") {
-      appendTerminalText(output, `/
-├── index.html
-├── personal-projects.html
-├── 42-projects.html
-├── about.html
-├── archives/
-│   ├── index.html
-│   ├── 01-maintenance.html
-│   ├── 02-small-obsessions.html
-│   ├── 03-neuro-scrambling.html
-│   ├── 04-limerence.html
-│   ├── 05-unplanned-age.html
-│   └── 06-void.html
-└── unmounted/
-    └── [hidden route unavailable]`);
+      appendTerminalText(output, getTerminalTreeAll());
       return;
     }
 
@@ -481,19 +626,22 @@ archives
     }
 
     if (normalized === "status") {
-      appendTerminalText(output, `SYSTEM STATUS: PARTIAL
-TERMINAL: ONLINE
-OPERATOR: PRESENT
-ARCHIVES: 6 DOCUMENTS RECOVERED
-VOID PRESSURE: OBSERVED
-HIDDEN ROUTES: UNMOUNTED
-EXPLANATION: NOT FOUND`);
+      appendTerminalText(output, getTerminalStatus());
       return;
     }
 
     if (normalized === "archives") {
       appendArchiveListing(output);
       return;
+    }
+
+    if (normalized === "mount" || normalized.startsWith("mount ")) {
+      handleTerminalMount(command, output);
+      return;
+    }
+
+    if (normalized === "open" || normalized.startsWith("open ")) {
+      return handleTerminalOpen(command, output);
     }
 
     appendTerminalText(output, `COMMAND NOT FOUND: ${command}
@@ -573,6 +721,11 @@ Type "help" to open the command helper.`);
 
       const nextInput = appendActiveLine();
       scrollTerminalToBottom();
+      if (action && action.type === "open") {
+        window.setTimeout(() => {
+          window.location.href = action.href;
+        }, 180);
+      }
       window.requestAnimationFrame(() => nextInput.focus());
     }
 

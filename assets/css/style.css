@@ -337,6 +337,31 @@ p {
   width: min(900px, 100%);
 }
 
+.room-desktop {
+  min-height: calc(100vh - 160px);
+  place-items: center;
+}
+
+.room-window {
+  width: min(620px, 100%);
+}
+
+.room-window__body {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.room-window__body h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.room-window__small {
+  max-width: 480px;
+  color: var(--muted);
+}
+
 .title-bar {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
