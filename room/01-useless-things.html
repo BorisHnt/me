@@ -154,6 +154,13 @@
       text-align: right;
     }
 
+    .useless-section--plain p:nth-of-type(odd),
+    .useless-section--plain p:nth-of-type(even) {
+      max-width: none;
+      margin-left: 0;
+      text-align: left;
+    }
+
     .useless-section--staircase p {
       max-width: 680px;
       margin-bottom: 0.75rem;
@@ -291,8 +298,13 @@
     }
 
     .soft-scramble.is-scrambling {
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      max-width: none;
       background: #c6b7be;
       letter-spacing: 0.035em;
+      white-space: nowrap;
     }
 
     .soft-scramble[data-font-state="serif"] {
@@ -495,7 +507,7 @@
           <p>And still, I make them.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--woven useless-scroll-block useless-arrival--fold" data-drift-x="-18" data-drift-y="-10">
+        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--fold" data-drift-x="-18" data-drift-y="-10">
           <p>Not because I think they are important.</p>
           <p>Not because I am trying to prove a point.</p>
           <p>Not because I want to rebel against productivity in some clean, theoretical way.</p>
@@ -574,7 +586,7 @@
           <p>A strange website can become a place where the soul quietly <span class="soft-scramble" data-soft-scramble>repairs one loose wire</span>.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--woven useless-scroll-block useless-arrival--side" data-drift-x="-10" data-drift-y="-12">
+        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--side" data-drift-x="-10" data-drift-y="-12">
           <p>I like the idea that someone may find one of these things one day.</p>
           <p>Not everyone.</p>
           <p>Not an audience.</p>
@@ -603,7 +615,7 @@
           <p>And sometimes existence without demand feels like mercy.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--woven useless-scroll-block useless-arrival--fold" data-drift-x="-14" data-drift-y="-10">
+        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--fold" data-drift-x="-14" data-drift-y="-10">
           <p>I have emotional attachments to objects, to fragments, to creations that would probably look replaceable to someone else.</p>
           <p>But they are not replaceable to me.</p>
           <p>A thing is not only its function.</p>
