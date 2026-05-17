@@ -538,6 +538,12 @@ The requested file is either missing, hidden better than expected, or not part o
       return;
     }
 
+    if (path.startsWith("room/") && !isRoomMounted()) {
+      appendTerminalText(output, `ACCESS DENIED: ${path}
+Mount source first: room`);
+      return;
+    }
+
     appendTerminalText(output, `OPENING: ${path}`);
     return {
       type: "open",
