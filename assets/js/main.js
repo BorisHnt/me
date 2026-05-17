@@ -541,6 +541,7 @@ Type "help" to open the command helper.`);
       document.body.classList.remove("is-terminal-open");
       resetTerminalOutput(output);
       appendActiveLine();
+      terminal.dispatchEvent(new CustomEvent("operator-terminal-state", { detail: { open: false } }));
     }
 
     close.addEventListener("click", () => {
@@ -569,8 +570,9 @@ Type "help" to open the command helper.`);
         resetTerminalOutput(output);
       }
 
-      appendActiveLine();
+      const nextInput = appendActiveLine();
       scrollTerminalToBottom();
+      window.requestAnimationFrame(() => nextInput.focus());
     }
 
     function handleHistoryNavigation(event, input) {
@@ -710,12 +712,20 @@ Type "help" to open the command helper.`);
     launcher.addEventListener("click", () => {
       terminal.hidden = false;
       document.body.classList.add("is-terminal-open");
+      launcher.classList.add("is-active");
+      launcher.setAttribute("aria-pressed", "true");
       window.requestAnimationFrame(() => {
         const activeInput = input();
         if (activeInput) {
           activeInput.focus();
         }
       });
+    });
+
+    terminal.addEventListener("operator-terminal-state", (event) => {
+      const isOpen = Boolean(event.detail && event.detail.open);
+      launcher.classList.toggle("is-active", isOpen);
+      launcher.setAttribute("aria-pressed", String(isOpen));
     });
   }
 
