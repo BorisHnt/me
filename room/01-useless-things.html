@@ -3,9 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A placeholder room file about useless things in the Boris Hanicotte portfolio.">
+  <meta name="description" content="A poetic room file about useless things, private repairs and small emotional objects.">
   <title>01 — Useless Things — Boris Hanicotte</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .useless-page {
+      width: min(calc(100vw - 24px), 1120px);
+      padding-bottom: 84px;
+    }
+
+    .useless-window {
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      background: #fafbf6;
+    }
+
+    .useless-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 2px solid #0f0f1b;
+      padding: 6px;
+      background: #c6b7be;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .useless-toolbar span {
+      border: 1px solid #0f0f1b;
+      padding: 0.16rem 0.42rem;
+      background: #fafbf6;
+      box-shadow: var(--sunken);
+    }
+
+    .useless-article {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.2rem, 5vw, 4rem);
+      color: #0f0f1b;
+    }
+
+    .useless-article::before,
+    .useless-article::after {
+      position: absolute;
+      pointer-events: none;
+      content: "";
+    }
+
+    .useless-article::before {
+      top: 14rem;
+      right: clamp(1rem, 6vw, 5rem);
+      width: min(28vw, 220px);
+      height: min(28vw, 220px);
+      border: 2px solid #c6b7be;
+      opacity: 0.55;
+    }
+
+    .useless-article::after {
+      bottom: 16rem;
+      left: clamp(1rem, 8vw, 7rem);
+      width: min(35vw, 310px);
+      height: 120px;
+      border: 1px solid #565a75;
+      opacity: 0.3;
+    }
+
+    .useless-back {
+      margin-bottom: clamp(2rem, 8vw, 5rem);
+    }
+
+    .useless-kicker {
+      width: fit-content;
+      border: 1px solid #565a75;
+      margin-bottom: 1.2rem;
+      padding: 0.22rem 0.42rem;
+      background: #c6b7be;
+      color: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .useless-title {
+      max-width: 900px;
+      margin-bottom: clamp(3rem, 10vw, 8rem);
+      font-size: clamp(3rem, 9vw, 7.8rem);
+      line-height: 0.92;
+    }
+
+    .useless-scroll-block {
+      --settle: 0;
+      --drift-x: 0px;
+      --drift-y: 0px;
+      --letter-air: 0em;
+      position: relative;
+      transform: translate3d(var(--drift-x), var(--drift-y), 0);
+      opacity: calc(0.55 + (var(--settle) * 0.45));
+      transition: opacity 700ms ease, letter-spacing 700ms ease;
+      letter-spacing: var(--letter-air);
+    }
+
+    .useless-section {
+      position: relative;
+      max-width: 760px;
+      margin: clamp(2.5rem, 9vw, 7rem) 0;
+      font-size: clamp(1.02rem, 1.8vw, 1.2rem);
+      line-height: 1.85;
+    }
+
+    .useless-section p {
+      margin: 0 0 1.05rem;
+    }
+
+    .useless-section--right {
+      margin-left: auto;
+    }
+
+    .useless-section--center {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .useless-section--narrow {
+      max-width: 420px;
+      margin-left: clamp(0px, 10vw, 120px);
+      line-height: 2.05;
+    }
+
+    .useless-panel {
+      border: 2px solid #565a75;
+      padding: clamp(1rem, 3vw, 2rem);
+      background: #fafbf6;
+      box-shadow: 6px 6px 0 #c6b7be;
+    }
+
+    .useless-statement {
+      max-width: 940px;
+      margin: clamp(4rem, 14vw, 10rem) auto;
+      font-size: clamp(2.2rem, 7vw, 5.7rem);
+      font-weight: 900;
+      line-height: 1.02;
+      text-align: center;
+    }
+
+    .useless-statement--quiet {
+      max-width: 720px;
+      font-size: clamp(1.8rem, 5vw, 4.3rem);
+      line-height: 1.12;
+    }
+
+    .useless-isolated {
+      display: block;
+      width: fit-content;
+      max-width: 760px;
+      margin: clamp(3rem, 12vw, 9rem) auto;
+      border-top: 2px solid #c6b7be;
+      border-bottom: 2px solid #c6b7be;
+      padding: clamp(1rem, 4vw, 2rem);
+      font-size: clamp(1.35rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .useless-soft-list {
+      display: grid;
+      gap: 0.55rem;
+      max-width: 610px;
+      margin: clamp(2rem, 6vw, 4rem) auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    .useless-soft-list li {
+      border-left: 2px solid #c6b7be;
+      padding-left: 0.85rem;
+    }
+
+    .useless-question-stack {
+      display: grid;
+      gap: 0.35rem;
+      border-left: 2px solid #0f0f1b;
+      padding-left: 1rem;
+      font-family: var(--mono);
+      font-size: clamp(0.9rem, 1.6vw, 1rem);
+      line-height: 1.6;
+    }
+
+    .useless-fragment {
+      position: absolute;
+      z-index: 0;
+      border: 1px solid #565a75;
+      padding: 0.16rem 0.35rem;
+      background: #fafbf6;
+      color: #565a75;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 900;
+      line-height: 1.1;
+      opacity: 0.62;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .useless-fragment--a {
+      top: 34rem;
+      left: 1rem;
+    }
+
+    .useless-fragment--b {
+      top: 92rem;
+      right: 2rem;
+    }
+
+    .useless-fragment--c {
+      top: 156rem;
+      left: 8%;
+    }
+
+    .useless-fragment--d {
+      bottom: 42rem;
+      right: 8%;
+    }
+
+    .soft-scramble {
+      display: inline;
+      border-bottom: 1px solid #c6b7be;
+      text-decoration: none;
+      transition: letter-spacing 220ms ease, background 220ms ease;
+    }
+
+    .soft-scramble.is-scrambling {
+      background: #c6b7be;
+      letter-spacing: 0.035em;
+    }
+
+    .useless-final {
+      max-width: 860px;
+      margin: clamp(5rem, 14vw, 11rem) auto clamp(3rem, 8vw, 6rem);
+      text-align: center;
+    }
+
+    .useless-final p {
+      margin-bottom: 1.2rem;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.85;
+    }
+
+    .useless-final .useless-last-line {
+      margin-top: clamp(2rem, 8vw, 5rem);
+      font-size: clamp(2rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    @media (max-width: 760px) {
+      .useless-page {
+        width: min(calc(100vw - 12px), 100%);
+      }
+
+      .useless-article {
+        padding: 1rem;
+      }
+
+      .useless-title {
+        font-size: clamp(2.4rem, 15vw, 4.5rem);
+      }
+
+      .useless-section,
+      .useless-section--right,
+      .useless-section--narrow {
+        max-width: none;
+        margin-left: 0;
+      }
+
+      .useless-statement,
+      .useless-isolated {
+        text-align: left;
+      }
+
+      .useless-fragment {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .useless-scroll-block {
+        transform: none !important;
+        opacity: 1 !important;
+        letter-spacing: 0 !important;
+        transition: none !important;
+      }
+
+      .soft-scramble {
+        border-bottom-color: #565a75;
+      }
+    }
+  </style>
 </head>
 <body data-page="room">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -33,8 +331,8 @@
     </nav>
   </header>
 
-  <main id="main-content" class="desktop room-desktop">
-    <section class="window room-window" aria-labelledby="room-file-title">
+  <main id="main-content" class="desktop useless-page">
+    <section class="window useless-window" aria-labelledby="room-file-title">
       <div class="title-bar">
         <div class="window-controls" aria-hidden="true">
           <span></span>
@@ -43,16 +341,216 @@
         <span class="window-title">USELESS THINGS ARE NOT USELESS</span>
         <span class="window-chip">FILE 01</span>
       </div>
-      <div class="window-body room-window__body">
-        <p class="system-label">Room file / placeholder</p>
-        <h1 id="room-file-title">01 — Useless Things</h1>
-        <p>This file is under construction.</p>
-        <p class="room-window__small">Some things are useless only to systems that do not know how to measure relief.</p>
-        <a class="button button-small" href="index.html">Back to room</a>
+      <div class="useless-toolbar" aria-label="File metadata">
+        <span>room/01</span>
+        <span>private object</span>
+        <span>not optimized</span>
       </div>
+
+      <article class="useless-article">
+        <a class="button button-small useless-back" href="index.html">Back to room</a>
+        <p class="useless-kicker">Room file / soft artifact</p>
+        <h1 id="room-file-title" class="useless-title useless-scroll-block" data-drift-x="-12" data-drift-y="-18">Useless Things Are Not Always Useless</h1>
+
+        <span class="useless-fragment useless-fragment--a" data-float-fragment>small repair</span>
+        <span class="useless-fragment useless-fragment--b" data-float-fragment>no audience</span>
+        <span class="useless-fragment useless-fragment--c" data-float-fragment>sincere object</span>
+        <span class="useless-fragment useless-fragment--d" data-float-fragment>exists anyway</span>
+
+        <section class="useless-section useless-section--center useless-scroll-block" data-drift-y="-10">
+          <p>Some things are useless only to systems that do not know how to measure relief.</p>
+        </section>
+
+        <p class="useless-statement useless-scroll-block" data-drift-y="-24" data-letter-air="0.018">I make <span class="soft-scramble" data-soft-scramble>useless things</span>.</p>
+
+        <section class="useless-section useless-scroll-block" data-drift-x="10" data-drift-y="-14">
+          <p>At least, that is what they probably look like from the outside.</p>
+          <ul class="useless-soft-list">
+            <li>Music or sounds without listeners.</li>
+            <li>Visual experiments with no client, no brief, no purpose, no promise.</li>
+            <li>Tiny effects that almost nobody will notice.</li>
+            <li>Private creations that exist only because something inside me wanted them to exist.</li>
+            <li>Small websites nobody asked for.</li>
+            <li>Hidden pages that may never be found.</li>
+          </ul>
+          <p>There may be no audience.</p>
+          <p>Sometimes I am the only person who will ever see them.</p>
+          <p>And still, I make them.</p>
+        </section>
+
+        <section class="useless-section useless-section--right useless-scroll-block" data-drift-x="-18" data-drift-y="-10">
+          <p>Not because I think they are important.</p>
+          <p>Not because I am trying to prove a point.</p>
+          <p>Not because I want to rebel against productivity in some clean, theoretical way.</p>
+          <p>Most of the time, it is simpler than that.</p>
+          <p>My brain starts building.</p>
+          <p>It takes a strange idea, an image, a texture, a page, a sound, a small visual accident, and it begins arranging things until the inside of my head becomes <span class="soft-scramble" data-soft-scramble>slightly less unbearable</span>.</p>
+          <p>That is not a business model.</p>
+          <p>That is not a strategy.</p>
+          <p>That is barely even a decision.</p>
+          <p>It is more like a reflex.</p>
+        </section>
+
+        <p class="useless-isolated useless-scroll-block" data-drift-y="-22" data-letter-air="0.025">A small <span class="soft-scramble" data-soft-scramble>private repair</span>.</p>
+
+        <section class="useless-section useless-panel useless-scroll-block" data-drift-x="14" data-drift-y="-16">
+          <p>The problem is that the world does not always know what to do with things that do not explain themselves.</p>
+          <div class="useless-question-stack">
+            <span>It asks:</span>
+            <span>What is it for?</span>
+            <span>Can it be used?</span>
+            <span>Can it be sold?</span>
+            <span>Can it help your career?</span>
+            <span>Can it become a project?</span>
+            <span>Can it become a skill?</span>
+            <span>Can it become a line on a CV?</span>
+            <span>Can it justify the time you gave to it?</span>
+          </div>
+        </section>
+
+        <section class="useless-section useless-section--narrow useless-scroll-block" data-drift-x="-8" data-drift-y="-8">
+          <p>And sometimes the honest answer is no.</p>
+          <p>No, it will not make money.</p>
+          <p>No, it will not advance my life in any measurable direction.</p>
+          <p>No, it will not become useful to society in a way that sounds good in a meeting.</p>
+          <p>No, I cannot always explain why it had to exist.</p>
+        </section>
+
+        <section class="useless-section useless-section--center useless-scroll-block" data-drift-y="-18">
+          <p>It exists because making it <span class="soft-scramble" data-soft-scramble>made me feel something</span>.</p>
+          <p>Sometimes that is enough.</p>
+          <p>Or at least, I need it to be enough.</p>
+        </section>
+
+        <section class="useless-section useless-section--right useless-scroll-block" data-drift-x="-16" data-drift-y="-14">
+          <p>Because when everything has to be useful, I start feeling useless by extension.</p>
+          <p>If the things I love are treated as pointless, if the things that make me breathe are treated as childish, decorative, absurd or unnecessary, then something in me hears the same sentence applied to myself.</p>
+          <p>That is where <span class="soft-scramble" data-soft-scramble>the sadness enters</span>.</p>
+          <p>Not loudly.</p>
+          <p>Not dramatically.</p>
+          <p>It just sits there.</p>
+        </section>
+
+        <section class="useless-section useless-scroll-block" data-drift-x="12" data-drift-y="-12">
+          <p>The quiet idea that maybe I should be producing something clearer.</p>
+          <p>Something more serious.</p>
+          <p>Something more profitable.</p>
+          <p>Something easier to defend.</p>
+          <p>Something with a function.</p>
+          <p>But I do not want every part of my life to become a function.</p>
+          <p>I do not want every gesture to become a performance.</p>
+          <p>I do not want every creation to become an argument.</p>
+          <p>I do not want every hour to stand in front of a judge and prove that it was not wasted.</p>
+        </section>
+
+        <section class="useless-section useless-section--center useless-scroll-block" data-drift-y="-20" data-letter-air="0.012">
+          <p>Some things are allowed to be small.</p>
+          <p>Some things are allowed to be strange.</p>
+          <p>Some things are allowed to be useless in the eyes of the world and still be necessary to the person who made them.</p>
+        </section>
+
+        <section class="useless-section useless-panel useless-scroll-block" data-drift-x="-14" data-drift-y="-16">
+          <p>A hidden page can be a refuge.</p>
+          <p>A private image can be a room.</p>
+          <p>A tiny animation can be a pulse.</p>
+          <p>A bit of music can be an expressed emotion.</p>
+          <p>A strange website can become a place where the soul quietly <span class="soft-scramble" data-soft-scramble>repairs one loose wire</span>.</p>
+        </section>
+
+        <section class="useless-section useless-section--right useless-scroll-block" data-drift-x="-10" data-drift-y="-12">
+          <p>I like the idea that someone may find one of these things one day.</p>
+          <p>Not everyone.</p>
+          <p>Not an audience.</p>
+          <p>Not a crowd.</p>
+          <p>Just someone.</p>
+          <p>Someone curious enough to click too far.</p>
+          <p>Someone who opens a page that was not placed in the main corridor.</p>
+          <p>Someone who notices the useless detail and understands that it was not useless to me.</p>
+          <p>Maybe they will tell me.</p>
+          <p>Maybe they will not.</p>
+          <p>The possibility is enough to make the room feel less empty.</p>
+        </section>
+
+        <p class="useless-isolated useless-scroll-block" data-drift-y="-24">I do not need these things to convince anyone.</p>
+
+        <section class="useless-section useless-scroll-block" data-drift-x="12" data-drift-y="-10">
+          <p>That may be why I love them.</p>
+          <p>They do not ask me to become better.</p>
+          <p>They do not ask me to be efficient.</p>
+          <p>They do not ask me to justify why I kept them, made them, repaired them, arranged them or refused to throw them away.</p>
+        </section>
+
+        <p class="useless-statement useless-statement--quiet useless-scroll-block" data-drift-y="-28" data-letter-air="0.02">They simply exist.</p>
+
+        <section class="useless-section useless-section--center useless-scroll-block" data-drift-y="-12">
+          <p>And sometimes existence without demand feels like mercy.</p>
+        </section>
+
+        <section class="useless-section useless-section--right useless-scroll-block" data-drift-x="-14" data-drift-y="-10">
+          <p>I have emotional attachments to objects, to fragments, to creations that would probably look replaceable to someone else.</p>
+          <p>But they are not replaceable to me.</p>
+          <p>A thing is not only its function.</p>
+          <p>A thing is also the moment it entered your life.</p>
+          <p>The attention you gave it.</p>
+          <p>The feeling it carried.</p>
+          <p>The private reason nobody else can fully access.</p>
+        </section>
+
+        <section class="useless-section useless-panel useless-scroll-block" data-drift-x="10" data-drift-y="-14">
+          <p>Some objects survive.</p>
+          <p>Some ideas survive.</p>
+          <p>Some ridiculous little projects survive.</p>
+          <p>Some pages survive even if nobody visits them.</p>
+          <p>And when something survives long enough to become part of your inner landscape, throwing it away is not neutral.</p>
+          <p>It is not always cleaning.</p>
+          <p>Sometimes it feels like erasing a <span class="soft-scramble" data-soft-scramble>witness</span>.</p>
+        </section>
+
+        <section class="useless-section useless-section--narrow useless-scroll-block" data-drift-x="-8" data-drift-y="-10">
+          <p>Maybe that is why I keep building and keeping useless things.</p>
+          <p>They witness parts of me that the useful world does not know how to read.</p>
+          <p>They let me exist outside the roles.</p>
+          <p>Not student.</p>
+          <p>Not worker.</p>
+          <p>Not developer.</p>
+          <p>Not useful person.</p>
+          <p>Not functional object.</p>
+          <p>Just someone making something because making it <span class="soft-scramble" data-soft-scramble>felt good to the soul</span>.</p>
+        </section>
+
+        <section class="useless-section useless-section--center useless-scroll-block" data-drift-y="-18">
+          <p>That sentence sounds fragile.</p>
+          <p>Maybe it is.</p>
+          <p>But I think <span class="soft-scramble" data-soft-scramble>fragile things</span> deserve space too.</p>
+        </section>
+
+        <section class="useless-section useless-section--right useless-scroll-block" data-drift-x="-12" data-drift-y="-14">
+          <p>I would rather make something small and sincere than something large and empty.</p>
+          <p>I would rather lose time inside a useless creation that came from the heart than save time for a life that has no room for softness.</p>
+        </section>
+
+        <p class="useless-isolated useless-scroll-block" data-drift-y="-22">Useless things are not always useful.</p>
+
+        <section class="useless-final useless-scroll-block" data-drift-y="-28" data-letter-air="0.014">
+          <p>That is not the point.</p>
+          <p>They do not need to become useful to deserve protection.</p>
+          <p>They do not need to become productive to deserve time.</p>
+          <p>They do not need to become understandable to deserve existence.</p>
+          <p>Some things do not save you by solving anything.</p>
+          <p>They save you by giving you a place to put a feeling.</p>
+          <p>A shape.</p>
+          <p>A room.</p>
+          <p>A surface.</p>
+          <p>A tiny useless world where nothing asks you to become profitable before <span class="soft-scramble" data-soft-scramble>allowing you to breathe</span>.</p>
+          <p>Maybe that is enough.</p>
+          <p>Not because useless things secretly become useful.</p>
+          <p class="useless-last-line">Because usefulness was never the highest form of existence.</p>
+        </section>
+      </article>
+
       <div class="status-bar">
         <span>ROUTE: /room/01-useless-things.html</span>
-        <span>CONTENTS: NOT MOUNTED</span>
+        <span>STATE: BREATHING</span>
       </div>
     </section>
   </main>
@@ -69,5 +567,111 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const blocks = Array.from(document.querySelectorAll(".useless-scroll-block"));
+      const fragments = Array.from(document.querySelectorAll("[data-float-fragment]"));
+      const scrambleTargets = Array.from(document.querySelectorAll("[data-soft-scramble]"));
+      const characterPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+      let ticking = false;
+      let lastScramble = 0;
+
+      scrambleTargets.forEach((target) => {
+        target.dataset.originalText = target.textContent;
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      }, { threshold: 0.12 });
+
+      blocks.forEach((block) => observer.observe(block));
+
+      function mutateSoftly(text) {
+        const letters = text.split("");
+        const mutationCount = Math.max(1, Math.floor(text.length * 0.08));
+        for (let index = 0; index < mutationCount; index += 1) {
+          const position = Math.floor(Math.random() * letters.length);
+          if (letters[position] && letters[position] !== " ") {
+            letters[position] = characterPool[Math.floor(Math.random() * characterPool.length)];
+          }
+        }
+        return letters.join("");
+      }
+
+      function runSoftScramble() {
+        if (prefersReducedMotion || scrambleTargets.length === 0) {
+          return;
+        }
+
+        const visibleTargets = scrambleTargets.filter((target) => {
+          const rect = target.getBoundingClientRect();
+          return rect.top < window.innerHeight * 0.86 && rect.bottom > window.innerHeight * 0.12;
+        });
+
+        if (visibleTargets.length === 0) {
+          return;
+        }
+
+        const target = visibleTargets[Math.floor(Math.random() * visibleTargets.length)];
+        const original = target.dataset.originalText || target.textContent;
+        target.classList.add("is-scrambling");
+        target.textContent = mutateSoftly(original);
+        window.setTimeout(() => {
+          target.textContent = original;
+          target.classList.remove("is-scrambling");
+        }, 260);
+      }
+
+      function updateBreathingLayout() {
+        ticking = false;
+        if (prefersReducedMotion) {
+          return;
+        }
+
+        const viewportCenter = window.innerHeight / 2;
+        blocks.forEach((block) => {
+          const rect = block.getBoundingClientRect();
+          const distance = Math.abs((rect.top + rect.height / 2) - viewportCenter);
+          const closeness = Math.max(0, 1 - distance / (window.innerHeight * 0.82));
+          const driftX = Number(block.dataset.driftX || 0) * closeness;
+          const driftY = Number(block.dataset.driftY || 0) * closeness;
+          const letterAir = Number(block.dataset.letterAir || 0) * closeness;
+          block.style.setProperty("--settle", closeness.toFixed(3));
+          block.style.setProperty("--drift-x", `${driftX.toFixed(2)}px`);
+          block.style.setProperty("--drift-y", `${driftY.toFixed(2)}px`);
+          block.style.setProperty("--letter-air", `${letterAir.toFixed(4)}em`);
+        });
+
+        fragments.forEach((fragment, index) => {
+          const offset = Math.sin((window.scrollY * 0.002) + index) * 9;
+          fragment.style.transform = `translateY(${offset.toFixed(2)}px)`;
+        });
+
+        const now = performance.now();
+        if (now - lastScramble > 620) {
+          lastScramble = now;
+          runSoftScramble();
+        }
+      }
+
+      function requestBreathingLayout() {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateBreathingLayout);
+        }
+      }
+
+      if (!prefersReducedMotion) {
+        window.addEventListener("scroll", requestBreathingLayout, { passive: true });
+        window.addEventListener("resize", requestBreathingLayout);
+        requestBreathingLayout();
+      }
+    })();
+  </script>
 </body>
 </html>
