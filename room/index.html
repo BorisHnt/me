@@ -46,12 +46,26 @@
       <div class="window-body room-window__body">
         <p class="system-label">Mounted route / placeholder structure</p>
         <h1 id="room-title">Room</h1>
-        <nav class="room-directory-list" aria-label="Room files">
-          <a href="01-useless-things.html"><span>[FILE]</span> 01-useless-things.html</a>
-          <a href="02-broken-aesthetics.html"><span>[FILE]</span> 02-broken-aesthetics.html</a>
-          <a href="03-shells-and-stones.html"><span>[FILE]</span> 03-shells-and-stones.html</a>
-          <a href="behind-room/index.html"><span>[DIR ]</span> behind-room/</a>
-        </nav>
+        <section class="room-file-browser" aria-label="Room file browser">
+          <div class="room-file-browser__bar">
+            <span>Address</span>
+            <span>room/</span>
+          </div>
+          <nav class="room-file-browser__files" aria-label="Room files">
+            <a class="room-file" href="01-useless-things.html">
+              <span class="room-file__icon" aria-hidden="true"></span>
+              <span class="room-file__name">01-useless-things.html</span>
+            </a>
+            <a class="room-file" href="02-broken-aesthetics.html">
+              <span class="room-file__icon" aria-hidden="true"></span>
+              <span class="room-file__name">02-broken-aesthetics.html</span>
+            </a>
+            <a class="room-file" href="03-shells-and-stones.html">
+              <span class="room-file__icon" aria-hidden="true"></span>
+              <span class="room-file__name">03-shells-and-stones.html</span>
+            </a>
+          </nav>
+        </section>
         <p class="room-window__small">The structure exists. The contents are not mounted yet.</p>
         <a class="button button-small" href="../index.html">Back to home</a>
       </div>
