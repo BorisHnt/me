@@ -7,6 +7,11 @@
   <title>02 — Broken Aesthetics — Boris Hanicotte</title>
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
+    body[data-page="room"] {
+      background: #0f0f1b;
+      color: #fafbf6;
+    }
+
     .broken-page {
       width: min(calc(100vw - 24px), 1220px);
       padding-bottom: 92px;
@@ -74,9 +79,9 @@
       min-height: 100vh;
       padding: clamp(1rem, 4vw, 3.6rem);
       background:
-        radial-gradient(circle at 52% 18%, rgba(198, 183, 190, 0.18), transparent 24rem),
-        radial-gradient(circle at 12% 62%, rgba(86, 90, 117, 0.32), transparent 28rem),
-        repeating-linear-gradient(0deg, rgba(250, 251, 246, 0.025) 0 1px, transparent 1px 6px),
+        radial-gradient(circle at 52% 18%, rgba(198, 183, 190, 0.16), transparent 28rem),
+        radial-gradient(circle at 12% 62%, rgba(86, 90, 117, 0.26), transparent 32rem),
+        radial-gradient(circle at 76% 82%, rgba(250, 251, 246, 0.08), transparent 24rem),
         #0f0f1b;
       color: #fafbf6;
       isolation: isolate;
@@ -93,17 +98,18 @@
     .broken-surface::before {
       z-index: 0;
       background:
-        linear-gradient(90deg, transparent 0 18%, rgba(198, 183, 190, 0.07) 18% 18.4%, transparent 18.4% 69%, rgba(86, 90, 117, 0.16) 69% 69.5%, transparent 69.5%),
-        repeating-linear-gradient(90deg, transparent 0 46px, rgba(250, 251, 246, 0.025) 46px 47px);
+        radial-gradient(circle at 18% 22%, rgba(250, 251, 246, 0.08), transparent 21rem),
+        radial-gradient(circle at 84% 52%, rgba(198, 183, 190, 0.1), transparent 19rem),
+        linear-gradient(180deg, rgba(15, 15, 27, 0), rgba(15, 15, 27, 0.86));
       mix-blend-mode: screen;
     }
 
     .broken-surface::after {
       z-index: 2;
       background:
-        repeating-linear-gradient(0deg, transparent 0 3px, rgba(15, 15, 27, 0.55) 3px 4px),
-        linear-gradient(180deg, rgba(15, 15, 27, 0.1), transparent 18%, rgba(15, 15, 27, 0.34));
-      opacity: 0.32;
+        linear-gradient(90deg, transparent, rgba(250, 251, 246, 0.05), transparent),
+        linear-gradient(180deg, rgba(15, 15, 27, 0.04), transparent 18%, rgba(15, 15, 27, 0.38));
+      opacity: 0.22;
     }
 
     @keyframes codecoreDrift {
@@ -201,6 +207,64 @@
       72% { opacity: 0.34; transform: scaleY(0.4); }
     }
 
+    @keyframes nestedBoxPulse {
+      0%, 100% {
+        clip-path: inset(0 0 0 0);
+        opacity: 0.78;
+        box-shadow: inset 0 0 0 1px rgba(250, 251, 246, 0.1);
+      }
+      22% {
+        clip-path: inset(0 18% 0 0);
+        opacity: 1;
+        box-shadow: inset 10px 0 0 rgba(198, 183, 190, 0.28);
+      }
+      48% {
+        clip-path: inset(11% 0 0 14%);
+        box-shadow: inset -14px 0 0 rgba(86, 90, 117, 0.48);
+      }
+      71% {
+        clip-path: inset(0 0 19% 0);
+      }
+    }
+
+    @keyframes cardSignalTear {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) skewX(0deg);
+        filter: none;
+      }
+      12% {
+        transform: translate3d(calc(var(--tear-x) * 0.25), 0, 0) skewX(-0.8deg);
+      }
+      13% {
+        transform: translate3d(calc(var(--tear-x) * -0.35), 0, 0) skewX(1.3deg);
+      }
+      28% {
+        filter: contrast(1.35);
+      }
+      52% {
+        transform: translate3d(calc(var(--tear-x) * 0.5), -4px, 0) skewX(0.5deg);
+      }
+      53% {
+        transform: translate3d(calc(var(--tear-x) * -0.2), 3px, 0) skewX(-1deg);
+      }
+    }
+
+    @keyframes inlineDisruptionWake {
+      0% {
+        opacity: 0;
+        max-height: 0;
+        transform: translate3d(0, 18px, 0);
+      }
+      18% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+        max-height: 900px;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
     .broken-back {
       position: relative;
       z-index: 3;
@@ -245,12 +309,14 @@
       margin: clamp(2.8rem, 9vw, 7rem) 0;
       font-size: clamp(1rem, 1.65vw, 1.14rem);
       line-height: 1.78;
+      color: #fafbf6;
       transform: translate3d(var(--drift-x), var(--drift-y), 0);
       transition: transform 500ms ease, opacity 500ms ease;
     }
 
     .broken-section p {
       margin: 0 0 1rem;
+      color: #fafbf6;
     }
 
     .broken-section--right {
@@ -272,9 +338,9 @@
     .broken-section--panel {
       border: 2px solid #565a75;
       padding: clamp(1rem, 3vw, 2rem);
-      background: rgba(250, 251, 246, 0.94);
-      box-shadow: 8px 8px 0 rgba(198, 183, 190, 0.78);
-      color: #0f0f1b;
+      background: rgba(15, 15, 27, 0.96);
+      box-shadow: 8px 8px 0 rgba(86, 90, 117, 0.72);
+      color: #fafbf6;
     }
 
     .broken-section--dark {
@@ -306,6 +372,7 @@
       line-height: 0.95;
       text-align: center;
       text-transform: uppercase;
+      color: #fafbf6;
       animation: statementFault 6.8s steps(2, end) infinite;
     }
 
@@ -368,7 +435,7 @@
       z-index: 2;
       max-width: 920px;
       margin: clamp(3rem, 10vw, 8rem) auto;
-      border: 2px solid #0f0f1b;
+      border: 2px solid #565a75;
       padding: clamp(0.8rem, 3vw, 1.5rem);
       background: #0f0f1b;
       color: #fafbf6;
@@ -385,7 +452,7 @@
       width: min(980px, 100%);
       min-height: clamp(460px, 68vw, 760px);
       margin: clamp(3rem, 10vw, 8rem) auto;
-      border: 2px solid #0f0f1b;
+      border: 2px solid #565a75;
       background: #0f0f1b;
       color: #fafbf6;
       box-shadow: 10px 10px 0 #565a75;
@@ -465,8 +532,9 @@
       margin: clamp(3rem, 9vw, 7rem) auto;
       border: 2px solid #565a75;
       padding: clamp(1rem, 3vw, 1.8rem);
-      background: #fafbf6;
+      background: rgba(15, 15, 27, 0.96);
       box-shadow: var(--sunken);
+      color: #fafbf6;
       font-family: var(--mono);
       font-size: clamp(0.72rem, 1.4vw, 0.95rem);
       font-weight: 900;
@@ -489,9 +557,10 @@
     }
 
     .audio-damage__labels span {
-      border: 1px solid #0f0f1b;
+      border: 1px solid #565a75;
       padding: 0.12rem 0.35rem;
-      background: #c6b7be;
+      background: rgba(198, 183, 190, 0.18);
+      color: #fafbf6;
     }
 
     .spectrum-box {
@@ -698,9 +767,9 @@
       width: var(--panel-w);
       min-height: var(--panel-h);
       border: 2px solid #565a75;
-      background: rgba(250, 251, 246, 0.94);
-      box-shadow: 7px 7px 0 rgba(86, 90, 117, 0.72);
-      color: #0f0f1b;
+      background: rgba(15, 15, 27, 0.94);
+      box-shadow: 7px 7px 0 rgba(198, 183, 190, 0.24);
+      color: #fafbf6;
       font-family: var(--mono);
       font-size: 0.58rem;
       line-height: 1.05;
@@ -751,9 +820,10 @@
       position: absolute;
       width: var(--w);
       min-height: var(--h);
-      border: 2px solid #0f0f1b;
-      background: #fafbf6;
+      border: 2px solid #565a75;
+      background: rgba(15, 15, 27, 0.94);
       box-shadow: 5px 5px 0 rgba(86, 90, 117, 0.65);
+      color: #fafbf6;
       transform: translateY(var(--float));
       opacity: 0.78;
       font-family: var(--mono);
@@ -787,8 +857,8 @@
       z-index: 2;
       border: 1px solid #565a75;
       padding: 0.16rem 0.35rem;
-      background: #fafbf6;
-      color: #565a75;
+      background: #0f0f1b;
+      color: #fafbf6;
       font-family: var(--mono);
       font-size: 0.58rem;
       font-weight: 900;
@@ -833,6 +903,28 @@
       pointer-events: none;
     }
 
+    .inline-disruption-zone {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.55rem, 1.8vw, 1rem);
+      width: min(1040px, 100%);
+      margin: clamp(1.2rem, 4vw, 3rem) auto clamp(2rem, 7vw, 5rem);
+      pointer-events: none;
+      animation: inlineDisruptionWake 900ms steps(5, end) both;
+    }
+
+    .inline-disruption-zone:nth-of-type(2n) {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    }
+
+    .inline-disruption-zone:nth-of-type(3n) {
+      grid-template-columns: minmax(0, 1fr);
+      width: min(760px, 86%);
+      margin-left: 0;
+    }
+
     .scroll-codecore-feed--left {
       width: min(720px, 84%);
       margin-left: 0;
@@ -858,13 +950,17 @@
     }
 
     .scroll-codecore-card {
+      --tear-x: 12px;
       min-height: var(--card-height);
-      border: 2px solid #0f0f1b;
-      background: #fafbf6;
-      box-shadow: 6px 6px 0 #565a75;
+      border: 2px solid #565a75;
+      background: rgba(15, 15, 27, 0.98);
+      box-shadow: 6px 6px 0 rgba(198, 183, 190, 0.32);
+      color: #fafbf6;
       overflow: hidden;
       font-family: var(--mono);
-      animation: codecoreDrift 5.2s steps(2, end) infinite;
+      animation:
+        codecoreDrift 5.2s steps(2, end) infinite,
+        cardSignalTear var(--card-speed, 2.8s) steps(4, end) infinite;
     }
 
     .scroll-codecore-card:nth-child(3n) {
@@ -888,6 +984,35 @@
       font-size: clamp(0.5rem, 1vw, 0.76rem);
       line-height: 0.95;
       white-space: pre-wrap;
+    }
+
+    .scroll-codecore-nest {
+      display: grid;
+      gap: 0.42rem;
+      padding: 0 0.55rem 0.65rem;
+    }
+
+    .scroll-codecore-nest__box {
+      border: 1px solid #565a75;
+      padding: 0.38rem;
+      background: rgba(250, 251, 246, 0.055);
+      color: #fafbf6;
+      font-size: clamp(0.46rem, 0.88vw, 0.66rem);
+      line-height: 0.88;
+      white-space: pre;
+      overflow: hidden;
+      animation: nestedBoxPulse var(--nest-speed, 1.9s) steps(4, end) infinite;
+    }
+
+    .scroll-codecore-nest__box:nth-child(2n) {
+      margin-left: clamp(0.65rem, 2vw, 1.7rem);
+      color: #c6b7be;
+    }
+
+    .scroll-codecore-nest__box:nth-child(3n) {
+      margin-right: clamp(0.8rem, 2vw, 2rem);
+      background: rgba(86, 90, 117, 0.24);
+      color: #fafbf6;
     }
 
     .scroll-codecore-feed--left .scroll-codecore-card:nth-child(3n),
@@ -926,6 +1051,7 @@
     .surface-stable .ambient-node-field,
     .surface-stable .media-core-layer,
     .surface-stable .scroll-codecore-feed,
+    .surface-stable .inline-disruption-zone,
     .surface-stable .text-spark,
     .surface-stable .textmode-cascade {
       display: none;
@@ -944,6 +1070,7 @@
     .surface-stable .codecore-window,
     .surface-stable .glitch-fragment,
     .surface-stable .audio-damage__wave,
+    .surface-stable .scroll-codecore-nest__box,
     .surface-stable .broken-macroblocks span {
       transform: none !important;
       animation: none !important;
@@ -1011,6 +1138,11 @@
         width: 100%;
       }
 
+      .inline-disruption-zone {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
       .scroll-codecore-card:nth-child(3n) {
         grid-column: auto;
       }
@@ -1029,6 +1161,8 @@
       .node-map circle,
       .spectrum-box span,
       .scroll-codecore-card,
+      .inline-disruption-zone,
+      .scroll-codecore-nest__box,
       .glitch-fragment,
       .audio-damage__wave,
       .broken-macroblocks span {
@@ -1039,6 +1173,7 @@
 
       .ambient-node-field,
       .media-core-layer,
+      .inline-disruption-zone,
       .textmode-cascade,
       .text-spark {
         display: none !important;
@@ -1524,6 +1659,7 @@
       const glyphCharacters = ".:;,\"'^~-_=+|/\\\\[]{}()<>01il!?*#%";
       const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
       const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "pixel storm"];
+      const inlineDisruptionZones = [];
       let ticking = false;
       let lastMutation = 0;
       let lastSpark = 0;
@@ -1891,6 +2027,26 @@
         });
       }
 
+      function createInlineDisruptionZones() {
+        if (!fractureBlocks.length) {
+          return;
+        }
+
+        fractureBlocks.forEach((block, index) => {
+          if (index < 1 || index % 2 !== 0) {
+            return;
+          }
+
+          const zone = document.createElement("div");
+          zone.className = "inline-disruption-zone";
+          zone.dataset.feedThreshold = String(Math.max(0.06, 0.08 + index * 0.055));
+          zone.dataset.feedMax = String(2 + (index % 4));
+          zone.setAttribute("aria-hidden", "true");
+          block.insertAdjacentElement("afterend", zone);
+          inlineDisruptionZones.push(zone);
+        });
+      }
+
       function createScrollCodecoreCard(index, targetFeed) {
         if (!targetFeed) {
           return;
@@ -1898,7 +2054,9 @@
 
         const card = document.createElement("div");
         card.className = "scroll-codecore-card";
-        card.style.setProperty("--card-height", `${125 + ((index * 29) % 110)}px`);
+        card.style.setProperty("--card-height", `${190 + ((index * 47) % 210)}px`);
+        card.style.setProperty("--tear-x", `${8 + ((index * 13) % 34)}px`);
+        card.style.setProperty("--card-speed", `${1.2 + (index % 6) * 0.34}s`);
         card.style.animationDelay = `${(index % 7) * -430}ms`;
 
         const title = document.createElement("div");
@@ -1915,20 +2073,35 @@
         ];
         body.textContent = lines.join("\n");
 
-        card.append(title, body);
+        const nested = document.createElement("div");
+        nested.className = "scroll-codecore-nest";
+        const nestedCount = 2 + (index % 4);
+        for (let level = 0; level < nestedCount; level += 1) {
+          const inner = document.createElement("div");
+          inner.className = "scroll-codecore-nest__box";
+          inner.style.setProperty("--nest-speed", `${0.85 + ((index + level) % 7) * 0.28}s`);
+          inner.textContent = [
+            `${designLabel(index + level * 17)} // ${signalLabel(index + level)}`,
+            makeLargeGlyphNoise(index + level * 23, 34 + level * 8, 5 + (level % 3) * 2)
+          ].join("\n");
+          nested.append(inner);
+        }
+
+        card.append(title, body, nested);
         targetFeed.append(card);
       }
 
       function maybeGenerateScrollCards(progress) {
-        if (!scrollCodecoreFeeds.length || document.body.classList.contains("surface-stable")) {
+        const feeds = scrollCodecoreFeeds.concat(inlineDisruptionZones);
+        if (!feeds.length || document.body.classList.contains("surface-stable")) {
           return;
         }
 
-        scrollCodecoreFeeds.forEach((feed, feedIndex) => {
+        feeds.forEach((feed, feedIndex) => {
           const threshold = Number(feed.dataset.feedThreshold || 0.18);
           const maxCards = Number(feed.dataset.feedMax || 4);
           const localProgress = Math.max(0, progress - threshold);
-          const desiredCards = progress > threshold ? Math.min(maxCards, Math.floor(localProgress / 0.028) + 1) : 0;
+          const desiredCards = progress > threshold ? Math.min(maxCards, Math.floor(localProgress / 0.018) + 1) : 0;
           const currentCards = Number(feed.dataset.generatedCards || 0);
 
           for (let index = currentCards; index < desiredCards; index += 1) {
@@ -1946,7 +2119,7 @@
         }
 
         const activeSparks = document.querySelectorAll(".text-spark");
-        if (activeSparks.length > 12) {
+        if (activeSparks.length > 24) {
           activeSparks[0].remove();
         }
 
@@ -1995,7 +2168,7 @@
 
       function mutateText(text) {
         const chars = text.split("");
-        const count = Math.max(1, Math.floor(chars.length * 0.18));
+        const count = Math.max(1, Math.floor(chars.length * 0.34));
         for (let index = 0; index < count; index += 1) {
           const position = Math.floor(Math.random() * chars.length);
           if (chars[position] && chars[position] !== " ") {
@@ -2052,6 +2225,17 @@
           box.style.setProperty("--float", `${float.toFixed(2)}px`);
         });
 
+        document.querySelectorAll(".scroll-codecore-card").forEach((card, index) => {
+          const tear = 8 + progress * 46 + Math.sin(window.scrollY * 0.012 + index) * 18;
+          card.style.setProperty("--tear-x", `${tear.toFixed(2)}px`);
+          card.style.setProperty("--card-speed", `${Math.max(0.72, 2.4 - progress * 1.35 + (index % 4) * 0.12).toFixed(2)}s`);
+        });
+
+        document.querySelectorAll(".media-core-raster, .textmode-cascade").forEach((field, index) => {
+          const intensity = 0.34 + progress * 0.42 + Math.sin(window.scrollY * 0.004 + index) * 0.08;
+          field.style.opacity = Math.min(0.92, Math.max(0.22, intensity)).toFixed(2);
+        });
+
         if (ambientNodeField) {
           const sway = Math.sin(window.scrollY * 0.0018) * 18;
           ambientNodeField.style.transform = `translate3d(${sway.toFixed(2)}px, ${(-progress * 140).toFixed(2)}px, 0)`;
@@ -2084,12 +2268,12 @@
         maybeGenerateScrollCards(progress);
 
         const now = performance.now();
-        if (now - lastMutation > 430) {
+        if (now - lastMutation > 240) {
           lastMutation = now;
           mutateOneVisibleWord();
         }
 
-        if (now - lastSpark > 155) {
+        if (now - lastSpark > 86) {
           lastSpark = now;
           createTextSpark();
         }
@@ -2113,6 +2297,7 @@
       createCodecoreArt();
       createCodecoreNetwork();
       createCodecoreWindows();
+      createInlineDisruptionZones();
 
       if (stabilizer) {
         stabilizer.addEventListener("click", () => {
