@@ -276,6 +276,12 @@
     output.append(block);
   }
 
+  function resetTerminalOutput(output) {
+    output.replaceChildren();
+    appendTerminalText(output, `You are inside the Operator Terminal.
+Type "help" to open the command helper.`, "operator-terminal__welcome");
+  }
+
   function getBrowserDiagnostic() {
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     const colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -353,6 +359,9 @@ The machine only looked at itself.`;
 help
   Opens this command helper.
 
+clear
+  Clears the terminal output.
+
 tree
   Shows the public site architecture.
 
@@ -368,6 +377,11 @@ status
 
 archives
   Lists recovered archive documents.`);
+      return;
+    }
+
+    if (normalized === "clear") {
+      resetTerminalOutput(output);
       return;
     }
 
@@ -462,8 +476,7 @@ Type "help" to open the command helper.`);
     output.className = "operator-terminal__output";
     output.setAttribute("aria-live", "polite");
 
-    appendTerminalText(output, `You are inside the Operator Terminal.
-Type "help" to open the command helper.`, "operator-terminal__welcome");
+    resetTerminalOutput(output);
 
     const form = document.createElement("form");
     form.className = "operator-terminal__form";
