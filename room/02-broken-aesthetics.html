@@ -10,13 +10,14 @@
     .broken-page {
       width: min(calc(100vw - 24px), 1220px);
       padding-bottom: 92px;
+      background: #0f0f1b;
     }
 
     .broken-window {
       width: min(1160px, 100%);
       margin: 0 auto;
       overflow: visible;
-      background: #fafbf6;
+      background: #0f0f1b;
     }
 
     .surface-stabilizer {
@@ -73,10 +74,36 @@
       min-height: 100vh;
       padding: clamp(1rem, 4vw, 3.6rem);
       background:
-        linear-gradient(90deg, transparent 0 68%, rgba(86, 90, 117, 0.15) 68% 68.4%, transparent 68.4%),
-        #fafbf6;
-      color: #0f0f1b;
+        radial-gradient(circle at 52% 18%, rgba(198, 183, 190, 0.18), transparent 24rem),
+        radial-gradient(circle at 12% 62%, rgba(86, 90, 117, 0.32), transparent 28rem),
+        repeating-linear-gradient(0deg, rgba(250, 251, 246, 0.025) 0 1px, transparent 1px 6px),
+        #0f0f1b;
+      color: #fafbf6;
       isolation: isolate;
+    }
+
+    .broken-surface::before,
+    .broken-surface::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+    }
+
+    .broken-surface::before {
+      z-index: 0;
+      background:
+        linear-gradient(90deg, transparent 0 18%, rgba(198, 183, 190, 0.07) 18% 18.4%, transparent 18.4% 69%, rgba(86, 90, 117, 0.16) 69% 69.5%, transparent 69.5%),
+        repeating-linear-gradient(90deg, transparent 0 46px, rgba(250, 251, 246, 0.025) 46px 47px);
+      mix-blend-mode: screen;
+    }
+
+    .broken-surface::after {
+      z-index: 2;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 3px, rgba(15, 15, 27, 0.55) 3px 4px),
+        linear-gradient(180deg, rgba(15, 15, 27, 0.1), transparent 18%, rgba(15, 15, 27, 0.34));
+      opacity: 0.32;
     }
 
     @keyframes codecoreDrift {
@@ -140,6 +167,40 @@
       74% { letter-spacing: 0.1em; }
     }
 
+    @keyframes mediaCoreSweep {
+      0% { transform: translate3d(-18%, 0, 0); opacity: 0; }
+      12% { opacity: 0.85; }
+      48% { opacity: 0.22; }
+      100% { transform: translate3d(118%, 0, 0); opacity: 0; }
+    }
+
+    @keyframes mediaCoreStep {
+      0%, 100% { clip-path: inset(0 0 0 0); opacity: 0.42; }
+      14% { clip-path: inset(18% 0 7% 0); opacity: 0.88; }
+      38% { clip-path: inset(0 11% 44% 0); }
+      64% { clip-path: inset(45% 0 0 13%); opacity: 0.62; }
+      82% { clip-path: inset(0 0 26% 0); }
+    }
+
+    @keyframes panelWake {
+      0% { opacity: 0; transform: translate3d(0, 18px, 0); }
+      16% { opacity: 1; }
+      55% { opacity: 0.78; transform: translate3d(var(--panel-sway), -8px, 0); }
+      100% { opacity: 0.2; transform: translate3d(calc(var(--panel-sway) * -1), -28px, 0); }
+    }
+
+    @keyframes glyphRain {
+      0% { transform: translate3d(0, -12%, 0); opacity: 0.16; }
+      50% { opacity: 0.72; }
+      100% { transform: translate3d(0, 12%, 0); opacity: 0.22; }
+    }
+
+    @keyframes mediaScopePulse {
+      0%, 100% { opacity: 0.16; transform: scaleY(0.72); }
+      40% { opacity: 0.86; transform: scaleY(1.04); }
+      72% { opacity: 0.34; transform: scaleY(0.4); }
+    }
+
     .broken-back {
       position: relative;
       z-index: 3;
@@ -154,6 +215,7 @@
       margin-bottom: 1rem;
       padding: 0.2rem 0.45rem;
       background: #c6b7be;
+      color: #0f0f1b;
       font-family: var(--mono);
       font-size: 0.68rem;
       font-weight: 900;
@@ -210,8 +272,9 @@
     .broken-section--panel {
       border: 2px solid #565a75;
       padding: clamp(1rem, 3vw, 2rem);
-      background: #fafbf6;
-      box-shadow: 8px 8px 0 #c6b7be;
+      background: rgba(250, 251, 246, 0.94);
+      box-shadow: 8px 8px 0 rgba(198, 183, 190, 0.78);
+      color: #0f0f1b;
     }
 
     .broken-section--dark {
@@ -528,7 +591,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.34;
+      opacity: 0.72;
       pointer-events: none;
     }
 
@@ -546,7 +609,7 @@
     }
 
     .ambient-node-field circle {
-      fill: #fafbf6;
+      fill: #c6b7be;
       stroke: #565a75;
       stroke-width: 1.4;
     }
@@ -556,6 +619,124 @@
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 900;
+    }
+
+    .media-core-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .media-core-raster,
+    .media-core-scope,
+    .media-core-panel {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .media-core-raster {
+      width: var(--raster-w);
+      min-height: var(--raster-h);
+      border: 1px solid #565a75;
+      background: rgba(15, 15, 27, 0.86);
+      color: #fafbf6;
+      padding: 0.42rem;
+      font-family: var(--mono);
+      font-size: clamp(0.42rem, 0.78vw, 0.62rem);
+      font-weight: 900;
+      line-height: 0.82;
+      white-space: pre;
+      opacity: 0.44;
+      overflow: hidden;
+      mix-blend-mode: screen;
+      animation: mediaCoreStep var(--raster-speed) steps(5, end) infinite;
+    }
+
+    .media-core-raster::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, transparent, rgba(250, 251, 246, 0.16), transparent);
+      animation: mediaCoreSweep 2.8s steps(7, end) infinite;
+    }
+
+    .media-core-scope {
+      display: grid;
+      grid-template-columns: repeat(34, minmax(2px, 1fr));
+      align-items: end;
+      gap: 2px;
+      width: var(--scope-w);
+      height: var(--scope-h);
+      border: 1px solid #565a75;
+      padding: 7px;
+      background: rgba(15, 15, 27, 0.9);
+      opacity: 0.74;
+      box-shadow: inset 0 0 0 1px #0f0f1b;
+    }
+
+    .media-core-scope span {
+      display: block;
+      min-height: 8px;
+      background: #fafbf6;
+      transform-origin: bottom;
+      animation: mediaScopePulse var(--scope-speed) steps(6, end) infinite;
+      animation-delay: var(--scope-delay);
+    }
+
+    .media-core-scope span:nth-child(3n) {
+      background: #c6b7be;
+    }
+
+    .media-core-scope span:nth-child(5n) {
+      background: #565a75;
+    }
+
+    .media-core-panel {
+      --panel-sway: 18px;
+      width: var(--panel-w);
+      min-height: var(--panel-h);
+      border: 2px solid #565a75;
+      background: rgba(250, 251, 246, 0.94);
+      box-shadow: 7px 7px 0 rgba(86, 90, 117, 0.72);
+      color: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      line-height: 1.05;
+      opacity: 0;
+      overflow: hidden;
+      animation: panelWake 4.8s steps(5, end) forwards;
+    }
+
+    .media-core-panel__title {
+      border-bottom: 2px solid #0f0f1b;
+      padding: 0.18rem 0.32rem;
+      background: #565a75;
+      color: #fafbf6;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .media-core-panel__body {
+      padding: 0.42rem;
+      white-space: pre-wrap;
+    }
+
+    .textmode-cascade {
+      position: absolute;
+      z-index: 1;
+      width: min(420px, 44vw);
+      color: #c6b7be;
+      font-family: var(--mono);
+      font-size: clamp(0.48rem, 0.72vw, 0.66rem);
+      font-weight: 900;
+      line-height: 0.78;
+      white-space: pre;
+      opacity: 0.34;
+      pointer-events: none;
+      animation: glyphRain 5.8s steps(6, end) infinite;
+      mix-blend-mode: screen;
     }
 
     .codecore-layer {
@@ -718,7 +899,8 @@
     .text-spark {
       position: fixed;
       z-index: 91;
-      color: #0f0f1b;
+      color: #fafbf6;
+      text-shadow: 2px 0 0 #565a75, -2px 0 0 #c6b7be;
       font-family: var(--mono);
       font-size: 0.68rem;
       font-weight: 900;
@@ -742,8 +924,10 @@
     .surface-stable .codecore-raster--damage,
     .surface-stable .codecore-raster--back,
     .surface-stable .ambient-node-field,
+    .surface-stable .media-core-layer,
     .surface-stable .scroll-codecore-feed,
-    .surface-stable .text-spark {
+    .surface-stable .text-spark,
+    .surface-stable .textmode-cascade {
       display: none;
     }
 
@@ -854,6 +1038,8 @@
       }
 
       .ambient-node-field,
+      .media-core-layer,
+      .textmode-cascade,
       .text-spark {
         display: none !important;
       }
@@ -911,6 +1097,7 @@
       <article class="broken-surface" data-broken-surface>
         <div class="codecore-layer" data-codecore-layer aria-hidden="true"></div>
         <div class="ambient-node-field" data-ambient-node-field aria-hidden="true"></div>
+        <div class="media-core-layer" data-media-core-layer aria-hidden="true"></div>
         <span class="glitch-fragment glitch-fragment--a">signal signal signal</span>
         <span class="glitch-fragment glitch-fragment--b">broken render</span>
         <span class="glitch-fragment glitch-fragment--c">frame / frame / frame</span>
@@ -1271,6 +1458,7 @@
       const surface = document.querySelector("[data-broken-surface]");
       const layer = document.querySelector("[data-codecore-layer]");
       const ambientNodeField = document.querySelector("[data-ambient-node-field]");
+      const mediaCoreLayer = document.querySelector("[data-media-core-layer]");
       const spectrumBox = document.querySelector("[data-spectrum-box]");
       const scrollCodecoreFeeds = Array.from(document.querySelectorAll("[data-scroll-codecore-feed]"));
       const codecoreArt = Array.from(document.querySelectorAll("[data-codecore-art]"));
@@ -1299,6 +1487,18 @@
       const glyphCharacters = ".:;,\"'^~-_=+|/\\\\[]{}()<>01il!?*#%";
       const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
       const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "codecore"];
+      const mediaCoreTitles = [
+        "MEDIACORE_BUFFER",
+        "LUMA_DAMAGE",
+        "FRAME_FIELD",
+        "DATAMOSH_SCOPE",
+        "BIT_DEPTH_FAULT",
+        "TEXTURE_PIPE",
+        "SIGNAL_ORGAN",
+        "SURFACE_ENGINE",
+        "AUDIO_REACTOR",
+        "ASCII_BODY"
+      ];
       const scrollCardTitles = [
         "SCROLL_DAMAGE_01",
         "BUFFER_GHOST_02",
@@ -1322,7 +1522,11 @@
       let ticking = false;
       let lastMutation = 0;
       let lastSpark = 0;
+      let lastMediaPanel = 0;
       let generatedScrollCards = 0;
+      let generatedMediaPanels = 0;
+      const ambientNodes = [];
+      const ambientLinks = [];
 
       glitchWords.forEach((word) => {
         word.dataset.originalText = word.textContent;
@@ -1340,6 +1544,23 @@
             line += ` ${codecoreWords[seed % codecoreWords.length]}`;
           }
           rows.push(line);
+        }
+        return rows.join("\n");
+      }
+
+      function makeLargeGlyphNoise(seed, width = 44, height = 18) {
+        const rows = [];
+        const glyphs = " .,:;^~-=+|/\\\\[]{}()<>01il!?#%";
+        for (let y = 0; y < height; y += 1) {
+          let row = "";
+          for (let x = 0; x < width; x += 1) {
+            const wave = Math.sin((x + seed) * 0.32) + Math.cos((y - seed) * 0.41);
+            const tear = Math.sin(x * 0.17 + y * 0.88 + seed) > 0.64;
+            const band = y % (3 + (seed % 4)) === 0;
+            const index = Math.abs(Math.floor(x * 7 + y * 13 + seed * 19)) % glyphs.length;
+            row += wave > 0.15 || tear || band ? glyphs[index] : " ";
+          }
+          rows.push(row);
         }
         return rows.join("\n");
       }
@@ -1500,7 +1721,7 @@
 
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("viewBox", "0 0 1000 3200");
-        svg.setAttribute("preserveAspectRatio", "none");
+        svg.setAttribute("preserveAspectRatio", "xMidYMin meet");
 
         const points = [];
         for (let index = 0; index < 46; index += 1) {
@@ -1519,6 +1740,7 @@
               line.setAttribute("x2", target[0]);
               line.setAttribute("y2", target[1]);
               svg.append(line);
+              ambientLinks.push({ line, from: index, to: targetIndex });
             }
           });
         });
@@ -1529,6 +1751,7 @@
           circle.setAttribute("cy", y);
           circle.setAttribute("r", index % 6 === 0 ? 5 : 3);
           svg.append(circle);
+          const record = { baseX: x, baseY: y, x, y, circle, label: null, phase: index * 0.47 };
 
           if (index % 4 === 0) {
             const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -1536,10 +1759,83 @@
             label.setAttribute("y", y - 7);
             label.textContent = `node ${String(index).padStart(2, "0")}`;
             svg.append(label);
+            record.label = label;
           }
+          ambientNodes.push(record);
         });
 
         ambientNodeField.append(svg);
+      }
+
+      function createMediaCoreRaster(index) {
+        if (!mediaCoreLayer) {
+          return;
+        }
+
+        const raster = document.createElement("pre");
+        raster.className = "media-core-raster";
+        raster.textContent = makeLargeGlyphNoise(index + 11, 52 + (index % 5) * 9, 14 + (index % 4) * 4);
+        raster.style.top = `${10 + index * 72}rem`;
+        raster.style.left = `${index % 2 === 0 ? 3 + (index % 5) * 6 : 58 + (index % 4) * 4}%`;
+        raster.style.setProperty("--raster-w", `${260 + (index % 4) * 62}px`);
+        raster.style.setProperty("--raster-h", `${120 + (index % 5) * 38}px`);
+        raster.style.setProperty("--raster-speed", `${2.4 + (index % 5) * 0.8}s`);
+        mediaCoreLayer.append(raster);
+      }
+
+      function createMediaScope(index) {
+        if (!mediaCoreLayer) {
+          return;
+        }
+
+        const scope = document.createElement("div");
+        scope.className = "media-core-scope";
+        scope.style.top = `${42 + index * 118}rem`;
+        scope.style.left = `${index % 2 === 0 ? 70 : 6}%`;
+        scope.style.setProperty("--scope-w", `${210 + (index % 3) * 70}px`);
+        scope.style.setProperty("--scope-h", `${90 + (index % 4) * 24}px`);
+        scope.style.setProperty("--scope-speed", `${520 + (index % 6) * 140}ms`);
+
+        for (let barIndex = 0; barIndex < 34; barIndex += 1) {
+          const bar = document.createElement("span");
+          const height = 0.18 + ((Math.sin(barIndex * 0.83 + index) + 1) * 0.42);
+          bar.style.transform = `scaleY(${height.toFixed(2)})`;
+          bar.style.setProperty("--scope-delay", `${-barIndex * 27}ms`);
+          scope.append(bar);
+        }
+        mediaCoreLayer.append(scope);
+      }
+
+      function createTextmodeCascade(index) {
+        if (!mediaCoreLayer) {
+          return;
+        }
+
+        const cascade = document.createElement("pre");
+        cascade.className = "textmode-cascade";
+        cascade.textContent = makeLargeGlyphNoise(index + 71, 58, 30);
+        cascade.style.top = `${24 + index * 96}rem`;
+        cascade.style.left = `${index % 3 === 0 ? 2 : index % 3 === 1 ? 39 : 66}%`;
+        cascade.style.animationDelay = `${index * -650}ms`;
+        mediaCoreLayer.append(cascade);
+      }
+
+      function createMediaCoreField() {
+        if (!mediaCoreLayer) {
+          return;
+        }
+
+        for (let index = 0; index < 13; index += 1) {
+          createMediaCoreRaster(index);
+        }
+
+        for (let index = 0; index < 9; index += 1) {
+          createMediaScope(index);
+        }
+
+        for (let index = 0; index < 8; index += 1) {
+          createTextmodeCascade(index);
+        }
       }
 
       function createCodecoreWindows() {
@@ -1650,6 +1946,38 @@
         window.setTimeout(() => spark.remove(), 950);
       }
 
+      function createMediaCorePanel(progress) {
+        if (!mediaCoreLayer || generatedMediaPanels > 34 || document.body.classList.contains("surface-stable")) {
+          return;
+        }
+
+        const panel = document.createElement("div");
+        panel.className = "media-core-panel";
+        panel.style.top = `${window.scrollY + 140 + Math.random() * (window.innerHeight * 0.62)}px`;
+        panel.style.left = `${8 + Math.random() * 76}%`;
+        panel.style.setProperty("--panel-w", `${150 + Math.random() * 220}px`);
+        panel.style.setProperty("--panel-h", `${80 + Math.random() * 150}px`);
+        panel.style.setProperty("--panel-sway", `${Math.floor(-38 + Math.random() * 76)}px`);
+        panel.style.animationDuration = `${3.2 + Math.random() * 2.8}s`;
+
+        const title = document.createElement("div");
+        title.className = "media-core-panel__title";
+        title.textContent = mediaCoreTitles[generatedMediaPanels % mediaCoreTitles.length];
+
+        const body = document.createElement("div");
+        body.className = "media-core-panel__body";
+        body.textContent = [
+          `scroll ${(progress * 100).toFixed(1)}%`,
+          makeGlyphField(generatedMediaPanels + 90),
+          `${codecoreWords[generatedMediaPanels % codecoreWords.length]} / ${codecoreWords[(generatedMediaPanels + 8) % codecoreWords.length]}`
+        ].join("\n");
+
+        panel.append(title, body);
+        mediaCoreLayer.append(panel);
+        generatedMediaPanels += 1;
+        window.setTimeout(() => panel.remove(), 6200);
+      }
+
       function mutateText(text) {
         const chars = text.split("");
         const count = Math.max(1, Math.floor(chars.length * 0.18));
@@ -1710,8 +2038,32 @@
         });
 
         if (ambientNodeField) {
-          const sway = Math.sin(window.scrollY * 0.0018) * 22;
+          const sway = Math.sin(window.scrollY * 0.0018) * 18;
           ambientNodeField.style.transform = `translate3d(${sway.toFixed(2)}px, ${(-progress * 140).toFixed(2)}px, 0)`;
+        }
+
+        if (ambientNodes.length) {
+          ambientNodes.forEach((node, index) => {
+            const x = node.baseX + Math.sin(window.scrollY * 0.006 + node.phase) * (18 + (index % 5) * 6);
+            const y = node.baseY + Math.cos(window.scrollY * 0.004 + node.phase) * (10 + (index % 7) * 4);
+            node.x = x;
+            node.y = y;
+            node.circle.setAttribute("cx", x.toFixed(2));
+            node.circle.setAttribute("cy", y.toFixed(2));
+            if (node.label) {
+              node.label.setAttribute("x", (x + 8).toFixed(2));
+              node.label.setAttribute("y", (y - 7).toFixed(2));
+            }
+          });
+
+          ambientLinks.forEach(({ line, from, to }) => {
+            const nodeA = ambientNodes[from];
+            const nodeB = ambientNodes[to];
+            line.setAttribute("x1", nodeA.x.toFixed(2));
+            line.setAttribute("y1", nodeA.y.toFixed(2));
+            line.setAttribute("x2", nodeB.x.toFixed(2));
+            line.setAttribute("y2", nodeB.y.toFixed(2));
+          });
         }
 
         maybeGenerateScrollCards(progress);
@@ -1726,6 +2078,11 @@
           lastSpark = now;
           createTextSpark();
         }
+
+        if (now - lastMediaPanel > 520) {
+          lastMediaPanel = now;
+          createMediaCorePanel(progress);
+        }
       }
 
       function requestBrokenUpdate() {
@@ -1737,6 +2094,7 @@
 
       createSpectrumBox();
       createAmbientNodeField();
+      createMediaCoreField();
       createCodecoreArt();
       createCodecoreNetwork();
       createCodecoreWindows();
