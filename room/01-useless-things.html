@@ -140,27 +140,6 @@
       box-shadow: 6px 6px 0 #c6b7be;
     }
 
-    .useless-section--woven {
-      max-width: 840px;
-    }
-
-    .useless-section--woven p:nth-of-type(odd) {
-      max-width: 78%;
-    }
-
-    .useless-section--woven p:nth-of-type(even) {
-      max-width: 72%;
-      margin-left: auto;
-      text-align: right;
-    }
-
-    .useless-section--plain p:nth-of-type(odd),
-    .useless-section--plain p:nth-of-type(even) {
-      max-width: none;
-      margin-left: 0;
-      text-align: left;
-    }
-
     .useless-section--staircase p {
       max-width: 680px;
       margin-bottom: 0.75rem;
@@ -201,6 +180,12 @@
       font-weight: 900;
       line-height: 1.02;
       text-align: center;
+    }
+
+    .useless-statement--single-line {
+      width: max-content;
+      max-width: none;
+      white-space: nowrap;
     }
 
     .useless-statement--quiet {
@@ -387,13 +372,6 @@
         margin-left: 0;
       }
 
-      .useless-section--woven p:nth-of-type(odd),
-      .useless-section--woven p:nth-of-type(even) {
-        max-width: none;
-        margin-left: 0;
-        text-align: left;
-      }
-
       .useless-section--staircase p,
       .useless-section--roles p:nth-last-child(-n+6) {
         margin-left: 0 !important;
@@ -402,6 +380,12 @@
       .useless-statement,
       .useless-isolated {
         text-align: left;
+      }
+
+      .useless-statement--single-line {
+        width: auto;
+        max-width: 100%;
+        white-space: normal;
       }
 
       .useless-shape-line,
@@ -490,9 +474,9 @@
           <p>Some things are useless only to systems that do not know how to measure relief.</p>
         </section>
 
-        <p class="useless-statement useless-scroll-block" data-drift-y="-24" data-letter-air="0.018">I make <span class="soft-scramble" data-soft-scramble>useless things</span>.</p>
+        <p class="useless-statement useless-statement--single-line useless-scroll-block" data-drift-y="-24" data-letter-air="0.018">I make <span class="soft-scramble" data-soft-scramble>useless things</span>.</p>
 
-        <section class="useless-section useless-section--woven useless-scroll-block useless-arrival--side" data-drift-x="10" data-drift-y="-14">
+        <section class="useless-section useless-scroll-block useless-arrival--side" data-drift-x="10" data-drift-y="-14">
           <p>At least, that is what they probably look like from the outside.</p>
           <ul class="useless-soft-list">
             <li>Music or sounds without listeners.</li>
@@ -507,7 +491,7 @@
           <p>And still, I make them.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--fold" data-drift-x="-18" data-drift-y="-10">
+        <section class="useless-section useless-section--right useless-scroll-block useless-arrival--fold" data-drift-x="-18" data-drift-y="-10">
           <p>Not because I think they are important.</p>
           <p>Not because I am trying to prove a point.</p>
           <p>Not because I want to rebel against productivity in some clean, theoretical way.</p>
@@ -586,7 +570,7 @@
           <p>A strange website can become a place where the soul quietly <span class="soft-scramble" data-soft-scramble>repairs one loose wire</span>.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--side" data-drift-x="-10" data-drift-y="-12">
+        <section class="useless-section useless-section--right useless-scroll-block useless-arrival--side" data-drift-x="-10" data-drift-y="-12">
           <p>I like the idea that someone may find one of these things one day.</p>
           <p>Not everyone.</p>
           <p>Not an audience.</p>
@@ -615,7 +599,7 @@
           <p>And sometimes existence without demand feels like mercy.</p>
         </section>
 
-        <section class="useless-section useless-section--right useless-section--plain useless-scroll-block useless-arrival--fold" data-drift-x="-14" data-drift-y="-10">
+        <section class="useless-section useless-section--right useless-scroll-block useless-arrival--fold" data-drift-x="-14" data-drift-y="-10">
           <p>I have emotional attachments to objects, to fragments, to creations that would probably look replaceable to someone else.</p>
           <p>But they are not replaceable to me.</p>
           <p>A thing is not only its function.</p>
