@@ -3,12 +3,498 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A placeholder room file about broken aesthetics in the Boris Hanicotte portfolio.">
+  <meta name="description" content="An experimental room file about broken aesthetics, glitch, damaged sound and unstable interfaces.">
   <title>02 — Broken Aesthetics — Boris Hanicotte</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .broken-page {
+      width: min(calc(100vw - 24px), 1220px);
+      padding-bottom: 92px;
+    }
+
+    .broken-window {
+      width: min(1160px, 100%);
+      margin: 0 auto;
+      overflow: visible;
+      background: #fafbf6;
+    }
+
+    .surface-stabilizer {
+      position: fixed;
+      top: 45%;
+      left: 8px;
+      z-index: 90;
+      max-width: 126px;
+      border: 2px solid #0f0f1b;
+      padding: 0.55rem 0.62rem;
+      background: #c6b7be;
+      box-shadow: var(--raised);
+      color: #0f0f1b;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 900;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    .surface-stabilizer:hover,
+    .surface-stabilizer:focus-visible {
+      background: #fafbf6;
+    }
+
+    .surface-stabilizer[aria-pressed="true"] {
+      box-shadow: var(--sunken);
+    }
+
+    .broken-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 2px solid #0f0f1b;
+      padding: 6px;
+      background: #c6b7be;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .broken-toolbar span {
+      border: 1px solid #0f0f1b;
+      padding: 0.16rem 0.42rem;
+      background: #fafbf6;
+      box-shadow: var(--sunken);
+    }
+
+    .broken-surface {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      padding: clamp(1rem, 4vw, 3.6rem);
+      background:
+        linear-gradient(90deg, transparent 0 68%, rgba(86, 90, 117, 0.15) 68% 68.4%, transparent 68.4%),
+        #fafbf6;
+      color: #0f0f1b;
+      isolation: isolate;
+    }
+
+    .broken-back {
+      position: relative;
+      z-index: 3;
+      margin-bottom: clamp(2rem, 7vw, 5rem);
+    }
+
+    .broken-kicker {
+      position: relative;
+      z-index: 3;
+      width: fit-content;
+      border: 1px solid #565a75;
+      margin-bottom: 1rem;
+      padding: 0.2rem 0.45rem;
+      background: #c6b7be;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .broken-title {
+      position: relative;
+      z-index: 3;
+      max-width: 920px;
+      margin-bottom: clamp(3rem, 10vw, 8rem);
+      font-family: var(--mono);
+      font-size: clamp(3.3rem, 10vw, 9rem);
+      font-weight: 900;
+      line-height: 0.85;
+      text-transform: uppercase;
+      text-shadow: 4px 0 0 #c6b7be, -2px 2px 0 #565a75;
+    }
+
+    .broken-section {
+      --drift-x: 0px;
+      --drift-y: 0px;
+      --fracture: 0;
+      position: relative;
+      z-index: 3;
+      max-width: 780px;
+      margin: clamp(2.8rem, 9vw, 7rem) 0;
+      font-size: clamp(1rem, 1.65vw, 1.14rem);
+      line-height: 1.78;
+      transform: translate3d(var(--drift-x), var(--drift-y), 0);
+      transition: transform 500ms ease, opacity 500ms ease;
+    }
+
+    .broken-section p {
+      margin: 0 0 1rem;
+    }
+
+    .broken-section--right {
+      margin-left: auto;
+    }
+
+    .broken-section--narrow {
+      max-width: 430px;
+      margin-left: clamp(0px, 9vw, 110px);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      line-height: 1.9;
+    }
+
+    .broken-section--wide {
+      max-width: 920px;
+    }
+
+    .broken-section--panel {
+      border: 2px solid #565a75;
+      padding: clamp(1rem, 3vw, 2rem);
+      background: #fafbf6;
+      box-shadow: 8px 8px 0 #c6b7be;
+    }
+
+    .broken-section--dark {
+      border: 2px solid #565a75;
+      padding: clamp(1rem, 3vw, 2rem);
+      background: #0f0f1b;
+      color: #fafbf6;
+      box-shadow: 8px 8px 0 #565a75;
+    }
+
+    .broken-section--fracture p:nth-child(odd) {
+      max-width: 78%;
+    }
+
+    .broken-section--fracture p:nth-child(even) {
+      max-width: 78%;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .broken-statement {
+      position: relative;
+      z-index: 3;
+      max-width: 1040px;
+      margin: clamp(4rem, 13vw, 10rem) auto;
+      font-family: var(--mono);
+      font-size: clamp(2rem, 7.4vw, 6.7rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .broken-statement--serif {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      text-transform: none;
+    }
+
+    .broken-line-stack {
+      display: grid;
+      gap: 0.35rem;
+      margin: clamp(2rem, 6vw, 4rem) 0;
+      font-family: var(--mono);
+      font-size: clamp(0.9rem, 1.6vw, 1.02rem);
+      font-weight: 900;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .broken-line-stack span {
+      width: fit-content;
+      border-left: 2px solid #c6b7be;
+      padding-left: 0.55rem;
+    }
+
+    .broken-line-stack span:nth-child(2n) {
+      margin-left: clamp(1rem, 7vw, 5rem);
+    }
+
+    .broken-macroblocks {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 22px;
+      gap: 3px;
+      max-width: 820px;
+      margin: clamp(3rem, 9vw, 7rem) auto;
+      opacity: 0.82;
+      pointer-events: none;
+    }
+
+    .broken-macroblocks span {
+      border: 1px solid #565a75;
+      background: #c6b7be;
+    }
+
+    .broken-macroblocks span:nth-child(3n) { background: #0f0f1b; }
+    .broken-macroblocks span:nth-child(4n) { grid-column: span 2; }
+    .broken-macroblocks span:nth-child(5n) { background: #fafbf6; box-shadow: inset 0 0 0 2px #565a75; }
+
+    .glyph-art {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      margin: clamp(3rem, 10vw, 8rem) auto;
+      border: 2px solid #0f0f1b;
+      padding: clamp(0.8rem, 3vw, 1.5rem);
+      background: #0f0f1b;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: clamp(0.48rem, 1vw, 0.75rem);
+      line-height: 1.1;
+      white-space: pre;
+      overflow: hidden;
+    }
+
+    .audio-damage {
+      position: relative;
+      z-index: 3;
+      max-width: 940px;
+      margin: clamp(3rem, 9vw, 7rem) auto;
+      border: 2px solid #565a75;
+      padding: clamp(1rem, 3vw, 1.8rem);
+      background: #fafbf6;
+      box-shadow: var(--sunken);
+      font-family: var(--mono);
+      font-size: clamp(0.72rem, 1.4vw, 0.95rem);
+      font-weight: 900;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .audio-damage__wave {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .audio-damage__labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 1rem;
+    }
+
+    .audio-damage__labels span {
+      border: 1px solid #0f0f1b;
+      padding: 0.12rem 0.35rem;
+      background: #c6b7be;
+    }
+
+    .node-map {
+      position: relative;
+      z-index: 2;
+      width: min(920px, 100%);
+      height: 330px;
+      margin: clamp(3rem, 10vw, 8rem) auto;
+      border: 2px solid #565a75;
+      background: #fafbf6;
+      box-shadow: 8px 8px 0 #c6b7be;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .node-map svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .node-map line,
+    .node-map circle {
+      stroke: #565a75;
+      fill: #fafbf6;
+      stroke-width: 2;
+    }
+
+    .node-map text {
+      fill: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .codecore-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .codecore-window {
+      --float: 0px;
+      position: absolute;
+      width: var(--w);
+      min-height: var(--h);
+      border: 2px solid #0f0f1b;
+      background: #fafbf6;
+      box-shadow: 5px 5px 0 rgba(86, 90, 117, 0.65);
+      transform: translateY(var(--float));
+      opacity: 0.78;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      line-height: 1.1;
+    }
+
+    .codecore-window.is-heavy {
+      background: #0f0f1b;
+      color: #fafbf6;
+    }
+
+    .codecore-window__title {
+      border-bottom: 2px solid #0f0f1b;
+      padding: 0.2rem 0.32rem;
+      background: #565a75;
+      color: #fafbf6;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .codecore-window__body {
+      padding: 0.4rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .glitch-fragment {
+      position: absolute;
+      z-index: 2;
+      border: 1px solid #565a75;
+      padding: 0.16rem 0.35rem;
+      background: #fafbf6;
+      color: #565a75;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 900;
+      opacity: 0.82;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .glitch-fragment--a { top: 46rem; left: 2%; }
+    .glitch-fragment--b { top: 112rem; right: 3%; }
+    .glitch-fragment--c { top: 188rem; left: 8%; }
+    .glitch-fragment--d { top: 270rem; right: 8%; }
+    .glitch-fragment--e { bottom: 68rem; left: 5%; }
+
+    .glitch-word {
+      display: inline;
+      border-bottom: 1px solid #565a75;
+      transition: letter-spacing 180ms ease, background 180ms ease;
+    }
+
+    .glitch-word.is-mutating {
+      display: inline-block;
+      position: relative;
+      z-index: 4;
+      background: #0f0f1b;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .font-mutant-serif {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+    }
+
+    .font-mutant-system {
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-weight: 900;
+    }
+
+    .surface-stable .codecore-window.is-heavy,
+    .surface-stable .glitch-fragment,
+    .surface-stable .broken-macroblocks {
+      display: none;
+    }
+
+    .surface-stable .codecore-window,
+    .surface-stable .glyph-art,
+    .surface-stable .node-map,
+    .surface-stable .audio-damage {
+      opacity: 0.28;
+    }
+
+    .surface-stable .broken-section,
+    .surface-stable .broken-statement,
+    .surface-stable .codecore-window {
+      transform: none !important;
+    }
+
+    .surface-stable .glitch-word {
+      background: transparent !important;
+      color: inherit !important;
+      font-family: inherit !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+    }
+
+    .surface-stable .broken-title {
+      text-shadow: none;
+    }
+
+    @media (max-width: 820px) {
+      .surface-stabilizer {
+        top: auto;
+        bottom: 52px;
+        left: 8px;
+      }
+
+      .broken-surface {
+        padding: 1rem;
+      }
+
+      .broken-title {
+        font-size: clamp(2.8rem, 16vw, 5rem);
+      }
+
+      .broken-section,
+      .broken-section--right,
+      .broken-section--narrow,
+      .broken-section--wide {
+        max-width: none;
+        margin-left: 0;
+      }
+
+      .broken-section--fracture p:nth-child(odd),
+      .broken-section--fracture p:nth-child(even) {
+        max-width: none;
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .codecore-window {
+        display: none;
+      }
+
+      .broken-macroblocks {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .broken-section,
+      .broken-statement,
+      .codecore-window {
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .glitch-word {
+        font-family: inherit !important;
+        letter-spacing: 0 !important;
+      }
+    }
+  </style>
 </head>
 <body data-page="room">
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <button class="surface-stabilizer" type="button" aria-pressed="false" data-stabilize-surface>Stabilize surface</button>
 
   <header class="menu-shell" data-site-header>
     <div class="shell-titlebar">
@@ -33,8 +519,8 @@
     </nav>
   </header>
 
-  <main id="main-content" class="desktop room-desktop">
-    <section class="window room-window" aria-labelledby="room-file-title">
+  <main id="main-content" class="desktop broken-page">
+    <section class="window broken-window" aria-labelledby="room-file-title">
       <div class="title-bar">
         <div class="window-controls" aria-hidden="true">
           <span></span>
@@ -43,16 +529,372 @@
         <span class="window-title">BROKEN AESTHETICS</span>
         <span class="window-chip">FILE 02</span>
       </div>
-      <div class="window-body room-window__body">
-        <p class="system-label">Room file / placeholder</p>
-        <h1 id="room-file-title">02 — Broken Aesthetics</h1>
-        <p>This file is under construction.</p>
-        <p class="room-window__small">A broken image sometimes tells the truth more honestly than a perfect surface.</p>
-        <a class="button button-small" href="index.html">Back to room</a>
+      <div class="broken-toolbar" aria-label="File metadata">
+        <span>room/02</span>
+        <span>render unstable</span>
+        <span>surface damaged</span>
       </div>
+
+      <article class="broken-surface" data-broken-surface>
+        <div class="codecore-layer" data-codecore-layer aria-hidden="true"></div>
+        <span class="glitch-fragment glitch-fragment--a">signal signal signal</span>
+        <span class="glitch-fragment glitch-fragment--b">broken render</span>
+        <span class="glitch-fragment glitch-fragment--c">frame / frame / frame</span>
+        <span class="glitch-fragment glitch-fragment--d">error became rhythm</span>
+        <span class="glitch-fragment glitch-fragment--e">alive / alive / alive</span>
+
+        <a class="button button-small broken-back" href="index.html">Back to room</a>
+        <p class="broken-kicker">Damaged interface archive</p>
+        <h1 id="room-file-title" class="broken-title" data-fracture-block>Broken Aesthetics</h1>
+
+        <section class="broken-section broken-section--wide" data-fracture-block>
+          <p>There is a kind of beauty that does not arrive cleanly.</p>
+          <p>It appears through bugs, offsets, noise, decay, compression, rupture, visual accidents, bad alignment, corrupted characters, unexpected traces, and structures that were never supposed to look like that.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>I have always been drawn to <span class="glitch-word" data-glitch-word>broken things</span>.</p>
+
+        <section class="broken-section broken-section--narrow" data-fracture-block>
+          <p>Not only digital ones.</p>
+          <div class="broken-line-stack">
+            <span>A bugged image.</span>
+            <span>A distorted interface.</span>
+            <span>A shape produced by accident.</span>
+            <span>A bad print offset on paper.</span>
+            <span>A line that should not have been there.</span>
+            <span>A frame damaged by compression.</span>
+            <span>A video collapsing through <span class="glitch-word" data-glitch-word>data moshing</span>.</span>
+          </div>
+          <p>A building abandoned long enough for the walls to begin losing the argument and for nature to quietly reclaim the surface.</p>
+        </section>
+
+        <div class="glyph-art" aria-hidden="true">..:://// raster surface ////::..
+0 1 0 1 0    ::signal::    ###___###___###
+░░▒▒▓▓  damaged frame  ▓▓▒▒░░
+....::::;;;;;;;;::::....      offset_node_09
+{ artifact } { artifact } { artifact }
+///// broken render ///// compression scar /////</div>
+
+        <section class="broken-section broken-section--right broken-section--fracture" data-fracture-block>
+          <p>All of that speaks to me.</p>
+          <p>Partly because it is strange.</p>
+          <p>Partly because it feels alive.</p>
+          <p>And partly because it resembles something familiar inside me.</p>
+          <p>Perfect surfaces can be beautiful.</p>
+          <p>I am not blind to that.</p>
+          <p>There are clean images I admire, precise compositions I respect, forms so controlled they almost feel ceremonial.</p>
+          <p>But very often, I lean toward the opposite side.</p>
+          <p>Toward the image that slipped.</p>
+          <p>Toward the structure that failed a little.</p>
+          <p>Toward the object that carries evidence of having lived through something.</p>
+          <p>Toward the visual system that stopped pretending to be invincible.</p>
+          <p>A flawless surface can impress me.</p>
+        </section>
+
+        <p class="broken-statement broken-statement--serif" data-fracture-block>A damaged one can move me.</p>
+
+        <div class="broken-macroblocks" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <section class="broken-section broken-section--panel" data-fracture-block>
+          <p>There is tenderness in imperfection.</p>
+          <p>A <span class="glitch-word" data-glitch-word>compression artifact</span>.</p>
+          <p>A broken render.</p>
+          <p>A visual glitch.</p>
+          <p>A misplaced layer.</p>
+          <p>A character corruption that unexpectedly turns into a form.</p>
+          <p>A frame that melts into the next one.</p>
+          <p>A texture produced by an error nobody planned.</p>
+          <p>An accident that opens a door instead of closing one.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>Sometimes the machine makes a mistake and accidentally becomes poetic.</p>
+
+        <section class="broken-section broken-section--wide" data-fracture-block>
+          <p>That matters to me.</p>
+          <p>The same thing happens with sound.</p>
+          <p>A clean sound can be beautiful.</p>
+          <p>But a damaged sound can feel alive.</p>
+        </section>
+
+        <div class="audio-damage" aria-hidden="true">
+          <span class="audio-damage__wave">▁▂▃▅▇▆▁▁▂▃▇▇▇▂▂▁ / stutter / ▁▁▆▅▃▂▂▇▇▁▁▁ / buffer fold</span>
+          <div class="audio-damage__labels">
+            <span>BUFFER ERROR</span>
+            <span>CLIPPED SIGNAL</span>
+            <span>BITCRUSH TRACE</span>
+            <span>ALIASING DETECTED</span>
+            <span>DAMAGED LOOP</span>
+            <span>AUDIO DAMAGE BECAME TEXTURE</span>
+          </div>
+        </div>
+
+        <section class="broken-section broken-section--dark" data-fracture-block>
+          <p><span class="glitch-word" data-glitch-word>Digital noise</span>.</p>
+          <p>Clipping.</p>
+          <p>Bitcrushed textures.</p>
+          <p><span class="glitch-word" data-glitch-word>Broken samples</span>.</p>
+          <p>Clicks.</p>
+          <p>Pops.</p>
+          <p>Buffer errors.</p>
+          <p>Aliasing.</p>
+          <p>Distorted transients.</p>
+          <p>A loop that does not close correctly.</p>
+          <p>A waveform that has been pushed too hard.</p>
+          <p>A piece of audio that sounds like it is remembering a file it lost.</p>
+        </section>
+
+        <section class="broken-section broken-section--right" data-fracture-block>
+          <p>I like when sound carries damage.</p>
+          <p>Not because damage is pleasant by itself.</p>
+          <p>Because sometimes the damage reveals a body inside the signal.</p>
+          <p>A perfect sound can float.</p>
+          <p>A broken one can touch the walls.</p>
+          <p>Glitched music can feel like a machine trying to sing through a wound.</p>
+          <p>It can stutter.</p>
+          <p>It can tear.</p>
+          <p>It can repeat the wrong fragment until the error becomes rhythm.</p>
+          <p>It can turn a failure into percussion.</p>
+          <p>It can make silence feel unstable.</p>
+          <p>It can make a broken frequency sound almost human.</p>
+        </section>
+
+        <section class="broken-section broken-section--panel broken-section--fracture" data-fracture-block>
+          <p>That kind of sound design fascinates me.</p>
+          <p>A noise can become emotion.</p>
+          <p>A corrupted sample can become atmosphere.</p>
+          <p>A digital crack can become texture.</p>
+          <p>A malfunction can become pressure.</p>
+          <p>A damaged loop can become a room.</p>
+          <p>Not every glitch is beautiful, of course.</p>
+          <p>Some are ugly.</p>
+          <p>Some are useless.</p>
+          <p>Some are only technical failures.</p>
+          <p>But sometimes the error becomes material.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>A defect becomes a signature.</p>
+
+        <section class="broken-section broken-section--wide" data-fracture-block>
+          <p>A bug stops being just a malfunction and becomes a texture.</p>
+          <p>A disturbance becomes a language.</p>
+          <p>A defect becomes a signature.</p>
+          <p>That transformation fascinates me.</p>
+          <p>I like when the surface confesses that it is a surface.</p>
+          <p>I like when an image admits that it is made of layers, noise, pixels, compression, fragility and unstable signals.</p>
+          <p>I like when sound admits that it is made of voltage, samples, clipping, breath, repetition and broken memory.</p>
+          <p>I like when the structure becomes visible.</p>
+          <p>Not because I want everything to collapse, but because I trust things a little more when they stop pretending to be perfect.</p>
+        </section>
+
+        <div class="node-map" aria-hidden="true">
+          <svg viewBox="0 0 920 330" role="img">
+            <line x1="72" y1="82" x2="235" y2="44"></line>
+            <line x1="235" y1="44" x2="394" y2="128"></line>
+            <line x1="394" y1="128" x2="610" y2="74"></line>
+            <line x1="610" y1="74" x2="820" y2="190"></line>
+            <line x1="162" y1="250" x2="394" y2="128"></line>
+            <line x1="162" y1="250" x2="548" y2="262"></line>
+            <line x1="548" y1="262" x2="820" y2="190"></line>
+            <circle cx="72" cy="82" r="8"></circle>
+            <circle cx="235" cy="44" r="7"></circle>
+            <circle cx="394" cy="128" r="10"></circle>
+            <circle cx="610" cy="74" r="7"></circle>
+            <circle cx="820" cy="190" r="9"></circle>
+            <circle cx="162" cy="250" r="7"></circle>
+            <circle cx="548" cy="262" r="8"></circle>
+            <text x="88" y="78">codecore 01</text>
+            <text x="250" y="40">node 15</text>
+            <text x="410" y="124">signal 09</text>
+            <text x="626" y="70">offset mesh</text>
+            <text x="668" y="212">surface fault</text>
+            <text x="178" y="246">ghost layer</text>
+            <text x="564" y="258">buffer room</text>
+          </svg>
+        </div>
+
+        <section class="broken-section broken-section--right" data-fracture-block>
+          <p>Things that are too smooth can feel cold to me.</p>
+          <p>Sometimes they feel beautiful, yes.</p>
+          <p>But also distant.</p>
+          <p>Corporate.</p>
+          <p>Over-sanitized.</p>
+          <p>Too resolved.</p>
+          <p>Too certain of themselves.</p>
+          <p>A lot of contemporary interfaces feel like they were cleaned so thoroughly that no human presence was allowed to remain on them.</p>
+          <p>They work.</p>
+          <p>Sometimes they even work very well.</p>
+          <p>But they do not always feel inhabited.</p>
+          <p>They do not always feel like they have a soul.</p>
+        </section>
+
+        <p class="broken-statement broken-statement--serif" data-fracture-block>I am more drawn to systems that seem <span class="glitch-word" data-glitch-word>slightly haunted</span>.</p>
+
+        <section class="broken-section broken-section--panel" data-fracture-block>
+          <p>A strange site that looks almost esoteric.</p>
+          <p>A page that feels like it should not exist in public.</p>
+          <p>An interface that behaves like it was assembled by somebody with too much affection and not enough interest in standardization.</p>
+          <p>A visual object that looks like it survived several versions of itself.</p>
+          <p>A sound that seems to come from a machine left alone in the dark for too long.</p>
+          <p>That kind of thing stays with me.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>The broken carries affect.</p>
+
+        <section class="broken-section broken-section--narrow" data-fracture-block>
+          <p>It carries uniqueness.</p>
+          <p>A defect is often an exception, and exceptions are difficult to replace.</p>
+          <p>That may be one reason I get attached to damaged things, old things, bugged things, visually unstable things, corrupted sounds and systems that do not behave exactly as expected.</p>
+          <p>They do not look interchangeable.</p>
+          <p>They feel singular.</p>
+          <p>And singular things are easier to love.</p>
+        </section>
+
+        <section class="broken-section broken-section--wide broken-section--fracture" data-fracture-block>
+          <p>There is also a deeper reason.</p>
+          <p>Broken aesthetics resemble my inner world more honestly than perfect ones do.</p>
+          <p>A clean system can be beautiful, but it does not always feel like home.</p>
+          <p>A disturbed one does.</p>
+          <p>Noise, interference, wrong alignment, instability, tension in the layout, visual discomfort, hidden structure, <span class="glitch-word" data-glitch-word>damaged signal</span>, beauty inside the error — all of that feels more emotionally accurate to me than a surface that behaves too well.</p>
+          <p>I do not only want design to function.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>I want it to feel alive.</p>
+
+        <section class="broken-section broken-section--right" data-fracture-block>
+          <p>I want it to breathe, drift, slip, vibrate, stutter, almost misbehave.</p>
+          <p>I want it to look inhabited.</p>
+          <p>I want it to sound inhabited too.</p>
+          <p>Sometimes that means control.</p>
+          <p>Sometimes that means intentional damage.</p>
+          <p>Sometimes that means setting up the conditions for an accident and seeing whether the accident says something more interesting than the plan did.</p>
+          <p>A lot of what I make lives somewhere between control and surrender.</p>
+          <p>Some broken effects are deliberate.</p>
+          <p>Some are guided accidents.</p>
+          <p>Some are chaos invited inside a frame.</p>
+          <p>Some are mistakes that became too beautiful to delete.</p>
+        </section>
+
+        <div class="glyph-art" aria-hidden="true">alive / alive / alive
+>>> frame_stutter_03              [surface admits surface]
+...---===###%%%###===---...
+broken broken broken        second life
+signal lost / signal found / signal bent
+:: not finished :: not obedient :: not dead ::</div>
+
+        <section class="broken-section broken-section--panel" data-fracture-block>
+          <p>I like all three states.</p>
+          <p>The brutal glitch.</p>
+          <p>The subtle glitch.</p>
+          <p>The poetic glitch.</p>
+          <p>Each one can do something different.</p>
+          <p>A brutal glitch can rupture the surface and force a new reading.</p>
+          <p>A subtle glitch can haunt the eye and create low-grade tension.</p>
+          <p>A poetic glitch can feel like a secret — like the machine almost whispered something and then returned to silence.</p>
+        </section>
+
+        <section class="broken-section broken-section--dark" data-fracture-block>
+          <p>In music, it is the same.</p>
+          <p>A brutal sound can hit like a physical object.</p>
+          <p>A subtle crackle can make the whole room feel unstable.</p>
+          <p>A tiny digital failure can change the emotional temperature of a track.</p>
+          <p>A repeated error can become a ritual.</p>
+          <p>That kind of instability is precious to me.</p>
+          <p>It makes the page feel less dead.</p>
+          <p>It makes the sound feel less obedient.</p>
+          <p>It makes the object feel less finished, and sometimes unfinished things have more room inside them.</p>
+        </section>
+
+        <section class="broken-section broken-section--wide" data-fracture-block>
+          <p>That is also true outside the digital world.</p>
+          <p>An abandoned building can be magnificent because it no longer belongs entirely to its original function.</p>
+          <p>It begins to drift.</p>
+          <p>Its use becomes unstable.</p>
+          <p>Its identity loosens.</p>
+          <p>Its walls crack.</p>
+          <p>Its surfaces peel.</p>
+          <p>Light enters differently.</p>
+          <p>Plants arrive without permission.</p>
+          <p>The place becomes something larger than what it was designed to be.</p>
+          <p>It decays, yes.</p>
+          <p>But it also transforms.</p>
+          <p>There is a strange dignity in that.</p>
+        </section>
+
+        <section class="broken-section broken-section--right broken-section--fracture" data-fracture-block>
+          <p>I feel something similar when a design breaks open.</p>
+          <p>When the interface slips.</p>
+          <p>When the layout refuses total obedience.</p>
+          <p>When text mutates.</p>
+          <p>When glyphs produce forms they were never supposed to produce.</p>
+          <p>When visual noise starts behaving like meaning.</p>
+          <p>When audio damage becomes rhythm.</p>
+          <p>When a corrupted signal becomes atmosphere.</p>
+          <p>It is not just damage.</p>
+        </section>
+
+        <p class="broken-statement" data-fracture-block>It is a <span class="glitch-word" data-glitch-word>second life</span>.</p>
+
+        <section class="broken-section broken-section--narrow" data-fracture-block>
+          <p>Maybe that is what I love most.</p>
+          <p>Not damage by itself.</p>
+          <p>Not ugliness for its own sake.</p>
+          <p>Not failure as a posture.</p>
+          <p>What I love is the moment when a thing escapes its intended shape and becomes more itself through the fracture.</p>
+          <p>The moment when the bug leaves a scar and the scar becomes part of the face.</p>
+          <p>The moment when the sound breaks and the break becomes the voice.</p>
+          <p>The moment when imperfection stops being a defect and starts becoming presence.</p>
+        </section>
+
+        <section class="broken-section broken-section--panel" data-fracture-block>
+          <p>I think that is why broken things can comfort me.</p>
+          <p>They do not judge.</p>
+          <p>They do not demand symmetry from me.</p>
+          <p>They do not ask me to be resolved.</p>
+          <p>They do not pretend that coherence is the only path to beauty.</p>
+          <p>They have lived a little.</p>
+          <p>They have shifted.</p>
+          <p>They have been touched by error.</p>
+          <p>They carry evidence.</p>
+          <p>And because of that, they feel closer.</p>
+        </section>
+
+        <section class="broken-section broken-section--right" data-fracture-block>
+          <p>I can love a polished thing.</p>
+          <p>But I love a wounded, unstable, singular thing differently.</p>
+          <p>With more tenderness.</p>
+          <p>With more affect.</p>
+          <p>With the sense that it has already survived enough to deserve even more care.</p>
+        </section>
+
+        <section class="broken-section broken-section--wide broken-section--fracture" data-fracture-block>
+          <p>Broken aesthetics are not only about visual taste.</p>
+          <p>They are also about permission.</p>
+          <p>Permission for the imperfect to remain visible.</p>
+          <p>Permission for the damaged to keep existing.</p>
+          <p>Permission for the strange to become beautiful.</p>
+          <p>Permission for a surface to admit that it has been altered.</p>
+          <p>Permission for a signal to keep speaking even after it has been damaged.</p>
+        </section>
+
+        <section class="broken-section broken-section--narrow" data-fracture-block>
+          <p>A perfect object may be admired.</p>
+          <p>A broken one may be understood.</p>
+          <p>And sometimes, understanding creates a deeper form of beauty than admiration ever could.</p>
+        </section>
+
+        <p class="broken-statement broken-statement--serif" data-fracture-block>The broken has a charm that many people do not see.</p>
+        <p class="broken-statement" data-fracture-block>To me, it is often where the life begins.</p>
+      </article>
+
       <div class="status-bar">
         <span>ROUTE: /room/02-broken-aesthetics.html</span>
-        <span>CONTENTS: NOT MOUNTED</span>
+        <span>STATE: UNSTABLE</span>
       </div>
     </section>
   </main>
@@ -69,5 +911,182 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const surface = document.querySelector("[data-broken-surface]");
+      const layer = document.querySelector("[data-codecore-layer]");
+      const stabilizer = document.querySelector("[data-stabilize-surface]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const fractureBlocks = Array.from(document.querySelectorAll("[data-fracture-block]"));
+      const glitchWords = Array.from(document.querySelectorAll("[data-glitch-word]"));
+      const codecoreTitles = [
+        "CODECORE_07",
+        "GLYPH_BUFFER",
+        "SIGNAL_MESH",
+        "BROKEN_RENDER",
+        "OFFSET_NODE",
+        "DATAMOSH_FRAME",
+        "AUDIO_DAMAGE",
+        "SURFACE_FAULT",
+        "HAUNTED_INTERFACE",
+        "ARTIFACT_WINDOW"
+      ];
+      const codecoreWords = [
+        "signal", "noise", "offset", "frame", "buffer", "surface", "artifact",
+        "glitch", "stutter", "damage", "alive", "second life", "compression",
+        "broken render", "data loss", "codecore"
+      ];
+      const glyphCharacters = ".:;,\"'^~-_=+|/\\\\[]{}()<>01il!?*#%";
+      const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
+      let ticking = false;
+      let lastMutation = 0;
+
+      glitchWords.forEach((word) => {
+        word.dataset.originalText = word.textContent;
+      });
+
+      function makeGlyphField(seed) {
+        const rows = [];
+        for (let row = 0; row < 5 + (seed % 4); row += 1) {
+          let line = "";
+          for (let col = 0; col < 20 + ((seed + row) % 18); col += 1) {
+            const pick = (seed * 17 + row * 11 + col * 7) % glyphCharacters.length;
+            line += glyphCharacters[pick];
+          }
+          if (row === 2) {
+            line += ` ${codecoreWords[seed % codecoreWords.length]}`;
+          }
+          rows.push(line);
+        }
+        return rows.join("\n");
+      }
+
+      function createCodecoreWindows() {
+        if (!layer) {
+          return;
+        }
+
+        const positions = [
+          [68, 3, 190, 88, false],
+          [125, 74, 240, 118, true],
+          [210, 6, 180, 96, false],
+          [318, 72, 260, 126, true],
+          [448, 4, 210, 96, false],
+          [535, 68, 245, 118, true],
+          [650, 9, 230, 108, false],
+          [782, 66, 255, 128, true],
+          [910, 5, 190, 92, false]
+        ];
+
+        positions.forEach(([top, left, width, height, heavy], index) => {
+          const box = document.createElement("div");
+          box.className = `codecore-window${heavy ? " is-heavy" : ""}`;
+          box.style.top = `${top}rem`;
+          box.style.left = `${left}%`;
+          box.style.setProperty("--w", `${width}px`);
+          box.style.setProperty("--h", `${height}px`);
+
+          const title = document.createElement("div");
+          title.className = "codecore-window__title";
+          title.textContent = codecoreTitles[index % codecoreTitles.length];
+
+          const body = document.createElement("div");
+          body.className = "codecore-window__body";
+          body.textContent = makeGlyphField(index + 3);
+
+          box.append(title, body);
+          layer.append(box);
+        });
+      }
+
+      function mutateText(text) {
+        const chars = text.split("");
+        const count = Math.max(1, Math.floor(chars.length * 0.18));
+        for (let index = 0; index < count; index += 1) {
+          const position = Math.floor(Math.random() * chars.length);
+          if (chars[position] && chars[position] !== " ") {
+            chars[position] = glyphCharacters[Math.floor(Math.random() * glyphCharacters.length)];
+          }
+        }
+        return chars.join("");
+      }
+
+      function mutateOneVisibleWord() {
+        if (reducedMotion || document.body.classList.contains("surface-stable")) {
+          return;
+        }
+
+        const visible = glitchWords.filter((word) => {
+          const rect = word.getBoundingClientRect();
+          return rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.08;
+        });
+
+        if (!visible.length) {
+          return;
+        }
+
+        const word = visible[Math.floor(Math.random() * visible.length)];
+        const original = word.dataset.originalText || word.textContent;
+        const fontClass = mutationFonts[Math.floor(Math.random() * mutationFonts.length)];
+        word.classList.add("is-mutating", fontClass);
+        word.textContent = mutateText(original);
+        window.setTimeout(() => {
+          word.textContent = original;
+          word.classList.remove("is-mutating", fontClass);
+        }, 230);
+      }
+
+      function updateBrokenSurface() {
+        ticking = false;
+        if (reducedMotion || document.body.classList.contains("surface-stable")) {
+          return;
+        }
+
+        const center = window.innerHeight / 2;
+        fractureBlocks.forEach((block, index) => {
+          const rect = block.getBoundingClientRect();
+          const closeness = Math.max(0, 1 - Math.abs((rect.top + rect.height / 2) - center) / (window.innerHeight * 0.72));
+          const direction = index % 2 === 0 ? 1 : -1;
+          block.style.setProperty("--drift-x", `${(direction * closeness * (5 + (index % 5) * 3)).toFixed(2)}px`);
+          block.style.setProperty("--drift-y", `${(-closeness * (3 + (index % 4) * 2)).toFixed(2)}px`);
+        });
+
+        document.querySelectorAll(".codecore-window").forEach((box, index) => {
+          const float = Math.sin(window.scrollY * 0.003 + index) * (8 + (index % 4) * 3);
+          box.style.setProperty("--float", `${float.toFixed(2)}px`);
+        });
+
+        const now = performance.now();
+        if (now - lastMutation > 430) {
+          lastMutation = now;
+          mutateOneVisibleWord();
+        }
+      }
+
+      function requestBrokenUpdate() {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateBrokenSurface);
+        }
+      }
+
+      createCodecoreWindows();
+
+      if (stabilizer) {
+        stabilizer.addEventListener("click", () => {
+          const stable = document.body.classList.toggle("surface-stable");
+          stabilizer.setAttribute("aria-pressed", String(stable));
+        });
+      }
+
+      if (!reducedMotion) {
+        window.addEventListener("scroll", requestBrokenUpdate, { passive: true });
+        window.addEventListener("resize", requestBrokenUpdate);
+        requestBrokenUpdate();
+      }
+    })();
+  </script>
 </body>
 </html>
