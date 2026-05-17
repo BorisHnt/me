@@ -1130,7 +1130,7 @@
         </section>
 
         <div class="codecore-composition" data-codecore-art="surface" aria-hidden="true">
-          <span class="codecore-caption">CODECORE SURFACE / DAMAGED FRAME</span>
+          <span class="codecore-caption">Pixel storm / Broken render</span>
         </div>
         <div class="scroll-codecore-feed scroll-codecore-feed--right" data-scroll-codecore-feed data-feed-threshold="0.10" data-feed-max="3" aria-hidden="true"></div>
 
@@ -1255,7 +1255,7 @@
         </section>
 
         <div class="node-map" data-codecore-network aria-hidden="true">
-          <span class="codecore-caption">NODE MESH / CODECORE MAP</span>
+          <span class="codecore-caption">Silent server / Digital canvas</span>
         </div>
         <div class="scroll-codecore-feed scroll-codecore-feed--wide" data-scroll-codecore-feed data-feed-threshold="0.39" data-feed-max="5" aria-hidden="true"></div>
 
@@ -1322,7 +1322,7 @@
         </section>
 
         <div class="codecore-composition" data-codecore-art="figure" aria-hidden="true">
-          <span class="codecore-caption">CODECORE FIGURE / SECOND LIFE</span>
+          <span class="codecore-caption">Lost data / Second life</span>
         </div>
         <div class="scroll-codecore-feed scroll-codecore-feed--left" data-scroll-codecore-feed data-feed-threshold="0.58" data-feed-max="4" aria-hidden="true"></div>
 
@@ -1467,58 +1467,63 @@
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const fractureBlocks = Array.from(document.querySelectorAll("[data-fracture-block]"));
       const glitchWords = Array.from(document.querySelectorAll("[data-glitch-word]"));
-      const codecoreTitles = [
-        "CODECORE_07",
-        "GLYPH_BUFFER",
-        "SIGNAL_MESH",
-        "BROKEN_RENDER",
-        "OFFSET_NODE",
-        "DATAMOSH_FRAME",
-        "AUDIO_DAMAGE",
-        "SURFACE_FAULT",
-        "HAUNTED_INTERFACE",
-        "ARTIFACT_WINDOW"
+      const designLabels = [
+        "Clean code", "Digital canvas", "Silent server", "Pixel storm",
+        "Código limpio", "Arte digital", "Servidor oscuro", "Datos perdidos",
+        "Codice pulito", "Arte digitale", "Rete invisibile", "Pixel rotti",
+        "Código limpo", "Servidor antigo", "Dados secretos", "Sauberer Code",
+        "Digitale Kunst", "Dunkler Server", "Verlorene Daten", "Schone code",
+        "Digitale kunst", "Stille machine", "Gebroken pixels", "Ren kod",
+        "Digital konst", "Tyst server", "Förlorade filer", "Ren kode",
+        "Mørk skjerm", "Gamle filer", "Stille netværk", "Tabte data",
+        "Puhdas koodi", "Digitaalinen taide", "Hiljainen palvelin", "Kadonneet tiedostot",
+        "Puhas kood", "Digitaalne kunst", "Vaikne server", "Kadunud andmed",
+        "Tīrs kods", "Digitālā māksla", "Kluss serveris", "Zuduši dati",
+        "Švarus kodas", "Skaitmeninis menas", "Tylus serveris", "Prarasti duomenys",
+        "Czysty kod", "Sztuka cyfrowa", "Cichy serwer", "Utracone dane",
+        "Čistý kód", "Digitální umění", "Tichý server", "Ztracená data",
+        "Digitálne umenie", "Stratené dáta", "Čista koda", "Digitalna umetnost",
+        "Tihi strežnik", "Izgubljeni podatki", "Čist kod", "Digitalna umjetnost",
+        "Tihi poslužitelj", "Izgubljeni podaci", "Чист код", "Дигитална уметност",
+        "Тихи сервер", "Изгубљени подаци", "Чистый код", "Цифровое искусство",
+        "Тихий сервер", "Потерянные данные", "Чистий код", "Цифрове мистецтво",
+        "Втрачені дані", "Καθαρός κώδικας", "Ψηφιακή τέχνη", "Σιωπηλός διακομιστής",
+        "Χαμένα δεδομένα", "Temiz kod", "Dijital sanat", "Sessiz sunucu",
+        "Kayıp veriler", "Tiszta kód", "Digitális művészet", "Csendes szerver",
+        "Elveszett adatok", "Cod curat", "Artă digitală", "Server tăcut",
+        "Date pierdute", "كود نظيف", "فن رقمي", "خادم صامت",
+        "بيانات مفقودة", "სუფთა კოდი", "ციფრული ხელოვნება", "ჩუმი სერვერი",
+        "დაკარგული მონაცემები", "کد تمیز", "هنر دیجیتال", "سرور خاموش",
+        "داده‌های گمشده", "साफ़ कोड", "डिजिटल कला", "शांत सर्वर",
+        "खोया हुआ डेटा", "পরিষ্কার কোড", "ডিজিটাল শিল্প", "নীরব সার্ভার",
+        "হারানো ডেটা", "صاف کوڈ", "ڈیجیٹل فن", "خاموش سرور",
+        "کھویا ہوا ڈیٹا", "சுத்தமான குறியீடு", "டிஜிட்டல் கலை", "அமைதியான சேவையகம்",
+        "இழந்த தரவு", "శుభ్రమైన కోడ్", "డిజిటల్ కళ", "నిశ్శబ్ద సర్వర్",
+        "కోల్పోయిన డేటా", "干净代码", "数字艺术", "安静服务器",
+        "丢失数据", "きれいなコード", "デジタルアート", "静かなサーバー",
+        "失われたデータ", "깨끗한 코드", "디지털 예술", "조용한 서버",
+        "잃어버린 데이터", "Mã sạch", "Nghệ thuật số", "Máy chủ im lặng",
+        "Dữ liệu mất", "โค้ดสะอาด", "ศิลปะดิจิทัล", "เซิร์ฟเวอร์เงียบ",
+        "ข้อมูลหาย", "កូដស្អាត", "សិល្បៈឌីជីថល", "ម៉ាស៊ីនបម្រើស្ងាត់",
+        "ទិន្នន័យបាត់", "Kode bersih", "Seni digital", "Server sunyi",
+        "Data hilang", "Kod bersih", "Seni digital", "Pelayan senyap",
+        "Malinis na code", "Digital na sining", "Tahimik na server", "Nawalang datos",
+        "Msimbo safi", "Sanaa ya kidijitali", "Seva tulivu", "Data zilizopotea",
+        "Skoon kode", "Digitale kuns", "Stil bediener", "Verlore data",
+        "ንጹህ ኮድ", "ዲጂታል ጥበብ", "ጸጥ ያለ ሰርቨር", "የጠፋ ውሂብ",
+        "Kood nadiif ah", "Farshaxan dijitaal ah", "Server aamusan", "Xog luntay",
+        "Kóòdù mímọ́", "Iṣẹ́ ọnà díjítà", "Sàfà dákẹ́", "Dátà tó sọnù",
+        "Kode garbia", "Arte digitala", "Zerbitzari isila", "Galdutako datuak",
+        "Cód glan", "Ealaín dhigiteach", "Freastalaí ciúin", "Sonraí caillte"
       ];
-      const codecoreWords = [
+      const signalWords = [
         "signal", "noise", "offset", "frame", "buffer", "surface", "artifact",
         "glitch", "stutter", "damage", "alive", "second life", "compression",
-        "broken render", "data loss", "codecore"
+        "broken render", "lost data", "silent server", "pixel storm"
       ];
       const glyphCharacters = ".:;,\"'^~-_=+|/\\\\[]{}()<>01il!?*#%";
       const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
-      const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "codecore"];
-      const mediaCoreTitles = [
-        "MEDIACORE_BUFFER",
-        "LUMA_DAMAGE",
-        "FRAME_FIELD",
-        "DATAMOSH_SCOPE",
-        "BIT_DEPTH_FAULT",
-        "TEXTURE_PIPE",
-        "SIGNAL_ORGAN",
-        "SURFACE_ENGINE",
-        "AUDIO_REACTOR",
-        "ASCII_BODY"
-      ];
-      const scrollCardTitles = [
-        "SCROLL_DAMAGE_01",
-        "BUFFER_GHOST_02",
-        "BROKEN_SURFACE_03",
-        "AUDIO_SHARD_04",
-        "RENDER_SPILL_05",
-        "TEXTURE_FAULT_06",
-        "DATA_LOSS_07",
-        "FRAME_MEMORY_08",
-        "SIGNAL_BODY_09",
-        "LIVING_ERROR_10",
-        "OFFSET_RITUAL_11",
-        "COMPRESSION_ROOM_12",
-        "GLYPH_PRESSURE_13",
-        "SECOND_LIFE_14",
-        "SURFACE_CONFESSION_15",
-        "ARTIFACT_BREATH_16",
-        "CODECORE_WAKE_17",
-        "DAMAGED_OBJECT_18"
-      ];
+      const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "pixel storm"];
       let ticking = false;
       let lastMutation = 0;
       let lastSpark = 0;
@@ -1532,6 +1537,16 @@
         word.dataset.originalText = word.textContent;
       });
 
+      function designLabel(seed) {
+        const index = Math.abs(Math.floor(seed * 37 + 11)) % designLabels.length;
+        return designLabels[index];
+      }
+
+      function signalLabel(seed) {
+        const index = Math.abs(Math.floor(seed * 19 + 5)) % signalWords.length;
+        return signalWords[index];
+      }
+
       function makeGlyphField(seed) {
         const rows = [];
         for (let row = 0; row < 5 + (seed % 4); row += 1) {
@@ -1541,7 +1556,7 @@
             line += glyphCharacters[pick];
           }
           if (row === 2) {
-            line += ` ${codecoreWords[seed % codecoreWords.length]}`;
+            line += ` ${signalLabel(seed)}`;
           }
           rows.push(line);
         }
@@ -1692,7 +1707,7 @@
           const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
           label.setAttribute("x", x + 10);
           label.setAttribute("y", y - 8);
-          label.textContent = `codecore ${String(index + 4).padStart(2, "0")}`;
+          label.textContent = designLabel(index + 24);
           svg.append(label);
         });
 
@@ -1757,7 +1772,7 @@
             const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
             label.setAttribute("x", x + 8);
             label.setAttribute("y", y - 7);
-            label.textContent = `node ${String(index).padStart(2, "0")}`;
+            label.textContent = designLabel(index + 91);
             svg.append(label);
             record.label = label;
           }
@@ -1865,7 +1880,7 @@
 
           const title = document.createElement("div");
           title.className = "codecore-window__title";
-          title.textContent = codecoreTitles[index % codecoreTitles.length];
+          title.textContent = designLabel(index + 7);
 
           const body = document.createElement("div");
           body.className = "codecore-window__body";
@@ -1888,14 +1903,14 @@
 
         const title = document.createElement("div");
         title.className = "scroll-codecore-card__title";
-        title.textContent = scrollCardTitles[index % scrollCardTitles.length];
+        title.textContent = designLabel(index + 33);
 
         const body = document.createElement("div");
         body.className = "scroll-codecore-card__body";
         const lines = [
           makeGlyphField(index + 23),
           "",
-          `${codecoreWords[index % codecoreWords.length]} / ${codecoreWords[(index + 5) % codecoreWords.length]} / ${codecoreWords[(index + 11) % codecoreWords.length]}`,
+          `${signalLabel(index)} / ${signalLabel(index + 5)} / ${signalLabel(index + 11)}`,
           makeGlyphField(index + 41)
         ];
         body.textContent = lines.join("\n");
@@ -1962,14 +1977,14 @@
 
         const title = document.createElement("div");
         title.className = "media-core-panel__title";
-        title.textContent = mediaCoreTitles[generatedMediaPanels % mediaCoreTitles.length];
+        title.textContent = designLabel(generatedMediaPanels + 57);
 
         const body = document.createElement("div");
         body.className = "media-core-panel__body";
         body.textContent = [
           `scroll ${(progress * 100).toFixed(1)}%`,
           makeGlyphField(generatedMediaPanels + 90),
-          `${codecoreWords[generatedMediaPanels % codecoreWords.length]} / ${codecoreWords[(generatedMediaPanels + 8) % codecoreWords.length]}`
+          `${signalLabel(generatedMediaPanels)} / ${signalLabel(generatedMediaPanels + 8)}`
         ].join("\n");
 
         panel.append(title, body);
