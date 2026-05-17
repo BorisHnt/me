@@ -79,6 +79,67 @@
       isolation: isolate;
     }
 
+    @keyframes codecoreDrift {
+      0% { transform: translate3d(0, 0, 0); }
+      33% { transform: translate3d(8px, -5px, 0); }
+      66% { transform: translate3d(-6px, 4px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    @keyframes codecoreDamage {
+      0%, 100% { clip-path: inset(0 0 0 0); opacity: 0.78; }
+      18% { clip-path: inset(8% 0 0 0); opacity: 0.98; }
+      38% { clip-path: inset(0 12% 17% 0); }
+      63% { clip-path: inset(28% 0 4% 8%); opacity: 0.66; }
+      82% { clip-path: inset(0 0 22% 0); }
+    }
+
+    @keyframes nodePulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes spectrumRise {
+      0%, 100% { transform: scaleY(0.18); }
+      35% { transform: scaleY(0.92); }
+      63% { transform: scaleY(0.45); }
+    }
+
+    @keyframes sparkDecay {
+      0% { opacity: 0; transform: translate3d(0, 8px, 0); }
+      18% { opacity: 1; }
+      100% { opacity: 0; transform: translate3d(var(--spark-x), var(--spark-y), 0); }
+    }
+
+    @keyframes macroblockTear {
+      0%, 100% { opacity: 0.8; box-shadow: none; }
+      27% { opacity: 1; box-shadow: 4px 0 0 #565a75; }
+      42% { opacity: 0.5; }
+      65% { opacity: 0.92; box-shadow: -5px 0 0 #0f0f1b; }
+    }
+
+    @keyframes fragmentStutter {
+      0%, 100% { opacity: 0.36; }
+      16% { opacity: 0.92; }
+      17% { opacity: 0.14; }
+      19% { opacity: 0.86; }
+      60% { opacity: 0.48; }
+    }
+
+    @keyframes statementFault {
+      0%, 100% { text-shadow: 4px 0 0 #c6b7be, -2px 2px 0 #565a75; }
+      46% { text-shadow: 10px 0 0 #565a75, -8px 0 0 #c6b7be; }
+      48% { text-shadow: none; }
+      50% { text-shadow: -12px 1px 0 #565a75, 7px -1px 0 #c6b7be; }
+    }
+
+    @keyframes waveTear {
+      0%, 100% { letter-spacing: 0; }
+      37% { letter-spacing: 0.18em; }
+      39% { letter-spacing: 0.02em; }
+      74% { letter-spacing: 0.1em; }
+    }
+
     .broken-back {
       position: relative;
       z-index: 3;
@@ -182,6 +243,7 @@
       line-height: 0.95;
       text-align: center;
       text-transform: uppercase;
+      animation: statementFault 6.8s steps(2, end) infinite;
     }
 
     .broken-statement--serif {
@@ -227,11 +289,16 @@
     .broken-macroblocks span {
       border: 1px solid #565a75;
       background: #c6b7be;
+      animation: macroblockTear 2.2s steps(3, end) infinite;
+      animation-delay: calc(var(--block-delay, 0) * -180ms);
     }
 
     .broken-macroblocks span:nth-child(3n) { background: #0f0f1b; }
     .broken-macroblocks span:nth-child(4n) { grid-column: span 2; }
     .broken-macroblocks span:nth-child(5n) { background: #fafbf6; box-shadow: inset 0 0 0 2px #565a75; }
+    .broken-macroblocks span:nth-child(2n) { --block-delay: 2; }
+    .broken-macroblocks span:nth-child(3n) { --block-delay: 5; }
+    .broken-macroblocks span:nth-child(7n) { --block-delay: 9; }
 
     .glyph-art {
       position: relative;
@@ -296,18 +363,21 @@
       letter-spacing: 0.02em;
       opacity: 0.9;
       white-space: pre;
+      animation: codecoreDrift 6s steps(2, end) infinite;
     }
 
     .codecore-raster--back {
       color: #565a75;
       opacity: 0.68;
       transform: translate(7px, 4px);
+      animation-duration: 9s;
     }
 
     .codecore-raster--damage {
       color: #c6b7be;
       opacity: 0.82;
       transform: translate(-5px, 2px);
+      animation: codecoreDamage 4.2s steps(4, end) infinite;
     }
 
     .codecore-caption {
@@ -345,6 +415,7 @@
       display: block;
       overflow: hidden;
       white-space: nowrap;
+      animation: waveTear 1.8s steps(4, end) infinite;
     }
 
     .audio-damage__labels {
@@ -358,6 +429,38 @@
       border: 1px solid #0f0f1b;
       padding: 0.12rem 0.35rem;
       background: #c6b7be;
+    }
+
+    .spectrum-box {
+      display: grid;
+      grid-template-columns: repeat(48, minmax(3px, 1fr));
+      gap: 3px;
+      height: 130px;
+      align-items: end;
+      border: 2px solid #0f0f1b;
+      margin-top: 1rem;
+      padding: 8px;
+      background: #0f0f1b;
+      overflow: hidden;
+    }
+
+    .spectrum-box span {
+      display: block;
+      min-height: 8px;
+      background: #fafbf6;
+      transform-origin: bottom;
+      animation: spectrumRise 900ms steps(5, end) infinite;
+      opacity: 0.9;
+    }
+
+    .spectrum-box span:nth-child(3n) {
+      background: #c6b7be;
+      animation-duration: 660ms;
+    }
+
+    .spectrum-box span:nth-child(4n) {
+      background: #565a75;
+      animation-duration: 1180ms;
     }
 
     .node-map {
@@ -384,12 +487,15 @@
       stroke: #565a75;
       stroke-width: 1.4;
       opacity: 0.84;
+      stroke-dasharray: 14 9;
+      animation: nodePulse 2.8s steps(3, end) infinite;
     }
 
     .node-map circle {
       fill: #fafbf6;
       stroke: #c6b7be;
       stroke-width: 2;
+      animation: nodePulse 1.8s steps(2, end) infinite;
     }
 
     .node-map text {
@@ -418,6 +524,40 @@
       transform: translate(9px, -3px);
     }
 
+    .ambient-node-field {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .ambient-node-field svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .ambient-node-field line {
+      stroke: #565a75;
+      stroke-width: 1;
+      stroke-dasharray: 7 13;
+      opacity: 0.7;
+    }
+
+    .ambient-node-field circle {
+      fill: #fafbf6;
+      stroke: #565a75;
+      stroke-width: 1.4;
+    }
+
+    .ambient-node-field text {
+      fill: #565a75;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
     .codecore-layer {
       position: absolute;
       inset: 0;
@@ -438,6 +578,7 @@
       font-family: var(--mono);
       font-size: 0.58rem;
       line-height: 1.1;
+      animation: codecoreDrift 7s steps(3, end) infinite;
     }
 
     .codecore-window.is-heavy {
@@ -473,6 +614,7 @@
       opacity: 0.82;
       pointer-events: none;
       text-transform: uppercase;
+      animation: fragmentStutter 1.4s steps(2, end) infinite;
     }
 
     .glitch-fragment--a { top: 46rem; left: 2%; }
@@ -499,6 +641,91 @@
       white-space: nowrap;
     }
 
+    .scroll-codecore-feed {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.7rem, 2vw, 1.2rem);
+      width: min(980px, 100%);
+      margin: clamp(3rem, 9vw, 7rem) auto;
+      pointer-events: none;
+    }
+
+    .scroll-codecore-feed--left {
+      width: min(720px, 84%);
+      margin-left: 0;
+      margin-right: auto;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scroll-codecore-feed--right {
+      width: min(720px, 84%);
+      margin-left: auto;
+      margin-right: 0;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scroll-codecore-feed--thin {
+      width: min(520px, 70%);
+      grid-template-columns: minmax(0, 1fr);
+      transform: rotate(-0.4deg);
+    }
+
+    .scroll-codecore-feed--wide {
+      width: min(1080px, 100%);
+    }
+
+    .scroll-codecore-card {
+      min-height: var(--card-height);
+      border: 2px solid #0f0f1b;
+      background: #fafbf6;
+      box-shadow: 6px 6px 0 #565a75;
+      overflow: hidden;
+      font-family: var(--mono);
+      animation: codecoreDrift 5.2s steps(2, end) infinite;
+    }
+
+    .scroll-codecore-card:nth-child(3n) {
+      grid-column: span 2;
+      background: #0f0f1b;
+      color: #fafbf6;
+    }
+
+    .scroll-codecore-card__title {
+      border-bottom: 2px solid #0f0f1b;
+      padding: 0.26rem 0.42rem;
+      background: #565a75;
+      color: #fafbf6;
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .scroll-codecore-card__body {
+      padding: 0.55rem;
+      font-size: clamp(0.5rem, 1vw, 0.76rem);
+      line-height: 0.95;
+      white-space: pre-wrap;
+    }
+
+    .scroll-codecore-feed--left .scroll-codecore-card:nth-child(3n),
+    .scroll-codecore-feed--right .scroll-codecore-card:nth-child(3n),
+    .scroll-codecore-feed--thin .scroll-codecore-card:nth-child(3n) {
+      grid-column: auto;
+    }
+
+    .text-spark {
+      position: fixed;
+      z-index: 91;
+      color: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 900;
+      pointer-events: none;
+      animation: sparkDecay 900ms steps(5, end) forwards;
+    }
+
     .font-mutant-serif {
       font-family: Georgia, "Times New Roman", serif;
       font-style: italic;
@@ -513,7 +740,10 @@
     .surface-stable .glitch-fragment,
     .surface-stable .broken-macroblocks,
     .surface-stable .codecore-raster--damage,
-    .surface-stable .codecore-raster--back {
+    .surface-stable .codecore-raster--back,
+    .surface-stable .ambient-node-field,
+    .surface-stable .scroll-codecore-feed,
+    .surface-stable .text-spark {
       display: none;
     }
 
@@ -527,8 +757,19 @@
 
     .surface-stable .broken-section,
     .surface-stable .broken-statement,
-    .surface-stable .codecore-window {
+    .surface-stable .codecore-window,
+    .surface-stable .glitch-fragment,
+    .surface-stable .audio-damage__wave,
+    .surface-stable .broken-macroblocks span {
       transform: none !important;
+      animation: none !important;
+    }
+
+    .surface-stable .codecore-raster,
+    .surface-stable .node-map line,
+    .surface-stable .node-map circle,
+    .surface-stable .spectrum-box span {
+      animation: none !important;
     }
 
     .surface-stable .glitch-word {
@@ -581,6 +822,15 @@
         min-height: 360px;
       }
 
+      .scroll-codecore-feed {
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .scroll-codecore-card:nth-child(3n) {
+        grid-column: auto;
+      }
+
       .broken-macroblocks {
         grid-template-columns: repeat(6, 1fr);
       }
@@ -589,9 +839,23 @@
     @media (prefers-reduced-motion: reduce) {
       .broken-section,
       .broken-statement,
-      .codecore-window {
+      .codecore-window,
+      .codecore-raster,
+      .node-map line,
+      .node-map circle,
+      .spectrum-box span,
+      .scroll-codecore-card,
+      .glitch-fragment,
+      .audio-damage__wave,
+      .broken-macroblocks span {
         transform: none !important;
+        animation: none !important;
         transition: none !important;
+      }
+
+      .ambient-node-field,
+      .text-spark {
+        display: none !important;
       }
 
       .glitch-word {
@@ -646,6 +910,7 @@
 
       <article class="broken-surface" data-broken-surface>
         <div class="codecore-layer" data-codecore-layer aria-hidden="true"></div>
+        <div class="ambient-node-field" data-ambient-node-field aria-hidden="true"></div>
         <span class="glitch-fragment glitch-fragment--a">signal signal signal</span>
         <span class="glitch-fragment glitch-fragment--b">broken render</span>
         <span class="glitch-fragment glitch-fragment--c">frame / frame / frame</span>
@@ -680,6 +945,7 @@
         <div class="codecore-composition" data-codecore-art="surface" aria-hidden="true">
           <span class="codecore-caption">CODECORE SURFACE / DAMAGED FRAME</span>
         </div>
+        <div class="scroll-codecore-feed scroll-codecore-feed--right" data-scroll-codecore-feed data-feed-threshold="0.10" data-feed-max="3" aria-hidden="true"></div>
 
         <section class="broken-section broken-section--right broken-section--fracture" data-fracture-block>
           <p>All of that speaks to me.</p>
@@ -706,6 +972,7 @@
           <span></span><span></span><span></span><span></span><span></span><span></span>
           <span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
+        <div class="scroll-codecore-feed scroll-codecore-feed--left" data-scroll-codecore-feed data-feed-threshold="0.19" data-feed-max="4" aria-hidden="true"></div>
 
         <section class="broken-section broken-section--panel" data-fracture-block>
           <p>There is tenderness in imperfection.</p>
@@ -738,7 +1005,9 @@
             <span>DAMAGED LOOP</span>
             <span>AUDIO DAMAGE BECAME TEXTURE</span>
           </div>
+          <div class="spectrum-box" data-spectrum-box aria-hidden="true"></div>
         </div>
+        <div class="scroll-codecore-feed scroll-codecore-feed--thin" data-scroll-codecore-feed data-feed-threshold="0.28" data-feed-max="3" aria-hidden="true"></div>
 
         <section class="broken-section broken-section--dark" data-fracture-block>
           <p><span class="glitch-word" data-glitch-word>Digital noise</span>.</p>
@@ -801,6 +1070,7 @@
         <div class="node-map" data-codecore-network aria-hidden="true">
           <span class="codecore-caption">NODE MESH / CODECORE MAP</span>
         </div>
+        <div class="scroll-codecore-feed scroll-codecore-feed--wide" data-scroll-codecore-feed data-feed-threshold="0.39" data-feed-max="5" aria-hidden="true"></div>
 
         <section class="broken-section broken-section--right" data-fracture-block>
           <p>Things that are too smooth can feel cold to me.</p>
@@ -867,6 +1137,7 @@
         <div class="codecore-composition" data-codecore-art="figure" aria-hidden="true">
           <span class="codecore-caption">CODECORE FIGURE / SECOND LIFE</span>
         </div>
+        <div class="scroll-codecore-feed scroll-codecore-feed--left" data-scroll-codecore-feed data-feed-threshold="0.58" data-feed-max="4" aria-hidden="true"></div>
 
         <section class="broken-section broken-section--panel" data-fracture-block>
           <p>I like all three states.</p>
@@ -971,6 +1242,7 @@
 
         <p class="broken-statement broken-statement--serif" data-fracture-block>The broken has a charm that many people do not see.</p>
         <p class="broken-statement" data-fracture-block>To me, it is often where the life begins.</p>
+        <div class="scroll-codecore-feed scroll-codecore-feed--wide" data-scroll-codecore-feed data-feed-threshold="0.72" data-feed-max="8" aria-hidden="true"></div>
       </article>
 
       <div class="status-bar">
@@ -998,6 +1270,9 @@
 
       const surface = document.querySelector("[data-broken-surface]");
       const layer = document.querySelector("[data-codecore-layer]");
+      const ambientNodeField = document.querySelector("[data-ambient-node-field]");
+      const spectrumBox = document.querySelector("[data-spectrum-box]");
+      const scrollCodecoreFeeds = Array.from(document.querySelectorAll("[data-scroll-codecore-feed]"));
       const codecoreArt = Array.from(document.querySelectorAll("[data-codecore-art]"));
       const codecoreNetwork = document.querySelector("[data-codecore-network]");
       const stabilizer = document.querySelector("[data-stabilize-surface]");
@@ -1023,8 +1298,31 @@
       ];
       const glyphCharacters = ".:;,\"'^~-_=+|/\\\\[]{}()<>01il!?*#%";
       const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
+      const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "codecore"];
+      const scrollCardTitles = [
+        "SCROLL_DAMAGE_01",
+        "BUFFER_GHOST_02",
+        "BROKEN_SURFACE_03",
+        "AUDIO_SHARD_04",
+        "RENDER_SPILL_05",
+        "TEXTURE_FAULT_06",
+        "DATA_LOSS_07",
+        "FRAME_MEMORY_08",
+        "SIGNAL_BODY_09",
+        "LIVING_ERROR_10",
+        "OFFSET_RITUAL_11",
+        "COMPRESSION_ROOM_12",
+        "GLYPH_PRESSURE_13",
+        "SECOND_LIFE_14",
+        "SURFACE_CONFESSION_15",
+        "ARTIFACT_BREATH_16",
+        "CODECORE_WAKE_17",
+        "DAMAGED_OBJECT_18"
+      ];
       let ticking = false;
       let lastMutation = 0;
+      let lastSpark = 0;
+      let generatedScrollCards = 0;
 
       glitchWords.forEach((word) => {
         word.dataset.originalText = word.textContent;
@@ -1180,6 +1478,70 @@
         codecoreNetwork.prepend(glyphA, glyphB, svg);
       }
 
+      function createSpectrumBox() {
+        if (!spectrumBox) {
+          return;
+        }
+
+        for (let index = 0; index < 48; index += 1) {
+          const bar = document.createElement("span");
+          const height = 0.18 + ((Math.sin(index * 1.7) + 1) * 0.34);
+          bar.style.transform = `scaleY(${height.toFixed(2)})`;
+          bar.style.animationDelay = `${(index % 11) * -73}ms`;
+          bar.style.animationDuration = `${620 + ((index * 47) % 780)}ms`;
+          spectrumBox.append(bar);
+        }
+      }
+
+      function createAmbientNodeField() {
+        if (!ambientNodeField) {
+          return;
+        }
+
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 1000 3200");
+        svg.setAttribute("preserveAspectRatio", "none");
+
+        const points = [];
+        for (let index = 0; index < 46; index += 1) {
+          const x = 60 + ((index * 173) % 880);
+          const y = 120 + index * 68 + Math.sin(index * 0.9) * 54;
+          points.push([x, y]);
+        }
+
+        points.forEach(([x, y], index) => {
+          [index + 1, index + 3, index + 7].forEach((targetIndex) => {
+            if (targetIndex < points.length && (index + targetIndex) % 3 !== 0) {
+              const target = points[targetIndex];
+              const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+              line.setAttribute("x1", x);
+              line.setAttribute("y1", y);
+              line.setAttribute("x2", target[0]);
+              line.setAttribute("y2", target[1]);
+              svg.append(line);
+            }
+          });
+        });
+
+        points.forEach(([x, y], index) => {
+          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          circle.setAttribute("cx", x);
+          circle.setAttribute("cy", y);
+          circle.setAttribute("r", index % 6 === 0 ? 5 : 3);
+          svg.append(circle);
+
+          if (index % 4 === 0) {
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", x + 8);
+            label.setAttribute("y", y - 7);
+            label.textContent = `node ${String(index).padStart(2, "0")}`;
+            svg.append(label);
+          }
+        });
+
+        ambientNodeField.append(svg);
+      }
+
       function createCodecoreWindows() {
         if (!layer) {
           return;
@@ -1216,6 +1578,76 @@
           box.append(title, body);
           layer.append(box);
         });
+      }
+
+      function createScrollCodecoreCard(index, targetFeed) {
+        if (!targetFeed) {
+          return;
+        }
+
+        const card = document.createElement("div");
+        card.className = "scroll-codecore-card";
+        card.style.setProperty("--card-height", `${125 + ((index * 29) % 110)}px`);
+        card.style.animationDelay = `${(index % 7) * -430}ms`;
+
+        const title = document.createElement("div");
+        title.className = "scroll-codecore-card__title";
+        title.textContent = scrollCardTitles[index % scrollCardTitles.length];
+
+        const body = document.createElement("div");
+        body.className = "scroll-codecore-card__body";
+        const lines = [
+          makeGlyphField(index + 23),
+          "",
+          `${codecoreWords[index % codecoreWords.length]} / ${codecoreWords[(index + 5) % codecoreWords.length]} / ${codecoreWords[(index + 11) % codecoreWords.length]}`,
+          makeGlyphField(index + 41)
+        ];
+        body.textContent = lines.join("\n");
+
+        card.append(title, body);
+        targetFeed.append(card);
+      }
+
+      function maybeGenerateScrollCards(progress) {
+        if (!scrollCodecoreFeeds.length || document.body.classList.contains("surface-stable")) {
+          return;
+        }
+
+        scrollCodecoreFeeds.forEach((feed, feedIndex) => {
+          const threshold = Number(feed.dataset.feedThreshold || 0.18);
+          const maxCards = Number(feed.dataset.feedMax || 4);
+          const localProgress = Math.max(0, progress - threshold);
+          const desiredCards = progress > threshold ? Math.min(maxCards, Math.floor(localProgress / 0.028) + 1) : 0;
+          const currentCards = Number(feed.dataset.generatedCards || 0);
+
+          for (let index = currentCards; index < desiredCards; index += 1) {
+            createScrollCodecoreCard(generatedScrollCards + feedIndex + index, feed);
+            generatedScrollCards += 1;
+          }
+
+          feed.dataset.generatedCards = String(Math.max(currentCards, desiredCards));
+        });
+      }
+
+      function createTextSpark() {
+        if (document.body.classList.contains("surface-stable")) {
+          return;
+        }
+
+        const activeSparks = document.querySelectorAll(".text-spark");
+        if (activeSparks.length > 12) {
+          activeSparks[0].remove();
+        }
+
+        const spark = document.createElement("span");
+        spark.className = "text-spark";
+        spark.textContent = sparkSources[Math.floor(Math.random() * sparkSources.length)];
+        spark.style.left = `${Math.floor(24 + Math.random() * (window.innerWidth - 80))}px`;
+        spark.style.top = `${Math.floor(90 + Math.random() * (window.innerHeight - 160))}px`;
+        spark.style.setProperty("--spark-x", `${Math.floor(-48 + Math.random() * 96)}px`);
+        spark.style.setProperty("--spark-y", `${Math.floor(-64 + Math.random() * 26)}px`);
+        document.body.append(spark);
+        window.setTimeout(() => spark.remove(), 950);
       }
 
       function mutateText(text) {
@@ -1261,6 +1693,8 @@
           return;
         }
 
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
         const center = window.innerHeight / 2;
         fractureBlocks.forEach((block, index) => {
           const rect = block.getBoundingClientRect();
@@ -1275,10 +1709,22 @@
           box.style.setProperty("--float", `${float.toFixed(2)}px`);
         });
 
+        if (ambientNodeField) {
+          const sway = Math.sin(window.scrollY * 0.0018) * 22;
+          ambientNodeField.style.transform = `translate3d(${sway.toFixed(2)}px, ${(-progress * 140).toFixed(2)}px, 0)`;
+        }
+
+        maybeGenerateScrollCards(progress);
+
         const now = performance.now();
         if (now - lastMutation > 430) {
           lastMutation = now;
           mutateOneVisibleWord();
+        }
+
+        if (now - lastSpark > 155) {
+          lastSpark = now;
+          createTextSpark();
         }
       }
 
@@ -1289,6 +1735,8 @@
         }
       }
 
+      createSpectrumBox();
+      createAmbientNodeField();
       createCodecoreArt();
       createCodecoreNetwork();
       createCodecoreWindows();
