@@ -1043,9 +1043,22 @@
       font-weight: 900;
     }
 
+    .surface-stable .broken-surface {
+      background: #0f0f1b;
+      color: #fafbf6;
+    }
+
+    .surface-stable .broken-surface::before,
+    .surface-stable .broken-surface::after,
+    .surface-stable .codecore-layer,
+    .surface-stable .codecore-window,
     .surface-stable .codecore-window.is-heavy,
     .surface-stable .glitch-fragment,
     .surface-stable .broken-macroblocks,
+    .surface-stable .glyph-art,
+    .surface-stable .codecore-composition,
+    .surface-stable .node-map,
+    .surface-stable .audio-damage,
     .surface-stable .codecore-raster--damage,
     .surface-stable .codecore-raster--back,
     .surface-stable .ambient-node-field,
@@ -1057,29 +1070,46 @@
       display: none;
     }
 
-    .surface-stable .codecore-window,
-    .surface-stable .glyph-art,
-    .surface-stable .codecore-composition,
-    .surface-stable .node-map,
-    .surface-stable .audio-damage {
-      opacity: 0.28;
-    }
-
     .surface-stable .broken-section,
-    .surface-stable .broken-statement,
-    .surface-stable .codecore-window,
-    .surface-stable .glitch-fragment,
-    .surface-stable .audio-damage__wave,
-    .surface-stable .scroll-codecore-nest__box,
-    .surface-stable .broken-macroblocks span {
+    .surface-stable .broken-section--right,
+    .surface-stable .broken-section--narrow,
+    .surface-stable .broken-section--wide {
+      max-width: 820px;
+      margin: clamp(1.6rem, 4vw, 3rem) auto;
+      font-family: inherit;
+      font-size: clamp(1rem, 1.7vw, 1.12rem);
+      line-height: 1.75;
       transform: none !important;
       animation: none !important;
+      transition: none !important;
     }
 
-    .surface-stable .codecore-raster,
-    .surface-stable .node-map line,
-    .surface-stable .node-map circle,
-    .surface-stable .spectrum-box span {
+    .surface-stable .broken-section--panel,
+    .surface-stable .broken-section--dark {
+      border-color: #565a75;
+      background: rgba(15, 15, 27, 0.92);
+      box-shadow: none;
+      color: #fafbf6;
+    }
+
+    .surface-stable .broken-section--fracture p:nth-child(odd),
+    .surface-stable .broken-section--fracture p:nth-child(even) {
+      max-width: none;
+      margin-left: 0;
+      text-align: left;
+    }
+
+    .surface-stable .broken-statement {
+      max-width: 820px;
+      margin: clamp(1.8rem, 5vw, 3.4rem) auto;
+      font-family: var(--mono);
+      font-size: clamp(1.35rem, 3.2vw, 2.45rem);
+      line-height: 1.18;
+      text-align: left;
+      text-transform: none;
+      color: #fafbf6;
+      text-shadow: none;
+      transform: none !important;
       animation: none !important;
     }
 
@@ -1089,6 +1119,7 @@
       font-family: inherit !important;
       letter-spacing: 0 !important;
       text-transform: none !important;
+      border-bottom: 0;
     }
 
     .surface-stable .broken-title {
@@ -2203,6 +2234,17 @@
         }, 230);
       }
 
+      function restoreReadableSurface() {
+        glitchWords.forEach((word) => {
+          word.textContent = word.dataset.originalText || word.textContent;
+          word.classList.remove("is-mutating", "font-mutant-serif", "font-mutant-system");
+        });
+
+        document.querySelectorAll(".text-spark, .media-core-panel").forEach((element) => {
+          element.remove();
+        });
+      }
+
       function updateBrokenSurface() {
         ticking = false;
         if (reducedMotion || document.body.classList.contains("surface-stable")) {
@@ -2303,6 +2345,11 @@
         stabilizer.addEventListener("click", () => {
           const stable = document.body.classList.toggle("surface-stable");
           stabilizer.setAttribute("aria-pressed", String(stable));
+          if (stable) {
+            restoreReadableSurface();
+          } else {
+            requestBrokenUpdate();
+          }
         });
       }
 
