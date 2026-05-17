@@ -415,6 +415,9 @@ The machine only looked at itself.`;
     "archives/05-unplanned-age.html",
     "archives/06-void.html",
     "room/index.html",
+    "room/01-useless-things.html",
+    "room/02-broken-aesthetics.html",
+    "room/03-shells-and-stones.html",
     "room/behind-room/index.html"
   ]);
 
@@ -441,6 +444,9 @@ The machine only looked at itself.`;
 │   └── mounted in footer window
 ├── room/
 │   ├── index.html
+│   ├── 01-useless-things.html
+│   ├── 02-broken-aesthetics.html
+│   ├── 03-shells-and-stones.html
 │   └── behind-room/
 │       └── index.html
 └── unmounted/
@@ -519,6 +525,9 @@ STATUS: SUCCESS
 
 Mounted paths:
 room/index.html
+room/01-useless-things.html
+room/02-broken-aesthetics.html
+room/03-shells-and-stones.html
 room/behind-room/index.html`);
       return;
     }
