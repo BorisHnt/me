@@ -34,23 +34,21 @@
   </header>
 
   <main id="main-content" class="desktop room-desktop">
-    <section class="window room-window" aria-labelledby="room-title">
+    <section class="window room-window" aria-labelledby="room-directory-title">
       <div class="title-bar">
         <div class="window-controls" aria-hidden="true">
           <span></span>
           <span></span>
         </div>
-        <span class="window-title">ROOM DIRECTORY</span>
+        <span class="window-title" id="room-directory-title">ROOM DIRECTORY</span>
         <span class="window-chip">FILES</span>
       </div>
+      <div class="room-file-browser__bar">
+        <span>Address</span>
+        <span>room/</span>
+      </div>
       <div class="window-body room-window__body">
-        <p class="system-label">Mounted route / placeholder structure</p>
-        <h1 id="room-title">Room</h1>
         <section class="room-file-browser" aria-label="Room file browser">
-          <div class="room-file-browser__bar">
-            <span>Address</span>
-            <span>room/</span>
-          </div>
           <nav class="room-file-browser__files" aria-label="Room files">
             <a class="room-file" href="01-useless-things.html">
               <span class="room-file__icon" aria-hidden="true"></span>
