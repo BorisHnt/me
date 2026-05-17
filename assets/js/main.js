@@ -679,6 +679,7 @@ Type "help" to open the command helper.`);
       terminal.style.top = `${position.top}px`;
       terminal.style.right = "auto";
       terminal.style.bottom = "auto";
+      terminal.style.transform = "none";
     });
 
     function releaseDrag(event) {

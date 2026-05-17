@@ -828,17 +828,19 @@ h1 {
 
 .operator-terminal {
   position: fixed;
-  right: clamp(12px, 8vw, 96px);
-  bottom: 58px;
+  top: 50%;
+  left: 50%;
   z-index: 120;
   display: grid;
   width: min(760px, calc(100vw - 24px));
+  height: min(620px, calc(100vh - 92px));
   max-height: min(620px, calc(100vh - 92px));
   grid-template-rows: auto minmax(260px, 1fr);
   border: 2px solid var(--border-dark);
   background: var(--surface-alt);
   box-shadow: var(--raised);
   color: var(--text);
+  transform: translate(-50%, -50%);
 }
 
 .operator-terminal[hidden] {
@@ -2245,10 +2247,12 @@ body.is-handheld-device.is-void-purged .void-translation-fragment {
   }
 
   .operator-terminal {
-    right: 6px;
-    bottom: 50px;
+    top: 50%;
+    left: 6px;
     width: calc(100vw - 12px);
+    height: calc(100vh - 74px);
     max-height: calc(100vh - 74px);
+    transform: translateY(-50%);
   }
 
   .operator-terminal__prompt {
