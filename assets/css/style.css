@@ -834,7 +834,7 @@ h1 {
   display: grid;
   width: min(760px, calc(100vw - 24px));
   max-height: min(620px, calc(100vh - 92px));
-  grid-template-rows: auto minmax(220px, 1fr) auto;
+  grid-template-rows: auto minmax(260px, 1fr);
   border: 2px solid var(--border-dark);
   background: var(--surface-alt);
   box-shadow: var(--raised);
@@ -858,6 +858,13 @@ h1 {
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+}
+
+.operator-terminal.is-dragging .operator-terminal__titlebar {
+  cursor: grabbing;
 }
 
 .operator-terminal__icon {
@@ -886,6 +893,7 @@ h1 {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 900;
+  user-select: none;
 }
 
 .operator-terminal__close:active {
@@ -908,16 +916,25 @@ h1 {
 
 .operator-terminal__block,
 .operator-terminal__welcome,
-.operator-terminal__echo {
+.operator-terminal__echo,
+.operator-terminal__active-line {
   margin: 0 0 0.8rem;
   color: inherit;
   font: inherit;
   white-space: pre-wrap;
 }
 
-.operator-terminal__echo {
+.operator-terminal__echo,
+.operator-terminal__active-line {
   color: var(--dust);
   font-weight: 900;
+}
+
+.operator-terminal__active-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-bottom: 0;
 }
 
 .operator-terminal__links {
@@ -931,38 +948,27 @@ h1 {
   text-underline-offset: 2px;
 }
 
-.operator-terminal__form {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 6px;
-  border-top: 2px solid var(--border-dark);
-  padding: 6px;
-  background: var(--surface-alt);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-}
-
 .operator-terminal__prompt {
-  color: var(--ink);
+  color: var(--dust);
   font-weight: 900;
   white-space: nowrap;
 }
 
 .operator-terminal__input {
-  min-width: 0;
-  border: 2px solid var(--border-dark);
-  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
-  padding: 4px 6px;
-  background: var(--paper);
-  color: var(--ink);
+  flex: 1;
+  min-width: 7ch;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--paper);
   font: inherit;
+  font-weight: 900;
   outline: 0;
+  caret-color: var(--paper);
 }
 
 .operator-terminal__input:focus {
-  outline: 1px dotted var(--ink);
-  outline-offset: -4px;
+  outline: 0;
 }
 
 body.about-shell {
@@ -2245,12 +2251,13 @@ body.is-handheld-device.is-void-purged .void-translation-fragment {
     max-height: calc(100vh - 74px);
   }
 
-  .operator-terminal__form {
-    grid-template-columns: 1fr;
-  }
-
   .operator-terminal__prompt {
     white-space: normal;
+  }
+
+  .operator-terminal__active-line {
+    align-items: flex-start;
+    gap: 0.25rem;
   }
 
   .taskbar-item {

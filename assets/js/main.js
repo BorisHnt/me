@@ -226,7 +226,12 @@
     const block = document.createElement("pre");
     block.className = className || "operator-terminal__block";
     block.textContent = text;
-    output.append(block);
+    const activeLine = output.querySelector(".operator-terminal__active-line");
+    if (activeLine) {
+      output.insertBefore(block, activeLine);
+    } else {
+      output.append(block);
+    }
     return block;
   }
 
@@ -273,13 +278,53 @@
       block.append(row);
     });
 
-    output.append(block);
+    const activeLine = output.querySelector(".operator-terminal__active-line");
+    if (activeLine) {
+      output.insertBefore(block, activeLine);
+    } else {
+      output.append(block);
+    }
   }
 
   function resetTerminalOutput(output) {
     output.replaceChildren();
     appendTerminalText(output, `You are inside the Operator Terminal.
 Type "help" to open the command helper.`, "operator-terminal__welcome");
+  }
+
+  function createTerminalEcho(command) {
+    const line = document.createElement("div");
+    line.className = "operator-terminal__echo";
+
+    const prompt = document.createElement("span");
+    prompt.className = "operator-terminal__prompt";
+    prompt.textContent = "operator@terminal:~$";
+
+    const value = document.createElement("span");
+    value.className = "operator-terminal__echo-command";
+    value.textContent = command ? ` ${command}` : "";
+
+    line.append(prompt, value);
+    return line;
+  }
+
+  function createTerminalActiveLine() {
+    const line = document.createElement("div");
+    line.className = "operator-terminal__active-line";
+
+    const prompt = document.createElement("span");
+    prompt.className = "operator-terminal__prompt";
+    prompt.textContent = "operator@terminal:~$";
+
+    const input = document.createElement("input");
+    input.className = "operator-terminal__input";
+    input.type = "text";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.setAttribute("aria-label", "Terminal command");
+
+    line.append(prompt, input);
+    return { line, input };
   }
 
   function getBrowserDiagnostic() {
@@ -362,6 +407,9 @@ help
 clear
   Clears the terminal output.
 
+exit
+  Closes the terminal window.
+
 tree
   Shows the public site architecture.
 
@@ -381,8 +429,11 @@ archives
     }
 
     if (normalized === "clear") {
-      resetTerminalOutput(output);
-      return;
+      return "clear";
+    }
+
+    if (normalized === "exit") {
+      return "exit";
     }
 
     if (normalized === "tree") {
@@ -477,45 +528,172 @@ Type "help" to open the command helper.`);
     output.setAttribute("aria-live", "polite");
 
     resetTerminalOutput(output);
+    const commandHistory = [];
+    let commandHistoryIndex = -1;
+    let activeInput = null;
 
-    const form = document.createElement("form");
-    form.className = "operator-terminal__form";
+    function scrollTerminalToBottom() {
+      output.scrollTop = output.scrollHeight;
+    }
 
-    const prompt = document.createElement("label");
-    prompt.className = "operator-terminal__prompt";
-    prompt.setAttribute("for", "operatorTerminalInput");
-    prompt.textContent = "operator@terminal:~$";
-
-    const input = document.createElement("input");
-    input.id = "operatorTerminalInput";
-    input.className = "operator-terminal__input";
-    input.type = "text";
-    input.autocomplete = "off";
-    input.spellcheck = false;
-    input.setAttribute("aria-label", "Terminal command");
-
-    close.addEventListener("click", () => {
+    function closeTerminalAndReset() {
       terminal.hidden = true;
       document.body.classList.remove("is-terminal-open");
+      resetTerminalOutput(output);
+      appendActiveLine();
+    }
+
+    close.addEventListener("click", () => {
+      closeTerminalAndReset();
     });
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+    function executeCommandFromActiveLine(input, line) {
       const command = input.value.trim();
-      input.value = "";
       if (!command) {
         return;
       }
 
-      output.append(createTerminalLine(`operator@terminal:~$ ${command}`, "operator-terminal__echo"));
-      resolveTerminalCommand(command, output);
-      output.scrollTop = output.scrollHeight;
+      line.replaceWith(createTerminalEcho(command));
+      commandHistory.push(command);
+      if (commandHistory.length > 10) {
+        commandHistory.shift();
+      }
+      commandHistoryIndex = commandHistory.length;
+
+      const action = resolveTerminalCommand(command, output);
+      if (action === "exit") {
+        closeTerminalAndReset();
+        return;
+      }
+      if (action === "clear") {
+        resetTerminalOutput(output);
+      }
+
+      appendActiveLine();
+      scrollTerminalToBottom();
+    }
+
+    function handleHistoryNavigation(event, input) {
+      if (event.key === "ArrowUp") {
+        if (commandHistory.length === 0) {
+          return;
+        }
+        event.preventDefault();
+        commandHistoryIndex = Math.max(0, commandHistoryIndex - 1);
+        input.value = commandHistory[commandHistoryIndex] || "";
+        window.requestAnimationFrame(() => input.setSelectionRange(input.value.length, input.value.length));
+      }
+
+      if (event.key === "ArrowDown") {
+        if (commandHistory.length === 0) {
+          return;
+        }
+        event.preventDefault();
+        commandHistoryIndex = Math.min(commandHistory.length, commandHistoryIndex + 1);
+        input.value = commandHistoryIndex >= commandHistory.length ? "" : commandHistory[commandHistoryIndex];
+        window.requestAnimationFrame(() => input.setSelectionRange(input.value.length, input.value.length));
+      }
+    }
+
+    function appendActiveLine() {
+      const active = output.querySelector(".operator-terminal__active-line");
+      if (active) {
+        active.remove();
+      }
+      const { line, input } = createTerminalActiveLine();
+      activeInput = input;
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          executeCommandFromActiveLine(input, line);
+          return;
+        }
+        handleHistoryNavigation(event, input);
+      });
+      output.append(line);
+      return input;
+    }
+
+    function focusActiveInput() {
+      if (activeInput) {
+        activeInput.focus();
+      }
+    }
+
+    output.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        return;
+      }
+      focusActiveInput();
     });
 
+    appendActiveLine();
+
     titleBar.append(icon, title, close);
-    form.append(prompt, input);
-    terminal.append(titleBar, output, form);
-    return { terminal, input, output };
+    terminal.append(titleBar, output);
+    return { terminal, input: () => activeInput, output, titleBar };
+  }
+
+  function clampTerminalPosition(left, top, terminal) {
+    const margin = 8;
+    const width = terminal.offsetWidth || 320;
+    const height = terminal.offsetHeight || 240;
+    const maxLeft = Math.max(margin, window.innerWidth - width - margin);
+    const maxTop = Math.max(margin, window.innerHeight - height - margin);
+    return {
+      left: Math.min(Math.max(margin, left), maxLeft),
+      top: Math.min(Math.max(margin, top), maxTop)
+    };
+  }
+
+  function installTerminalDragging(terminal, titleBar) {
+    let dragState = null;
+
+    titleBar.addEventListener("pointerdown", (event) => {
+      if (event.target instanceof HTMLButtonElement) {
+        return;
+      }
+
+      const rectangle = terminal.getBoundingClientRect();
+      dragState = {
+        pointerId: event.pointerId,
+        offsetX: event.clientX - rectangle.left,
+        offsetY: event.clientY - rectangle.top
+      };
+      terminal.classList.add("is-dragging");
+      titleBar.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    titleBar.addEventListener("pointermove", (event) => {
+      if (!dragState || event.pointerId !== dragState.pointerId) {
+        return;
+      }
+
+      const position = clampTerminalPosition(
+        event.clientX - dragState.offsetX,
+        event.clientY - dragState.offsetY,
+        terminal
+      );
+      terminal.style.left = `${position.left}px`;
+      terminal.style.top = `${position.top}px`;
+      terminal.style.right = "auto";
+      terminal.style.bottom = "auto";
+    });
+
+    function releaseDrag(event) {
+      if (!dragState || event.pointerId !== dragState.pointerId) {
+        return;
+      }
+      dragState = null;
+      terminal.classList.remove("is-dragging");
+      if (titleBar.hasPointerCapture(event.pointerId)) {
+        titleBar.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    titleBar.addEventListener("pointerup", releaseDrag);
+    titleBar.addEventListener("pointercancel", releaseDrag);
   }
 
   function setupOperatorTerminal() {
@@ -524,13 +702,19 @@ Type "help" to open the command helper.`);
       return;
     }
 
-    const { terminal, input } = createOperatorTerminal();
+    const { terminal, input, titleBar } = createOperatorTerminal();
+    installTerminalDragging(terminal, titleBar);
     document.body.append(terminal);
 
     launcher.addEventListener("click", () => {
       terminal.hidden = false;
       document.body.classList.add("is-terminal-open");
-      window.requestAnimationFrame(() => input.focus());
+      window.requestAnimationFrame(() => {
+        const activeInput = input();
+        if (activeInput) {
+          activeInput.focus();
+        }
+      });
     });
   }
 
