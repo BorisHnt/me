@@ -10,6 +10,7 @@
     body[data-page="room"] {
       background: #0f0f1b;
       color: #fafbf6;
+      overflow-x: hidden;
     }
 
     .broken-page {
@@ -77,7 +78,7 @@
 
     .broken-surface {
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       min-height: 100vh;
       padding: clamp(1rem, 4vw, 3.6rem);
       background:
@@ -548,7 +549,7 @@
     .codecore-composition {
       position: relative;
       z-index: 2;
-      width: min(980px, 100%);
+      width: min(1120px, calc(100% + 9vw));
       min-height: clamp(460px, 68vw, 760px);
       margin: clamp(3rem, 10vw, 8rem) auto;
       border: 2px solid #565a75;
@@ -569,8 +570,10 @@
 
     .codecore-composition::before {
       background:
-        repeating-linear-gradient(0deg, transparent 0 5px, rgba(250, 251, 246, 0.08) 5px 6px),
-        repeating-linear-gradient(90deg, transparent 0 11px, rgba(198, 183, 190, 0.12) 11px 12px);
+        repeating-linear-gradient(0deg, transparent 0 8px, rgba(250, 251, 246, 0.055) 8px 9px),
+        repeating-linear-gradient(90deg, transparent 0 8px, rgba(198, 183, 190, 0.06) 8px 9px),
+        repeating-linear-gradient(0deg, transparent 0 40px, rgba(86, 90, 117, 0.18) 40px 41px),
+        repeating-linear-gradient(90deg, transparent 0 40px, rgba(86, 90, 117, 0.16) 40px 41px);
       mix-blend-mode: screen;
     }
 
@@ -586,9 +589,9 @@
       margin: 0;
       color: #fafbf6;
       font-family: var(--mono);
-      font-size: clamp(0.38rem, 0.82vw, 0.68rem);
+      font-size: clamp(0.3rem, 0.58vw, 0.5rem);
       font-weight: 900;
-      line-height: 0.86;
+      line-height: 0.74;
       letter-spacing: 0.02em;
       opacity: 0.9;
       white-space: pre;
@@ -715,16 +718,16 @@
 
     .node-map line {
       stroke: #565a75;
-      stroke-width: 1.4;
+      stroke-width: 0.55;
       opacity: 0.84;
-      stroke-dasharray: 14 9;
+      stroke-dasharray: 8 12;
       animation: nodePulse 2.8s steps(3, end) infinite;
     }
 
     .node-map circle {
       fill: #fafbf6;
       stroke: #c6b7be;
-      stroke-width: 2;
+      stroke-width: 0.8;
       animation: nodePulse 1.8s steps(2, end) infinite;
     }
 
@@ -770,15 +773,16 @@
 
     .ambient-node-field line {
       stroke: #565a75;
-      stroke-width: 1;
-      stroke-dasharray: 7 13;
-      opacity: 0.7;
+      stroke-width: 0.45;
+      stroke-dasharray: 6 15;
+      opacity: 0.42;
     }
 
     .ambient-node-field circle {
       fill: #c6b7be;
       stroke: #565a75;
-      stroke-width: 1.4;
+      stroke-width: 0.55;
+      opacity: 0.72;
     }
 
     .ambient-node-field text {
@@ -806,9 +810,9 @@
 
     .svg-codecore-layer {
       position: absolute;
-      inset: 0;
+      inset: 0 -15vw 0 -15vw;
       z-index: 1;
-      overflow: hidden;
+      overflow: visible;
       pointer-events: none;
     }
 
@@ -822,7 +826,13 @@
       left: var(--svg-left);
       top: var(--svg-top);
       width: var(--svg-w);
-      min-height: var(--svg-h);
+      height: var(--svg-h);
+      border: 2px solid #565a75;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 7px, rgba(250, 251, 246, 0.045) 7px 8px),
+        repeating-linear-gradient(90deg, transparent 0 7px, rgba(198, 183, 190, 0.045) 7px 8px),
+        #0f0f1b;
+      box-shadow: 10px 10px 0 rgba(86, 90, 117, 0.7);
       opacity: var(--svg-opacity);
       transform:
         translate3d(var(--svg-x), var(--svg-y), 0)
@@ -830,6 +840,38 @@
         scale(var(--svg-scale));
       transform-origin: center;
       mix-blend-mode: screen;
+      overflow: hidden;
+    }
+
+    .svg-codecore-figure::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 6;
+      min-height: 22px;
+      border-bottom: 2px solid #0f0f1b;
+      padding: 0.24rem 0.44rem;
+      background: #565a75;
+      color: #fafbf6;
+      content: attr(data-window-title);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .svg-codecore-figure::after {
+      position: absolute;
+      inset: 28px 8px 8px;
+      z-index: 1;
+      border: 1px solid rgba(198, 183, 190, 0.5);
+      background:
+        repeating-linear-gradient(0deg, transparent 0 7px, rgba(250, 251, 246, 0.035) 7px 8px),
+        repeating-linear-gradient(90deg, transparent 0 7px, rgba(250, 251, 246, 0.035) 7px 8px);
+      content: "";
+      pointer-events: none;
     }
 
     .svg-codecore-figure.is-right {
@@ -842,9 +884,9 @@
 
     .svg-codecore-figure__frame {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      inset: 30px 10px 10px;
+      width: calc(100% - 20px);
+      height: calc(100% - 40px);
       object-fit: contain;
       object-position: center;
       opacity: 0;
@@ -874,25 +916,25 @@
 
     .svg-codecore-figure__glyphs {
       position: absolute;
-      inset: 5%;
-      z-index: 2;
+      inset: 34px 14px 14px;
+      z-index: 3;
       margin: 0;
       color: #fafbf6;
       font-family: var(--mono);
-      font-size: clamp(0.42rem, 0.78vw, 0.68rem);
+      font-size: clamp(0.24rem, 0.44vw, 0.42rem);
       font-weight: 900;
-      line-height: 0.78;
+      line-height: 0.62;
       white-space: pre;
-      opacity: 0.24;
+      opacity: 0.54;
       overflow: hidden;
-      text-shadow: 2px 0 0 #565a75, -2px 0 0 #c6b7be;
+      text-shadow: 1px 0 0 rgba(86, 90, 117, 0.52);
       animation: glyphSurfaceInterference var(--glyph-speed, 3.4s) steps(5, end) infinite;
     }
 
     .svg-codecore-figure__nodes {
       position: absolute;
-      inset: 0;
-      z-index: 3;
+      inset: 30px 10px 10px;
+      z-index: 4;
       width: 100%;
       height: 100%;
       overflow: visible;
@@ -900,33 +942,33 @@
 
     .svg-codecore-figure__nodes line {
       stroke: #c6b7be;
-      stroke-width: 1.2;
-      stroke-dasharray: 12 8;
-      opacity: 0.48;
+      stroke-width: 0.36;
+      stroke-dasharray: 5 9;
+      opacity: 0.34;
       animation: vectorLineAlive 1.7s steps(5, end) infinite;
     }
 
     .svg-codecore-figure__nodes circle {
       fill: #fafbf6;
       stroke: #565a75;
-      stroke-width: 1.6;
+      stroke-width: 0.5;
     }
 
     .svg-codecore-figure__nodes text {
       fill: #fafbf6;
       font-family: var(--mono);
-      font-size: 9px;
+      font-size: 4px;
       font-weight: 900;
       paint-order: stroke;
       stroke: #0f0f1b;
-      stroke-width: 3px;
+      stroke-width: 1.4px;
     }
 
     .svg-codecore-figure__tag {
       position: absolute;
       right: 4%;
-      bottom: 5%;
-      z-index: 4;
+      bottom: 12px;
+      z-index: 7;
       border: 1px solid #565a75;
       padding: 0.16rem 0.34rem;
       background: #0f0f1b;
@@ -941,6 +983,57 @@
     .svg-codecore-figure--ghost {
       --svg-opacity: 0.2;
       z-index: 0;
+    }
+
+    .svg-codecore-figure--field {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      opacity: calc(var(--svg-opacity) * 0.72);
+      mix-blend-mode: screen;
+    }
+
+    .svg-codecore-figure--field::before {
+      display: none;
+    }
+
+    .svg-codecore-figure--field::after {
+      inset: 0;
+      border: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 9px, rgba(250, 251, 246, 0.022) 9px 10px),
+        repeating-linear-gradient(90deg, transparent 0 9px, rgba(198, 183, 190, 0.022) 9px 10px);
+      opacity: 0.62;
+    }
+
+    .svg-codecore-figure--field .svg-codecore-figure__frame {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.28;
+      filter: invert(1) contrast(1.18) brightness(0.68);
+    }
+
+    .svg-codecore-figure--field .svg-codecore-figure__frame.is-primary,
+    .svg-codecore-figure--field .svg-codecore-figure__frame.is-active {
+      opacity: 0.38;
+    }
+
+    .svg-codecore-figure--field .svg-codecore-figure__glyphs {
+      inset: 4%;
+      font-size: clamp(0.2rem, 0.38vw, 0.34rem);
+      line-height: 0.56;
+      opacity: 0.36;
+      text-shadow: none;
+    }
+
+    .svg-codecore-figure--field .svg-codecore-figure__nodes {
+      inset: 0;
+      opacity: 0.66;
+    }
+
+    .svg-codecore-figure--field .svg-codecore-figure__tag {
+      display: none;
     }
 
     .life-panel {
@@ -2124,7 +2217,7 @@
           const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
           circle.setAttribute("cx", x);
           circle.setAttribute("cy", y);
-          circle.setAttribute("r", index % 4 === 0 ? 1.7 : 1.05);
+          circle.setAttribute("r", index % 4 === 0 ? 1.05 : 0.62);
           svg.append(circle);
 
           let label = null;
@@ -2150,6 +2243,7 @@
 
         const figure = document.createElement("div");
         figure.className = `svg-codecore-figure ${config.className || ""}`;
+        figure.dataset.windowTitle = config.title || designLabel(index * 13 + 21);
         figure.style.setProperty("--svg-left", config.left);
         figure.style.setProperty("--svg-top", config.top);
         figure.style.setProperty("--svg-w", config.width);
@@ -2207,14 +2301,16 @@
         }
 
         const configs = [
-          { assetSet: 0, left: "-12%", top: "6rem", width: "min(720px, 62vw)", height: "560px", opacity: "0.28", speed: 4.6, faultSpeed: 1.6, rotation: -2.5, scale: "1.08", xPull: -72, yPull: 120, className: "is-left", glyphWidth: 76, glyphHeight: 34 },
-          { assetSet: 1, left: "54%", top: "42rem", width: "min(660px, 54vw)", height: "640px", opacity: "0.32", speed: 5.1, faultSpeed: 1.2, rotation: 1.8, scale: "1.12", xPull: 86, yPull: 180, className: "is-right", glyphWidth: 72, glyphHeight: 38 },
-          { assetSet: 3, left: "-10%", top: "120rem", width: "min(620px, 56vw)", height: "650px", opacity: "0.38", speed: 3.9, faultSpeed: 1.1, rotation: -5.4, scale: "1", xPull: -114, yPull: 230, className: "is-left", glyphWidth: 70, glyphHeight: 42 },
-          { assetSet: 2, left: "62%", top: "188rem", width: "min(560px, 50vw)", height: "760px", opacity: "0.22", speed: 6.2, faultSpeed: 2.1, rotation: 5.6, scale: "1.16", xPull: 128, yPull: 260, className: "is-right svg-codecore-figure--ghost", glyphWidth: 68, glyphHeight: 46 },
-          { assetSet: 4, left: "4%", top: "294rem", width: "min(820px, 70vw)", height: "460px", opacity: "0.2", speed: 4.4, faultSpeed: 1.4, rotation: -1.2, scale: "1.2", xPull: -86, yPull: 210, className: "is-left svg-codecore-figure--ghost", glyphWidth: 82, glyphHeight: 30 },
-          { assetSet: 5, left: "50%", top: "424rem", width: "min(700px, 58vw)", height: "720px", opacity: "0.3", speed: 4.8, faultSpeed: 1.35, rotation: 3.2, scale: "1.04", xPull: 102, yPull: 280, className: "is-right", glyphWidth: 74, glyphHeight: 42 },
-          { assetSet: 6, left: "-8%", top: "560rem", width: "min(640px, 56vw)", height: "520px", opacity: "0.18", speed: 5.8, faultSpeed: 2.4, rotation: -3.4, scale: "1.1", xPull: -96, yPull: 180, className: "is-left svg-codecore-figure--ghost", glyphWidth: 70, glyphHeight: 35 },
-          { assetSet: 1, left: "22%", top: "680rem", width: "min(760px, 66vw)", height: "620px", opacity: "0.24", speed: 3.7, faultSpeed: 1.18, rotation: 0.5, scale: "1.15", xPull: 0, yPull: 180, className: "", glyphWidth: 88, glyphHeight: 38 }
+          { title: "Server aamusan", assetSet: 0, left: "-21%", top: "6rem", width: "min(720px, 58vw)", height: "520px", opacity: "0.32", speed: 4.6, faultSpeed: 1.6, rotation: -1.2, scale: "1", xPull: -54, yPull: 120, className: "is-left", glyphWidth: 104, glyphHeight: 54 },
+          { title: "Verlorene Daten", assetSet: 1, left: "67%", top: "40rem", width: "min(610px, 48vw)", height: "600px", opacity: "0.34", speed: 5.1, faultSpeed: 1.2, rotation: 0.7, scale: "1", xPull: 64, yPull: 180, className: "is-right", glyphWidth: 100, glyphHeight: 60 },
+          { title: "فن رقمي", assetSet: 3, left: "-10%", top: "118rem", width: "min(760px, 64vw)", height: "660px", opacity: "0.22", speed: 3.9, faultSpeed: 1.1, rotation: -1.3, scale: "1.08", xPull: -72, yPull: 180, className: "is-left svg-codecore-figure--field", glyphWidth: 132, glyphHeight: 78 },
+          { title: "Kadunud andmed", assetSet: 2, left: "73%", top: "188rem", width: "min(500px, 42vw)", height: "690px", opacity: "0.24", speed: 6.2, faultSpeed: 2.1, rotation: 2.2, scale: "1", xPull: 96, yPull: 260, className: "is-right svg-codecore-figure--ghost", glyphWidth: 92, glyphHeight: 70 },
+          { title: "失われたデータ", assetSet: 4, left: "-21%", top: "294rem", width: "min(760px, 58vw)", height: "430px", opacity: "0.20", speed: 4.4, faultSpeed: 1.4, rotation: -0.6, scale: "1", xPull: -72, yPull: 210, className: "is-left svg-codecore-figure--field", glyphWidth: 136, glyphHeight: 52 },
+          { title: "Digitální umění", assetSet: 5, left: "66%", top: "424rem", width: "min(630px, 47vw)", height: "680px", opacity: "0.32", speed: 4.8, faultSpeed: 1.35, rotation: 1.4, scale: "0.98", xPull: 82, yPull: 280, className: "is-right", glyphWidth: 106, glyphHeight: 66 },
+          { title: "Nghệ thuật số", assetSet: 6, left: "-10%", top: "558rem", width: "min(680px, 54vw)", height: "500px", opacity: "0.18", speed: 5.8, faultSpeed: 2.4, rotation: -1.1, scale: "1.04", xPull: -60, yPull: 160, className: "is-left svg-codecore-figure--field", glyphWidth: 124, glyphHeight: 58 },
+          { title: "Ψηφιακή τέχνη", assetSet: 1, left: "18%", top: "682rem", width: "min(780px, 62vw)", height: "590px", opacity: "0.26", speed: 3.7, faultSpeed: 1.18, rotation: 0.2, scale: "1", xPull: 0, yPull: 180, className: "", glyphWidth: 122, glyphHeight: 62 },
+          { title: "Silent server", assetSet: 0, left: "39%", top: "76rem", width: "min(850px, 70vw)", height: "470px", opacity: "0.16", speed: 6.4, faultSpeed: 2.2, rotation: 0.4, scale: "1.12", xPull: 28, yPull: 120, className: "svg-codecore-figure--field", glyphWidth: 146, glyphHeight: 46 },
+          { title: "Digital canvas", assetSet: 1, left: "-8%", top: "350rem", width: "min(900px, 72vw)", height: "520px", opacity: "0.15", speed: 5.7, faultSpeed: 1.8, rotation: -0.2, scale: "1.1", xPull: -24, yPull: 180, className: "svg-codecore-figure--field", glyphWidth: 150, glyphHeight: 54 }
         ];
 
         configs.forEach(createSvgCodecoreFigure);
@@ -2341,7 +2437,7 @@
           const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
           circle.setAttribute("cx", x);
           circle.setAttribute("cy", y);
-          circle.setAttribute("r", index % 5 === 0 ? 9 : 6);
+          circle.setAttribute("r", index % 5 === 0 ? 5.4 : 3.2);
           svg.append(circle);
 
           const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -2911,7 +3007,7 @@
           record.figure.style.setProperty("--svg-y", `${vertical.toFixed(2)}px`);
           record.figure.style.setProperty("--svg-rot", `${rotation.toFixed(2)}deg`);
           record.figure.style.setProperty("--svg-scale", scale.toFixed(3));
-          record.figure.style.setProperty("--svg-opacity", `${Math.min(0.58, 0.16 + progress * 0.32 + (index % 3) * 0.035).toFixed(2)}`);
+            record.figure.style.setProperty("--svg-opacity", `${Math.min(0.54, 0.24 + progress * 0.24 + (index % 3) * 0.035).toFixed(2)}`);
 
           const activeFrame = Math.abs(Math.floor((window.scrollY * 0.018 + index * 1.7 + record.frameOffset))) % record.imageFrames.length;
           record.imageFrames.forEach((frame, frameIndex) => {
@@ -2929,7 +3025,7 @@
             node.y = y;
             node.circle.setAttribute("cx", x.toFixed(2));
             node.circle.setAttribute("cy", y.toFixed(2));
-            node.circle.setAttribute("r", (nodeIndex % 4 === 0 ? 1.7 + progress * 0.9 : 1.05 + progress * 0.42).toFixed(2));
+            node.circle.setAttribute("r", (nodeIndex % 4 === 0 ? 1.05 + progress * 0.42 : 0.62 + progress * 0.22).toFixed(2));
             if (node.label) {
               node.label.setAttribute("x", (x + 2.2).toFixed(2));
               node.label.setAttribute("y", (y - 2.2).toFixed(2));
@@ -2943,7 +3039,7 @@
             line.setAttribute("y1", nodeA.y.toFixed(2));
             line.setAttribute("x2", nodeB.x.toFixed(2));
             line.setAttribute("y2", nodeB.y.toFixed(2));
-            line.style.opacity = String(Math.min(0.86, 0.22 + progress * 0.46 + ((from + to + index) % 3) * 0.08));
+            line.style.opacity = String(Math.min(0.56, 0.18 + progress * 0.24 + ((from + to + index) % 3) * 0.05));
           });
         });
       }
