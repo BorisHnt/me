@@ -108,7 +108,7 @@
     }
 
     .broken-surface::after {
-      z-index: 2;
+      z-index: 1;
       background:
         linear-gradient(90deg, transparent, rgba(250, 251, 246, 0.05), transparent),
         linear-gradient(180deg, rgba(15, 15, 27, 0.04), transparent 18%, rgba(15, 15, 27, 0.38));
@@ -757,9 +757,10 @@
     .ambient-node-field {
       position: absolute;
       inset: 0 -7vw;
-      z-index: 1;
-      opacity: 0.92;
+      z-index: 2;
+      opacity: 1;
       pointer-events: none;
+      mix-blend-mode: screen;
     }
 
     .ambient-node-field svg {
@@ -769,24 +770,25 @@
     }
 
     .ambient-node-field line {
-      stroke: #565a75;
-      stroke-width: 0.28;
+      stroke: #c6b7be;
+      stroke-width: 0.34;
       stroke-dasharray: 4 18;
-      opacity: 0.46;
+      opacity: 0.66;
     }
 
     .ambient-node-field circle {
-      fill: #c6b7be;
-      stroke: #565a75;
-      stroke-width: 0.36;
-      opacity: 0.82;
+      fill: #fafbf6;
+      stroke: #c6b7be;
+      stroke-width: 0.42;
+      opacity: 0.92;
     }
 
     .ambient-node-field text {
-      fill: #565a75;
+      fill: #c6b7be;
       font-family: var(--mono);
       font-size: 10px;
       font-weight: 900;
+      opacity: 0.82;
     }
 
     .media-core-layer {
@@ -2107,6 +2109,8 @@
       let lastLifeStep = 0;
       let lastAudioChaos = 0;
       let lastProceduralStep = 0;
+      let lastAutonomousFrame = 0;
+      let autonomousFrame = 0;
       let generatedScrollCards = 0;
       let generatedMediaPanels = 0;
       const ambientNodes = [];
@@ -2750,7 +2754,8 @@
           return;
         }
 
-        const scrollBand = Math.floor(window.scrollY / 72);
+        const autonomousBand = Math.floor(performance.now() / 260);
+        const scrollBand = Math.floor(window.scrollY / 72) + autonomousBand;
         ambientNodes.forEach((node, index) => {
           if (node.lastBand !== scrollBand) {
             node.lastBand = scrollBand;
@@ -3426,6 +3431,33 @@
         }
       }
 
+      function autonomousBrokenLoop(now) {
+        if (reducedMotion) {
+          return;
+        }
+
+        const nextDelay = 100;
+        if (!document.body.classList.contains("surface-stable")) {
+          const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+          const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+          updateAmbientNodeField(progress);
+          updateProceduralCodecore(progress, now || performance.now());
+
+          if ((now || performance.now()) - lastAudioChaos > 96) {
+            lastAudioChaos = now || performance.now();
+            updateChaoticAudio(progress);
+          }
+
+          if ((now || performance.now()) - lastLifeStep > 190) {
+            lastLifeStep = now || performance.now();
+            stepLifeField(progress);
+          }
+        }
+
+        autonomousFrame += 1;
+        window.setTimeout(() => autonomousBrokenLoop(performance.now()), nextDelay);
+      }
+
       createSpectrumBox();
       createSvgCodecoreLayer();
       createAmbientNodeField();
@@ -3453,6 +3485,7 @@
         window.addEventListener("scroll", requestBrokenUpdate, { passive: true });
         window.addEventListener("resize", requestBrokenUpdate);
         requestBrokenUpdate();
+        autonomousBrokenLoop(performance.now());
       }
     })();
   </script>
