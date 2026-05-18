@@ -887,10 +887,17 @@
       inset: 30px 10px 10px;
       width: calc(100% - 20px);
       height: calc(100% - 40px);
-      object-fit: contain;
-      object-position: center;
       opacity: 0;
-      filter: invert(1) contrast(1.35) brightness(0.84);
+      margin: 0;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: clamp(0.22rem, 0.42vw, 0.42rem);
+      font-weight: 900;
+      line-height: 0.56;
+      letter-spacing: 0;
+      overflow: hidden;
+      white-space: pre;
+      text-shadow: 1px 0 0 rgba(198, 183, 190, 0.24);
       animation: svgFrameFault var(--svg-fault-speed, 2.7s) steps(4, end) infinite;
     }
 
@@ -1011,7 +1018,10 @@
       width: 100%;
       height: 100%;
       opacity: 0.28;
-      filter: invert(1) contrast(1.18) brightness(0.68);
+      font-size: clamp(0.18rem, 0.34vw, 0.34rem);
+      line-height: 0.52;
+      color: rgba(250, 251, 246, 0.76);
+      text-shadow: none;
     }
 
     .svg-codecore-figure--field .svg-codecore-figure__frame.is-primary,
@@ -2181,6 +2191,55 @@
         return rows.join("\n");
       }
 
+      function convertImageDataToAscii(imageData, width, height, seed) {
+        const glyphs = "  .,:;^~-=+|/\\\\[]{}()<>01il!?#%";
+        const rows = [];
+        for (let y = 0; y < height; y += 1) {
+          let row = "";
+          for (let x = 0; x < width; x += 1) {
+            const offset = (y * width + x) * 4;
+            const red = imageData[offset];
+            const green = imageData[offset + 1];
+            const blue = imageData[offset + 2];
+            const alpha = imageData[offset + 3];
+            const ink = alpha / 255;
+            const darkness = ink * (1 - (red + green + blue) / 765);
+            const edge = Math.abs(Math.sin((x + seed) * 0.41) + Math.cos((y - seed) * 0.33));
+            if (darkness < 0.055 && edge < 1.72) {
+              row += " ";
+            } else {
+              const pressure = Math.min(1, darkness * 2.2 + (edge > 1.82 ? 0.22 : 0));
+              const glyphIndex = Math.min(glyphs.length - 1, Math.max(2, Math.floor(pressure * (glyphs.length - 1))));
+              row += glyphs[(glyphIndex + x * 3 + y * 5 + seed) % glyphs.length];
+            }
+          }
+          rows.push(row.replace(/\s+$/g, ""));
+        }
+        return rows.join("\n");
+      }
+
+      function renderSvgAsAscii(src, target, width, height, seed) {
+        const image = new Image();
+        image.decoding = "async";
+        image.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const context = canvas.getContext("2d", { willReadFrequently: true });
+          if (!context) {
+            return;
+          }
+          context.clearRect(0, 0, width, height);
+          context.drawImage(image, 0, 0, width, height);
+          const imageData = context.getImageData(0, 0, width, height).data;
+          target.textContent = convertImageDataToAscii(imageData, width, height, seed);
+        };
+        image.onerror = () => {
+          target.textContent = makeSvgGlyphSkin(seed, width, Math.max(18, Math.floor(height * 0.74)));
+        };
+        image.src = src;
+      }
+
       function createSvgFigureNodes(container, seed) {
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.classList.add("svg-codecore-figure__nodes");
@@ -2257,14 +2316,12 @@
         const frames = svgAssetSets[config.assetSet];
         const imageFrames = [];
         frames.forEach((src, frameIndex) => {
-          const img = document.createElement("img");
-          img.className = `svg-codecore-figure__frame${frameIndex === 0 ? " is-primary is-active" : ""}`;
-          img.src = src;
-          img.alt = "";
-          img.decoding = "async";
-          img.loading = "lazy";
-          figure.append(img);
-          imageFrames.push(img);
+          const asciiFrame = document.createElement("pre");
+          asciiFrame.className = `svg-codecore-figure__frame${frameIndex === 0 ? " is-primary is-active" : ""}`;
+          asciiFrame.textContent = makeSvgGlyphSkin(index + frameIndex * 17, config.asciiWidth, config.asciiHeight);
+          renderSvgAsAscii(src, asciiFrame, config.asciiWidth, config.asciiHeight, index + frameIndex * 17);
+          figure.append(asciiFrame);
+          imageFrames.push(asciiFrame);
         });
 
         const glyphs = document.createElement("pre");
@@ -2301,16 +2358,16 @@
         }
 
         const configs = [
-          { title: "Server aamusan", assetSet: 0, left: "-21%", top: "6rem", width: "min(720px, 58vw)", height: "520px", opacity: "0.32", speed: 4.6, faultSpeed: 1.6, rotation: -1.2, scale: "1", xPull: -54, yPull: 120, className: "is-left", glyphWidth: 104, glyphHeight: 54 },
-          { title: "Verlorene Daten", assetSet: 1, left: "67%", top: "40rem", width: "min(610px, 48vw)", height: "600px", opacity: "0.34", speed: 5.1, faultSpeed: 1.2, rotation: 0.7, scale: "1", xPull: 64, yPull: 180, className: "is-right", glyphWidth: 100, glyphHeight: 60 },
-          { title: "فن رقمي", assetSet: 3, left: "-10%", top: "118rem", width: "min(760px, 64vw)", height: "660px", opacity: "0.22", speed: 3.9, faultSpeed: 1.1, rotation: -1.3, scale: "1.08", xPull: -72, yPull: 180, className: "is-left svg-codecore-figure--field", glyphWidth: 132, glyphHeight: 78 },
-          { title: "Kadunud andmed", assetSet: 2, left: "73%", top: "188rem", width: "min(500px, 42vw)", height: "690px", opacity: "0.24", speed: 6.2, faultSpeed: 2.1, rotation: 2.2, scale: "1", xPull: 96, yPull: 260, className: "is-right svg-codecore-figure--ghost", glyphWidth: 92, glyphHeight: 70 },
-          { title: "失われたデータ", assetSet: 4, left: "-21%", top: "294rem", width: "min(760px, 58vw)", height: "430px", opacity: "0.20", speed: 4.4, faultSpeed: 1.4, rotation: -0.6, scale: "1", xPull: -72, yPull: 210, className: "is-left svg-codecore-figure--field", glyphWidth: 136, glyphHeight: 52 },
-          { title: "Digitální umění", assetSet: 5, left: "66%", top: "424rem", width: "min(630px, 47vw)", height: "680px", opacity: "0.32", speed: 4.8, faultSpeed: 1.35, rotation: 1.4, scale: "0.98", xPull: 82, yPull: 280, className: "is-right", glyphWidth: 106, glyphHeight: 66 },
-          { title: "Nghệ thuật số", assetSet: 6, left: "-10%", top: "558rem", width: "min(680px, 54vw)", height: "500px", opacity: "0.18", speed: 5.8, faultSpeed: 2.4, rotation: -1.1, scale: "1.04", xPull: -60, yPull: 160, className: "is-left svg-codecore-figure--field", glyphWidth: 124, glyphHeight: 58 },
-          { title: "Ψηφιακή τέχνη", assetSet: 1, left: "18%", top: "682rem", width: "min(780px, 62vw)", height: "590px", opacity: "0.26", speed: 3.7, faultSpeed: 1.18, rotation: 0.2, scale: "1", xPull: 0, yPull: 180, className: "", glyphWidth: 122, glyphHeight: 62 },
-          { title: "Silent server", assetSet: 0, left: "39%", top: "76rem", width: "min(850px, 70vw)", height: "470px", opacity: "0.16", speed: 6.4, faultSpeed: 2.2, rotation: 0.4, scale: "1.12", xPull: 28, yPull: 120, className: "svg-codecore-figure--field", glyphWidth: 146, glyphHeight: 46 },
-          { title: "Digital canvas", assetSet: 1, left: "-8%", top: "350rem", width: "min(900px, 72vw)", height: "520px", opacity: "0.15", speed: 5.7, faultSpeed: 1.8, rotation: -0.2, scale: "1.1", xPull: -24, yPull: 180, className: "svg-codecore-figure--field", glyphWidth: 150, glyphHeight: 54 }
+          { title: "Server aamusan", assetSet: 0, left: "-21%", top: "6rem", width: "min(720px, 58vw)", height: "520px", opacity: "0.32", speed: 4.6, faultSpeed: 1.6, rotation: -1.2, scale: "1", xPull: -54, yPull: 120, className: "is-left", glyphWidth: 104, glyphHeight: 54, asciiWidth: 128, asciiHeight: 78 },
+          { title: "Verlorene Daten", assetSet: 1, left: "67%", top: "40rem", width: "min(610px, 48vw)", height: "600px", opacity: "0.34", speed: 5.1, faultSpeed: 1.2, rotation: 0.7, scale: "1", xPull: 64, yPull: 180, className: "is-right", glyphWidth: 100, glyphHeight: 60, asciiWidth: 118, asciiHeight: 88 },
+          { title: "فن رقمي", assetSet: 3, left: "-10%", top: "118rem", width: "min(760px, 64vw)", height: "660px", opacity: "0.22", speed: 3.9, faultSpeed: 1.1, rotation: -1.3, scale: "1.08", xPull: -72, yPull: 180, className: "is-left svg-codecore-figure--field", glyphWidth: 132, glyphHeight: 78, asciiWidth: 150, asciiHeight: 92 },
+          { title: "Kadunud andmed", assetSet: 2, left: "73%", top: "188rem", width: "min(500px, 42vw)", height: "690px", opacity: "0.24", speed: 6.2, faultSpeed: 2.1, rotation: 2.2, scale: "1", xPull: 96, yPull: 260, className: "is-right svg-codecore-figure--ghost", glyphWidth: 92, glyphHeight: 70, asciiWidth: 100, asciiHeight: 100 },
+          { title: "失われたデータ", assetSet: 4, left: "-21%", top: "294rem", width: "min(760px, 58vw)", height: "430px", opacity: "0.20", speed: 4.4, faultSpeed: 1.4, rotation: -0.6, scale: "1", xPull: -72, yPull: 210, className: "is-left svg-codecore-figure--field", glyphWidth: 136, glyphHeight: 52, asciiWidth: 154, asciiHeight: 62 },
+          { title: "Digitální umění", assetSet: 5, left: "66%", top: "424rem", width: "min(630px, 47vw)", height: "680px", opacity: "0.32", speed: 4.8, faultSpeed: 1.35, rotation: 1.4, scale: "0.98", xPull: 82, yPull: 280, className: "is-right", glyphWidth: 106, glyphHeight: 66, asciiWidth: 120, asciiHeight: 96 },
+          { title: "Nghệ thuật số", assetSet: 6, left: "-10%", top: "558rem", width: "min(680px, 54vw)", height: "500px", opacity: "0.18", speed: 5.8, faultSpeed: 2.4, rotation: -1.1, scale: "1.04", xPull: -60, yPull: 160, className: "is-left svg-codecore-figure--field", glyphWidth: 124, glyphHeight: 58, asciiWidth: 132, asciiHeight: 70 },
+          { title: "Ψηφιακή τέχνη", assetSet: 1, left: "18%", top: "682rem", width: "min(780px, 62vw)", height: "590px", opacity: "0.26", speed: 3.7, faultSpeed: 1.18, rotation: 0.2, scale: "1", xPull: 0, yPull: 180, className: "", glyphWidth: 122, glyphHeight: 62, asciiWidth: 150, asciiHeight: 86 },
+          { title: "Silent server", assetSet: 0, left: "39%", top: "76rem", width: "min(850px, 70vw)", height: "470px", opacity: "0.16", speed: 6.4, faultSpeed: 2.2, rotation: 0.4, scale: "1.12", xPull: 28, yPull: 120, className: "svg-codecore-figure--field", glyphWidth: 146, glyphHeight: 46, asciiWidth: 170, asciiHeight: 62 },
+          { title: "Digital canvas", assetSet: 1, left: "-8%", top: "350rem", width: "min(900px, 72vw)", height: "520px", opacity: "0.15", speed: 5.7, faultSpeed: 1.8, rotation: -0.2, scale: "1.1", xPull: -24, yPull: 180, className: "svg-codecore-figure--field", glyphWidth: 150, glyphHeight: 54, asciiWidth: 176, asciiHeight: 68 }
         ];
 
         configs.forEach(createSvgCodecoreFigure);
