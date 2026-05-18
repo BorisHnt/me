@@ -229,6 +229,103 @@
       }
     }
 
+    @keyframes svgSignalBreathe {
+      0%, 100% {
+        filter: invert(1) contrast(1.3) brightness(0.82);
+        opacity: var(--svg-opacity, 0.34);
+      }
+      17% {
+        filter: invert(1) contrast(2.1) brightness(1.22);
+        opacity: calc(var(--svg-opacity, 0.34) + 0.18);
+      }
+      18% {
+        filter: invert(1) contrast(0.9) brightness(0.72);
+        opacity: calc(var(--svg-opacity, 0.34) - 0.14);
+      }
+      38% {
+        clip-path: inset(0 0 0 0);
+      }
+      39% {
+        clip-path: inset(14% 0 23% 0);
+      }
+      41% {
+        clip-path: inset(0 18% 0 0);
+      }
+      63% {
+        filter: invert(1) contrast(1.8) brightness(0.96);
+      }
+    }
+
+    @keyframes svgFrameFault {
+      0%, 100% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+      }
+      9% {
+        opacity: 0.48;
+        transform: translate3d(8px, -3px, 0);
+      }
+      10% {
+        opacity: 0;
+      }
+      37% {
+        opacity: 0.34;
+        transform: translate3d(-12px, 2px, 0);
+      }
+      39% {
+        opacity: 0;
+      }
+      72% {
+        opacity: 0.58;
+        transform: translate3d(5px, 7px, 0);
+      }
+      74% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes vectorLineAlive {
+      0%, 100% {
+        stroke-dashoffset: 0;
+        opacity: 0.16;
+      }
+      34% {
+        stroke-dashoffset: 46;
+        opacity: 0.84;
+      }
+      35% {
+        opacity: 0.12;
+      }
+      67% {
+        stroke-dashoffset: -23;
+        opacity: 0.58;
+      }
+    }
+
+    @keyframes glyphSurfaceInterference {
+      0%, 100% {
+        opacity: 0.18;
+        transform: translate3d(0, 0, 0);
+      }
+      20% {
+        opacity: 0.76;
+        transform: translate3d(11px, -4px, 0);
+      }
+      21% {
+        opacity: 0.25;
+        transform: translate3d(-17px, 3px, 0);
+      }
+      52% {
+        clip-path: inset(0 0 0 0);
+      }
+      53% {
+        clip-path: inset(26% 0 17% 0);
+      }
+      57% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
     @keyframes cardSignalTear {
       0%, 100% {
         transform: translate3d(0, 0, 0) skewX(0deg);
@@ -707,6 +804,145 @@
       pointer-events: none;
     }
 
+    .svg-codecore-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .svg-codecore-figure {
+      --svg-x: 0px;
+      --svg-y: 0px;
+      --svg-rot: 0deg;
+      --svg-scale: 1;
+      --svg-opacity: 0.34;
+      position: absolute;
+      left: var(--svg-left);
+      top: var(--svg-top);
+      width: var(--svg-w);
+      min-height: var(--svg-h);
+      opacity: var(--svg-opacity);
+      transform:
+        translate3d(var(--svg-x), var(--svg-y), 0)
+        rotate(var(--svg-rot))
+        scale(var(--svg-scale));
+      transform-origin: center;
+      mix-blend-mode: screen;
+    }
+
+    .svg-codecore-figure.is-right {
+      transform-origin: right center;
+    }
+
+    .svg-codecore-figure.is-left {
+      transform-origin: left center;
+    }
+
+    .svg-codecore-figure__frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0;
+      filter: invert(1) contrast(1.35) brightness(0.84);
+      animation: svgFrameFault var(--svg-fault-speed, 2.7s) steps(4, end) infinite;
+    }
+
+    .svg-codecore-figure__frame.is-primary,
+    .svg-codecore-figure__frame.is-active {
+      opacity: 0.74;
+      animation:
+        svgSignalBreathe var(--svg-speed, 5.6s) steps(6, end) infinite,
+        svgFrameFault var(--svg-fault-speed, 2.7s) steps(4, end) infinite;
+    }
+
+    .svg-codecore-figure__frame:nth-child(2) {
+      animation-delay: -0.31s;
+    }
+
+    .svg-codecore-figure__frame:nth-child(3) {
+      animation-delay: -0.72s;
+    }
+
+    .svg-codecore-figure__frame:nth-child(4) {
+      animation-delay: -1.11s;
+    }
+
+    .svg-codecore-figure__glyphs {
+      position: absolute;
+      inset: 5%;
+      z-index: 2;
+      margin: 0;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: clamp(0.42rem, 0.78vw, 0.68rem);
+      font-weight: 900;
+      line-height: 0.78;
+      white-space: pre;
+      opacity: 0.24;
+      overflow: hidden;
+      text-shadow: 2px 0 0 #565a75, -2px 0 0 #c6b7be;
+      animation: glyphSurfaceInterference var(--glyph-speed, 3.4s) steps(5, end) infinite;
+    }
+
+    .svg-codecore-figure__nodes {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .svg-codecore-figure__nodes line {
+      stroke: #c6b7be;
+      stroke-width: 1.2;
+      stroke-dasharray: 12 8;
+      opacity: 0.48;
+      animation: vectorLineAlive 1.7s steps(5, end) infinite;
+    }
+
+    .svg-codecore-figure__nodes circle {
+      fill: #fafbf6;
+      stroke: #565a75;
+      stroke-width: 1.6;
+    }
+
+    .svg-codecore-figure__nodes text {
+      fill: #fafbf6;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 900;
+      paint-order: stroke;
+      stroke: #0f0f1b;
+      stroke-width: 3px;
+    }
+
+    .svg-codecore-figure__tag {
+      position: absolute;
+      right: 4%;
+      bottom: 5%;
+      z-index: 4;
+      border: 1px solid #565a75;
+      padding: 0.16rem 0.34rem;
+      background: #0f0f1b;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      opacity: 0.82;
+    }
+
+    .svg-codecore-figure--ghost {
+      --svg-opacity: 0.2;
+      z-index: 0;
+    }
+
     .life-panel {
       --life-x: 0px;
       --life-y: 0px;
@@ -1119,6 +1355,7 @@
     .surface-stable .ambient-node-field,
     .surface-stable .media-core-layer,
     .surface-stable .life-field-layer,
+    .surface-stable .svg-codecore-layer,
     .surface-stable .scroll-codecore-feed,
     .surface-stable .inline-disruption-zone,
     .surface-stable .text-spark,
@@ -1266,6 +1503,7 @@
       .ambient-node-field,
       .media-core-layer,
       .life-field-layer,
+      .svg-codecore-layer,
       .inline-disruption-zone,
       .textmode-cascade,
       .text-spark {
@@ -1324,6 +1562,7 @@
 
       <article class="broken-surface" data-broken-surface>
         <div class="codecore-layer" data-codecore-layer aria-hidden="true"></div>
+        <div class="svg-codecore-layer" data-svg-codecore-layer aria-hidden="true"></div>
         <div class="ambient-node-field" data-ambient-node-field aria-hidden="true"></div>
         <div class="media-core-layer" data-media-core-layer aria-hidden="true"></div>
         <div class="life-field-layer" data-life-field-layer aria-hidden="true"></div>
@@ -1685,6 +1924,7 @@
 
       const surface = document.querySelector("[data-broken-surface]");
       const layer = document.querySelector("[data-codecore-layer]");
+      const svgCodecoreLayer = document.querySelector("[data-svg-codecore-layer]");
       const ambientNodeField = document.querySelector("[data-ambient-node-field]");
       const mediaCoreLayer = document.querySelector("[data-media-core-layer]");
       const lifeFieldLayer = document.querySelector("[data-life-field-layer]");
@@ -1755,6 +1995,15 @@
       const mutationFonts = ["font-mutant-serif", "font-mutant-system"];
       const sparkSources = ["signal", "noise", "frame", "buffer", "artifact", "stutter", "alive", "damage", "surface", "pixel storm"];
       const audioGlyphs = ["▁", "▂", "▃", "▅", "▇", "█", "▓", "▒", "░", "╱", "╲", "│", "╳", "╿", "╽", "/", "\\", "_", "▀", "▄"];
+      const svgAssetSets = [
+        ["../assets/img/codecore/weirdcore001-a.svg", "../assets/img/codecore/weirdcore001-b.svg"],
+        ["../assets/img/codecore/rbmk-plan-a.svg", "../assets/img/codecore/rbmk-plan-b.svg", "../assets/img/codecore/rbmk-plan-c.svg", "../assets/img/codecore/rbmk-plan-d.svg", "../assets/img/codecore/rbmk-plan-e.svg"],
+        ["../assets/img/codecore/panelka001-a.svg", "../assets/img/codecore/panelka001-b.svg"],
+        ["../assets/img/codecore/creepy001-a.svg", "../assets/img/codecore/creepy001-b.svg", "../assets/img/codecore/creepy001-c.svg"],
+        ["../assets/img/codecore/creepy002-a.svg", "../assets/img/codecore/creepy002-b.svg", "../assets/img/codecore/creepy002-c.svg"],
+        ["../assets/img/codecore/rbmk-picture-a.svg", "../assets/img/codecore/rbmk-plan-b.svg"],
+        ["../assets/img/codecore/lada2017-a.svg", "../assets/img/codecore/panelka002-a.svg"]
+      ];
       const inlineDisruptionZones = [];
       let ticking = false;
       let lastMutation = 0;
@@ -1769,6 +2018,7 @@
       const lifePanels = [];
       const spectrumBars = [];
       const scopeBars = [];
+      const svgCodecoreFigures = [];
 
       glitchWords.forEach((word) => {
         word.dataset.originalText = word.textContent;
@@ -1815,6 +2065,159 @@
           rows.push(row);
         }
         return rows.join("\n");
+      }
+
+      function makeSvgGlyphSkin(seed, width = 66, height = 34) {
+        const rows = [];
+        const glyphs = " .,:;^~-=+|/\\\\[]{}()<>01il!?#%";
+        for (let y = 0; y < height; y += 1) {
+          let row = "";
+          for (let x = 0; x < width; x += 1) {
+            const nx = (x - width / 2) / (width / 2);
+            const ny = (y - height / 2) / (height / 2);
+            const verticalBody = Math.abs(nx + Math.sin(y * 0.27 + seed) * 0.16) < 0.2 + Math.max(0, ny) * 0.16;
+            const skullBody = (nx ** 2) / 0.64 + ((ny + 0.06) ** 2) / 0.58 < 1;
+            const architectural = y % (4 + seed % 3) === 0 || x % (11 + seed % 5) === 0;
+            const torn = Math.sin(x * 0.39 + y * 0.71 + seed) > 0.58;
+            const active = seed % 3 === 0 ? skullBody || torn : seed % 3 === 1 ? verticalBody || architectural : torn || architectural;
+            const pick = Math.abs(Math.floor(x * 9 + y * 13 + seed * 23)) % glyphs.length;
+            row += active ? glyphs[pick] : " ";
+          }
+          rows.push(row);
+        }
+        return rows.join("\n");
+      }
+
+      function createSvgFigureNodes(container, seed) {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.classList.add("svg-codecore-figure__nodes");
+        svg.setAttribute("viewBox", "0 0 100 100");
+        svg.setAttribute("preserveAspectRatio", "none");
+
+        const points = [];
+        const count = 9 + (seed % 5);
+        for (let index = 0; index < count; index += 1) {
+          const x = 9 + ((seed * 17 + index * 29) % 82);
+          const y = 10 + ((seed * 31 + index * 23) % 78);
+          points.push([x, y]);
+        }
+
+        const links = [];
+        points.forEach(([x, y], index) => {
+          [index + 1, index + 3].forEach((targetIndex) => {
+            if (targetIndex < points.length && (targetIndex + seed) % 2 === 0) {
+              const target = points[targetIndex];
+              const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+              line.setAttribute("x1", x);
+              line.setAttribute("y1", y);
+              line.setAttribute("x2", target[0]);
+              line.setAttribute("y2", target[1]);
+              line.style.animationDelay = `${-(index * 130)}ms`;
+              svg.append(line);
+              links.push({ line, from: index, to: targetIndex });
+            }
+          });
+        });
+
+        const nodeRecords = [];
+        points.forEach(([x, y], index) => {
+          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          circle.setAttribute("cx", x);
+          circle.setAttribute("cy", y);
+          circle.setAttribute("r", index % 4 === 0 ? 1.7 : 1.05);
+          svg.append(circle);
+
+          let label = null;
+          if (index % 3 === 0) {
+            label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", x + 2.2);
+            label.setAttribute("y", y - 2.2);
+            label.textContent = designLabel(seed + index * 9);
+            svg.append(label);
+          }
+
+          nodeRecords.push({ baseX: x, baseY: y, x, y, circle, label, phase: seed * 0.31 + index * 0.74 });
+        });
+
+        container.append(svg);
+        return { nodes: nodeRecords, links };
+      }
+
+      function createSvgCodecoreFigure(config, index) {
+        if (!svgCodecoreLayer) {
+          return;
+        }
+
+        const figure = document.createElement("div");
+        figure.className = `svg-codecore-figure ${config.className || ""}`;
+        figure.style.setProperty("--svg-left", config.left);
+        figure.style.setProperty("--svg-top", config.top);
+        figure.style.setProperty("--svg-w", config.width);
+        figure.style.setProperty("--svg-h", config.height);
+        figure.style.setProperty("--svg-opacity", config.opacity);
+        figure.style.setProperty("--svg-speed", `${config.speed}s`);
+        figure.style.setProperty("--svg-fault-speed", `${config.faultSpeed}s`);
+        figure.style.setProperty("--svg-scale", config.scale);
+        figure.style.setProperty("--svg-rot", `${config.rotation}deg`);
+
+        const frames = svgAssetSets[config.assetSet];
+        const imageFrames = [];
+        frames.forEach((src, frameIndex) => {
+          const img = document.createElement("img");
+          img.className = `svg-codecore-figure__frame${frameIndex === 0 ? " is-primary is-active" : ""}`;
+          img.src = src;
+          img.alt = "";
+          img.decoding = "async";
+          img.loading = "lazy";
+          figure.append(img);
+          imageFrames.push(img);
+        });
+
+        const glyphs = document.createElement("pre");
+        glyphs.className = "svg-codecore-figure__glyphs";
+        glyphs.textContent = makeSvgGlyphSkin(index + 31, config.glyphWidth, config.glyphHeight);
+        glyphs.style.setProperty("--glyph-speed", `${2.2 + (index % 5) * 0.42}s`);
+
+        const tag = document.createElement("span");
+        tag.className = "svg-codecore-figure__tag";
+        tag.textContent = designLabel(index * 17 + 5);
+
+        figure.append(glyphs);
+        const nodePoints = createSvgFigureNodes(figure, index + 11);
+        figure.append(tag);
+        svgCodecoreLayer.append(figure);
+
+        svgCodecoreFigures.push({
+          figure,
+          imageFrames,
+          glyphs,
+          nodePoints,
+          phase: index * 0.83 + 0.2,
+          baseRotation: config.rotation,
+          baseScale: config.scale,
+          yPull: config.yPull,
+          xPull: config.xPull,
+          frameOffset: index % imageFrames.length
+        });
+      }
+
+      function createSvgCodecoreLayer() {
+        if (!svgCodecoreLayer) {
+          return;
+        }
+
+        const configs = [
+          { assetSet: 0, left: "-12%", top: "6rem", width: "min(720px, 62vw)", height: "560px", opacity: "0.28", speed: 4.6, faultSpeed: 1.6, rotation: -2.5, scale: "1.08", xPull: -72, yPull: 120, className: "is-left", glyphWidth: 76, glyphHeight: 34 },
+          { assetSet: 1, left: "54%", top: "42rem", width: "min(660px, 54vw)", height: "640px", opacity: "0.32", speed: 5.1, faultSpeed: 1.2, rotation: 1.8, scale: "1.12", xPull: 86, yPull: 180, className: "is-right", glyphWidth: 72, glyphHeight: 38 },
+          { assetSet: 3, left: "-10%", top: "120rem", width: "min(620px, 56vw)", height: "650px", opacity: "0.38", speed: 3.9, faultSpeed: 1.1, rotation: -5.4, scale: "1", xPull: -114, yPull: 230, className: "is-left", glyphWidth: 70, glyphHeight: 42 },
+          { assetSet: 2, left: "62%", top: "188rem", width: "min(560px, 50vw)", height: "760px", opacity: "0.22", speed: 6.2, faultSpeed: 2.1, rotation: 5.6, scale: "1.16", xPull: 128, yPull: 260, className: "is-right svg-codecore-figure--ghost", glyphWidth: 68, glyphHeight: 46 },
+          { assetSet: 4, left: "4%", top: "294rem", width: "min(820px, 70vw)", height: "460px", opacity: "0.2", speed: 4.4, faultSpeed: 1.4, rotation: -1.2, scale: "1.2", xPull: -86, yPull: 210, className: "is-left svg-codecore-figure--ghost", glyphWidth: 82, glyphHeight: 30 },
+          { assetSet: 5, left: "50%", top: "424rem", width: "min(700px, 58vw)", height: "720px", opacity: "0.3", speed: 4.8, faultSpeed: 1.35, rotation: 3.2, scale: "1.04", xPull: 102, yPull: 280, className: "is-right", glyphWidth: 74, glyphHeight: 42 },
+          { assetSet: 6, left: "-8%", top: "560rem", width: "min(640px, 56vw)", height: "520px", opacity: "0.18", speed: 5.8, faultSpeed: 2.4, rotation: -3.4, scale: "1.1", xPull: -96, yPull: 180, className: "is-left svg-codecore-figure--ghost", glyphWidth: 70, glyphHeight: 35 },
+          { assetSet: 1, left: "22%", top: "680rem", width: "min(760px, 66vw)", height: "620px", opacity: "0.24", speed: 3.7, faultSpeed: 1.18, rotation: 0.5, scale: "1.15", xPull: 0, yPull: 180, className: "", glyphWidth: 88, glyphHeight: 38 }
+        ];
+
+        configs.forEach(createSvgCodecoreFigure);
       }
 
       function makeCodecoreRaster(kind, layerName) {
@@ -2493,6 +2896,58 @@
         });
       }
 
+      function updateSvgCodecoreLayer(progress) {
+        if (!svgCodecoreFigures.length) {
+          return;
+        }
+
+        const scrollSignal = window.scrollY * 0.004;
+        svgCodecoreFigures.forEach((record, index) => {
+          const lateral = Math.sin(scrollSignal + record.phase) * (18 + progress * Math.abs(record.xPull));
+          const vertical = Math.cos(scrollSignal * 0.62 + record.phase) * (8 + progress * 22) - progress * record.yPull;
+          const rotation = record.baseRotation + Math.sin(scrollSignal * 0.7 + index) * (1.4 + progress * 5.8);
+          const scale = Number(record.baseScale) + Math.sin(scrollSignal * 0.42 + index) * 0.015 + progress * 0.07;
+          record.figure.style.setProperty("--svg-x", `${lateral.toFixed(2)}px`);
+          record.figure.style.setProperty("--svg-y", `${vertical.toFixed(2)}px`);
+          record.figure.style.setProperty("--svg-rot", `${rotation.toFixed(2)}deg`);
+          record.figure.style.setProperty("--svg-scale", scale.toFixed(3));
+          record.figure.style.setProperty("--svg-opacity", `${Math.min(0.58, 0.16 + progress * 0.32 + (index % 3) * 0.035).toFixed(2)}`);
+
+          const activeFrame = Math.abs(Math.floor((window.scrollY * 0.018 + index * 1.7 + record.frameOffset))) % record.imageFrames.length;
+          record.imageFrames.forEach((frame, frameIndex) => {
+            frame.classList.toggle("is-active", frameIndex === activeFrame);
+          });
+
+          if (record.glyphs && Math.floor(window.scrollY / 120 + index) % 3 === 0) {
+            record.glyphs.style.transform = `translate3d(${Math.sin(scrollSignal * 3 + index) * 12}px, ${Math.cos(scrollSignal * 2.2 + index) * 8}px, 0)`;
+          }
+
+          record.nodePoints.nodes.forEach((node, nodeIndex) => {
+            const x = node.baseX + Math.sin(window.scrollY * 0.014 + node.phase) * (2.2 + progress * 5.4);
+            const y = node.baseY + Math.cos(window.scrollY * 0.011 + node.phase) * (1.8 + progress * 4.6);
+            node.x = x;
+            node.y = y;
+            node.circle.setAttribute("cx", x.toFixed(2));
+            node.circle.setAttribute("cy", y.toFixed(2));
+            node.circle.setAttribute("r", (nodeIndex % 4 === 0 ? 1.7 + progress * 0.9 : 1.05 + progress * 0.42).toFixed(2));
+            if (node.label) {
+              node.label.setAttribute("x", (x + 2.2).toFixed(2));
+              node.label.setAttribute("y", (y - 2.2).toFixed(2));
+            }
+          });
+
+          record.nodePoints.links.forEach(({ line, from, to }) => {
+            const nodeA = record.nodePoints.nodes[from];
+            const nodeB = record.nodePoints.nodes[to];
+            line.setAttribute("x1", nodeA.x.toFixed(2));
+            line.setAttribute("y1", nodeA.y.toFixed(2));
+            line.setAttribute("x2", nodeB.x.toFixed(2));
+            line.setAttribute("y2", nodeB.y.toFixed(2));
+            line.style.opacity = String(Math.min(0.86, 0.22 + progress * 0.46 + ((from + to + index) % 3) * 0.08));
+          });
+        });
+      }
+
       function updateBrokenSurface() {
         ticking = false;
         if (reducedMotion || document.body.classList.contains("surface-stable")) {
@@ -2530,6 +2985,8 @@
           const sway = Math.sin(window.scrollY * 0.0018) * 18;
           ambientNodeField.style.transform = `translate3d(${sway.toFixed(2)}px, ${(-progress * 140).toFixed(2)}px, 0)`;
         }
+
+        updateSvgCodecoreLayer(progress);
 
         if (ambientNodes.length) {
           ambientNodes.forEach((node, index) => {
@@ -2592,6 +3049,7 @@
       }
 
       createSpectrumBox();
+      createSvgCodecoreLayer();
       createAmbientNodeField();
       createMediaCoreField();
       createLifeField();
