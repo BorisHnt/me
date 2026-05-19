@@ -977,6 +977,21 @@ h1 {
   box-shadow: var(--sunken);
 }
 
+.taskbar-language {
+  display: inline-flex;
+  min-width: 24px;
+  min-height: 18px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-dark);
+  background: #fafbf6;
+  color: #0f0f1b;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
 .operator-terminal {
   position: fixed;
   top: 50%;

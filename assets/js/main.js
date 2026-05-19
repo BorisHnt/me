@@ -212,7 +212,22 @@
     }
   }
 
+  function setupTaskbarLanguageIndicator() {
+    const status = document.querySelector(".taskbar-status");
+    if (!status || status.querySelector(".taskbar-language")) {
+      return;
+    }
+
+    const language = (navigator.language || "en").slice(0, 2).toUpperCase();
+    const indicator = document.createElement("span");
+    indicator.className = "taskbar-language";
+    indicator.textContent = language;
+    indicator.setAttribute("aria-label", `Browser language ${language}`);
+    status.prepend(indicator);
+  }
+
   function startTaskbarClock() {
+    setupTaskbarLanguageIndicator();
     updateTaskbarStatus();
     window.setInterval(updateTaskbarStatus, 1000);
   }
