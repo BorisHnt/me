@@ -218,12 +218,148 @@
       return;
     }
 
-    const language = (navigator.language || "en").slice(0, 2).toUpperCase();
-    const indicator = document.createElement("span");
+    const availableLanguages = {
+      EN: "English",
+      FR: "Francais",
+      RU: "Русский",
+      CH: "中文",
+      JP: "日本語"
+    };
+    const browserLanguage = (navigator.language || "en").slice(0, 2).toLowerCase();
+    const browserLanguageMap = {
+      en: "EN",
+      fr: "FR",
+      ru: "RU",
+      zh: "CH",
+      ja: "JP"
+    };
+    let activeLanguage = browserLanguageMap[browserLanguage] || "EN";
+
+    const indicator = document.createElement("button");
+    indicator.type = "button";
     indicator.className = "taskbar-language";
-    indicator.textContent = language;
-    indicator.setAttribute("aria-label", `Browser language ${language}`);
+    indicator.textContent = activeLanguage;
+    indicator.setAttribute("aria-label", `Selected language ${activeLanguage}`);
+    indicator.setAttribute("aria-haspopup", "menu");
+    indicator.setAttribute("aria-expanded", "false");
+
+    const menu = document.createElement("div");
+    menu.className = "taskbar-language-menu";
+    menu.hidden = true;
+    menu.setAttribute("role", "menu");
+
+    const menuTitle = document.createElement("div");
+    menuTitle.className = "taskbar-language-menu__title";
+    menuTitle.textContent = "Language";
+    menu.append(menuTitle);
+
+    const errorWindow = document.createElement("section");
+    errorWindow.className = "language-error-window";
+    errorWindow.hidden = true;
+    errorWindow.setAttribute("role", "dialog");
+    errorWindow.setAttribute("aria-label", "Language error");
+    errorWindow.innerHTML = `
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true"><span></span><span></span></div>
+        <span class="window-title">LANGUAGE ERROR</span>
+        <span class="window-chip">UNAVAILABLE</span>
+      </div>
+      <div class="language-error-window__body">
+        <p>The requested language is not available for now.</p>
+        <button class="button button-small" type="button">OK</button>
+      </div>
+    `;
+
+    function closeMenu() {
+      menu.hidden = true;
+      indicator.setAttribute("aria-expanded", "false");
+    }
+
+    function positionMenu() {
+      const rect = indicator.getBoundingClientRect();
+      menu.style.left = `${Math.max(4, Math.min(window.innerWidth - 190, rect.left))}px`;
+      menu.style.bottom = `${Math.max(44, window.innerHeight - rect.top + 4)}px`;
+    }
+
+    function showUnavailableLanguageError() {
+      closeMenu();
+      errorWindow.hidden = false;
+      const okButton = errorWindow.querySelector("button");
+      if (okButton) {
+        okButton.focus();
+      }
+    }
+
+    function selectLanguage(code) {
+      if (!availableLanguages[code]) {
+        showUnavailableLanguageError();
+        return;
+      }
+
+      activeLanguage = code;
+      indicator.textContent = code;
+      indicator.setAttribute("aria-label", `Selected language ${code}`);
+      menu.querySelectorAll("button[data-language-code]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.languageCode === activeLanguage));
+      });
+      closeMenu();
+      indicator.focus();
+    }
+
+    Object.entries(availableLanguages).forEach(([code, label]) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.setAttribute("role", "menuitem");
+      item.dataset.languageCode = code;
+      item.setAttribute("aria-pressed", String(code === activeLanguage));
+      item.textContent = `${code} - ${label}`;
+      item.addEventListener("click", () => selectLanguage(code));
+      menu.append(item);
+    });
+
+    const unavailableItem = document.createElement("button");
+    unavailableItem.type = "button";
+    unavailableItem.setAttribute("role", "menuitem");
+    unavailableItem.textContent = "Other language...";
+    unavailableItem.addEventListener("click", showUnavailableLanguageError);
+    menu.append(unavailableItem);
+
+    indicator.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      indicator.setAttribute("aria-expanded", String(willOpen));
+      if (willOpen) {
+        positionMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menu.hidden && !menu.contains(event.target) && event.target !== indicator) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+        errorWindow.hidden = true;
+      }
+    });
+
+    errorWindow.querySelector("button")?.addEventListener("click", () => {
+      errorWindow.hidden = true;
+      indicator.focus();
+    });
+
+    window.addEventListener("resize", () => {
+      if (!menu.hidden) {
+        positionMenu();
+      }
+    });
+
     status.prepend(indicator);
+    document.body.append(menu, errorWindow);
   }
 
   function startTaskbarClock() {

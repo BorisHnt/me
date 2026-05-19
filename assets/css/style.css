@@ -986,10 +986,106 @@ h1 {
   border: 1px solid var(--border-dark);
   background: #fafbf6;
   color: #0f0f1b;
+  cursor: pointer;
   font-family: var(--mono);
   font-size: 0.62rem;
   font-weight: 900;
   line-height: 1;
+  appearance: none;
+  border-radius: 0;
+  text-transform: uppercase;
+}
+
+.taskbar-language:hover,
+.taskbar-language:focus-visible,
+.taskbar-language[aria-expanded="true"] {
+  box-shadow: var(--sunken);
+}
+
+.taskbar-language-menu {
+  position: fixed;
+  z-index: 130;
+  min-width: 178px;
+  border: 2px solid var(--border-dark);
+  background: var(--button-face);
+  box-shadow: var(--raised);
+  color: var(--taskbar-text);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.taskbar-language-menu[hidden] {
+  display: none;
+}
+
+.taskbar-language-menu__title {
+  border-bottom: 2px solid var(--border-dark);
+  padding: 0.22rem 0.42rem;
+  background: var(--steel);
+  color: var(--paper);
+}
+
+.taskbar-language-menu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border-dark);
+  padding: 0.34rem 0.48rem;
+  background: var(--button-face);
+  color: var(--taskbar-text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  text-transform: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+.taskbar-language-menu button:last-child {
+  border-bottom: 0;
+}
+
+.taskbar-language-menu button:hover,
+.taskbar-language-menu button:focus-visible {
+  background: var(--steel);
+  color: var(--paper);
+}
+
+.taskbar-language-menu button[aria-pressed="true"]::before {
+  content: "✓ ";
+}
+
+.language-error-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 135;
+  width: min(360px, calc(100vw - 24px));
+  border: 2px solid var(--border-dark);
+  background: var(--surface-alt);
+  box-shadow: var(--raised);
+  color: var(--text);
+  transform: translate(-50%, -50%);
+}
+
+.language-error-window[hidden] {
+  display: none;
+}
+
+.language-error-window__body {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.language-error-window__body p {
+  margin: 0;
+}
+
+.language-error-window__body .button {
+  justify-self: end;
 }
 
 .operator-terminal {
