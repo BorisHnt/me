@@ -4,7 +4,17 @@
 (function () {
   "use strict";
 
-  const expectedArchiveWords = ["clean", "the", "soul", "from", "the", "void"];
+  const archivePermitCoordinates = Object.freeze([
+    [112, 99, 103, 110, 101],
+    [103, 106, 118],
+    [110, 119, 113, 117],
+    [111, 114, 113, 104],
+    [103, 106, 118],
+    [102, 107, 113, 120]
+  ]);
+  const expectedArchiveWords = archivePermitCoordinates.map((receipt) => {
+    return receipt.map((code) => String.fromCharCode(code - 2)).reverse().join("");
+  });
   const recoveredSentence = expectedArchiveWords.map((word) => word.toUpperCase()).join(" ");
   const upperMarks = ["\u030d", "\u030e", "\u0304", "\u0305", "\u033f", "\u0311", "\u0306", "\u0310", "\u0352", "\u0357", "\u0307", "\u0308", "\u030a", "\u0342", "\u0343", "\u0344"];
   const lowerMarks = ["\u0316", "\u0317", "\u0318", "\u0319", "\u031c", "\u031d", "\u031e", "\u031f", "\u0320", "\u0324", "\u0325", "\u0326", "\u0329", "\u032a", "\u032b", "\u0330"];
