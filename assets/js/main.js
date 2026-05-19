@@ -225,6 +225,7 @@
       CH: "中文",
       JP: "日本語"
     };
+    const mountedLanguages = new Set(["EN"]);
     const browserLanguage = (navigator.language || "en").slice(0, 2).toLowerCase();
     const browserLanguageMap = {
       en: "EN",
@@ -291,7 +292,7 @@
     }
 
     function selectLanguage(code) {
-      if (!availableLanguages[code]) {
+      if (!availableLanguages[code] || !mountedLanguages.has(code)) {
         showUnavailableLanguageError();
         return;
       }
@@ -316,13 +317,6 @@
       item.addEventListener("click", () => selectLanguage(code));
       menu.append(item);
     });
-
-    const unavailableItem = document.createElement("button");
-    unavailableItem.type = "button";
-    unavailableItem.setAttribute("role", "menuitem");
-    unavailableItem.textContent = "Other language...";
-    unavailableItem.addEventListener("click", showUnavailableLanguageError);
-    menu.append(unavailableItem);
 
     indicator.addEventListener("click", (event) => {
       event.stopPropagation();
