@@ -354,7 +354,6 @@ body.archive-shell {
 .stamp-e { top: 62%; right: -88px; }
 
 .acrostic-ledger,
-.small-obsessions-cabinet-index,
 .diagnostic-grid {
   display: grid;
   gap: 6px;
@@ -366,29 +365,11 @@ body.archive-shell {
 }
 
 .acrostic-ledger p,
-.small-obsessions-cabinet-index p,
 .diagnostic-grid p {
   margin: 0;
   font-family: var(--mono);
   font-size: 0.8rem;
   line-height: 1.35;
-}
-
-.small-obsessions-cabinet-index {
-  width: min(560px, 100%);
-  margin-left: clamp(0px, 8vw, 86px);
-}
-
-.small-obsessions-cabinet-index__stamp {
-  display: inline-block;
-  min-width: 5.4em;
-  border-right: 2px solid var(--ink);
-  margin-right: 0.45rem;
-  padding-right: 0.45rem;
-  color: var(--steel);
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
 }
 
 .small-obsessions-white-residue {
@@ -575,36 +556,6 @@ body.archive-shell {
 .kernel-essay {
   position: relative;
   z-index: 1;
-}
-
-.kernel-stabilize-control {
-  position: fixed;
-  top: 42%;
-  left: 10px;
-  z-index: 72;
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  padding: 0.42rem 0.55rem;
-  background: var(--dust);
-  box-shadow: var(--raised);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.kernel-stabilize-control:hover,
-.kernel-stabilize-control:focus-visible {
-  background: var(--paper);
-  outline: 2px solid var(--steel);
-  outline-offset: 2px;
-}
-
-.kernel-stabilize-control[aria-pressed="true"] {
-  box-shadow: var(--sunken);
-  background: var(--ink);
-  color: var(--paper);
 }
 
 .kernel-reactor {
@@ -958,24 +909,24 @@ body.archive-shell {
   transform: translate(-50%, -50%);
 }
 
-.is-kernel-stabilized .kernel-document::before,
-.is-kernel-stabilized .kernel-document::after,
-.is-kernel-stabilized .kernel-reactor::before,
-.is-kernel-stabilized .kernel-reactor::after,
-.is-kernel-stabilized .kernel-reactor__core,
-.is-kernel-stabilized .kernel-orbit-label,
-.is-kernel-stabilized .kernel-thermal-phrase,
-.is-kernel-stabilized .kernel-line--pressure,
-.is-kernel-stabilized .kernel-pulse,
-.is-kernel-stabilized .kernel-field-break::before,
-.is-kernel-stabilized .kernel-field-break::after {
+.archive-clean .kernel-document::before,
+.archive-clean .kernel-document::after,
+.archive-clean .kernel-reactor::before,
+.archive-clean .kernel-reactor::after,
+.archive-clean .kernel-reactor__core,
+.archive-clean .kernel-orbit-label,
+.archive-clean .kernel-thermal-phrase,
+.archive-clean .kernel-line--pressure,
+.archive-clean .kernel-pulse,
+.archive-clean .kernel-field-break::before,
+.archive-clean .kernel-field-break::after {
   animation: none !important;
 }
 
-.is-kernel-stabilized .kernel-line,
-.is-kernel-stabilized .kernel-diagnostic-panel,
-.is-kernel-stabilized .kernel-pulse,
-.is-kernel-stabilized .kernel-field-break {
+.archive-clean .kernel-line,
+.archive-clean .kernel-diagnostic-panel,
+.archive-clean .kernel-pulse,
+.archive-clean .kernel-field-break {
   opacity: 1;
   transform: none;
 }
@@ -1067,15 +1018,6 @@ body.archive-shell {
 }
 
 @media (max-width: 900px) {
-  .kernel-stabilize-control {
-    position: sticky;
-    top: 0.75rem;
-    left: auto;
-    display: block;
-    width: fit-content;
-    margin: 0.5rem 0 1rem;
-  }
-
   .kernel-reactor {
     width: min(92vw, 430px);
   }

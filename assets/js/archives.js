@@ -2076,44 +2076,6 @@
     mount.replaceChildren(fragment);
   }
 
-  function createSmallObsessionsCabinetIndex() {
-    const note = document.createElement("aside");
-    note.className = "small-obsessions-cabinet-index";
-    note.setAttribute("aria-label", "Recovered cabinet index");
-
-    const title = document.createElement("p");
-    title.className = "recovered-note-title";
-    title.textContent = getActiveArchiveLanguage() === "FR" ? "INDEX DE CABINET RÉCUPÉRÉ" : "RECOVERED CABINET INDEX";
-    note.append(title);
-
-    const rows = getActiveArchiveLanguage() === "FR"
-      ? [
-        ["Y-axis", "coquillage classé hors usage"],
-        ["O-ring", "surface rescapée de la compression"],
-        ["U-bolt", "machine refusant la forme propre"],
-        ["R-slot", "fragment revenu du dehors"]
-      ]
-      : [
-        ["Y-axis", "object kept without reason"],
-        ["O-ring", "surface survived compression"],
-        ["U-bolt", "machine resisted clean design"],
-        ["R-slot", "fragment returned from outside"]
-      ];
-
-    rows.forEach(([code, label]) => {
-      const row = document.createElement("p");
-      const stamp = document.createElement("span");
-      stamp.className = "small-obsessions-cabinet-index__stamp";
-      stamp.textContent = code;
-      const text = document.createElement("span");
-      text.textContent = ` / ${label}`;
-      row.append(stamp, text);
-      note.append(row);
-    });
-
-    return note;
-  }
-
   function decodeWhiteCabinetReceipt(receipt) {
     return receipt.map((character) => String.fromCharCode(character - 4)).join("");
   }
@@ -2161,7 +2123,6 @@
         fragment.append(createSmallObsessionsWhiteResidue(whiteResidueSlots.get(index)));
       }
     });
-    fragment.append(createSmallObsessionsCabinetIndex());
     mount.replaceChildren(fragment);
   }
 
@@ -3884,16 +3845,6 @@
   function initializeKernelPage() {
     if (!document.body.classList.contains("archive-doc-kernel")) {
       return;
-    }
-
-    const control = document.querySelector("[data-stabilize-kernel]");
-    if (control && !control.dataset.kernelControlReady) {
-      control.dataset.kernelControlReady = "true";
-      control.addEventListener("click", () => {
-        const stabilized = document.body.classList.toggle("is-kernel-stabilized");
-        control.setAttribute("aria-pressed", String(stabilized));
-        control.textContent = stabilized ? "Kernel stabilized" : "Stabilize kernel";
-      });
     }
 
     const animatedNodes = Array.from(document.querySelectorAll(
