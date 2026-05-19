@@ -220,7 +220,7 @@
 
     const availableLanguages = {
       EN: "English",
-      FR: "Francais",
+      FR: "Français",
       RU: "Русский",
       CH: "中文",
       JP: "日本語"
