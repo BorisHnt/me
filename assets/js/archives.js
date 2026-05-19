@@ -559,6 +559,99 @@
     "To rescue fragments"
   ];
 
+  const kernelArchiveLedger = Object.freeze([
+    "VGhlIEtlcm5lbA==",
+    "VGhlcmUgaXMgYSBwYXJ0IG9mIG1lIHRoYXQgZG9lcyBub3Qgc3BlYWsgdGhlIGxhbmd1YWdlIHBlb3BsZSBleHBlY3Qu",
+    "SXQgaXMgbm90IGJyb2tlbi4=",
+    "SXQgaXMgbm90IGVtcHR5Lg==",
+    "SXQgaXMgbm90IGhvc3RpbGUu",
+    "SXQgd2FzIHNpbXBseSBjb2RlZCBkaWZmZXJlbnRseSBmcm9tIHRoZSBiZWdpbm5pbmcu",
+    "SSB0aGluayBvZiBpdCBhcyBhIGtlcm5lbC4=",
+    "Tm90IGEgdGVjaG5pY2FsIG9iamVjdCBleGFjdGx5LgpOb3QgYSBtYWNoaW5lIHBhcnQuCk5vdCBhIHNhY3JlZCBjb3JlIGVpdGhlci4=",
+    "TW9yZSBsaWtlIGEgc21hbGwgZW1vdGlvbmFsIGNlbnRlciB0aGF0IGhhcyBiZWVuIHJ1bm5pbmcgcXVpZXRseSB1bmRlciBldmVyeXRoaW5nIGVsc2Uu",
+    "SXQgZG9lcyBub3QgYWx3YXlzIGtub3cgaG93IHRvIHRyYW5zbGF0ZSBpdHNlbGYu",
+    "U29tZXRpbWVzIGl0IHNlbmRzIGtpbmRuZXNzIGFuZCBwZW9wbGUgcmVhZCBkaXN0YW5jZS4KU29tZXRpbWVzIGl0IHNlbmRzIGNhdXRpb24gYW5kIHBlb3BsZSByZWFkIGNvbGRuZXNzLgpTb21ldGltZXMgaXQgc2VuZHMgaW50ZW5zaXR5IGFuZCBwZW9wbGUgcmVhZCBkYW5nZXIuClNvbWV0aW1lcyBpdCBzZW5kcyBzaWxlbmNlIGJlY2F1c2Ugc3BlYWtpbmcgd291bGQgcmVxdWlyZSB0b28gbXVjaCBlbmVyZ3ksIGFuZCBwZW9wbGUgcmVhZCBndWlsdC4=",
+    "VGhlbiB0aGUga2VybmVsIGhhcyB0byBleHBsYWluIGl0c2VsZi4=",
+    "QWdhaW4u",
+    "SXQgaGFzIHRvIHByb2R1Y2UgY29udGV4dC4KUHJvZHVjZSBsb2dzLgpQcm9kdWNlIHByb29mLgpQcm9kdWNlIHRvbmUuClByb2R1Y2UgZXZpZGVuY2UgdGhhdCBpdCBtZWFudCBubyBoYXJtLg==",
+    "SXQgaGFzIHRvIHNob3cgY2xlYW4gaGFuZHMu",
+    "SXQgaGFzIHRvIGp1c3RpZnkgd2h5IGl0cyBtZXNzYWdlIGFycml2ZWQgd2l0aCB0aGUgd3Jvbmcgc2hhcGUu",
+    "VGhhdCBjb3N0cyBtb3JlIGVuZXJneSB0aGFuIHBlb3BsZSBpbWFnaW5lLg==",
+    "QSBzZW50ZW5jZSBjYW4gYmVjb21lIGEgdHJpYWwuCkEgbWlzdW5kZXJzdGFuZGluZyBjYW4gYmVjb21lIGEgZm9sZGVyLgpBIHNtYWxsIHNvY2lhbCBtaXN0YWtlIGNhbiBiZWNvbWUgYSBjb21wbGV0ZSBhZG1pbmlzdHJhdGl2ZSBwcm9jZWR1cmUgd2hlcmUgdGhlIGtlcm5lbCBtdXN0IHByb3ZlIHRoYXQgaXQgaXMgdHJ1c3R3b3J0aHksIGdlbnRsZSwgc2FmZSwgaG9uZXN0LCBub3QgaGlkaW5nIGEga25pZmUgYmVoaW5kIHRoZSBpbnRlcmZhY2Uu",
+    "QWZ0ZXIgYSB3aGlsZSwgY29tbXVuaWNhdGlvbiBzdG9wcyBmZWVsaW5nIGxpa2UgY29ubmVjdGlvbi4=",
+    "SXQgc3RhcnRzIGZlZWxpbmcgbGlrZSBkZWZlbnNlLg==",
+    "U28gc29tZXRpbWVzIHRoZSBrZXJuZWwgc3RvcHMgc2VuZGluZy4=",
+    "Tm90IGJlY2F1c2UgaXQgaGFzIG5vdGhpbmcgbGVmdCBpbnNpZGUu",
+    "QmVjYXVzZSBldmVyeSBzaWduYWwgcmlza3MgYmVjb21pbmcgYW5vdGhlciBjYXNlIGZpbGUu",
+    "U29tZXRpbWVzIGl0IHNodXRzIGRvd24u",
+    "U29tZXRpbWVzIGl0IGhpZGVzIGJlaGluZCBwb2xpdGVuZXNzLgpTb21ldGltZXMgaXQgd2VhcnMgYSBtYXNrIHVudGlsIHRoZSBtYXNrIGJlY29tZXMgaGVhdnkgZW5vdWdoIHRvIGJydWlzZS4KU29tZXRpbWVzIGl0IGxldHMgcGVvcGxlIGJlbGlldmUgdGhlIHNpbXBsZXIgd3JvbmcgdmVyc2lvbiwgYmVjYXVzZSBjb3JyZWN0aW5nIGl0IHdvdWxkIHJlcXVpcmUgYW5vdGhlciBleGhhdXN0aW5nIHJlcG9ydC4=",
+    "SSBkbyBub3QgdGhpbmsgdGhlIGtlcm5lbCBpcyB3cm9uZy4=",
+    "SSB0aGluayBpdCBpcyB0aXJlZC4=",
+    "VGhlcmUgaXMgYSBkaWZmZXJlbmNlLg==",
+    "Rm9yIGEgbG9uZyB0aW1lLCBJIHRyZWF0ZWQgcGFydHMgb2YgbXlzZWxmIGxpa2UgYnVncyB0byBwYXRjaC4=",
+    "SSBsZWFybmVkIHRvIG1hc2suClRvIGVkaXQuClRvIHJlZHVjZS4KVG8gc29mdGVuIHRoZSB3cm9uZyBlZGdlcy4KVG8gbWFrZSBteXNlbGYgZWFzaWVyIHRvIHBhcnNlLgpUbyBiZWNvbWUgY29tcGF0aWJsZSB3aXRoIHJvb21zIHRoYXQgd2VyZSBub3QgYnVpbHQgZm9yIG15IG9wZXJhdGluZyBzeXN0ZW0u",
+    "U29tZSBvZiB0aGF0IGhlbHBlZCBtZSBzdXJ2aXZlLg==",
+    "U29tZSBvZiBpdCBhbHNvIHRhdWdodCBtZSB0byBkaXN0cnVzdCBteSBvd24gc2hhcGUu",
+    "VGhlIHdvcmxkIG9mdGVuIGFjdHMgYXMgaWYgcGVvcGxlIGxpa2UgbWUgYXJlIGFjY2VwdGFibGUgb25seSBhZnRlciBlbm91Z2ggYWRhcHRhdGlvbi4=",
+    "QXMgaWYgdGhlIG9yaWdpbmFsIHNpZ25hbCBpcyBhIHByb2JsZW0gdW50aWwgaXQgYmVjb21lcyBjb252ZW5pZW50LgpBcyBpZiBzb2Z0bmVzcyBvbmx5IGNvdW50cyB3aGVuIGl0IGlzIGRlbGl2ZXJlZCBpbiB0aGUgZXhwZWN0ZWQgZm9ybWF0LgpBcyBpZiBhIHBlcnNvbiBtdXN0IGJlY29tZSByZWFkYWJsZSBiZWZvcmUgdGhleSBhcmUgYWxsb3dlZCB0byBiZSBiZWxpZXZlZC4=",
+    "VGhhdCBpcyBhIHZpb2xlbnQga2luZCBvZiBub3JtYWxpdHku",
+    "Tm90IGFsd2F5cyBsb3VkLgpOb3QgYWx3YXlzIGludGVudGlvbmFsLgpCdXQgdmlvbGVudCBpbiB0aGUgd2F5IGEgc3lzdGVtIGNhbiBiZSB2aW9sZW50IHdoZW4gaXQga2VlcHMgYXNraW5nIHRoZSBzYW1lIHBlcnNvbiB0byBiZW5kLg==",
+    "QWdhaW4u",
+    "QWdhaW4u",
+    "QWdhaW4u",
+    "SSBkbyBub3Qgd2FudCB0byByb21hbnRpY2l6ZSBteXNlbGYu",
+    "SSBhbSBub3QgcHVyZS4KSSBhbSBub3QgaGFybWxlc3MgYnkgbWFnaWMuCkkgYW0gbm90IGV4ZW1wdCBmcm9tIG1pc3Rha2VzLgpJIGNhbiBiZSB0aXJlZCwgZGVmZW5zaXZlLCBjbHVtc3ksIHRvbyBpbnRlbnNlLCB0b28gc2lsZW50LCB0b28gbGF0ZSwgdG9vIG11Y2gsIG5vdCBlbm91Z2gu",
+    "QnV0IEkgZG8gbm90IHRoaW5rIEkgZGVzZXJ2ZWQgdG8gc3VmZmVyIHRoaXMgbXVjaCBqdXN0IGJlY2F1c2UgbXkgaW50ZXJuYWwgbGFuZ3VhZ2Ugd2FzIGRpZmZlcmVudC4=",
+    "SSBkbyBub3QgdGhpbmsgdGhlIGtlcm5lbCBkZXNlcnZlZCB0byBiZSB0cmVhdGVkIGxpa2UgYSBkZWZlY3Qu",
+    "VGhlcmUgaXMgc29tZXRoaW5nIGluc2lkZSBtZSB0aGF0IGlzIHByb2dyYW1tZWQgdG93YXJkIHNvZnRuZXNzLg==",
+    "VG93YXJkIGNhcmUuClRvd2FyZCB0ZW5kZXJuZXNzLgpUb3dhcmQgc21hbGwgcmVwYWlycy4KVG93YXJkIGFuaW1hbHMuClRvd2FyZCBvYmplY3RzIHRoYXQgZmVlbCBnZW50bGUuClRvd2FyZCB1c2VsZXNzIHRoaW5ncyB0aGF0IG1ha2UgdGhlIHJvb20gd2FybWVyLgpUb3dhcmQgZ2l2aW5nIGFmZmVjdGlvbiB3aGVyZSB0aGUgd29ybGQgdXN1YWxseSBnaXZlcyBwcmVzc3VyZS4=",
+    "V2hlbiBJIHNlZW0gaGFyZCwgaXQgaXMgb2Z0ZW4gYmVjYXVzZSB0aGUgZW52aXJvbm1lbnQgaGFzIGJlY29tZSB0b28gc2hhcnAu",
+    "V2hlbiBJIHNlZW0gZGlzdGFudCwgaXQgaXMgb2Z0ZW4gYmVjYXVzZSB0cmFuc2xhdGlvbiBoYXMgYmVjb21lIHRvbyBleHBlbnNpdmUu",
+    "V2hlbiBJIHNlZW0gY29sZCwgaXQgaXMgb2Z0ZW4gYmVjYXVzZSB0aGUgc3lzdGVtIGlzIHByb3RlY3Rpbmcgc29tZXRoaW5nIHNlbnNpdGl2ZSBmcm9tIGJlaW5nIHRvdWNoZWQgd2l0aCBkaXJ0eSBoYW5kcy4=",
+    "VGhlIGtlcm5lbCBpcyBub3QgYSB3ZWFwb24u",
+    "SXQgaXMgYSBzb2Z0IHRoaW5nIHVuZGVyIGFybW9yLg==",
+    "QW5kIG1heWJlIHRoYXQgaXMgd2h5IGl0IGNhbiBsb29rIHN0cmFuZ2UgZnJvbSB0aGUgb3V0c2lkZS4=",
+    "UGVvcGxlIG9mdGVuIGV4cGVjdCBzb2Z0bmVzcyB0byBiZSBzaW1wbGUuCkVhc3kuCk9wZW4uClNtaWxpbmcuCkltbWVkaWF0ZWx5IGxlZ2libGUu",
+    "QnV0IHNvbWUgc29mdG5lc3MgaGFzIGxlYXJuZWQgdG8gbG9jayB0aGUgZG9vci4=",
+    "U29tZSBzb2Z0bmVzcyBoYXMgYmVlbiBjcm9zcy1leGFtaW5lZCB0b28gbWFueSB0aW1lcy4KU29tZSBzb2Z0bmVzcyBoYXMgYmVlbiBtaXN1bmRlcnN0b29kIHVudGlsIGl0IGJlY2FtZSBjYXJlZnVsLgpTb21lIHNvZnRuZXNzIGhhcyBzcGVudCB5ZWFycyBwcm92aW5nIGl0IHdhcyBub3QgZGFuZ2Vyb3VzLg==",
+    "SSB3aXNoIEkgZGlkIG5vdCBoYXZlIHRvIHByb3ZlIHRoYXQgSSBkZXNlcnZlIHRvIGJlIGJlbGlldmVkLg==",
+    "SSB3aXNoIHRydXN0IGRpZCBub3QgZmVlbCBsaWtlIGEgZG9jdW1lbnQgSSBoYXZlIHRvIHN1Ym1pdCBpbiB0cmlwbGljYXRlLg==",
+    "SSB3aXNoIEkgY291bGQgY29tbXVuaWNhdGUgYmFkbHkgc29tZXRpbWVzIGFuZCBzdGlsbCBiZSBoZWxkIHdpdGggcGF0aWVuY2Uu",
+    "SSB3aXNoIEkgY291bGQgYmUgdGlyZWQgd2l0aG91dCBiZWNvbWluZyBzdXNwaWNpb3VzLgpJIHdpc2ggSSBjb3VsZCBiZSBzaWxlbnQgd2l0aG91dCBiZWNvbWluZyBhY2N1c2VkLgpJIHdpc2ggSSBjb3VsZCBiZSBvdmVyd2hlbG1lZCB3aXRob3V0IGJlY29taW5nIGEgcHJvYmxlbSB0byBzb2x2ZS4KSSB3aXNoIEkgY291bGQgYXNrIGZvciBhZmZlY3Rpb24gd2l0aG91dCBmZWVsaW5nIGxpa2UgSSBhbSBhc2tpbmcgZm9yIHRvbyBtdWNoLg==",
+    "VGhlIGtlcm5lbCBkb2VzIG5vdCB3YW50IG11Y2gu",
+    "SXQgd2FudHMgc2FmZXR5LgpJdCB3YW50cyB3YXJtdGguCkl0IHdhbnRzIGZld2VyIHRyaWFscy4KSXQgd2FudHMgZmV3ZXIgdHJhbnNsYXRpb25zLgpJdCB3YW50cyBzb21lb25lIHRvIHVuZGVyc3RhbmQgdGhhdCBpdHMgc3RyYW5nZSBsYW5ndWFnZSBpcyBzdGlsbCBhIGxhbmd1YWdlLg==",
+    "SXQgd2FudHMgdG8gYmUgcHJvdGVjdGVkLCBub3QgaW1wcm92ZWQgaW50byBzb21ldGhpbmcgZWxzZS4=",
+    "VGhhdCBpcyBkaWZmaWN1bHQgdG8gYWRtaXQu",
+    "QmVjYXVzZSB0aGUgd29ybGQgcmV3YXJkcyBpbXByb3ZlbWVudC4KT3B0aW1pemF0aW9uLgpDb3JyZWN0aW9uLgpQZXJmb3JtYW5jZS4KQWRhcHRhdGlvbi4=",
+    "QnV0IHNvbWUgcGFydHMgb2YgYSBwZXJzb24gZG8gbm90IG5lZWQgdG8gYmUgb3B0aW1pemVkLg==",
+    "U29tZSBwYXJ0cyBuZWVkIHNoZWx0ZXIu",
+    "QSBwbGFjZSB3aGVyZSB0aGV5IGNhbiBzdG9wIHBlcmZvcm1pbmcgY29tcGF0aWJpbGl0eS4KQSBwbGFjZSB3aGVyZSB0aGV5IGNhbiBzcGVhayBpbiB0aGVpciBvd24gcmh5dGhtLgpBIHBsYWNlIHdoZXJlIHRoZXkgY2FuIGJlIGdlbnRsZSB3aXRob3V0IGJlaW5nIGZvcmNlZCB0byBwcm92ZSB0aGF0IGdlbnRsZW5lc3MgaXMgcmVhbC4=",
+    "TWF5YmUgZm9yZ2l2ZW5lc3Mgc3RhcnRzIHRoZXJlLg==",
+    "Tm90IGJ5IHByZXRlbmRpbmcgSSBkaWQgbm90aGluZyB3cm9uZy4=",
+    "Tm90IGJ5IGRlY2xhcmluZyBteXNlbGYgcGVyZmVjdC4=",
+    "QnV0IGJ5IHVuZGVyc3RhbmRpbmcgdGhhdCBub3QgZXZlcnl0aGluZyBpbnNpZGUgbWUgd2FzIHJlc3BvbnNpYmxlIGZvciB0aGUgcGFpbiBpdCBoYWQgdG8gY2Fycnku",
+    "VGhlIGtlcm5lbCB3YXMgbm90IGEgY3JpbWUgc2NlbmUu",
+    "SXQgd2FzIGEgZGlmZmVyZW50IGFyY2hpdGVjdHVyZS4=",
+    "QW5kIG1heWJlIEkgY2FuIHN0b3Agc2VuZGluZyBwb2xpY2UgaW50byBldmVyeSByb29tIG9mIG15c2VsZi4=",
+    "TWF5YmUgSSBjYW4gc3RvcCB0cmVhdGluZyBteSBvd24gc29mdG5lc3MgbGlrZSBldmlkZW5jZSB0aGF0IG5lZWRzIHRvIGJlIHZlcmlmaWVkLg==",
+    "TWF5YmUgSSBjYW4gc3RvcCBhcG9sb2dpemluZyBmb3IgZXZlcnkgcGFydCBvZiBtZSB0aGF0IGRvZXMgbm90IHRyYW5zbGF0ZSBjbGVhbmx5Lg==",
+    "SSBzdGlsbCB3YW50IHRvIGJlY29tZSBiZXR0ZXIu",
+    "QnV0IEkgZG8gbm90IHdhbnQgdG8gYmVjb21lIHNvbWVvbmUgZWxzZS4=",
+    "SSB3YW50IHRvIHByb3RlY3QgdGhlIHBhcnQgdGhhdCB3YXMgdGhlcmUgZnJvbSB0aGUgYmVnaW5uaW5nLg==",
+    "VGhlIHBhcnQgdGhhdCBzdGlsbCByZWFjaGVzIGZvciBraW5kbmVzcy4KVGhlIHBhcnQgdGhhdCBzdGlsbCBsb3ZlcyBzbWFsbCBnZW50bGUgdGhpbmdzLgpUaGUgcGFydCB0aGF0IHN0aWxsIHdhbnRzIHRvIHJlcGFpciBpbnN0ZWFkIG9mIHB1bmlzaC4KVGhlIHBhcnQgdGhhdCBzdGlsbCBiZWxpZXZlcyBzb2Z0bmVzcyBtYXR0ZXJzLCBldmVuIGFmdGVyIHRoZSB3b3JsZCBtYWRlIHNvZnRuZXNzIGZlZWwgdW5zYWZlLg==",
+    "VGhlIGtlcm5lbCBpcyBzZW5zaXRpdmUu",
+    "VGhlIGtlcm5lbCBpcyB0aXJlZC4=",
+    "VGhlIGtlcm5lbCBpcyBzb21ldGltZXMgdW5zdGFibGUu",
+    "QnV0IGl0IGlzIHN0aWxsIHdhcm0u",
+    "QW5kIEkgdGhpbmsgdGhhdCBtYXR0ZXJzLg==",
+    "TWF5YmUgdGhlIGdvYWwgaXMgbm90IHRvIHJld3JpdGUgaXQu",
+    "TWF5YmUgdGhlIGdvYWwgaXMgdG8gc3RvcCBleHBvc2luZyBpdCB0byBldmVyeSBob3N0aWxlIHJvb20u",
+    "TWF5YmUgdGhlIGdvYWwgaXMgdG8gYnVpbGQgYXJvdW5kIGl0IHdpdGggbW9yZSBjYXJlLg==",
+    "QSBiZXR0ZXIgc2hlbGwuCkEgc29mdGVyIGludGVyZmFjZS4KQSBzYWZlciBwcm90b2NvbC4KQSBwbGFjZSB3aGVyZSB0aGUgbWVzc2FnZSBjYW4gYXJyaXZlIHN0cmFuZ2VseSBhbmQgc3RpbGwgYmUgcmVjZWl2ZWQgd2l0aCBsb3ZlLg==",
+    "VGhlIGtlcm5lbCBkb2VzIG5vdCBuZWVkIHRvIGJlY29tZSBub3JtYWwu",
+    "SXQgbmVlZHMgdG8gYmUgaGVsZCBnZW50bHkgZW5vdWdoIHRvIHN0YXkgb25saW5lLg=="
+  ]);
+
   const neuroScramblingArchiveLedger = (() => {
     const corridorChecksum = [
       "n00", "n01", "n02", "n03", "n04", "n05", "n06", "n07", "n08", "n09",
@@ -1896,6 +1989,10 @@
     });
   }
 
+  function reconstructKernelDocument() {
+    return kernelArchiveLedger.map((receipt) => atob(receipt));
+  }
+
   function reconstructNeuroScramblingDocument() {
     return neuroScramblingArchiveLedger.corridorChecksum.map((permit) => {
       const truckMouth = neuroScramblingArchiveLedger.wetAntenna[permit] || [];
@@ -2065,6 +2162,185 @@
       }
     });
     fragment.append(createSmallObsessionsCabinetIndex());
+    mount.replaceChildren(fragment);
+  }
+
+  const kernelThermalPhrases = [
+    "coded differently",
+    "small emotional center",
+    "The kernel is not a weapon",
+    "soft thing under armor",
+    "programmed toward softness",
+    "still warm",
+    "held gently enough to stay online"
+  ];
+
+  function appendKernelInlineText(parent, text) {
+    const escaped = kernelThermalPhrases.map(escapeMunicipalPattern).join("|");
+    const pattern = new RegExp(escaped, "gi");
+    let start = 0;
+    text.replace(pattern, (match, offset) => {
+      if (offset > start) {
+        parent.append(document.createTextNode(text.slice(start, offset)));
+      }
+      const pulse = document.createElement("span");
+      pulse.className = "kernel-thermal-phrase";
+      pulse.textContent = match;
+      parent.append(pulse);
+      start = offset + match.length;
+      return match;
+    });
+    if (start < text.length) {
+      parent.append(document.createTextNode(text.slice(start)));
+    }
+  }
+
+  function appendKernelText(parent, text) {
+    text.split("\n").forEach((line, index, lines) => {
+      appendKernelInlineText(parent, line);
+      if (index < lines.length - 1) {
+        parent.append(document.createElement("br"));
+      }
+    });
+  }
+
+  function createKernelReactor() {
+    const reactor = document.createElement("aside");
+    reactor.className = "kernel-reactor";
+    reactor.setAttribute("aria-hidden", "true");
+
+    const core = document.createElement("div");
+    core.className = "kernel-reactor__core";
+    const label = document.createElement("span");
+    label.textContent = "kernel still online";
+    core.append(label);
+    reactor.append(core);
+
+    ["soft core", "containment holding", "signal warm", "not broken", "still responding"].forEach((text, index) => {
+      const orbit = document.createElement("span");
+      orbit.className = `kernel-orbit-label kernel-orbit-label--${index}`;
+      orbit.textContent = text;
+      reactor.append(orbit);
+    });
+
+    return reactor;
+  }
+
+  function createKernelDiagnosticPanel(index) {
+    const panels = [
+      ["KERNEL STATE", "containment: fragile", "signal: warm", "hostility: not detected"],
+      ["TRANSLATION LOG", "translation: expensive", "trust request: pending", "tone proof: not required"],
+      ["SOFTNESS CHECK", "softness: protected", "shutdown risk: contextual", "protocol: hold gently"],
+      ["SHELL STATUS", "armor: present", "core response: active", "interface: safer when patient"],
+      ["CONTAINMENT REPORT", "orbit: stable", "pressure: reduced", "safe chamber: requested"]
+    ];
+    const panel = document.createElement("aside");
+    panel.className = `kernel-diagnostic-panel kernel-diagnostic-panel--${index % panels.length}`;
+    panel.setAttribute("aria-label", "Kernel diagnostic");
+    const title = document.createElement("p");
+    title.className = "kernel-diagnostic-panel__title";
+    title.textContent = panels[index % panels.length][0];
+    const body = document.createElement("div");
+    body.className = "kernel-diagnostic-panel__body";
+    panels[index % panels.length].slice(1).forEach((line) => {
+      const output = document.createElement("span");
+      const [label, value] = line.split(": ");
+      const labelNode = document.createElement("span");
+      labelNode.textContent = label;
+      const valueNode = document.createElement("b");
+      valueNode.textContent = value || "pending";
+      output.append(labelNode, valueNode);
+      body.append(output);
+    });
+    panel.append(title, body);
+    return panel;
+  }
+
+  function createKernelPulse(pulse) {
+    const box = document.createElement("aside");
+    box.className = `kernel-pulse kernel-pulse--${pulse.tone}`;
+    box.setAttribute("aria-label", "Kernel pulse trace");
+    const title = document.createElement("p");
+    title.className = "kernel-pulse__header";
+    title.textContent = `KERNEL PULSE ${pulse.id}`;
+    const trace = document.createElement("p");
+    trace.className = "kernel-pulse__body";
+    trace.textContent = pulse.trace;
+    const status = document.createElement("p");
+    status.className = "kernel-pulse__body kernel-pulse__body--status";
+    status.textContent = pulse.status;
+    box.append(title, trace, status);
+    return box;
+  }
+
+  function createKernelFieldBreak() {
+    const field = document.createElement("aside");
+    field.className = "kernel-field-break";
+    field.setAttribute("aria-hidden", "true");
+    ["softness", "trust", "signal", "warmth", "containment", "protection", "gentle protocol", "safe chamber"].forEach((text, index) => {
+      const particle = document.createElement("span");
+      particle.className = `kernel-field-break__particle kernel-field-break__particle--${index}`;
+      particle.textContent = text;
+      field.append(particle);
+    });
+    return field;
+  }
+
+  function initializeKernelDocument() {
+    const mount = document.querySelector("[data-kernel-document]");
+    if (!mount) {
+      return;
+    }
+
+    const pulseSlots = new Map([
+      [5, { id: "04", trace: "containment sum: 10 + 5", status: "state: warm", tone: "warm" }],
+      [12, { id: "01", trace: "thermal drift: 3²", status: "state: stable", tone: "stable" }],
+      [23, { id: "06", trace: "soft decay: 12 - 7", status: "state: dim", tone: "shutdown" }],
+      [31, { id: "02", trace: "orbit fold: 7 × 2", status: "state: drifting", tone: "stable" }],
+      [44, { id: "03", trace: "field division: 28 / 2", status: "state: protected", tone: "warm" }],
+      [56, { id: "07", trace: "magnetic remainder: 21 - 7", status: "state: returning", tone: "stable" }],
+      [71, { id: "05", trace: "core root: √9", status: "state: sheltered", tone: "warm" }],
+      [86, { id: "08", trace: "final rotation: 4 × 5", status: "state: online", tone: "stable" }]
+    ]);
+    const diagnosticSlots = new Map([[10, 0], [17, 1], [29, 2], [53, 3], [83, 4]]);
+    const fieldBreaks = new Set([8, 42, 64, 87]);
+    const statementLines = new Set([2, 3, 4, 8, 25, 42, 48, 49, 70, 71, 82, 89]);
+    const pressureLines = new Set([11, 13, 14, 15, 16, 17, 32, 33, 34, 35, 41, 54, 55, 56, 57]);
+    const shutdownLines = new Set([20, 21, 22, 23, 24, 26]);
+
+    const fragment = document.createDocumentFragment();
+    fragment.append(createKernelReactor());
+
+    reconstructKernelDocument().slice(1).forEach((line, index) => {
+      const sourceIndex = index + 1;
+      const paragraph = document.createElement("p");
+      paragraph.className = "kernel-line";
+      if (statementLines.has(sourceIndex)) {
+        paragraph.classList.add("kernel-line--statement");
+      }
+      if (pressureLines.has(sourceIndex)) {
+        paragraph.classList.add("kernel-line--pressure");
+      }
+      if (shutdownLines.has(sourceIndex)) {
+        paragraph.classList.add("kernel-line--shutdown");
+      }
+      if (sourceIndex > 75) {
+        paragraph.classList.add("kernel-line--returning");
+      }
+      appendKernelText(paragraph, line);
+      fragment.append(paragraph);
+
+      if (pulseSlots.has(sourceIndex)) {
+        fragment.append(createKernelPulse(pulseSlots.get(sourceIndex)));
+      }
+      if (diagnosticSlots.has(sourceIndex)) {
+        fragment.append(createKernelDiagnosticPanel(diagnosticSlots.get(sourceIndex)));
+      }
+      if (fieldBreaks.has(sourceIndex)) {
+        fragment.append(createKernelFieldBreak());
+      }
+    });
+
     mount.replaceChildren(fragment);
   }
 
@@ -3605,15 +3881,52 @@
     });
   }
 
+  function initializeKernelPage() {
+    if (!document.body.classList.contains("archive-doc-kernel")) {
+      return;
+    }
+
+    const control = document.querySelector("[data-stabilize-kernel]");
+    if (control && !control.dataset.kernelControlReady) {
+      control.dataset.kernelControlReady = "true";
+      control.addEventListener("click", () => {
+        const stabilized = document.body.classList.toggle("is-kernel-stabilized");
+        control.setAttribute("aria-pressed", String(stabilized));
+        control.textContent = stabilized ? "Kernel stabilized" : "Stabilize kernel";
+      });
+    }
+
+    const animatedNodes = Array.from(document.querySelectorAll(
+      ".kernel-line, .kernel-diagnostic-panel, .kernel-pulse, .kernel-field-break"
+    ));
+    if (animatedNodes.length === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      animatedNodes.forEach((node) => node.classList.add("is-kernel-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-kernel-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+
+    animatedNodes.forEach((node) => observer.observe(node));
+  }
+
   function rerenderArchiveLanguageContent() {
     const wasClean = document.body.classList.contains("archive-clean");
     initializeMaintenanceDocument();
     initializeSmallObsessionsDocument();
+    initializeKernelDocument();
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
     initializeUnplannedAgeDocument();
     initializeVoidDocument();
     initializeStaticArchivePopups();
+    initializeKernelPage();
     initializeVoidPage();
     if (wasClean) {
       revealArchiveRedactions();
@@ -3628,6 +3941,7 @@
     reconstructOperatorFromSuspiciousChunks(["ar", "ch", "ive"]);
     initializeMaintenanceDocument();
     initializeSmallObsessionsDocument();
+    initializeKernelDocument();
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
     initializeUnplannedAgeDocument();
@@ -3636,6 +3950,7 @@
     initializeDocumentControls();
     initializeStaticArchivePopups();
     initializeSmallObsessionsScramble();
+    initializeKernelPage();
     initializeNeuroScrollGlitches();
     initializeLimerenceScrollEchoes();
     initializeUnplannedAgeDegradation();
