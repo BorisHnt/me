@@ -418,6 +418,7 @@ The machine only looked at itself.`;
     "room/01-useless-things.html",
     "room/02-broken-aesthetics.html",
     "room/03-shells-and-stones.html",
+    "room/99-sandbox-test.html",
     "room/behind-room/index.html"
   ]);
 
@@ -447,6 +448,7 @@ The machine only looked at itself.`;
 │   ├── 01-useless-things.html
 │   ├── 02-broken-aesthetics.html
 │   ├── 03-shells-and-stones.html
+│   ├── 99-sandbox-test.html
 │   └── behind-room/
 │       └── index.html
 └── unmounted/
@@ -499,7 +501,7 @@ EXPLANATION: NOT FOUND`;
     if (/\/room\/behind-room(?:\/index\.html)?$/.test(pathname)) {
       return "../../";
     }
-    if (/\/archives(?:\/[^/]+\.html)?$/.test(pathname) || /\/room(?:\/index\.html)?$/.test(pathname)) {
+    if (/\/archives(?:\/[^/]+\.html)?$/.test(pathname) || /\/room(?:\/[^/]+\.html|\/index\.html)?$/.test(pathname)) {
       return "../";
     }
     return "";
@@ -528,6 +530,7 @@ room/index.html
 room/01-useless-things.html
 room/02-broken-aesthetics.html
 room/03-shells-and-stones.html
+room/99-sandbox-test.html
 room/behind-room/index.html`);
       return;
     }

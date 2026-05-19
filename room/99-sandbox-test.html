@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A sandbox page for testing Broken Aesthetics visual systems by effect type.">
+  <title>99 — Sandbox Test — Boris Hanicotte</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    body[data-page="room"] {
+      background: #0f0f1b;
+      color: #fafbf6;
+      overflow-x: hidden;
+    }
+
+    .sandbox-page {
+      width: min(calc(100vw - 24px), 1240px);
+      padding-bottom: 96px;
+    }
+
+    .sandbox-window {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      overflow: visible;
+      background: #0f0f1b;
+    }
+
+    .sandbox-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 2px solid #0f0f1b;
+      padding: 6px;
+      background: #c6b7be;
+      color: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .sandbox-toolbar span {
+      border: 1px solid #0f0f1b;
+      padding: 0.16rem 0.42rem;
+      background: #fafbf6;
+      box-shadow: var(--sunken);
+    }
+
+    .sandbox-surface {
+      position: relative;
+      min-height: 100vh;
+      padding: clamp(1rem, 4vw, 3.4rem);
+      background: #0f0f1b;
+      color: #fafbf6;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .sandbox-node-field {
+      position: absolute;
+      inset: 0 -8vw;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.86;
+      mix-blend-mode: screen;
+    }
+
+    .sandbox-node-field svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .sandbox-node-field line {
+      stroke: #c6b7be;
+      stroke-width: 0.32;
+      stroke-dasharray: 4 16;
+      opacity: 0.46;
+    }
+
+    .sandbox-node-field circle {
+      fill: #fafbf6;
+      stroke: #c6b7be;
+      stroke-width: 0.38;
+      opacity: 0.82;
+    }
+
+    .sandbox-node-field text {
+      fill: #c6b7be;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 900;
+      opacity: 0.74;
+    }
+
+    .sandbox-back,
+    .sandbox-kicker,
+    .sandbox-title,
+    .sandbox-intro,
+    .effect-type {
+      position: relative;
+      z-index: 2;
+    }
+
+    .sandbox-kicker {
+      display: inline-block;
+      margin: clamp(2rem, 5vw, 4rem) 0 0.6rem;
+      border: 1px solid #565a75;
+      padding: 0.18rem 0.48rem;
+      background: #c6b7be;
+      color: #0f0f1b;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .sandbox-title {
+      max-width: 950px;
+      margin: 0 0 clamp(1.4rem, 5vw, 3rem);
+      font-family: var(--mono);
+      font-size: clamp(3rem, 9vw, 8rem);
+      font-weight: 900;
+      line-height: 0.86;
+      text-transform: uppercase;
+      text-shadow: 4px 0 0 #c6b7be, -2px 2px 0 #565a75;
+    }
+
+    .sandbox-intro {
+      max-width: 760px;
+      margin-bottom: clamp(2.4rem, 8vw, 5rem);
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.65;
+    }
+
+    .effect-type {
+      margin: clamp(2.4rem, 8vw, 5.8rem) 0;
+      border: 2px solid #565a75;
+      background: rgba(15, 15, 27, 0.94);
+      box-shadow: 6px 6px 0 rgba(86, 90, 117, 0.7);
+    }
+
+    .effect-type__bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid #0f0f1b;
+      padding: 0.38rem 0.55rem;
+      background: #565a75;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .effect-type__body {
+      display: grid;
+      gap: clamp(0.85rem, 2vw, 1.35rem);
+      padding: clamp(0.85rem, 2vw, 1.35rem);
+    }
+
+    .effect-type__note {
+      max-width: 820px;
+      margin: 0;
+      color: #c6b7be;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 900;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .effect-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.8rem, 2vw, 1.2rem);
+      align-items: start;
+    }
+
+    .effect-panel,
+    .micro-panel {
+      border: 1px solid #565a75;
+      background: #0f0f1b;
+      color: #fafbf6;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .effect-panel__title,
+    .micro-panel__title {
+      border-bottom: 1px solid #0f0f1b;
+      padding: 0.22rem 0.38rem;
+      background: #565a75;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .effect-raster,
+    .micro-raster {
+      margin: 0;
+      padding: 0.45rem;
+      font-family: var(--mono);
+      font-size: clamp(0.38rem, 0.78vw, 0.58rem);
+      font-weight: 900;
+      line-height: 0.72;
+      white-space: pre;
+    }
+
+    .effect-raster {
+      min-height: 280px;
+    }
+
+    .micro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .micro-panel {
+      min-height: 92px;
+      box-shadow: 3px 3px 0 rgba(198, 183, 190, 0.28);
+    }
+
+    .micro-panel__equation {
+      display: block;
+      border-bottom: 1px solid rgba(86, 90, 117, 0.8);
+      padding: 0.16rem 0.28rem;
+      color: #c6b7be;
+      font-family: var(--mono);
+      font-size: 0.44rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .micro-raster {
+      font-size: 0.36rem;
+    }
+
+    .node-demo {
+      height: 420px;
+      border: 1px solid #565a75;
+      background: #0f0f1b;
+      overflow: hidden;
+    }
+
+    .node-demo svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .node-demo line {
+      stroke: #c6b7be;
+      stroke-width: 0.42;
+      stroke-dasharray: 5 14;
+      opacity: 0.64;
+    }
+
+    .node-demo circle {
+      fill: #fafbf6;
+      stroke: #c6b7be;
+      stroke-width: 0.5;
+    }
+
+    .life-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--life-cols), 1fr);
+      gap: 0;
+      border: 1px solid #565a75;
+      padding: 0.28rem;
+      background: #0f0f1b;
+    }
+
+    .life-cell {
+      aspect-ratio: 1;
+      background: rgba(250, 251, 246, 0.035);
+    }
+
+    .life-cell.is-alive {
+      background: #fafbf6;
+    }
+
+    .spectrum-demo {
+      display: grid;
+      grid-template-columns: repeat(56, minmax(2px, 1fr));
+      align-items: end;
+      gap: 2px;
+      height: 190px;
+      border: 1px solid #565a75;
+      padding: 0.45rem;
+      background: #0f0f1b;
+    }
+
+    .spectrum-demo span {
+      min-height: 6px;
+      background: #fafbf6;
+      transform-origin: bottom;
+    }
+
+    .wave-demo {
+      border: 1px solid #565a75;
+      padding: 0.65rem;
+      background: #0f0f1b;
+      color: #c6b7be;
+      font-family: var(--mono);
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .codecore-box-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .codecore-box {
+      min-height: 128px;
+      border: 1px solid #565a75;
+      background: #0f0f1b;
+      color: #fafbf6;
+      font-family: var(--mono);
+      overflow: hidden;
+    }
+
+    .codecore-box pre {
+      margin: 0;
+      padding: 0.48rem;
+      font-size: 0.52rem;
+      font-weight: 900;
+      line-height: 0.84;
+      white-space: pre-wrap;
+    }
+
+    .macroblocks {
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+      gap: 2px;
+      min-height: 220px;
+      border: 1px solid #565a75;
+      padding: 0.5rem;
+      background: #0f0f1b;
+    }
+
+    .macroblocks span {
+      min-height: 18px;
+      background: #565a75;
+      opacity: 0.7;
+    }
+
+    .text-mutation-demo {
+      max-width: 760px;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      line-height: 1.55;
+    }
+
+    .mutant-word {
+      display: inline-block;
+      border-bottom: 1px solid #565a75;
+      font-family: var(--mono);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .spark-field {
+      position: relative;
+      min-height: 180px;
+      border: 1px solid #565a75;
+      overflow: hidden;
+      background: #0f0f1b;
+    }
+
+    .sandbox-spark {
+      position: absolute;
+      color: #fafbf6;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    @media (max-width: 820px) {
+      .effect-grid,
+      .micro-grid,
+      .codecore-box-row {
+        grid-template-columns: 1fr;
+      }
+
+      .sandbox-title {
+        font-size: clamp(2.8rem, 15vw, 5rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sandbox-node-field,
+      .sandbox-spark {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body data-page="room">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="menu-shell" data-site-header>
+    <div class="shell-titlebar">
+      <a class="menu-brand" href="../index.html" aria-label="Boris Hanicotte home">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Boris Hanicotte</span>
+      </a>
+      <span class="shell-title">SANDBOX_TEST.EXE</span>
+      <button class="menu-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-links">
+        <span aria-hidden="true">MENU</span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+    </div>
+    <nav class="menu-bar" aria-label="Primary navigation">
+      <div class="menu-links" id="nav-links" data-nav-links>
+        <a href="../index.html">Home</a>
+        <a href="../personal-projects.html">Personal Projects</a>
+        <a href="../42-projects.html">42 Support Projects</a>
+        <a href="../about.html">About</a>
+        <a href="https://github.com/BorisHnt" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="desktop sandbox-page">
+    <section class="window sandbox-window" aria-labelledby="sandbox-title">
+      <div class="title-bar">
+        <div class="window-controls" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <span class="window-title">SANDBOX TEST</span>
+        <span class="window-chip">FILE 99</span>
+      </div>
+      <div class="sandbox-toolbar" aria-label="Sandbox metadata">
+        <span>room/99</span>
+        <span>effect catalog</span>
+        <span>autonomous testbed</span>
+      </div>
+
+      <article class="sandbox-surface" data-sandbox-surface>
+        <div class="sandbox-node-field" data-global-node-field aria-hidden="true"></div>
+
+        <a class="button button-small sandbox-back" href="index.html">Back to room</a>
+        <p class="sandbox-kicker">Broken Aesthetics effect inventory</p>
+        <h1 id="sandbox-title" class="sandbox-title">99 — Sandbox Test</h1>
+        <p class="sandbox-intro">This page isolates the visual systems from Broken Aesthetics. Each block is grouped by type so the behavior can be judged without the essay around it.</p>
+
+        <section class="effect-type" aria-labelledby="type-procedural">
+          <div class="effect-type__bar">
+            <h2 id="type-procedural">Type 01 — Procedural ASCII Forms</h2>
+            <span>non-looping drift</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">Large procedural fields driven by changing targets. They mutate without returning to a fixed first frame.</p>
+            <div class="effect-grid">
+              <div class="effect-panel">
+                <div class="effect-panel__title">surface equation</div>
+                <pre class="effect-raster" data-procedural-raster="surface"></pre>
+              </div>
+              <div class="effect-panel">
+                <div class="effect-panel__title">figure equation</div>
+                <pre class="effect-raster" data-procedural-raster="figure"></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-micro">
+          <div class="effect-type__bar">
+            <h2 id="type-micro">Type 02 — Micro Procedural Boxes</h2>
+            <span>small equations</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">Tiny boxed equations with independent target changes and saccaded raster mutation.</p>
+            <div class="micro-grid" data-micro-grid></div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-nodes">
+          <div class="effect-type__bar">
+            <h2 id="type-nodes">Type 03 — Node Fields</h2>
+            <span>scroll + autonomous jitter</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">A full-page background network is active behind the catalog. This local map exposes the same motion at a smaller scale.</p>
+            <div class="node-demo" data-node-demo></div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-life">
+          <div class="effect-type__bar">
+            <h2 id="type-life">Type 04 — Game Of Life</h2>
+            <span>known unstable seeds</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">Small-cell Life patterns seeded with gliders, R-pentomino, acorn, diehard and pulsar fragments.</p>
+            <div class="effect-grid">
+              <div class="life-demo-grid" data-life-demo="0"></div>
+              <div class="life-demo-grid" data-life-demo="1"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-audio">
+          <div class="effect-type__bar">
+            <h2 id="type-audio">Type 05 — Audio Damage</h2>
+            <span>chaotic meters</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">Non-sinusoidal bar movement and wave text that mutates like a damaged buffer.</p>
+            <div class="spectrum-demo" data-spectrum-demo></div>
+            <div class="wave-demo" data-wave-demo>buffer loading</div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-codecore">
+          <div class="effect-type__bar">
+            <h2 id="type-codecore">Type 06 — Codecore Windows</h2>
+            <span>small system boxes</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">Compact OS-like glyph windows, intentionally smaller than the article decorations.</p>
+            <div class="codecore-box-row" data-codecore-boxes></div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-compression">
+          <div class="effect-type__bar">
+            <h2 id="type-compression">Type 07 — Compression Blocks</h2>
+            <span>macroblock tearing</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="effect-type__note">A static-grid test for macroblock damage, updated in saccades instead of smooth loops.</p>
+            <div class="macroblocks" data-macroblocks></div>
+          </div>
+        </section>
+
+        <section class="effect-type" aria-labelledby="type-text">
+          <div class="effect-type__bar">
+            <h2 id="type-text">Type 08 — Text Mutation And Sparks</h2>
+            <span>glyph interference</span>
+          </div>
+          <div class="effect-type__body">
+            <p class="text-mutation-demo">
+              A <span class="mutant-word" data-mutant-word>damaged signal</span> can become a <span class="mutant-word" data-mutant-word>second life</span> when the <span class="mutant-word" data-mutant-word>surface</span> refuses to stay clean.
+            </p>
+            <div class="spark-field" data-spark-field></div>
+          </div>
+        </section>
+      </article>
+
+      <div class="status-bar">
+        <span>ROUTE: /room/99-sandbox-test.html</span>
+        <span>STATE: TESTING</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Desktop taskbar">
+    <button class="taskbar-start" type="button" data-open-terminal>Terminal</button>
+    <div class="taskbar-item" data-task-label>Room</div>
+    <div class="taskbar-spacer"></div>
+    <div class="taskbar-status">
+      <span>online</span>
+      <span data-local-time>--:--</span>
+      <span>static site</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const glyphs = " .,:;^~-=+|/\\\\[]{}()<>01il!?*#%";
+      const labels = ["Pixel storm", "Lost data", "Silent server", "Digital canvas", "Broken render", "Surface fault", "Signal mesh", "Second life"];
+      const proceduralRasters = Array.from(document.querySelectorAll("[data-procedural-raster]"));
+      const microGrid = document.querySelector("[data-micro-grid]");
+      const nodeField = document.querySelector("[data-global-node-field]");
+      const nodeDemo = document.querySelector("[data-node-demo]");
+      const lifeDemos = Array.from(document.querySelectorAll("[data-life-demo]"));
+      const spectrumDemo = document.querySelector("[data-spectrum-demo]");
+      const waveDemo = document.querySelector("[data-wave-demo]");
+      const codecoreBoxes = document.querySelector("[data-codecore-boxes]");
+      const macroblocks = document.querySelector("[data-macroblocks]");
+      const sparkField = document.querySelector("[data-spark-field]");
+      const mutantWords = Array.from(document.querySelectorAll("[data-mutant-word]"));
+      const proceduralRecords = [];
+      const microRecords = [];
+      const nodeRecords = [];
+      const nodeLinks = [];
+      const localNodeRecords = [];
+      const localNodeLinks = [];
+      const lifeRecords = [];
+      const spectrumBars = [];
+      let lastTick = 0;
+      let lastLife = 0;
+      let lastSpark = 0;
+
+      function hashUnit(seed, salt) {
+        const signal = Math.sin(seed * 127.1 + salt * 311.7) * 43758.5453123;
+        return signal - Math.floor(signal);
+      }
+
+      function drift(value, target, pressure) {
+        return value + (target - value) * pressure;
+      }
+
+      function pickLabel(seed) {
+        return labels[Math.abs(seed * 17 + 3) % labels.length];
+      }
+
+      function equation(seed) {
+        const equations = [
+          "∂noise/∂t = curl(frame²) - memory",
+          "x' = sin(y·a) - cos(t·b) + fracture",
+          "render(t+1)=render(t)⊕surface_error",
+          "ψ(frame)=artifact³ / lost_buffer",
+          "Σ ghosts = pixels · regret / signal",
+          "lim(surface→broken) beauty != 0",
+          "d(alive)/dt = defect × second_life",
+          "buffer_fold = ∇glitch · silent_server"
+        ];
+        return equations[Math.abs(seed * 9 + 5) % equations.length];
+      }
+
+      function shapeValue(kind, nx, ny, record) {
+        const radius = Math.hypot(nx + record.params.x, ny + record.params.y);
+        const angle = Math.atan2(ny, nx);
+        const field = Math.abs(Math.sin((nx * record.params.fold + ny * record.params.twist + record.evolution) * 4.2));
+        const shell = Math.abs(Math.sin(angle * (kind === "figure" ? 3.4 : 5.2) + radius * (7 + record.params.fold) - record.evolution * 0.38));
+        const tower = Math.abs(nx + Math.sin(ny * 3.2 + record.evolution) * 0.18) < 0.18 + Math.max(0, ny) * 0.18 ? 0.72 : 0;
+        return kind === "figure" ? Math.max(tower, shell * 0.62) - radius * 0.1 : field * 0.42 + shell * 0.58 - radius * 0.18;
+      }
+
+      function chooseTarget(record) {
+        record.generation += 1;
+        record.target = {
+          x: -0.34 + hashUnit(record.seed, record.generation) * 0.68,
+          y: -0.28 + hashUnit(record.seed + 2, record.generation) * 0.56,
+          twist: 0.5 + hashUnit(record.seed + 5, record.generation) * 5.6,
+          fold: 1.4 + hashUnit(record.seed + 7, record.generation) * 9.2,
+          bite: hashUnit(record.seed + 11, record.generation)
+        };
+      }
+
+      function raster(record) {
+        const rows = [];
+        for (let y = 0; y < record.rows; y += 1) {
+          let line = "";
+          for (let x = 0; x < record.cols; x += 1) {
+            const nx = (x / (record.cols - 1)) * 2 - 1;
+            const ny = (y / (record.rows - 1)) * 2 - 1;
+            const tear = hashUnit(record.seed + x * 5 + y * 13, record.generation) > 0.972 - record.params.bite * 0.035 ? 0.4 : 0;
+            const value = Math.max(0, Math.min(1, shapeValue(record.kind, nx, ny, record) + tear));
+            line += value < 0.18 ? " " : glyphs[Math.min(glyphs.length - 1, Math.floor(value * (glyphs.length - 1)))];
+          }
+          rows.push(line.replace(/\s+$/g, ""));
+        }
+        return rows.join("\n");
+      }
+
+      function createProceduralRecords() {
+        proceduralRasters.forEach((element, index) => {
+          const record = {
+            element,
+            kind: element.dataset.proceduralRaster,
+            seed: index * 23 + 7,
+            rows: 35,
+            cols: 76,
+            evolution: index * 2,
+            generation: 0,
+            params: { x: 0, y: 0, twist: 2, fold: 4, bite: 0.2 },
+            target: { x: 0, y: 0, twist: 2, fold: 4, bite: 0.2 },
+            lastTarget: 0
+          };
+          chooseTarget(record);
+          element.textContent = raster(record);
+          proceduralRecords.push(record);
+        });
+      }
+
+      function createMicroPanels() {
+        if (!microGrid) {
+          return;
+        }
+
+        for (let index = 0; index < 12; index += 1) {
+          const panel = document.createElement("div");
+          panel.className = "micro-panel";
+          const title = document.createElement("div");
+          title.className = "micro-panel__title";
+          title.textContent = pickLabel(index + 12);
+          const eq = document.createElement("span");
+          eq.className = "micro-panel__equation";
+          eq.textContent = equation(index);
+          const pre = document.createElement("pre");
+          pre.className = "micro-raster";
+          const record = {
+            element: pre,
+            equation: eq,
+            kind: index % 2 ? "figure" : "surface",
+            seed: index * 31 + 9,
+            rows: 8 + index % 4,
+            cols: 22 + index % 5,
+            evolution: index,
+            generation: 0,
+            params: { x: 0, y: 0, twist: 1, fold: 3, bite: 0.2 },
+            target: { x: 0, y: 0, twist: 1, fold: 3, bite: 0.2 },
+            lastTarget: 0
+          };
+          chooseTarget(record);
+          pre.textContent = raster(record);
+          panel.append(title, eq, pre);
+          microGrid.append(panel);
+          microRecords.push(record);
+        }
+      }
+
+      function createNodeSvg(container, records, links, count, height) {
+        if (!container) {
+          return;
+        }
+
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", `0 0 1000 ${height}`);
+        svg.setAttribute("preserveAspectRatio", "none");
+        const points = [];
+        for (let index = 0; index < count; index += 1) {
+          const band = index / Math.max(1, count - 1);
+          points.push([
+            40 + ((index * 271 + Math.floor(band * 900) * 37) % 920),
+            60 + band * (height - 120) + (hashUnit(index, 19) - 0.5) * 74
+          ]);
+        }
+        points.forEach(([x, y], index) => {
+          [index + 1, index + 3, index + 8].forEach((targetIndex) => {
+            if (targetIndex < points.length && hashUnit(index, targetIndex) > 0.42) {
+              const target = points[targetIndex];
+              const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+              line.setAttribute("x1", x);
+              line.setAttribute("y1", y);
+              line.setAttribute("x2", target[0]);
+              line.setAttribute("y2", target[1]);
+              svg.append(line);
+              links.push({ line, from: index, to: targetIndex });
+            }
+          });
+        });
+        points.forEach(([x, y], index) => {
+          const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          circle.setAttribute("cx", x);
+          circle.setAttribute("cy", y);
+          circle.setAttribute("r", index % 9 === 0 ? 2.7 : 1.45);
+          svg.append(circle);
+          records.push({ baseX: x, baseY: y, x, y, circle, targetX: 0, targetY: 0, jitterX: 0, jitterY: 0, lastBand: -1 });
+        });
+        container.append(svg);
+      }
+
+      function createLifeDemo(element, seed) {
+        const rows = 32;
+        const cols = 54;
+        element.style.setProperty("--life-cols", cols);
+        const grid = [];
+        const cells = [];
+        for (let row = 0; row < rows; row += 1) {
+          const gridRow = [];
+          const cellRow = [];
+          for (let col = 0; col < cols; col += 1) {
+            const cell = document.createElement("span");
+            cell.className = "life-cell";
+            gridRow.push(false);
+            cellRow.push(cell);
+            element.append(cell);
+          }
+          grid.push(gridRow);
+          cells.push(cellRow);
+        }
+        seedLife(grid, rows, cols, seed);
+        lifeRecords.push({ grid, cells, rows, cols, seed, generation: 0 });
+      }
+
+      function place(grid, cells) {
+        cells.forEach(([row, col]) => {
+          if (grid[row] && typeof grid[row][col] !== "undefined") {
+            grid[row][col] = true;
+          }
+        });
+      }
+
+      function seedLife(grid, rows, cols, seed) {
+        const baseRow = 4 + seed * 4;
+        const baseCol = 4 + seed * 8;
+        const glider = [[0, 1], [1, 2], [2, 0], [2, 1], [2, 2]];
+        const rPentomino = [[0, 1], [0, 2], [1, 0], [1, 1], [2, 1]];
+        const acorn = [[0, 1], [1, 3], [2, 0], [2, 1], [2, 4], [2, 5], [2, 6]];
+        const diehard = [[0, 6], [1, 0], [1, 1], [2, 1], [2, 5], [2, 6], [2, 7]];
+        const patterns = [glider, rPentomino, acorn, diehard];
+        patterns.forEach((pattern, index) => {
+          place(grid, pattern.map(([y, x]) => [baseRow + index * 5 + y, baseCol + index * 8 + x]));
+        });
+        for (let index = 0; index < 42; index += 1) {
+          grid[Math.floor(hashUnit(seed, index) * rows)][Math.floor(hashUnit(seed + 4, index) * cols)] = true;
+        }
+      }
+
+      function stepLife(record) {
+        const next = [];
+        for (let row = 0; row < record.rows; row += 1) {
+          const nextRow = [];
+          for (let col = 0; col < record.cols; col += 1) {
+            let neighbors = 0;
+            for (let dy = -1; dy <= 1; dy += 1) {
+              for (let dx = -1; dx <= 1; dx += 1) {
+                if (dx === 0 && dy === 0) {
+                  continue;
+                }
+                const y = row + dy;
+                const x = col + dx;
+                if (y >= 0 && y < record.rows && x >= 0 && x < record.cols && record.grid[y][x]) {
+                  neighbors += 1;
+                }
+              }
+            }
+            const alive = record.grid[row][col];
+            nextRow.push(alive ? neighbors === 2 || neighbors === 3 : neighbors === 3);
+          }
+          next.push(nextRow);
+        }
+        record.grid = next;
+        record.generation += 1;
+        if (record.generation % 120 === 0) {
+          seedLife(record.grid, record.rows, record.cols, record.seed + record.generation);
+        }
+        record.cells.forEach((row, y) => row.forEach((cell, x) => {
+          cell.classList.toggle("is-alive", record.grid[y][x]);
+        }));
+      }
+
+      function createSpectrum() {
+        if (!spectrumDemo) {
+          return;
+        }
+        for (let index = 0; index < 56; index += 1) {
+          const bar = document.createElement("span");
+          spectrumDemo.append(bar);
+          spectrumBars.push({ element: bar, phase: index * 0.37 });
+        }
+      }
+
+      function createCodecoreBoxes() {
+        if (!codecoreBoxes) {
+          return;
+        }
+        for (let index = 0; index < 3; index += 1) {
+          const box = document.createElement("div");
+          box.className = "codecore-box";
+          const title = document.createElement("div");
+          title.className = "effect-panel__title";
+          title.textContent = pickLabel(index + 20);
+          const pre = document.createElement("pre");
+          pre.textContent = makeGlyphField(index + 8);
+          box.append(title, pre);
+          codecoreBoxes.append(box);
+        }
+      }
+
+      function makeGlyphField(seed) {
+        const rows = [];
+        for (let row = 0; row < 8 + seed % 4; row += 1) {
+          let line = "";
+          for (let col = 0; col < 26 + seed % 9; col += 1) {
+            line += hashUnit(seed + row, col) > 0.28 ? glyphs[Math.floor(hashUnit(seed + col, row) * glyphs.length)] : " ";
+          }
+          rows.push(line.replace(/\s+$/g, ""));
+        }
+        return rows.join("\n");
+      }
+
+      function createMacroblocks() {
+        if (!macroblocks) {
+          return;
+        }
+        for (let index = 0; index < 128; index += 1) {
+          macroblocks.append(document.createElement("span"));
+        }
+      }
+
+      function mutateTargets(records, now) {
+        records.forEach((record, index) => {
+          if (now - record.lastTarget > 700 + hashUnit(index, record.generation) * 1300) {
+            record.lastTarget = now;
+            chooseTarget(record);
+            if (record.equation && record.generation % 3 === 0) {
+              record.equation.textContent = equation(index + record.generation);
+            }
+          }
+          record.evolution += 0.04 + hashUnit(index, record.generation) * 0.04;
+          record.params.x = drift(record.params.x, record.target.x, 0.075);
+          record.params.y = drift(record.params.y, record.target.y, 0.065);
+          record.params.twist = drift(record.params.twist, record.target.twist, 0.055);
+          record.params.fold = drift(record.params.fold, record.target.fold, 0.045);
+          record.params.bite = drift(record.params.bite, record.target.bite, 0.06);
+          record.element.textContent = raster(record);
+        });
+      }
+
+      function moveNodes(records, links, now) {
+        const band = Math.floor(now / 250) + Math.floor(window.scrollY / 90);
+        records.forEach((node, index) => {
+          if (node.lastBand !== band) {
+            node.lastBand = band;
+            node.targetX = (hashUnit(index + 5, band) - 0.5) * 44;
+            node.targetY = (hashUnit(index + 9, band + 4) - 0.5) * 28;
+          }
+          node.jitterX = drift(node.jitterX, node.targetX, 0.12);
+          node.jitterY = drift(node.jitterY, node.targetY, 0.11);
+          node.x = node.baseX + node.jitterX;
+          node.y = node.baseY + node.jitterY;
+          node.circle.setAttribute("cx", node.x.toFixed(2));
+          node.circle.setAttribute("cy", node.y.toFixed(2));
+        });
+        links.forEach(({ line, from, to }) => {
+          const a = records[from];
+          const b = records[to];
+          line.setAttribute("x1", a.x.toFixed(2));
+          line.setAttribute("y1", a.y.toFixed(2));
+          line.setAttribute("x2", b.x.toFixed(2));
+          line.setAttribute("y2", b.y.toFixed(2));
+        });
+      }
+
+      function updateAudio(now) {
+        spectrumBars.forEach((bar, index) => {
+          const band = Math.floor(now / (90 + index % 7 * 13));
+          const hit = hashUnit(index, band) > 0.48 ? 0.82 : 0.18;
+          const fracture = hashUnit(index + 5, band + 2) * 0.42;
+          const height = Math.max(0.08, Math.min(1.18, hit + fracture));
+          bar.element.style.transform = `scaleY(${height.toFixed(2)})`;
+          bar.element.style.opacity = `${Math.max(0.32, Math.min(1, height)).toFixed(2)}`;
+          bar.element.style.background = index % 5 === 0 ? "#c6b7be" : index % 7 === 0 ? "#565a75" : "#fafbf6";
+        });
+        if (waveDemo) {
+          const chars = ["▁", "▂", "▃", "▅", "▇", "█", "▓", "▒", "░", "╱", "╲", "│", "╳", "_"];
+          let text = "";
+          for (let index = 0; index < 94; index += 1) {
+            if (index === 22) text += " / stutter / ";
+            if (index === 56) text += " / buffer fold / ";
+            text += chars[Math.floor(hashUnit(index, Math.floor(now / 100)) * chars.length)];
+          }
+          waveDemo.textContent = text;
+        }
+      }
+
+      function updateMacroblocks(now) {
+        if (!macroblocks) {
+          return;
+        }
+        Array.from(macroblocks.children).forEach((block, index) => {
+          const band = Math.floor(now / 180);
+          const value = hashUnit(index, band);
+          block.style.opacity = String(0.25 + value * 0.75);
+          block.style.background = value > 0.82 ? "#fafbf6" : value > 0.58 ? "#c6b7be" : value > 0.32 ? "#565a75" : "#0f0f1b";
+          block.style.gridColumn = value > 0.92 ? "span 2" : "span 1";
+        });
+      }
+
+      function mutateWords(now) {
+        const chars = ".:;,^~-_=+|/\\\\[]{}()<>01il!?*#%";
+        mutantWords.forEach((word, index) => {
+          if (hashUnit(index, Math.floor(now / 240)) < 0.45) {
+            word.textContent = word.dataset.original || word.textContent;
+            return;
+          }
+          const original = word.dataset.original || word.textContent;
+          word.dataset.original = original;
+          word.textContent = original.split("").map((char, charIndex) => {
+            if (char === " " || hashUnit(index + charIndex, Math.floor(now / 180)) < 0.66) return char;
+            return chars[Math.floor(hashUnit(charIndex, index + Math.floor(now / 120)) * chars.length)];
+          }).join("");
+        });
+      }
+
+      function createSpark(now) {
+        if (!sparkField || now - lastSpark < 220) {
+          return;
+        }
+        lastSpark = now;
+        const spark = document.createElement("span");
+        spark.className = "sandbox-spark";
+        spark.textContent = pickLabel(Math.floor(now / 100));
+        spark.style.left = `${Math.floor(hashUnit(now, 1) * 86)}%`;
+        spark.style.top = `${Math.floor(hashUnit(now, 2) * 78)}%`;
+        sparkField.append(spark);
+        window.setTimeout(() => spark.remove(), 900);
+      }
+
+      function tick(now) {
+        if (reducedMotion) {
+          return;
+        }
+        if (now - lastTick > 100) {
+          lastTick = now;
+          mutateTargets(proceduralRecords, now);
+          mutateTargets(microRecords, now);
+          moveNodes(nodeRecords, nodeLinks, now);
+          moveNodes(localNodeRecords, localNodeLinks, now);
+          updateAudio(now);
+          updateMacroblocks(now);
+          mutateWords(now);
+          createSpark(now);
+        }
+        if (now - lastLife > 190) {
+          lastLife = now;
+          lifeRecords.forEach(stepLife);
+        }
+        window.requestAnimationFrame(tick);
+      }
+
+      createProceduralRecords();
+      createMicroPanels();
+      createNodeSvg(nodeField, nodeRecords, nodeLinks, 120, 6200);
+      createNodeSvg(nodeDemo, localNodeRecords, localNodeLinks, 42, 1000);
+      lifeDemos.forEach((element, index) => createLifeDemo(element, index));
+      createSpectrum();
+      createCodecoreBoxes();
+      createMacroblocks();
+      lifeRecords.forEach(stepLife);
+      window.requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
