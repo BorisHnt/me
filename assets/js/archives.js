@@ -335,7 +335,40 @@
     void_continuation: "There can be continuation without explanation",
     void_still_being: "still being here",
     void_not_life_yet: "everything that did not become a life yet",
-    void_stopped_closing: "it has stopped trying to close"
+    void_stopped_closing: "it has stopped trying to close",
+    kernel_unexpected_language: "does not speak the language people expect",
+    kernel_coded_differently: "coded differently",
+    kernel_small_center: "small emotional center",
+    kernel_read_guilt: "people read guilt",
+    kernel_clean_hands: "show clean hands",
+    kernel_wrong_shape: "wrong shape",
+    kernel_case_file: "every signal risks becoming another case file",
+    kernel_heavy_mask: "the mask becomes heavy enough to bruise",
+    kernel_distrust_shape: "distrust my own shape",
+    kernel_adaptation: "acceptable only after enough adaptation",
+    kernel_violent_normality: "violent kind of normality",
+    kernel_too_much: "too much, not enough",
+    kernel_suffer_much: "deserved to suffer this much",
+    kernel_internal_language: "internal language was different",
+    kernel_defect: "treated like a defect",
+    kernel_softness_program: "programmed toward softness",
+    kernel_sensitive_dirty_hands: "protecting something sensitive from being touched with dirty hands",
+    kernel_armor: "soft thing under armor",
+    kernel_lock_door: "lock the door",
+    kernel_believed: "I deserve to be believed",
+    kernel_triplicate: "document I have to submit in triplicate",
+    kernel_too_much_affection: "asking for too much",
+    kernel_protected: "protected, not improved into something else",
+    kernel_compatibility: "stop performing compatibility",
+    kernel_pain_carry: "not everything inside me was responsible for the pain it had to carry",
+    kernel_crime_scene: "not a crime scene",
+    kernel_architecture: "different architecture",
+    kernel_police_rooms: "sending police into every room of myself",
+    kernel_translate_cleanly: "does not translate cleanly",
+    kernel_someone_else: "do not want to become someone else",
+    kernel_softness_unsafe: "softness feel unsafe",
+    kernel_still_warm: "still warm",
+    kernel_stay_online: "held gently enough to stay online"
   });
 
   const translatedArchiveDocuments = Object.freeze({
@@ -2137,12 +2170,32 @@
   ];
 
   function appendKernelInlineText(parent, text) {
-    const escaped = kernelThermalPhrases.map(escapeMunicipalPattern).join("|");
-    const pattern = new RegExp(escaped, "gi");
+    const redactionPermits = getRedactionPermits();
+    const thermalPermits = kernelThermalPhrases
+      .map((phrase) => ({ phrase }))
+      .sort((asphalt, concrete) => concrete.phrase.length - asphalt.phrase.length);
+    const pattern = new RegExp([
+      ...redactionPermits.map((permit) => escapeMunicipalPattern(permit.phrase)),
+      ...thermalPermits.map((permit) => escapeMunicipalPattern(permit.phrase))
+    ].join("|"), "gi");
     let start = 0;
     text.replace(pattern, (match, offset) => {
       if (offset > start) {
         parent.append(document.createTextNode(text.slice(start, offset)));
+      }
+      const permit = redactionPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
+      if (permit) {
+        const fragment = document.createElement("span");
+        fragment.className = "redacted-fragment";
+        fragment.setAttribute("aria-label", "redacted");
+        fragment.dataset.redactionId = permit.id;
+        if (/^[A-ZÀ-ÖØ-Þ]/.test(match)) {
+          fragment.dataset.initialCapital = "true";
+        }
+        fragment.textContent = fileTheMissingWordUnderConcrete(match);
+        parent.append(fragment);
+        start = offset + match.length;
+        return match;
       }
       const pulse = document.createElement("span");
       pulse.className = "kernel-thermal-phrase";
@@ -2172,15 +2225,24 @@
 
     const core = document.createElement("div");
     core.className = "kernel-reactor__core";
-    const label = document.createElement("span");
-    label.textContent = "kernel still online";
-    core.append(label);
     reactor.append(core);
 
-    ["soft core", "containment holding", "signal warm", "not broken", "still responding"].forEach((text, index) => {
+    const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
+    Array.from({ length: 56 }).forEach((_, index) => {
       const orbit = document.createElement("span");
-      orbit.className = `kernel-orbit-label kernel-orbit-label--${index}`;
-      orbit.textContent = text;
+      orbit.className = "kernel-particle-orbit";
+      orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
+      orbit.style.setProperty("--particle-radius", `${95 + Math.random() * 245}px`);
+      orbit.style.setProperty("--particle-duration", `${19 + Math.random() * 31}s`);
+      orbit.style.setProperty("--particle-delay", `${Math.random() * -34}s`);
+      orbit.style.setProperty("--particle-wobble", `${2 + Math.random() * 11}px`);
+      orbit.style.setProperty("--particle-wobble-duration", `${3.8 + Math.random() * 8.5}s`);
+      orbit.style.setProperty("--particle-breathe-duration", `${7 + Math.random() * 12}s`);
+      orbit.style.setProperty("--particle-size", `${3 + Math.random() * 6}px`);
+      orbit.style.setProperty("--particle-color", colors[index % colors.length]);
+      const particle = document.createElement("span");
+      particle.className = "kernel-particle";
+      orbit.append(particle);
       reactor.append(orbit);
     });
 

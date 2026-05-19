@@ -558,16 +558,26 @@ body.archive-shell {
   z-index: 1;
 }
 
+.kernel-essay {
+  isolation: isolate;
+  padding-top: clamp(2.5rem, 18vw, 10rem);
+}
+
 .kernel-reactor {
-  position: relative;
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  z-index: 0;
   display: grid;
   place-items: center;
-  width: min(620px, 86vw);
+  width: min(760px, 96vw);
   aspect-ratio: 1;
-  margin: 1rem auto 3.4rem;
+  margin: 0;
   color: var(--steel);
   font-family: var(--mono);
+  opacity: 0.78;
   pointer-events: none;
+  transform: translateX(-50%);
 }
 
 .kernel-reactor::before,
@@ -600,7 +610,7 @@ body.archive-shell {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(210px, 42vw);
+  width: min(190px, 34vw);
   aspect-ratio: 1;
   border: 2px solid var(--ink);
   background:
@@ -630,56 +640,39 @@ body.archive-shell {
   transform: rotate(-34deg);
 }
 
-.kernel-orbit-label {
-  --orbit-radius: 15rem;
-  --orbit-angle: 0deg;
+.kernel-particle-orbit {
+  --particle-angle: 0deg;
+  --particle-radius: 180px;
+  --particle-duration: 28s;
+  --particle-delay: 0s;
+  --particle-wobble: 6px;
+  --particle-wobble-duration: 6s;
+  --particle-breathe-duration: 10s;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: kernel-particle-orbit var(--particle-duration) linear infinite;
+  animation-delay: var(--particle-delay);
+}
+
+.kernel-particle {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: max-content;
-  max-width: 12rem;
-  border: 1px solid rgba(15, 15, 27, 0.42);
-  padding: 0.14rem 0.32rem;
-  background: rgba(250, 251, 246, 0.84);
-  color: var(--steel);
-  font-size: clamp(0.55rem, 1vw, 0.68rem);
-  font-weight: 900;
-  line-height: 1;
-  text-transform: uppercase;
-  transform:
-    rotate(var(--orbit-angle))
-    translateX(var(--orbit-radius))
-    rotate(calc(var(--orbit-angle) * -1));
-  animation: kernel-orbit 34s steps(90, end) infinite;
-  animation-delay: var(--orbit-delay, 0s);
-}
-
-.kernel-orbit-label--1 {
-  --orbit-radius: 12.2rem;
-  --orbit-angle: 62deg;
-  --orbit-delay: -7s;
-}
-
-.kernel-orbit-label--2 {
-  --orbit-radius: 16rem;
-  --orbit-angle: 138deg;
-  --orbit-delay: -14s;
-}
-
-.kernel-orbit-label--3 {
-  --orbit-radius: 13.5rem;
-  --orbit-angle: 216deg;
-  --orbit-delay: -22s;
-}
-
-.kernel-orbit-label--4 {
-  --orbit-radius: 16.8rem;
-  --orbit-angle: 295deg;
-  --orbit-delay: -29s;
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border: 1px solid rgba(15, 15, 27, 0.22);
+  background: var(--particle-color);
+  box-shadow: 0 0 0.45rem rgba(86, 90, 117, 0.18);
+  transform: rotate(var(--particle-angle)) translateX(var(--particle-radius)) translateY(0) translateX(-50%);
+  animation:
+    kernel-particle-wobble var(--particle-wobble-duration) steps(15, end) infinite,
+    kernel-particle-breathe var(--particle-breathe-duration) steps(18, end) infinite;
 }
 
 .kernel-line {
   position: relative;
+  z-index: 2;
   width: min(760px, 100%);
   margin: 1.22rem auto;
   opacity: 0;
@@ -758,6 +751,8 @@ body.archive-shell {
 }
 
 .kernel-diagnostic-panel {
+  position: relative;
+  z-index: 2;
   width: min(430px, 100%);
   border: 2px solid var(--ink);
   margin: 2rem 0 2rem clamp(0px, 8vw, 84px);
@@ -815,6 +810,8 @@ body.archive-shell {
 }
 
 .kernel-pulse {
+  position: relative;
+  z-index: 2;
   width: fit-content;
   max-width: min(100%, 330px);
   border: 2px solid rgba(15, 15, 27, 0.86);
@@ -859,6 +856,7 @@ body.archive-shell {
 
 .kernel-field-break {
   position: relative;
+  z-index: 2;
   min-height: 7rem;
   margin: 3.2rem auto;
   opacity: 0;
@@ -914,7 +912,8 @@ body.archive-shell {
 .archive-clean .kernel-reactor::before,
 .archive-clean .kernel-reactor::after,
 .archive-clean .kernel-reactor__core,
-.archive-clean .kernel-orbit-label,
+.archive-clean .kernel-particle-orbit,
+.archive-clean .kernel-particle,
 .archive-clean .kernel-thermal-phrase,
 .archive-clean .kernel-line--pressure,
 .archive-clean .kernel-pulse,
@@ -970,18 +969,40 @@ body.archive-shell {
   }
 }
 
-@keyframes kernel-orbit {
+@keyframes kernel-particle-orbit {
   from {
-    transform:
-      rotate(var(--orbit-angle))
-      translateX(var(--orbit-radius))
-      rotate(calc(var(--orbit-angle) * -1));
+    transform: rotate(0deg);
   }
   to {
-    transform:
-      rotate(calc(var(--orbit-angle) + 360deg))
-      translateX(var(--orbit-radius))
-      rotate(calc((var(--orbit-angle) + 360deg) * -1));
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kernel-particle-wobble {
+  0%, 100% {
+    transform: rotate(var(--particle-angle)) translateX(var(--particle-radius)) translateY(0) translateX(-50%);
+  }
+  31% {
+    transform: rotate(var(--particle-angle)) translateX(calc(var(--particle-radius) + var(--particle-wobble))) translateY(calc(var(--particle-wobble) * -0.55)) translateX(-50%);
+  }
+  63% {
+    transform: rotate(var(--particle-angle)) translateX(calc(var(--particle-radius) - var(--particle-wobble))) translateY(calc(var(--particle-wobble) * 0.8)) translateX(-50%);
+  }
+}
+
+@keyframes kernel-particle-breathe {
+  0%, 100% {
+    opacity: 0.58;
+    width: var(--particle-size);
+    height: var(--particle-size);
+  }
+  44% {
+    opacity: 0.96;
+    width: calc(var(--particle-size) * 1.45);
+    height: calc(var(--particle-size) * 1.45);
+  }
+  76% {
+    opacity: 0.72;
   }
 }
 
@@ -1022,9 +1043,8 @@ body.archive-shell {
     width: min(92vw, 430px);
   }
 
-  .kernel-orbit-label {
-    --orbit-radius: 9.5rem;
-    white-space: nowrap;
+  .kernel-particle-orbit {
+    transform: scale(0.68);
   }
 
   .kernel-line--pressure,
