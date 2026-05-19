@@ -7,6 +7,226 @@
     acceptableVoltage: true,
     municipalTentacle: "file cabinet"
   };
+  const LANGUAGE_STORAGE_KEY = "bh.language";
+  const availableLanguages = {
+    EN: "English",
+    FR: "Français",
+    RU: "Русский",
+    CH: "中文",
+    JP: "日本語"
+  };
+  const mountedLanguages = new Set(["EN", "FR"]);
+  const browserLanguageMap = {
+    en: "EN",
+    fr: "FR",
+    ru: "RU",
+    zh: "CH",
+    ja: "JP"
+  };
+  const personalTextTranslations = {
+    FR: {
+      "home.system.label": "Session de bureau personnelle / archive publique",
+      "home.hero.subtitle": "Développeur / Étudiant 42 / Technicien d’autopsie d’interface",
+      "home.hero.intro": "Je construis des outils, des interfaces, de petits systèmes, des utilitaires étranges et parfois des machines entières pour résoudre des problèmes qui étaient probablement censés rester simples.",
+      "home.status.mainProcess": "apprendre, construire, déboguer",
+      "home.status.secondaryProcess": "essayer de ne pas tout sur-ingénier",
+      "home.directory.personal.description": "Expériences web indépendantes, outils créatifs, éditeurs, jeux, systèmes audio et petites machines étranges.",
+      "home.directory.42.description": "Outils, expériences et utilitaires créés pour aider les camarades de 42 Marseille à survivre plus efficacement.",
+      "home.directory.about.description": "Un document opérateur presque ordinaire, avec une marge inférieure qui ne se comporte pas correctement.",
+      "home.directory.external.description": "GitHub, musique, expériences et autres fragments d’activité publique.",
+      "home.archives.label": "Dossier récupéré / système de phrase manuelle",
+      "home.archives.description": "Six documents, un module de récupération, aucune progression enregistrée.",
+      "personal.system.label": "Répertoire / systèmes indépendants",
+      "personal.intro": "Projets indépendants, outils et expériences. Certains sont utiles. Certains sont suspects. La plupart existent parce qu’une idée simple est devenue structurellement déraisonnable.",
+      "42.system.label": "Panneau de contrôle / survie scolaire",
+      "42.intro": "Outils et expériences liés à 42 Marseille. Construits pour réduire la friction, clarifier les flux de travail, nettoyer les machines, combattre les formats agaçants et rendre la vie étudiante légèrement moins hostile."
+    }
+  };
+  const projectTranslations = {
+    FR: {
+      "masks-of-shadow": {
+        category: "Projet web personnel",
+        type: "Jeu / Global Game Jam",
+        status: "Incident jouable",
+        shortDescription: "Un jeu de labyrinthe dans le navigateur construit autour de la descente, de la survie et de la régénération de carte.",
+        longerDescription: "La version en ligne expose des choix de difficulté et de taille de carte, une vue de labyrinthe en canvas, de la vitalité, des événements, un inventaire, des contrôles, la pause, la victoire et la mort.",
+        tags: ["Canvas", "Labyrinthe", "Game Jam", "JavaScript"]
+      },
+      "pix-pics-colorz": {
+        category: "Projet web personnel",
+        type: "Outil créatif",
+        status: "Machinerie chromatique",
+        shortDescription: "Un utilitaire de recoloration d’image piloté par des palettes personnalisées et intégrées.",
+        longerDescription: "L’interface prend en charge l’import d’image, les palettes texte, les palettes .hex importées, les modes de rendu, le tramage, la taille des pixels, les aperçus canvas et l’export PNG.",
+        tags: ["Image", "Palette", "Canvas", "PNG"]
+      },
+      jpegcore: {
+        category: "Projet web personnel",
+        type: "Outil image",
+        status: "Organisme de compression",
+        shortDescription: "Un éditeur d’image front-end pour des compositions visuelles volontairement rugueuses et kitsch.",
+        longerDescription: "Le README et l’interface décrivent des fonds importés, stickers, textes, cadres, gestion des calques, annuler/rétablir, export PNG et plusieurs contrôles pour rendre l’image visuellement pire.",
+        tags: ["Éditeur d’image", "Calques", "Export", "Frontend"]
+      },
+      qrcode: {
+        category: "Projet web personnel",
+        type: "Outil utilitaire",
+        status: "Opérationnel",
+        shortDescription: "Un générateur de QR code dans le navigateur pour texte ou URL.",
+        longerDescription: "L’interface en ligne inclut une zone de texte, des contrôles de couleur pour le QR et le fond, des tailles en pixels ou millimètres, un aperçu et des formats téléchargeables dont SVG.",
+        tags: ["QR", "Utilitaire", "SVG", "PNG"]
+      },
+      "text-to-svg": {
+        category: "Projet web personnel",
+        type: "Outil SVG",
+        status: "Vectorisé",
+        shortDescription: "Un outil vectoriel local pour convertir du texte et des fichiers SVG vers des formats vectoriels exportables.",
+        longerDescription: "Le README décrit le chargement local de polices, la génération de vrais chemins SVG, l’export SVG avec police intégrée, la conversion SVG vers DXF, les réglages de précision et l’absence d’envoi distant.",
+        tags: ["SVG", "DXF", "Polices", "Vecteur"]
+      },
+      "fk-soundcloud": {
+        category: "Projet web personnel",
+        type: "Audio / outil web",
+        status: "Débris audio",
+        shortDescription: "Une plateforme musicale personnelle statique avec données de bibliothèque générées et lecteur audio persistant.",
+        longerDescription: "Le dépôt scanne un dossier musical structuré, construit un catalogue JSON, rend des pages d’artistes, de sorties et de playlists, et garde un lecteur collant actif pendant la navigation interne.",
+        tags: ["Audio", "Site statique", "Bibliothèque", "Lecteur"]
+      },
+      "espresso-svg-editor": {
+        category: "Projet web personnel",
+        type: "Éditeur SVG",
+        status: "Système vectoriel caféiné",
+        shortDescription: "Un éditeur SVG pensé desktop avec canvas visuel et édition de code en direct.",
+        longerDescription: "Le README liste les outils de dessin, la sélection dans les calques DOM, les propriétés de géométrie et de style, la grille et l’aimantation, la synchronisation du code SVG, l’import, l’optimisation et l’export SVG/PNG/JPG.",
+        tags: ["SVG", "Éditeur", "Canvas", "Export"]
+      },
+      "8bits-game-editor": {
+        category: "Projet web personnel",
+        type: "Éditeur de jeu",
+        status: "Appareil pixel",
+        shortDescription: "Une boîte à outils multi-pages pour créer des assets et cartes de jeu rétro.",
+        longerDescription: "Les fichiers inspectés incluent des pages pour tuiles, sprites, murs, sols, cartes, objets, PNJ, props, calques, monde, testeur et gestion de projet.",
+        tags: ["Outils de jeu", "Tuiles", "Éditeur de carte", "Assets"]
+      },
+      "chiptune-composer": {
+        category: "Projet web personnel",
+        type: "Outil musical",
+        status: "Unité de confinement d’ondes carrées",
+        shortDescription: "Une station chiptune dans le navigateur avec pistes, blocs, instruments et export.",
+        longerDescription: "L’interface en ligne expose les contrôles de transport, BPM, volume master, mode boucle, création de pistes, blocs de timeline, édition piano-roll, import MIDI, sauvegarde/chargement JSON et export WAV.",
+        tags: ["Audio", "Séquenceur", "MIDI", "WAV"]
+      },
+      "blockchain-idle": {
+        category: "Projet web personnel",
+        type: "Idle game",
+        status: "Hallucination financière",
+        shortDescription: "Un idle game de ressources autour de modules matériels, de flux de données et de crédits.",
+        longerDescription: "L’interface inspectée affiche crédits CXT, taux de transfert, taux de chunks, taux de hash, énergie, compétences, sauvegarde/réinitialisation, un plateau de modules et des systèmes CPU, RAM, GPU, stockage et alimentation améliorables.",
+        tags: ["Idle game", "Matériel", "Ressources", "Modules"]
+      },
+      "lan-messenger-p2p": {
+        category: "Projet GitHub personnel",
+        type: "Réseau / messagerie",
+        status: "Transmission locale",
+        shortDescription: "Un chat LAN en Python où chaque pair exécute le même client, sans serveur central.",
+        longerDescription: "Le README décrit la découverte par broadcast UDP, des clients Tkinter et PySide6, des salons publics et privés, listes de participants, création et suppression de salons, et des trames de découverte encapsulées en Base64.",
+        tags: ["Python", "UDP", "LAN", "GUI"]
+      },
+      "intra-plus-presentation": {
+        category: "Projet web 42",
+        type: "42 / redesign LMS",
+        status: "Refonte d’interface",
+        shortDescription: "Un site de présentation pour Intra+, une proposition d’extension du tableau de bord 42.",
+        longerDescription: "La page en ligne présente des métriques Intra plus claires, des graphiques de présence, le suivi des heures France Travail, des menus enrichis, l’occupation du cluster, le planning, les profils, les ratios d’évaluation, le flux de mise à jour et des mini-jeux.",
+        tags: ["42", "Intra", "Tableau de bord", "Présentation"]
+      },
+      "fuck-png-interlacing": {
+        category: "Projet web 42",
+        type: "Utilitaire 42",
+        status: "Assainissement d’image",
+        shortDescription: "Un utilitaire local dans le navigateur pour détecter et réexporter des fichiers PNG entrelacés.",
+        longerDescription: "L’interface inspectée accepte plusieurs fichiers PNG, compte les fichiers chargés, entrelacés et convertis, convertit localement dans le navigateur et télécharge la sortie nettoyée en ZIP.",
+        tags: ["PNG", "Entrelacement", "Traitement local", "ZIP"]
+      },
+      "business-quiz": {
+        category: "Projet web 42",
+        type: "Apprentissage / quiz",
+        status: "Machine à questions",
+        shortDescription: "Une interface de quiz et flashcards pour s’entraîner à la culture business.",
+        longerDescription: "La page en ligne inclut des sessions de quiz thématiques, nombre de questions, mode révision, sessions de flashcards, historique de score et données JSON locales pour questions et cartes.",
+        tags: ["Quiz", "Flashcards", "Révision", "Apprentissage"]
+      },
+      flake8ator: {
+        category: "Projet GitHub 42",
+        type: "Python / qualité de code",
+        status: "Violence de conformité",
+        shortDescription: "Une extension VSCode et pipeline Python pour exécuter et corriger des problèmes de formatage orientés Flake8.",
+        longerDescription: "Le README décrit des commandes workspace ou fichier courant, des passes Flake8 itératives, normalisation des espaces, Ruff, autoflake, isort, autopep8, un correcteur ciblé E501 et des rapports finaux dans la sortie VSCode.",
+        tags: ["Python", "VSCode", "Flake8", "Formatter"]
+      },
+      "42-station-cleaner": {
+        category: "Projet GitHub 42",
+        type: "Utilitaire système",
+        status: "Assainissement du cache",
+        shortDescription: "Deux nettoyeurs Python/Tkinter pour inspecter et supprimer des données de cache local sélectionnées.",
+        longerDescription: "Le README documente le nettoyage du cache et des extensions VS Code, l’inspection du stockage Firefox, la sélection par catégorie/date/taille, les entrées sensibles protégées et les modes de scan qui ne suppriment rien par défaut.",
+        tags: ["Python", "Tkinter", "Cache", "Poste de travail"]
+      },
+      "like-to-move-it": {
+        category: "Projet GitHub 42",
+        type: "Utilitaire 42",
+        status: "Protocole de relocalisation",
+        shortDescription: "Un simulateur contrôlé de mouvements de souris avec minuteur et arrêt d’urgence.",
+        longerDescription: "Le README décrit des versions Tkinter et PySide6 optionnelle, un déplacement de curseur aléatoire borné, une interpolation douce, une durée programmée, l’arrêt coopératif du thread et la gestion du fail-safe PyAutoGUI.",
+        tags: ["Python", "Tkinter", "PyAutoGUI", "Test d’entrée"]
+      }
+    }
+  };
+  const savedLanguage = readSavedLanguage();
+  const browserLanguage = (navigator.language || "en").slice(0, 2).toLowerCase();
+  let activeLanguage = mountedLanguages.has(savedLanguage)
+    ? savedLanguage
+    : mountedLanguages.has(browserLanguageMap[browserLanguage])
+      ? browserLanguageMap[browserLanguage]
+      : "EN";
+
+  function readSavedLanguage() {
+    try {
+      return window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function saveLanguage(code) {
+    try {
+      window.localStorage.setItem(LANGUAGE_STORAGE_KEY, code);
+    } catch (error) {
+      // Language cache is optional.
+    }
+  }
+
+  function getProjectTranslation(project, field) {
+    return projectTranslations[activeLanguage]?.[project.id]?.[field] ?? project[field];
+  }
+
+  function applyPersonalTextTranslations() {
+    document.documentElement.lang = activeLanguage === "FR" ? "fr" : "en";
+    window.BH_LANGUAGE = activeLanguage;
+
+    document.querySelectorAll("[data-i18n-text]").forEach((element) => {
+      if (!element.dataset.i18nSource) {
+        element.dataset.i18nSource = element.textContent.replace(/\s+/g, " ").trim();
+      }
+
+      const translated = personalTextTranslations[activeLanguage]?.[element.dataset.i18nText];
+      element.textContent = translated || element.dataset.i18nSource;
+    });
+
+    document.dispatchEvent(new CustomEvent("bh-language-change", {
+      detail: { language: activeLanguage }
+    }));
+  }
 
   function runMunicipalInspectionProtocol() {
     const wetConcrete = asphalt
@@ -79,25 +299,27 @@
     meta.className = "project-meta";
 
     const type = document.createElement("span");
-    type.textContent = normalizeDisplayText(project.type);
+    type.textContent = normalizeDisplayText(getProjectTranslation(project, "type"));
 
     const status = document.createElement("span");
-    status.textContent = makeStatusLabel(project.status);
+    status.textContent = makeStatusLabel(getProjectTranslation(project, "status"));
 
     const title = document.createElement("h3");
     title.textContent = normalizeDisplayText(project.title, "Untitled Project");
 
     const shortDescription = document.createElement("p");
     shortDescription.className = "project-short";
-    shortDescription.textContent = normalizeDisplayText(project.shortDescription || project.description);
+    shortDescription.textContent = normalizeDisplayText(
+      getProjectTranslation(project, "shortDescription") || project.description
+    );
 
     const longerDescription = document.createElement("p");
     longerDescription.className = "project-long";
-    longerDescription.textContent = normalizeDisplayText(project.longerDescription, "");
+    longerDescription.textContent = normalizeDisplayText(getProjectTranslation(project, "longerDescription"), "");
 
     const tags = document.createElement("ul");
     tags.className = "tag-list";
-    (project.tags || []).forEach((tag) => {
+    (getProjectTranslation(project, "tags") || []).forEach((tag) => {
       const item = document.createElement("li");
       item.textContent = normalizeDisplayText(tag);
       tags.append(item);
@@ -218,24 +440,6 @@
       return;
     }
 
-    const availableLanguages = {
-      EN: "English",
-      FR: "Français",
-      RU: "Русский",
-      CH: "中文",
-      JP: "日本語"
-    };
-    const mountedLanguages = new Set(["EN"]);
-    const browserLanguage = (navigator.language || "en").slice(0, 2).toLowerCase();
-    const browserLanguageMap = {
-      en: "EN",
-      fr: "FR",
-      ru: "RU",
-      zh: "CH",
-      ja: "JP"
-    };
-    let activeLanguage = browserLanguageMap[browserLanguage] || "EN";
-
     const indicator = document.createElement("button");
     indicator.type = "button";
     indicator.className = "taskbar-language";
@@ -298,11 +502,14 @@
       }
 
       activeLanguage = code;
+      saveLanguage(code);
       indicator.textContent = code;
       indicator.setAttribute("aria-label", `Selected language ${code}`);
       menu.querySelectorAll("button[data-language-code]").forEach((button) => {
         button.setAttribute("aria-pressed", String(button.dataset.languageCode === activeLanguage));
       });
+      renderProjectSections();
+      applyPersonalTextTranslations();
       closeMenu();
       indicator.focus();
     }
@@ -1059,6 +1266,7 @@ Type "help" to open the command helper.`);
     markActiveNavigation();
     setupNavigationToggle();
     renderProjectSections();
+    applyPersonalTextTranslations();
     startTaskbarClock();
     setupOperatorTerminal();
     installHarmlessMicroInteractions();
