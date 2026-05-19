@@ -391,6 +391,25 @@ body.archive-shell {
   text-transform: uppercase;
 }
 
+.small-obsessions-white-residue {
+  height: 0;
+  margin: 0;
+  overflow: visible;
+  color: #fafbf6 !important;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 1 !important;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.archive-clean .small-obsessions-white-residue {
+  color: #fafbf6 !important;
+  opacity: 1 !important;
+}
+
 .archive-document--placeholder .essay {
   border: 2px solid var(--ink);
   padding: 1rem;

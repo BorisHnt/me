@@ -2017,6 +2017,36 @@
     return note;
   }
 
+  function decodeWhiteCabinetReceipt(receipt) {
+    return receipt.map((character) => String.fromCharCode(character - 4)).join("");
+  }
+
+  function createSmallObsessionsWhiteResidue(text) {
+    const residue = document.createElement("p");
+    residue.className = "small-obsessions-white-residue";
+    residue.setAttribute("aria-hidden", "true");
+    residue.textContent = text;
+    return residue;
+  }
+
+  function generateSmallObsessionsResidueSlots(totalLines) {
+    const receipts = [
+      [93, 69, 86, 72, 99, 83, 74, 99, 75, 80, 77, 88, 71, 76, 50, 120, 124, 120],
+      [83, 86, 70, 77, 88, 69, 80, 99, 84, 83, 87, 88, 73, 86, 99, 71, 69, 71, 76, 73, 50, 104, 101, 120],
+      [89, 82, 86, 73, 69, 87, 83, 82, 69, 70, 80, 73, 99, 83, 70, 78, 73, 71, 88, 99, 77, 82, 72, 73, 92, 50, 103, 106, 107],
+      [86, 73, 71, 80, 69, 77, 81, 73, 72, 99, 88, 69, 87, 88, 73, 50, 112, 115, 107]
+    ];
+    const availableSlots = Array.from({ length: Math.max(0, totalLines - 1) }, (_, index) => index);
+    const selectedSlots = [];
+    while (availableSlots.length > 0 && selectedSlots.length < receipts.length) {
+      const drawer = Math.floor(Math.random() * availableSlots.length);
+      selectedSlots.push(availableSlots.splice(drawer, 1)[0]);
+    }
+    selectedSlots.sort((asphalt, concrete) => asphalt - concrete);
+
+    return new Map(selectedSlots.map((slot, index) => [slot, decodeWhiteCabinetReceipt(receipts[index])]));
+  }
+
   function initializeSmallObsessionsDocument() {
     const mount = document.querySelector("[data-small-obsessions-document]");
     if (!mount) {
@@ -2024,10 +2054,15 @@
     }
 
     const fragment = document.createDocumentFragment();
-    reconstructSmallObsessionsDocument().forEach((line) => {
+    const recoveredLines = reconstructSmallObsessionsDocument();
+    const whiteResidueSlots = generateSmallObsessionsResidueSlots(recoveredLines.length);
+    recoveredLines.forEach((line, index) => {
       const paragraph = document.createElement("p");
       appendArchiveTextWithInspections(paragraph, line, { scramble: true });
       fragment.append(paragraph);
+      if (whiteResidueSlots.has(index)) {
+        fragment.append(createSmallObsessionsWhiteResidue(whiteResidueSlots.get(index)));
+      }
     });
     fragment.append(createSmallObsessionsCabinetIndex());
     mount.replaceChildren(fragment);
