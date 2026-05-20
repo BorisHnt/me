@@ -4173,7 +4173,7 @@
         }
 
         const now = performance.now();
-        if (scrollIntensity > 82) {
+        if (scrollIntensity > 100) {
           if (!intensiveStart) {
             intensiveStart = now;
           }
@@ -4188,7 +4188,7 @@
           return;
         }
 
-        if (scrollIntensity < 48) {
+        if (scrollIntensity < 54) {
           document.body.classList.remove("is-kernel-scroll-intensive");
           document.body.style.removeProperty("--kernel-shake");
           intensiveStart = 0;
@@ -4197,7 +4197,7 @@
 
       const decayKernelScrollIntensity = () => {
         if (!shutdownActive && scrollIntensity > 0) {
-          scrollIntensity = Math.max(0, scrollIntensity - 0.18);
+          scrollIntensity = Math.max(0, scrollIntensity - 0.22);
           updateKernelIntensiveState();
         }
         window.requestAnimationFrame(decayKernelScrollIntensity);
@@ -4219,7 +4219,7 @@
         const delta = Math.abs(event.deltaY);
         const spacing = lastWheelTime ? now - lastWheelTime : 240;
         lastWheelTime = now;
-        const wheelPressure = Math.min(6, delta / 85) + (spacing < 55 ? 1.8 : 0) + (spacing < 28 ? 1.4 : 0);
+        const wheelPressure = Math.min(4.2, delta / 130) + (spacing < 48 ? 1.1 : 0) + (spacing < 24 ? 0.9 : 0);
         scrollIntensity = Math.min(100, scrollIntensity + wheelPressure);
         updateKernelIntensiveState();
       };
