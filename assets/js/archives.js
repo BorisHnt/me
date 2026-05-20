@@ -2249,29 +2249,28 @@
 
   function describeKernelEdgeSpark(index, total, lane, amplitude, crestShift) {
     const sweep = 360 / total;
-    const center = index * sweep + (lane - 1.5) * 0.18;
-    const laneRadius = 447 + (lane - 1.5) * 2.25;
+    const center = index * sweep + (lane - 1.5) * 0.16;
     const phase = crestShift % 4;
-    const angleNoise = [
-      -1.16 - lane * 0.03,
-      -0.82 + lane * 0.02,
-      -0.48 - phase * 0.025,
-      -0.18 + phase * 0.03,
-      0.18 - lane * 0.018,
-      0.5 + phase * 0.025,
-      0.82 - phase * 0.03,
-      1.12 + lane * 0.025
+    const radii = [
+      426 + lane * 0.7,
+      432,
+      438,
+      444,
+      450,
+      456,
+      462,
+      468 - lane * 0.5
     ];
     const crestMap = [
-      [-0.2, 0.8, -0.55, 1, -0.75, 0.65, -0.35, 0.15],
-      [0.55, -0.35, 0.9, -0.65, 0.72, -0.9, 0.45, -0.1],
-      [-0.75, 0.28, -0.15, 0.82, -0.45, 0.96, -0.72, 0.38],
-      [0.18, -0.86, 0.62, -0.24, 0.93, -0.48, 0.74, -0.62]
+      [-0.18, 0.64, -0.52, 0.82, -0.7, 0.5, -0.34, 0.16],
+      [0.44, -0.28, 0.74, -0.56, 0.58, -0.72, 0.36, -0.12],
+      [-0.62, 0.24, -0.18, 0.68, -0.38, 0.78, -0.56, 0.3],
+      [0.12, -0.7, 0.52, -0.2, 0.72, -0.4, 0.58, -0.46]
     ][phase];
-    const points = angleNoise.map((angleOffset, pointIndex) => {
-      const crest = crestMap[pointIndex] * amplitude;
-      const roughness = ((index + lane + pointIndex + phase) % 3 - 1) * 1.35;
-      return getKernelOrbitPoint(laneRadius + crest + roughness, center + angleOffset);
+    const points = radii.map((radius, pointIndex) => {
+      const crest = crestMap[pointIndex] * amplitude * 0.18;
+      const roughness = ((index + lane + pointIndex + phase) % 3 - 1) * 0.06;
+      return getKernelOrbitPoint(radius, center + crest + roughness);
     });
 
     return points.map((point, pointIndex) => {
@@ -2282,16 +2281,16 @@
 
   function describeKernelEdgeSparkBranch(index, total, lane, amplitude, crestShift, branchIndex) {
     const sweep = 360 / total;
-    const center = index * sweep + (lane - 1.5) * 0.18;
+    const center = index * sweep + (lane - 1.5) * 0.16;
     const phase = (crestShift + branchIndex) % 4;
-    const branchOffsets = [-0.58, -0.14, 0.42, 0.76];
-    const angle = center + branchOffsets[branchIndex % branchOffsets.length] + phase * 0.035;
-    const direction = (index + lane + branchIndex + phase) % 2 === 0 ? 1 : -1;
-    const baseRadius = 446 + (lane - 1.5) * 2.5;
-    const start = getKernelOrbitPoint(baseRadius + direction * amplitude * 0.18, angle);
-    const elbow = getKernelOrbitPoint(baseRadius + direction * (4.5 + amplitude * 0.85), angle + direction * (0.16 + phase * 0.03));
-    const fork = getKernelOrbitPoint(baseRadius + direction * (8 + amplitude * 1.45), angle - direction * (0.18 + branchIndex * 0.04));
-    const tip = getKernelOrbitPoint(baseRadius + direction * (11 + amplitude * 1.85), angle + direction * (0.26 + phase * 0.04));
+    const branchOffsets = [-0.28, 0.24, -0.18, 0.32];
+    const angle = center + branchOffsets[branchIndex % branchOffsets.length] + phase * 0.02;
+    const forkDirection = branchIndex % 2 === 0 ? 1 : -1;
+    const baseRadius = 438 + branchIndex * 7 + lane * 1.2;
+    const start = getKernelOrbitPoint(baseRadius, angle);
+    const elbow = getKernelOrbitPoint(baseRadius + 5 + amplitude * 0.45, angle + forkDirection * (0.08 + phase * 0.015));
+    const fork = getKernelOrbitPoint(baseRadius + 10 + amplitude * 0.8, angle - forkDirection * (0.12 + branchIndex * 0.025));
+    const tip = getKernelOrbitPoint(baseRadius + 15 + amplitude * 1.05, angle + forkDirection * (0.16 + phase * 0.02));
 
     return [
       `M ${start.x} ${start.y}`,
