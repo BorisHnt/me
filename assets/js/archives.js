@@ -2249,18 +2249,18 @@
 
   function describeKernelEdgeSpark(index, total, lane, amplitude, crestShift) {
     const sweep = 360 / total;
-    const center = index * sweep + (lane - 1.5) * 0.22;
-    const laneRadius = 447 + (lane - 1.5) * 2.8;
+    const center = index * sweep + (lane - 1.5) * 0.18;
+    const laneRadius = 447 + (lane - 1.5) * 2.25;
     const phase = crestShift % 4;
     const angleNoise = [
-      -1.35 - lane * 0.04,
-      -0.92 + lane * 0.03,
-      -0.47 - phase * 0.03,
-      -0.08 + phase * 0.04,
-      0.38 - lane * 0.02,
-      0.78 + phase * 0.03,
-      1.18 - phase * 0.04,
-      1.52 + lane * 0.03
+      -1.16 - lane * 0.03,
+      -0.82 + lane * 0.02,
+      -0.48 - phase * 0.025,
+      -0.18 + phase * 0.03,
+      0.18 - lane * 0.018,
+      0.5 + phase * 0.025,
+      0.82 - phase * 0.03,
+      1.12 + lane * 0.025
     ];
     const crestMap = [
       [-0.2, 0.8, -0.55, 1, -0.75, 0.65, -0.35, 0.15],
@@ -2280,31 +2280,86 @@
     }).join(" ");
   }
 
-  function createKernelEdgeSpark(index, lane, colors) {
+  function describeKernelEdgeSparkBranch(index, total, lane, amplitude, crestShift, branchIndex) {
+    const sweep = 360 / total;
+    const center = index * sweep + (lane - 1.5) * 0.18;
+    const phase = (crestShift + branchIndex) % 4;
+    const branchOffsets = [-0.58, -0.14, 0.42, 0.76];
+    const angle = center + branchOffsets[branchIndex % branchOffsets.length] + phase * 0.035;
+    const direction = (index + lane + branchIndex + phase) % 2 === 0 ? 1 : -1;
+    const baseRadius = 446 + (lane - 1.5) * 2.5;
+    const start = getKernelOrbitPoint(baseRadius + direction * amplitude * 0.18, angle);
+    const elbow = getKernelOrbitPoint(baseRadius + direction * (4.5 + amplitude * 0.85), angle + direction * (0.16 + phase * 0.03));
+    const fork = getKernelOrbitPoint(baseRadius + direction * (8 + amplitude * 1.45), angle - direction * (0.18 + branchIndex * 0.04));
+    const tip = getKernelOrbitPoint(baseRadius + direction * (11 + amplitude * 1.85), angle + direction * (0.26 + phase * 0.04));
+
+    return [
+      `M ${start.x} ${start.y}`,
+      `L ${elbow.x} ${elbow.y}`,
+      `L ${fork.x} ${fork.y}`,
+      `L ${tip.x} ${tip.y}`
+    ].join(" ");
+  }
+
+  function appendKernelSparkPath(parent, className, shapes, duration, color, opacity, width, delay) {
     const spark = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    const amplitude = 3.2 + Math.random() * 7.2;
-    const duration = 0.18 + Math.random() * 0.34;
-    const firstShape = describeKernelEdgeSpark(index, 16, lane, amplitude, 0);
-    const secondShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.35 + Math.random() * 0.7), 1);
-    const thirdShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (0.75 + Math.random() * 0.55), 2);
-    const fourthShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.1 + Math.random() * 0.5), 3);
     const sparkAnimation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
 
-    spark.classList.add("kernel-edge-spark", `kernel-edge-spark--${lane}`);
-    spark.setAttribute("d", firstShape);
-    spark.style.setProperty("--spark-color", colors[(index + lane) % colors.length]);
-    spark.style.setProperty("--spark-opacity", `${(0.24 + Math.random() * 0.48).toFixed(2)}`);
-    spark.style.setProperty("--spark-width", `${(0.55 + Math.random() * 0.85).toFixed(2)}`);
-    spark.style.setProperty("--spark-delay", `${(index * 0.03 + lane * 0.07 + Math.random() * 0.35).toFixed(2)}`);
+    spark.classList.add(className);
+    spark.setAttribute("d", shapes[0]);
+    spark.style.setProperty("--spark-color", color);
+    spark.style.setProperty("--spark-opacity", `${opacity.toFixed(2)}`);
+    spark.style.setProperty("--spark-width", `${width.toFixed(2)}`);
+    spark.style.setProperty("--spark-delay", `${delay.toFixed(2)}`);
     spark.style.setProperty("--spark-duration", `${duration.toFixed(2)}s`);
     sparkAnimation.setAttribute("attributeName", "d");
     sparkAnimation.setAttribute("dur", `${duration.toFixed(2)}s`);
     sparkAnimation.setAttribute("repeatCount", "indefinite");
-    sparkAnimation.setAttribute("values", `${firstShape};${secondShape};${thirdShape};${fourthShape};${firstShape}`);
+    sparkAnimation.setAttribute("values", `${shapes.join(";")};${shapes[0]}`);
     sparkAnimation.setAttribute("calcMode", "discrete");
     spark.append(sparkAnimation);
+    parent.append(spark);
+  }
 
-    return spark;
+  function createKernelEdgeSpark(index, lane, colors) {
+    const cluster = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    const amplitude = 2.4 + Math.random() * 5.6;
+    const duration = 0.12 + Math.random() * 0.26;
+    const firstShape = describeKernelEdgeSpark(index, 16, lane, amplitude, 0);
+    const secondShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.35 + Math.random() * 0.7), 1);
+    const thirdShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (0.75 + Math.random() * 0.55), 2);
+    const fourthShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.1 + Math.random() * 0.5), 3);
+
+    cluster.classList.add("kernel-edge-spark-cluster");
+    appendKernelSparkPath(
+      cluster,
+      "kernel-edge-spark",
+      [firstShape, secondShape, thirdShape, fourthShape],
+      duration,
+      colors[(index + lane) % colors.length],
+      0.26 + Math.random() * 0.46,
+      0.58 + Math.random() * 0.62,
+      index * 0.03 + lane * 0.07 + Math.random() * 0.35
+    );
+
+    Array.from({ length: 2 }).forEach((_, branchIndex) => {
+      const branchAmplitude = amplitude * (0.72 + Math.random() * 0.65);
+      const branchShapes = [0, 1, 2, 3].map((shift) => (
+        describeKernelEdgeSparkBranch(index, 16, lane, branchAmplitude, shift, branchIndex + lane)
+      ));
+      appendKernelSparkPath(
+        cluster,
+        "kernel-edge-spark-branch",
+        branchShapes,
+        duration * (0.72 + Math.random() * 0.28),
+        colors[(index + lane + branchIndex + 1) % colors.length],
+        0.16 + Math.random() * 0.28,
+        0.34 + Math.random() * 0.42,
+        index * 0.04 + branchIndex * 0.06 + Math.random() * 0.28
+      );
+    });
+
+    return cluster;
   }
 
   function createKernelEdgeFrame(colors) {
