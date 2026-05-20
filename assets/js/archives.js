@@ -2228,7 +2228,7 @@
       const orbit = document.createElement("span");
       const radius = Math.random() < 0.72
         ? 300 + Math.random() * 130
-        : 70 + Math.random() * 130;
+        : 200 + Math.random() * 100;
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
       orbit.style.setProperty("--particle-radius", `${radius}px`);
