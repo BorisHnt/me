@@ -2247,22 +2247,64 @@
     ].join(" ");
   }
 
-  function describeKernelEdgeSpark(index, total) {
+  function describeKernelEdgeSpark(index, total, lane, amplitude, crestShift) {
     const sweep = 360 / total;
-    const center = index * sweep;
-    const points = [
-      getKernelOrbitPoint(445, center - 1.7),
-      getKernelOrbitPoint(436, center - 0.85),
-      getKernelOrbitPoint(455, center - 0.2),
-      getKernelOrbitPoint(431, center + 0.55),
-      getKernelOrbitPoint(460, center + 1.1),
-      getKernelOrbitPoint(442, center + 1.7)
+    const center = index * sweep + (lane - 1.5) * 0.22;
+    const laneRadius = 447 + (lane - 1.5) * 2.8;
+    const phase = crestShift % 4;
+    const angleNoise = [
+      -1.35 - lane * 0.04,
+      -0.92 + lane * 0.03,
+      -0.47 - phase * 0.03,
+      -0.08 + phase * 0.04,
+      0.38 - lane * 0.02,
+      0.78 + phase * 0.03,
+      1.18 - phase * 0.04,
+      1.52 + lane * 0.03
     ];
+    const crestMap = [
+      [-0.2, 0.8, -0.55, 1, -0.75, 0.65, -0.35, 0.15],
+      [0.55, -0.35, 0.9, -0.65, 0.72, -0.9, 0.45, -0.1],
+      [-0.75, 0.28, -0.15, 0.82, -0.45, 0.96, -0.72, 0.38],
+      [0.18, -0.86, 0.62, -0.24, 0.93, -0.48, 0.74, -0.62]
+    ][phase];
+    const points = angleNoise.map((angleOffset, pointIndex) => {
+      const crest = crestMap[pointIndex] * amplitude;
+      const roughness = ((index + lane + pointIndex + phase) % 3 - 1) * 1.35;
+      return getKernelOrbitPoint(laneRadius + crest + roughness, center + angleOffset);
+    });
 
     return points.map((point, pointIndex) => {
       const command = pointIndex === 0 ? "M" : "L";
       return `${command} ${point.x} ${point.y}`;
     }).join(" ");
+  }
+
+  function createKernelEdgeSpark(index, lane, colors) {
+    const spark = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const amplitude = 3.2 + Math.random() * 7.2;
+    const duration = 0.18 + Math.random() * 0.34;
+    const firstShape = describeKernelEdgeSpark(index, 16, lane, amplitude, 0);
+    const secondShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.35 + Math.random() * 0.7), 1);
+    const thirdShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (0.75 + Math.random() * 0.55), 2);
+    const fourthShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.1 + Math.random() * 0.5), 3);
+    const sparkAnimation = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+
+    spark.classList.add("kernel-edge-spark", `kernel-edge-spark--${lane}`);
+    spark.setAttribute("d", firstShape);
+    spark.style.setProperty("--spark-color", colors[(index + lane) % colors.length]);
+    spark.style.setProperty("--spark-opacity", `${(0.24 + Math.random() * 0.48).toFixed(2)}`);
+    spark.style.setProperty("--spark-width", `${(0.55 + Math.random() * 0.85).toFixed(2)}`);
+    spark.style.setProperty("--spark-delay", `${(index * 0.03 + lane * 0.07 + Math.random() * 0.35).toFixed(2)}`);
+    spark.style.setProperty("--spark-duration", `${duration.toFixed(2)}s`);
+    sparkAnimation.setAttribute("attributeName", "d");
+    sparkAnimation.setAttribute("dur", `${duration.toFixed(2)}s`);
+    sparkAnimation.setAttribute("repeatCount", "indefinite");
+    sparkAnimation.setAttribute("values", `${firstShape};${secondShape};${thirdShape};${fourthShape};${firstShape}`);
+    sparkAnimation.setAttribute("calcMode", "discrete");
+    spark.append(sparkAnimation);
+
+    return spark;
   }
 
   function createKernelEdgeFrame(colors) {
@@ -2283,13 +2325,9 @@
     });
 
     Array.from({ length: 16 }).forEach((_, index) => {
-      const spark = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      spark.classList.add("kernel-edge-spark", `kernel-edge-spark--${index % 4}`);
-      spark.setAttribute("d", describeKernelEdgeSpark(index, 16));
-      spark.style.setProperty("--spark-color", colors[(index + 2) % colors.length]);
-      spark.style.setProperty("--spark-delay", `${index * 0.19 + Math.random() * 1.4}`);
-      spark.style.setProperty("--spark-duration", `${4.2 + Math.random() * 5.6}s`);
-      frame.append(spark);
+      Array.from({ length: 4 }).forEach((__, lane) => {
+        frame.append(createKernelEdgeSpark(index, lane, colors));
+      });
     });
 
     return frame;
