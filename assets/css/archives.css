@@ -564,20 +564,20 @@ body.archive-shell {
 }
 
 .kernel-reactor {
-  position: absolute;
-  top: 0.5rem;
+  position: fixed;
+  top: 50%;
   left: 50%;
   z-index: 0;
   display: grid;
   place-items: center;
-  width: min(840px, 106vw);
+  width: min(1040px, 118vw);
   aspect-ratio: 1;
   margin: 0;
   color: var(--steel);
   font-family: var(--mono);
-  opacity: 0.62;
+  opacity: 0.52;
   pointer-events: none;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .kernel-reactor::before,
@@ -607,14 +607,16 @@ body.archive-shell {
 .kernel-particle-orbit {
   --particle-angle: 0deg;
   --particle-radius: 180px;
-  --particle-duration: 12s;
+  --particle-duration: 5s;
   --particle-delay: 0s;
   --particle-wobble: 6px;
   --particle-wobble-duration: 6s;
   --particle-breathe-duration: 10s;
+  --particle-tail: 38px;
   position: absolute;
   inset: 0;
   border-radius: 50%;
+  transform: rotate(var(--particle-angle));
   animation: kernel-particle-orbit var(--particle-duration) linear infinite;
   animation-delay: var(--particle-delay);
 }
@@ -630,10 +632,12 @@ body.archive-shell {
   background: var(--particle-color);
   box-shadow:
     0 0 0.45rem rgba(86, 90, 117, 0.18),
-    -7px 0 0 -1px currentColor,
-    -14px 0 0 -2px currentColor,
-    -22px 0 0 -3px currentColor;
-  transform: rotate(var(--particle-angle)) translateX(var(--particle-radius)) translateY(0) translateX(-50%);
+    calc(var(--particle-tail) * -0.18) 0 0 -1px currentColor,
+    calc(var(--particle-tail) * -0.34) 0 0 -2px currentColor,
+    calc(var(--particle-tail) * -0.52) 0 0 -3px currentColor,
+    calc(var(--particle-tail) * -0.75) 0 0 -4px currentColor,
+    calc(var(--particle-tail) * -1) 0 0 -5px currentColor;
+  transform: translate(-50%, -50%) translateX(var(--particle-radius)) rotate(90deg);
   animation:
     kernel-particle-wobble var(--particle-wobble-duration) steps(15, end) infinite,
     kernel-particle-breathe var(--particle-breathe-duration) steps(18, end) infinite;
@@ -651,16 +655,18 @@ body.archive-shell {
 
 .kernel-particle::before {
   right: calc(100% + 4px);
-  width: calc(var(--particle-size) * 1.7);
+  width: var(--particle-tail);
   height: max(2px, calc(var(--particle-size) * 0.52));
-  opacity: 0.36;
+  opacity: 0.3;
+  clip-path: polygon(0 0, 84% 0, 84% 32%, 100% 32%, 100% 68%, 78% 68%, 78% 100%, 0 100%);
 }
 
 .kernel-particle::after {
-  right: calc(100% + 18px);
-  width: calc(var(--particle-size) * 1.05);
+  right: calc(100% + var(--particle-tail) + 8px);
+  width: calc(var(--particle-tail) * 0.64);
   height: max(1px, calc(var(--particle-size) * 0.34));
-  opacity: 0.2;
+  opacity: 0.14;
+  clip-path: polygon(0 0, 64% 0, 64% 45%, 100% 45%, 100% 100%, 0 100%);
 }
 
 .kernel-line {
@@ -948,22 +954,22 @@ body.archive-shell {
 
 @keyframes kernel-particle-orbit {
   from {
-    transform: rotate(0deg);
+    transform: rotate(var(--particle-angle));
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(calc(var(--particle-angle) + 360deg));
   }
 }
 
 @keyframes kernel-particle-wobble {
   0%, 100% {
-    transform: rotate(var(--particle-angle)) translateX(var(--particle-radius)) translateY(0) translateX(-50%);
+    transform: translate(-50%, -50%) translateX(var(--particle-radius)) translateY(0) rotate(90deg);
   }
   31% {
-    transform: rotate(var(--particle-angle)) translateX(calc(var(--particle-radius) + var(--particle-wobble))) translateY(calc(var(--particle-wobble) * -0.55)) translateX(-50%);
+    transform: translate(-50%, -50%) translateX(calc(var(--particle-radius) + var(--particle-wobble))) translateY(calc(var(--particle-wobble) * -0.55)) rotate(90deg);
   }
   63% {
-    transform: rotate(var(--particle-angle)) translateX(calc(var(--particle-radius) - var(--particle-wobble))) translateY(calc(var(--particle-wobble) * 0.8)) translateX(-50%);
+    transform: translate(-50%, -50%) translateX(calc(var(--particle-radius) - var(--particle-wobble))) translateY(calc(var(--particle-wobble) * 0.8)) rotate(90deg);
   }
 }
 
