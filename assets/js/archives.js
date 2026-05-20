@@ -4511,6 +4511,12 @@
       let intensiveStart = 0;
       let rebootStart = 0;
       let shutdownActive = false;
+      let lockedScrollY = 0;
+      const warningThreshold = 48;
+      const warningRelease = 34;
+      const intensiveThreshold = 74;
+      const intensiveRelease = 46;
+      const shutdownHold = 5000;
 
       const resetKernelChargeOnly = () => {
         scrollIntensity = 0;
@@ -4562,6 +4568,7 @@
         }
 
         shutdownActive = true;
+        lockedScrollY = window.scrollY;
         window.clearTimeout(scrollChargeReceipt);
         document.body.classList.remove("is-kernel-scroll-charged", "is-kernel-scroll-warning", "is-kernel-scroll-intensive");
         document.body.style.removeProperty("--kernel-warning-shake");
@@ -4585,31 +4592,31 @@
         }
 
         const now = performance.now();
-        if (scrollIntensity > 62) {
-          const warningShake = Math.min(1.8, (scrollIntensity - 62) / 28 * 1.8);
+        if (scrollIntensity > warningThreshold) {
+          const warningShake = Math.min(1.8, (scrollIntensity - warningThreshold) / (intensiveThreshold - warningThreshold) * 1.8);
           document.body.classList.add("is-kernel-scroll-warning");
           document.body.style.setProperty("--kernel-warning-shake", `${warningShake.toFixed(2)}px`);
-        } else if (scrollIntensity < 42) {
+        } else if (scrollIntensity < warningRelease) {
           document.body.classList.remove("is-kernel-scroll-warning");
           document.body.style.removeProperty("--kernel-warning-shake");
         }
 
-        if (scrollIntensity > 90) {
+        if (scrollIntensity > intensiveThreshold) {
           if (!intensiveStart) {
             intensiveStart = now;
           }
           const held = now - intensiveStart;
-          const vibration = Math.min(5, held / 5000 * 5);
+          const vibration = Math.min(5, held / shutdownHold * 5);
           document.body.classList.add("is-kernel-scroll-intensive");
           document.body.style.setProperty("--kernel-shake", `${vibration.toFixed(2)}px`);
 
-          if (held >= 5000) {
+          if (held >= shutdownHold) {
             triggerKernelShutdown();
           }
           return;
         }
 
-        if (scrollIntensity < 54) {
+        if (scrollIntensity < intensiveRelease) {
           document.body.classList.remove("is-kernel-scroll-intensive");
           document.body.style.removeProperty("--kernel-shake");
           intensiveStart = 0;
@@ -4618,7 +4625,7 @@
 
       const decayKernelScrollIntensity = () => {
         if (!shutdownActive && scrollIntensity > 0) {
-          scrollIntensity = Math.max(0, scrollIntensity - 0.18);
+          scrollIntensity = Math.max(0, scrollIntensity - 0.08);
           updateKernelIntensiveState();
         }
         window.requestAnimationFrame(decayKernelScrollIntensity);
@@ -4645,9 +4652,23 @@
         const delta = Math.abs(event.deltaY);
         const spacing = lastWheelTime ? now - lastWheelTime : 240;
         lastWheelTime = now;
-        const wheelPressure = Math.min(4.8, delta / 115) + (spacing < 48 ? 1.2 : 0) + (spacing < 24 ? 1 : 0);
+        const wheelPressure = Math.min(8.5, delta / 72) + (spacing < 64 ? 1.35 : 0) + (spacing < 32 ? 1.15 : 0);
         scrollIntensity = Math.min(100, scrollIntensity + wheelPressure);
         updateKernelIntensiveState();
+      };
+
+      const holdKernelScrollPosition = () => {
+        if (!document.body.classList.contains("is-kernel-recovery-lock")) {
+          return;
+        }
+        window.scrollTo(0, lockedScrollY);
+      };
+
+      const blockKernelTouchScroll = (event) => {
+        if (!document.body.classList.contains("is-kernel-recovery-lock")) {
+          return;
+        }
+        event.preventDefault();
       };
 
       const blockKernelScrollKeys = (event) => {
@@ -4662,6 +4683,8 @@
 
       window.addEventListener("scroll", chargeKernelFromScroll, { passive: true });
       window.addEventListener("wheel", handleKernelWheel, { passive: false });
+      window.addEventListener("scroll", holdKernelScrollPosition, { passive: true });
+      window.addEventListener("touchmove", blockKernelTouchScroll, { passive: false });
       window.addEventListener("keydown", blockKernelScrollKeys);
       window.requestAnimationFrame(decayKernelScrollIntensity);
     }
