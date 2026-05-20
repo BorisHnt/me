@@ -929,6 +929,9 @@ body.archive-shell {
   color: var(--steel);
   font-size: 0.62rem;
   line-height: 1;
+  transition:
+    background 650ms steps(10, end),
+    box-shadow 650ms steps(10, end);
 }
 
 .kernel-line--pressure {
@@ -979,7 +982,11 @@ body.archive-shell {
   font-family: var(--mono);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 650ms steps(8, end), transform 650ms steps(8, end);
+  transition:
+    opacity 650ms steps(8, end),
+    transform 650ms steps(8, end),
+    background 650ms steps(10, end),
+    box-shadow 650ms steps(10, end);
 }
 
 .kernel-diagnostic-panel.is-kernel-visible {
@@ -1003,6 +1010,7 @@ body.archive-shell {
   font-size: 0.64rem;
   font-weight: 900;
   text-transform: uppercase;
+  transition: background 650ms steps(10, end);
 }
 
 .kernel-diagnostic-panel__body {
@@ -1043,7 +1051,11 @@ body.archive-shell {
   font-weight: 900;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 700ms steps(9, end), transform 700ms steps(9, end);
+  transition:
+    opacity 700ms steps(9, end),
+    transform 700ms steps(9, end),
+    background 650ms steps(10, end),
+    box-shadow 650ms steps(10, end);
   animation: kernel-pulse-drift 7s steps(20, end) infinite;
 }
 
@@ -1064,6 +1076,7 @@ body.archive-shell {
   background: var(--dust);
   color: var(--steel);
   text-transform: uppercase;
+  transition: background 650ms steps(10, end);
 }
 
 .kernel-pulse__body {
@@ -1086,6 +1099,41 @@ body.archive-shell {
 .archive-clean .kernel-pulse {
   opacity: 1;
   transform: none;
+}
+
+.is-kernel-shutdown .kernel-line--statement::before,
+.is-kernel-shutdown .kernel-diagnostic-panel,
+.is-kernel-shutdown .kernel-diagnostic-panel__title,
+.is-kernel-shutdown .kernel-pulse,
+.is-kernel-shutdown .kernel-pulse__header {
+  background: transparent;
+}
+
+.is-kernel-shutdown .kernel-diagnostic-panel,
+.is-kernel-shutdown .kernel-pulse {
+  box-shadow: none;
+}
+
+.is-kernel-rebooting .kernel-line--statement::before {
+  animation: kernel-label-background-reboot 15s steps(90, end) both;
+}
+
+.is-kernel-rebooting .kernel-diagnostic-panel {
+  animation: kernel-panel-background-reboot 15s steps(90, end) both;
+}
+
+.is-kernel-rebooting .kernel-diagnostic-panel__title {
+  animation: kernel-panel-title-reboot 15s steps(90, end) both;
+}
+
+.is-kernel-rebooting .kernel-pulse {
+  animation:
+    kernel-pulse-drift 7s steps(20, end) infinite,
+    kernel-pulse-background-reboot 15s steps(90, end) both;
+}
+
+.is-kernel-rebooting .kernel-pulse__header {
+  animation: kernel-label-background-reboot 15s steps(90, end) both;
 }
 
 @keyframes kernel-ring-breathe {
@@ -1202,6 +1250,48 @@ body.archive-shell {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes kernel-label-background-reboot {
+  0%, 12% {
+    background: transparent;
+  }
+  100% {
+    background: var(--dust);
+  }
+}
+
+@keyframes kernel-panel-title-reboot {
+  0%, 12% {
+    background: transparent;
+  }
+  100% {
+    background: var(--steel);
+  }
+}
+
+@keyframes kernel-panel-background-reboot {
+  0%, 12% {
+    background: transparent;
+    box-shadow: none;
+  }
+  100% {
+    background: rgba(250, 251, 246, 0.94);
+    box-shadow: var(--sunken);
+  }
+}
+
+@keyframes kernel-pulse-background-reboot {
+  0%, 12% {
+    background: transparent;
+    box-shadow: none;
+  }
+  100% {
+    background:
+      linear-gradient(90deg, rgba(198, 183, 190, 0.3), transparent),
+      var(--paper);
+    box-shadow: var(--raised);
   }
 }
 
