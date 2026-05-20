@@ -610,7 +610,6 @@ body.archive-shell {
   --tail-angle: -3deg;
   --tail-opacity: 0.24;
   --tail-size: 5px;
-  --tail-inset: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -623,7 +622,7 @@ body.archive-shell {
   transform:
     translate(-50%, -50%)
     rotate(var(--tail-angle))
-    translateX(calc(var(--particle-radius) - var(--tail-inset)))
+    translateX(var(--particle-radius))
     rotate(90deg);
   animation: kernel-tail-wobble var(--particle-wobble-duration) steps(15, end) infinite;
 }
@@ -880,14 +879,14 @@ body.archive-shell {
     transform:
       translate(-50%, -50%)
       rotate(var(--tail-angle))
-      translateX(calc(var(--particle-radius) - var(--tail-inset)))
+      translateX(var(--particle-radius))
       rotate(90deg);
   }
   31% {
     transform:
       translate(-50%, -50%)
       rotate(calc(var(--tail-angle) - 0.7deg))
-      translateX(calc(var(--particle-radius) + var(--particle-wobble) - var(--tail-inset)))
+      translateX(calc(var(--particle-radius) + var(--particle-wobble)))
       translateY(calc(var(--particle-wobble) * -0.55))
       rotate(90deg);
   }
@@ -895,7 +894,7 @@ body.archive-shell {
     transform:
       translate(-50%, -50%)
       rotate(calc(var(--tail-angle) + 0.9deg))
-      translateX(calc(var(--particle-radius) - var(--particle-wobble) - var(--tail-inset)))
+      translateX(calc(var(--particle-radius) - var(--particle-wobble)))
       translateY(calc(var(--particle-wobble) * 0.8))
       rotate(90deg);
   }

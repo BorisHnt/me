@@ -2242,10 +2242,9 @@
       Array.from({ length: 16 }).forEach((_, tailIndex) => {
         const segment = document.createElement("span");
         segment.className = "kernel-particle-tail-segment";
-        segment.style.setProperty("--tail-angle", `${(tailIndex + 1) * -2.15}deg`);
+        segment.style.setProperty("--tail-angle", `${(tailIndex + 1) * -1.65}deg`);
         segment.style.setProperty("--tail-opacity", `${0.38 - tailIndex * 0.021}`);
         segment.style.setProperty("--tail-size", `${Math.max(1, 8 - tailIndex * 0.34)}px`);
-        segment.style.setProperty("--tail-inset", `${tailIndex * 4.4}px`);
         orbit.append(segment);
       });
       orbit.append(particle);
