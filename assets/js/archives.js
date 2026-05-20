@@ -4127,7 +4127,8 @@
         scrollIntensity = 0;
         intensiveStart = 0;
         document.body.style.removeProperty("--kernel-shake");
-        document.body.classList.remove("is-kernel-scroll-intensive");
+        document.body.style.removeProperty("--kernel-warning-shake");
+        document.body.classList.remove("is-kernel-scroll-warning", "is-kernel-scroll-intensive");
       };
 
       const chargeKernelFromScroll = () => {
@@ -4173,6 +4174,15 @@
         }
 
         const now = performance.now();
+        if (scrollIntensity > 62) {
+          const warningShake = Math.min(1.8, (scrollIntensity - 62) / 28 * 1.8);
+          document.body.classList.add("is-kernel-scroll-warning");
+          document.body.style.setProperty("--kernel-warning-shake", `${warningShake.toFixed(2)}px`);
+        } else if (scrollIntensity < 42) {
+          document.body.classList.remove("is-kernel-scroll-warning");
+          document.body.style.removeProperty("--kernel-warning-shake");
+        }
+
         if (scrollIntensity > 90) {
           if (!intensiveStart) {
             intensiveStart = now;
