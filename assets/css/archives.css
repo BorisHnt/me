@@ -571,7 +571,9 @@ body.archive-shell {
   box-shadow:
     inset 0 0 0 10px rgba(198, 183, 190, 0.14),
     0 0 0 1px rgba(15, 15, 27, 0.1);
-  animation: kernel-ring-breathe 6.6s steps(18, end) infinite;
+  animation:
+    kernel-ring-breathe 6.6s steps(18, end) infinite,
+    kernel-halo-breathe 9.4s steps(24, end) infinite;
 }
 
 .kernel-particle-orbit {
@@ -584,11 +586,23 @@ body.archive-shell {
   --particle-breathe-duration: 10s;
   --particle-tail: 72px;
   position: absolute;
+  z-index: 2;
   inset: 0;
   border-radius: 50%;
   transform: rotate(var(--particle-angle));
   animation: kernel-particle-orbit var(--particle-duration) linear infinite;
   animation-delay: var(--particle-delay);
+}
+
+.is-kernel-scroll-charged .kernel-particle-orbit {
+  animation-duration: calc(var(--particle-duration) * 0.7);
+}
+
+.is-kernel-scroll-charged .kernel-field-line,
+.is-kernel-scroll-charged .kernel-edge-segment {
+  filter:
+    drop-shadow(3px 3px 0 rgba(15, 15, 27, 0.1))
+    brightness(1.08);
 }
 
 .kernel-edge-frame {
@@ -601,6 +615,40 @@ body.archive-shell {
   pointer-events: none;
 }
 
+.kernel-field-lines {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.kernel-field-line {
+  fill: none;
+  stroke: rgba(86, 90, 117, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.12;
+  animation: kernel-field-line-pulse var(--field-duration, 10s) steps(18, end) infinite;
+  animation-delay: calc(var(--field-delay, 0) * -1s);
+}
+
+.kernel-field-line--1 {
+  stroke: rgba(198, 183, 190, 0.3);
+}
+
+.kernel-field-line--2 {
+  stroke: rgba(15, 15, 27, 0.14);
+}
+
+.kernel-field-line--3 {
+  stroke: rgba(250, 251, 246, 0.44);
+}
+
 .kernel-edge-segment {
   fill: color-mix(in srgb, var(--segment-color) 82%, transparent);
   stroke: rgba(15, 15, 27, 0.42);
@@ -610,7 +658,7 @@ body.archive-shell {
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(4px 4px 0 rgba(15, 15, 27, 0.08));
   opacity: 0.9;
-  animation: kernel-edge-segment-pulse 8s steps(18, end) infinite;
+  animation: kernel-edge-segment-pulse var(--edge-duration, 8s) steps(18, end) infinite;
   animation-delay: calc(var(--edge-delay, 0) * -1s);
 }
 
@@ -632,7 +680,10 @@ body.archive-shell {
   border: 1px solid rgba(15, 15, 27, 0.22);
   color: var(--particle-color);
   background: var(--particle-color);
-  box-shadow: 0 0 0.45rem rgba(86, 90, 117, 0.18);
+  box-shadow:
+    0 0 0.45rem rgba(86, 90, 117, 0.18),
+    2px 2px 0 rgba(15, 15, 27, 0.1),
+    -2px 1px 0 rgba(198, 183, 190, 0.16);
   transform: translate(-50%, -50%) translateX(var(--particle-radius)) rotate(90deg);
   animation:
     kernel-particle-wobble var(--particle-wobble-duration) steps(15, end) infinite,
@@ -844,15 +895,14 @@ body.archive-shell {
   padding: 0.34rem 0.48rem;
 }
 
-.archive-clean .kernel-reactor::before,
-.archive-clean .kernel-particle-orbit,
-.archive-clean .kernel-particle,
-.archive-clean .kernel-particle-tail-segment,
-.archive-clean .kernel-edge-segment,
 .archive-clean .kernel-thermal-phrase,
 .archive-clean .kernel-line--pressure,
 .archive-clean .kernel-pulse {
   animation: none !important;
+}
+
+.archive-clean .kernel-reactor {
+  opacity: 0.24;
 }
 
 .archive-clean .kernel-line,
@@ -874,6 +924,18 @@ body.archive-shell {
   }
 }
 
+@keyframes kernel-halo-breathe {
+  0%, 100% {
+    filter: saturate(0.96) opacity(0.74);
+  }
+  48% {
+    filter: saturate(1.08) opacity(1);
+  }
+  76% {
+    filter: saturate(1.02) opacity(0.86);
+  }
+}
+
 @keyframes kernel-field-sway {
   0%, 100% {
     opacity: 0.5;
@@ -883,6 +945,21 @@ body.archive-shell {
   }
   69% {
     opacity: 0.58;
+  }
+}
+
+@keyframes kernel-field-line-pulse {
+  0%, 100% {
+    opacity: 0.08;
+    stroke-dashoffset: 0;
+  }
+  42% {
+    opacity: 0.24;
+    stroke-dashoffset: -14;
+  }
+  73% {
+    opacity: 0.13;
+    stroke-dashoffset: -22;
   }
 }
 

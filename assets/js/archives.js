@@ -2259,11 +2259,44 @@
       segment.classList.add("kernel-edge-segment", `kernel-edge-segment--${index}`);
       segment.setAttribute("d", describeKernelEdgeSegment(index, 16));
       segment.style.setProperty("--segment-color", colors[index % colors.length]);
-      segment.style.setProperty("--edge-delay", `${index * 0.42}`);
+      segment.style.setProperty("--edge-delay", `${index * 0.31 + Math.random() * 0.9}`);
+      segment.style.setProperty("--edge-duration", `${5.8 + Math.random() * 7.2}s`);
       frame.append(segment);
     });
 
     return frame;
+  }
+
+  function describeKernelFieldArc(index) {
+    const start = index * 30 + 6 + Math.random() * 8;
+    const end = start + 18 + Math.random() * 42;
+    const radius = 235 + Math.random() * 170;
+    const startPoint = getKernelOrbitPoint(radius, start);
+    const endPoint = getKernelOrbitPoint(radius, end);
+    const largeArc = end - start > 180 ? 1 : 0;
+    return [
+      `M ${startPoint.x} ${startPoint.y}`,
+      `A ${radius} ${radius} 0 ${largeArc} 1 ${endPoint.x} ${endPoint.y}`
+    ].join(" ");
+  }
+
+  function createKernelFieldLines() {
+    const field = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    field.classList.add("kernel-field-lines");
+    field.setAttribute("viewBox", "-500 -500 1000 1000");
+    field.setAttribute("focusable", "false");
+    field.setAttribute("aria-hidden", "true");
+
+    Array.from({ length: 24 }).forEach((_, index) => {
+      const arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      arc.classList.add("kernel-field-line", `kernel-field-line--${index % 4}`);
+      arc.setAttribute("d", describeKernelFieldArc(index));
+      arc.style.setProperty("--field-delay", `${index * 0.17 + Math.random() * 1.8}`);
+      arc.style.setProperty("--field-duration", `${7 + Math.random() * 11}s`);
+      field.append(arc);
+    });
+
+    return field;
   }
 
   function createKernelReactor() {
@@ -2272,6 +2305,7 @@
     reactor.setAttribute("aria-hidden", "true");
 
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
+    reactor.append(createKernelFieldLines());
     reactor.append(createKernelEdgeFrame(colors));
 
     Array.from({ length: 240 }).forEach((_, index) => {
@@ -3956,6 +3990,19 @@
     if (animatedNodes.length === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       animatedNodes.forEach((node) => node.classList.add("is-kernel-visible"));
       return;
+    }
+
+    if (!document.body.dataset.kernelScrollChargeReady) {
+      document.body.dataset.kernelScrollChargeReady = "true";
+      let scrollChargeReceipt = 0;
+      const chargeKernelFromScroll = () => {
+        document.body.classList.add("is-kernel-scroll-charged");
+        window.clearTimeout(scrollChargeReceipt);
+        scrollChargeReceipt = window.setTimeout(() => {
+          document.body.classList.remove("is-kernel-scroll-charged");
+        }, 300);
+      };
+      window.addEventListener("scroll", chargeKernelFromScroll, { passive: true });
     }
 
     const observer = new IntersectionObserver((entries) => {
