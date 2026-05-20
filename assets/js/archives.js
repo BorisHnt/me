@@ -2230,7 +2230,7 @@
     const sweep = 360 / total;
     const start = index * sweep + 1.8;
     const end = (index + 1) * sweep - 1.8;
-    const outerRadius = 455;
+    const outerRadius = 465;
     const innerRadius = 425;
     const outerStart = getKernelOrbitPoint(outerRadius, start);
     const outerEnd = getKernelOrbitPoint(outerRadius, end);
