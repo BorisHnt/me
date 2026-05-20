@@ -516,7 +516,6 @@ body.archive-shell {
   overflow: hidden;
   border-color: var(--steel);
   background:
-    radial-gradient(circle at 50% 7rem, rgba(198, 183, 190, 0.52), transparent 20rem),
     linear-gradient(180deg, rgba(250, 251, 246, 0.98), rgba(250, 251, 246, 0.92)),
     var(--paper);
 }
@@ -539,9 +538,16 @@ body.archive-shell {
   z-index: 0;
   display: grid;
   place-items: center;
-  width: min(1450px, 158vw);
+  width: min(1350px, 148vw);
   aspect-ratio: 1;
   margin: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle,
+      transparent 0 25%,
+      rgba(198, 183, 190, 0.06) 46%,
+      rgba(86, 90, 117, 0.16) 76%,
+      rgba(86, 90, 117, 0.24) 100%);
   color: var(--steel);
   font-family: var(--mono);
   opacity: 0.58;
