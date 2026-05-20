@@ -501,10 +501,49 @@ body.archive-shell {
 }
 
 .archive-doc-kernel {
+  --kernel-shake: 0px;
+  position: relative;
   background:
     radial-gradient(circle at 50% 12%, rgba(198, 183, 190, 0.42), transparent 30rem),
     radial-gradient(circle at 18% 44%, rgba(86, 90, 117, 0.16), transparent 24rem),
     linear-gradient(180deg, var(--paper), rgba(198, 183, 190, 0.28) 54%, var(--paper));
+}
+
+.archive-doc-kernel::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background: #0f0f1b;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms steps(6, end);
+}
+
+.archive-doc-kernel .document-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.archive-doc-kernel.is-kernel-shutdown:not(.is-kernel-rebooting) {
+  background: #0f0f1b;
+}
+
+.archive-doc-kernel.is-kernel-shutdown::after {
+  opacity: 1;
+}
+
+.archive-doc-kernel.is-kernel-rebooting {
+  animation: kernel-background-reboot 5s steps(40, end) both;
+}
+
+.archive-doc-kernel.is-kernel-rebooting::after {
+  opacity: 0;
+  transition: opacity 5s steps(40, end);
+}
+
+.archive-doc-kernel.is-kernel-recovery-lock {
+  overscroll-behavior: none;
 }
 
 .archive-doc-kernel .document-shell {
@@ -548,6 +587,9 @@ body.archive-shell {
   overflow: hidden;
   pointer-events: none;
   transform: translate(-50%, -50%);
+  transition:
+    opacity 700ms steps(10, end),
+    filter 500ms steps(8, end);
 }
 
 .kernel-reactor::before {
@@ -592,10 +634,26 @@ body.archive-shell {
   transform: rotate(var(--particle-angle));
   animation: kernel-particle-orbit var(--particle-duration) linear infinite;
   animation-delay: var(--particle-delay);
+  opacity: 1;
+  transition: opacity 220ms steps(4, end);
 }
 
 .is-kernel-scroll-charged .kernel-particle-orbit {
-  animation-duration: calc(var(--particle-duration) * 0.7);
+  animation-duration: calc(var(--particle-duration) * 0.58);
+}
+
+.is-kernel-scroll-charged:not(.is-kernel-scroll-intensive) .kernel-reactor {
+  animation: kernel-scroll-charge-envelope 1s steps(16, end) both;
+}
+
+.is-kernel-scroll-charged .kernel-edge-segment {
+  animation-duration: calc(var(--edge-duration) * 0.48);
+}
+
+.is-kernel-scroll-charged .kernel-edge-spark,
+.is-kernel-scroll-charged .kernel-edge-spark-branch {
+  animation-duration: calc(var(--spark-duration) * 0.58);
+  stroke-width: calc(var(--spark-width, 1) * 1.18);
 }
 
 .is-kernel-scroll-charged .kernel-field-line,
@@ -605,6 +663,89 @@ body.archive-shell {
   filter:
     drop-shadow(3px 3px 0 rgba(15, 15, 27, 0.1))
     brightness(1.08);
+}
+
+.is-kernel-scroll-intensive .kernel-reactor {
+  animation: kernel-intensive-vibration 34ms steps(2, end) infinite;
+  filter: brightness(1.08) contrast(1.04);
+}
+
+.is-kernel-scroll-intensive .kernel-particle-orbit {
+  animation-duration: calc(var(--particle-duration) * 0.32);
+}
+
+.is-kernel-scroll-intensive .kernel-edge-segment {
+  animation-duration: calc(var(--edge-duration) * 0.24);
+  filter:
+    drop-shadow(4px 4px 0 rgba(15, 15, 27, 0.12))
+    brightness(1.14);
+}
+
+.is-kernel-scroll-intensive .kernel-edge-spark,
+.is-kernel-scroll-intensive .kernel-edge-spark-branch {
+  animation-duration: calc(var(--spark-duration) * 0.34);
+  stroke-width: calc(var(--spark-width, 1) * 1.42);
+  filter:
+    drop-shadow(2px 2px 0 rgba(15, 15, 27, 0.18))
+    brightness(1.22);
+}
+
+.is-kernel-shutdown .kernel-reactor {
+  opacity: 0.34;
+  filter: brightness(0.66) contrast(0.84);
+}
+
+.is-kernel-shutdown .kernel-reactor::before {
+  animation: none;
+  opacity: 0.12;
+}
+
+.is-kernel-shutdown:not(.is-kernel-rebooting) .kernel-edge-segment {
+  animation-play-state: paused;
+  filter: brightness(0.72);
+}
+
+.is-kernel-shutdown:not(.is-kernel-rebooting) .kernel-edge-spark,
+.is-kernel-shutdown:not(.is-kernel-rebooting) .kernel-edge-spark-branch {
+  opacity: 0;
+  animation-play-state: paused;
+}
+
+.is-kernel-shutdown .kernel-particle-orbit {
+  opacity: 0;
+  animation-play-state: paused;
+}
+
+.is-kernel-rebooting .kernel-reactor {
+  opacity: 0.58;
+  filter: none;
+  transition: opacity 5s steps(40, end), filter 5s steps(40, end);
+}
+
+.is-kernel-rebooting .kernel-reactor::before {
+  animation: kernel-reactor-core-reboot 5s steps(40, end) both;
+}
+
+.is-kernel-rebooting .kernel-edge-segment,
+.is-kernel-rebooting .kernel-edge-spark,
+.is-kernel-rebooting .kernel-edge-spark-branch {
+  animation-play-state: running;
+  transition:
+    opacity 5s steps(40, end),
+    filter 5s steps(40, end),
+    stroke-width 5s steps(40, end);
+}
+
+.is-kernel-rebooting .kernel-edge-spark,
+.is-kernel-rebooting .kernel-edge-spark-branch {
+  opacity: var(--spark-opacity, 0.46);
+}
+
+.is-kernel-rebooting .kernel-particle-orbit {
+  opacity: 1;
+  animation-play-state: running;
+  transition: opacity 260ms steps(4, end);
+  transition-delay: var(--particle-return-delay, 0s);
 }
 
 .kernel-edge-frame {
@@ -992,6 +1133,72 @@ body.archive-shell {
   73% {
     opacity: 0.13;
     stroke-dashoffset: -22;
+  }
+}
+
+@keyframes kernel-scroll-charge-envelope {
+  0% {
+    filter: brightness(1);
+  }
+  5% {
+    filter: brightness(1.1) contrast(1.03);
+  }
+  30% {
+    filter: brightness(1.1) contrast(1.03);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+@keyframes kernel-background-reboot {
+  0% {
+    background: #0f0f1b;
+  }
+  18% {
+    background: #0f0f1b;
+  }
+  100% {
+    background:
+      radial-gradient(circle at 50% 12%, rgba(198, 183, 190, 0.42), transparent 30rem),
+      radial-gradient(circle at 18% 44%, rgba(86, 90, 117, 0.16), transparent 24rem),
+      linear-gradient(180deg, var(--paper), rgba(198, 183, 190, 0.28) 54%, var(--paper));
+  }
+}
+
+@keyframes kernel-intensive-vibration {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(
+      calc(-50% + var(--kernel-shake)),
+      calc(-50% - var(--kernel-shake))
+    );
+  }
+  50% {
+    transform: translate(
+      calc(-50% - var(--kernel-shake)),
+      calc(-50% + var(--kernel-shake))
+    );
+  }
+  75% {
+    transform: translate(
+      calc(-50% + var(--kernel-shake)),
+      calc(-50% + var(--kernel-shake))
+    );
+  }
+}
+
+@keyframes kernel-reactor-core-reboot {
+  0% {
+    opacity: 0.12;
+  }
+  30% {
+    opacity: 0.24;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

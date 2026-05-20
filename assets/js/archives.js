@@ -2445,6 +2445,7 @@
       orbit.style.setProperty("--particle-size", `${2 + Math.random() * 6}px`);
       orbit.style.setProperty("--particle-tail", `${46 + Math.random() * 92}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
+      orbit.style.setProperty("--particle-return-delay", `${(index / 240 * 4.7 + Math.random() * 0.25).toFixed(2)}s`);
       const particle = document.createElement("span");
       particle.className = "kernel-particle";
       Array.from({ length: 16 }).forEach((_, tailIndex) => {
@@ -4116,14 +4117,127 @@
     if (!document.body.dataset.kernelScrollChargeReady) {
       document.body.dataset.kernelScrollChargeReady = "true";
       let scrollChargeReceipt = 0;
+      let scrollIntensity = 0;
+      let lastWheelTime = 0;
+      let intensiveStart = 0;
+      let rebootStart = 0;
+      let shutdownActive = false;
+
+      const resetKernelIntensity = () => {
+        scrollIntensity = 0;
+        intensiveStart = 0;
+        document.body.style.removeProperty("--kernel-shake");
+        document.body.classList.remove("is-kernel-scroll-intensive");
+      };
+
       const chargeKernelFromScroll = () => {
+        if (shutdownActive) {
+          return;
+        }
         document.body.classList.add("is-kernel-scroll-charged");
         window.clearTimeout(scrollChargeReceipt);
         scrollChargeReceipt = window.setTimeout(() => {
           document.body.classList.remove("is-kernel-scroll-charged");
-        }, 300);
+        }, 1000);
       };
+
+      const completeKernelReboot = () => {
+        document.body.classList.remove("is-kernel-shutdown", "is-kernel-rebooting", "is-kernel-recovery-lock");
+        document.body.style.removeProperty("--kernel-shake");
+        shutdownActive = false;
+        rebootStart = 0;
+        resetKernelIntensity();
+      };
+
+      const triggerKernelShutdown = () => {
+        if (shutdownActive) {
+          return;
+        }
+
+        shutdownActive = true;
+        window.clearTimeout(scrollChargeReceipt);
+        document.body.classList.remove("is-kernel-scroll-charged", "is-kernel-scroll-intensive");
+        document.body.classList.add("is-kernel-shutdown", "is-kernel-recovery-lock");
+        document.body.style.setProperty("--kernel-shake", "0px");
+
+        window.setTimeout(() => {
+          rebootStart = performance.now();
+          document.body.classList.add("is-kernel-rebooting");
+          window.setTimeout(completeKernelReboot, 5000);
+        }, 1000);
+      };
+
+      const updateKernelIntensiveState = () => {
+        if (shutdownActive) {
+          return;
+        }
+
+        const now = performance.now();
+        if (scrollIntensity > 44) {
+          if (!intensiveStart) {
+            intensiveStart = now;
+          }
+          const held = now - intensiveStart;
+          const vibration = Math.min(5, held / 5000 * 5);
+          document.body.classList.add("is-kernel-scroll-intensive");
+          document.body.style.setProperty("--kernel-shake", `${vibration.toFixed(2)}px`);
+
+          if (held >= 5000) {
+            triggerKernelShutdown();
+          }
+          return;
+        }
+
+        if (scrollIntensity < 28) {
+          document.body.classList.remove("is-kernel-scroll-intensive");
+          document.body.style.removeProperty("--kernel-shake");
+          intensiveStart = 0;
+        }
+      };
+
+      const decayKernelScrollIntensity = () => {
+        if (!shutdownActive && scrollIntensity > 0) {
+          scrollIntensity = Math.max(0, scrollIntensity - 0.42);
+          updateKernelIntensiveState();
+        }
+        window.requestAnimationFrame(decayKernelScrollIntensity);
+      };
+
+      const handleKernelWheel = (event) => {
+        if (document.body.classList.contains("is-kernel-recovery-lock")) {
+          event.preventDefault();
+          if (document.body.classList.contains("is-kernel-rebooting") && rebootStart) {
+            const recovery = Math.min(1, (performance.now() - rebootStart) / 5000);
+            window.scrollBy(0, event.deltaY * recovery);
+          }
+          return;
+        }
+
+        chargeKernelFromScroll();
+
+        const now = performance.now();
+        const delta = Math.abs(event.deltaY);
+        const spacing = lastWheelTime ? now - lastWheelTime : 240;
+        lastWheelTime = now;
+        const wheelPressure = Math.min(24, delta / 18) + (spacing < 70 ? 7 : 0) + (spacing < 38 ? 5 : 0);
+        scrollIntensity = Math.min(100, scrollIntensity + wheelPressure);
+        updateKernelIntensiveState();
+      };
+
+      const blockKernelScrollKeys = (event) => {
+        if (!document.body.classList.contains("is-kernel-recovery-lock")) {
+          return;
+        }
+        const blockedKeys = [" ", "PageDown", "PageUp", "End", "Home", "ArrowDown", "ArrowUp"];
+        if (blockedKeys.includes(event.key)) {
+          event.preventDefault();
+        }
+      };
+
       window.addEventListener("scroll", chargeKernelFromScroll, { passive: true });
+      window.addEventListener("wheel", handleKernelWheel, { passive: false });
+      window.addEventListener("keydown", blockKernelScrollKeys);
+      window.requestAnimationFrame(decayKernelScrollIntensity);
     }
 
     const observer = new IntersectionObserver((entries) => {
