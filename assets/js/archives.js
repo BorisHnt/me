@@ -1876,35 +1876,60 @@
   ]);
 
   const lowFrequencySignalWindows = Object.freeze([
-    ["LOW FREQUENCY TRACE", "carrier frequency", "17.51", "sine", "BH001.png"],
-    ["SUBSIGNAL TRACE", "floor resonance", "8.30", "flat", null],
-    ["TUNNEL TRACE", "frequency", "4.00", "pulse", "Freq002.png"],
-    ["DESCENT TRACE", "signal drift", "20.22", "noisy", null],
-    ["PRESSURE TRACE", "carrier frequency", "31.00", "square", "BH004.png"],
-    ["SUBLAYER TRACE", "floor resonance", "5.00", "triangle", null],
-    ["DRIFT TRACE", "gravity index", "42.00", "saw", "Freq006.png"],
-    ["ECHO TRACE", "signal drift", "6.40", "noisy", null],
-    ["RESONANCE TRACE", "carrier frequency", "3.14", "sine", "BH007.png"],
-    ["GRAVITY TRACE", "floor resonance", "11.80", "pulse", null],
-    ["CARRIER TRACE", "frequency", "5.00", "flat", "Freq009.png"],
-    ["UNDERTONE TRACE", "signal drift", "27.00", "triangle", null],
-    ["STATIC FLOOR TRACE", "carrier frequency", "33.33", "square", "BH010.png"],
-    ["INTERNAL WAVE TRACE", "floor resonance", "18.75", "saw", null],
-    ["BELOW SURFACE TRACE", "gravity index", "16.00", "noisy", "Freq004.png"],
-    ["COGNITIVE DEPTH TRACE", "carrier frequency", "52.00", "pulse", null]
+    ["LOW FREQUENCY TRACE", "carrier frequency", "17.51", "sine"],
+    ["SUBSIGNAL TRACE", "floor resonance", "8.30", "flat"],
+    ["TUNNEL TRACE", "frequency", "4.00", "pulse"],
+    ["DESCENT TRACE", "signal drift", "20.22", "noisy"],
+    ["PRESSURE TRACE", "carrier frequency", "31.00", "square"],
+    ["SUBLAYER TRACE", "floor resonance", "5.00", "triangle"],
+    ["DRIFT TRACE", "gravity index", "42.00", "saw"],
+    ["ECHO TRACE", "signal drift", "6.40", "noisy"],
+    ["RESONANCE TRACE", "carrier frequency", "3.14", "sine"],
+    ["GRAVITY TRACE", "floor resonance", "11.80", "pulse"],
+    ["CARRIER TRACE", "frequency", "5.00", "flat"],
+    ["UNDERTONE TRACE", "signal drift", "27.00", "triangle"],
+    ["STATIC FLOOR TRACE", "carrier frequency", "33.33", "square"],
+    ["INTERNAL WAVE TRACE", "floor resonance", "18.75", "saw"],
+    ["BELOW SURFACE TRACE", "gravity index", "16.00", "noisy"],
+    ["COGNITIVE DEPTH TRACE", "carrier frequency", "52.00", "pulse"]
+  ]);
+
+  const lowFrequencyImagePayloads = Object.freeze([
+    "BH001.png", "BH002.png", "BH003.png", "BH004.png", "BH005.png",
+    "BH006.png", "BH007.png", "BH008.png", "BH009.png", "BH010.png",
+    "Freq001.png", "Freq002.png", "Freq003.png", "Freq004.png", "Freq005.png",
+    "Freq006.png", "Freq007.png", "Freq008.png", "Freq009.png", "Freq010.png"
   ]);
 
   const lowFrequencySignalPermits = [
-    { phrase: "losing time", mode: "redaction" },
+    { id: "lf01", phrase: "Too far, maybe", mode: "redaction" },
+    { id: "lf02", phrase: "The limit of my imagination is extremely high", mode: "scramble" },
+    { id: "lf03", phrase: "the brain becomes a machine that refuses to stop drilling", mode: "scramble" },
+    { id: "lf04", phrase: "It consumes time", mode: "redaction" },
+    { id: "lf05", phrase: "It consumes sleep", mode: "redaction" },
+    { id: "lf06", phrase: "messages I should answer", mode: "redaction" },
+    { id: "lf07", phrase: "work I should probably be doing", mode: "redaction" },
+    { id: "lf08", phrase: "losing time", mode: "redaction" },
     { phrase: "the tunnel calls again", mode: "scramble" },
     { phrase: "I go back down", mode: "scramble" },
     { phrase: "This is immersion", mode: "drift" },
     { phrase: "A thought can become more real than the room", mode: "scramble" },
     { phrase: "the ordinary world becomes a weak signal", mode: "drift" },
-    { phrase: "guilt", mode: "redaction" },
+    { id: "lf09", phrase: "Hours can disappear", mode: "redaction" },
+    { id: "lf10", phrase: "Sometimes days can become porous", mode: "redaction" },
+    { id: "lf11", phrase: "guilt", mode: "redaction" },
+    { id: "lf12", phrase: "I feel guilty for going so far", mode: "redaction" },
     { phrase: "Descent again", mode: "echo" },
+    { id: "lf13", phrase: "Loss of time", mode: "redaction" },
+    { phrase: "a world made inside the mind can become more comfortable than the world outside it", mode: "scramble" },
+    { phrase: "a refuge can also become a sinkhole", mode: "scramble" },
+    { id: "lf14", phrase: "I need a rope back to the surface", mode: "redaction" },
+    { id: "lf15", phrase: "I do not want to become shallow just to be more compatible with ordinary life", mode: "redaction" },
+    { id: "lf16", phrase: "I do not want to cut the wires that let me imagine so intensely", mode: "redaction" },
+    { phrase: "reality is still waiting", mode: "scramble" },
     { phrase: "I do not want to drown in it", mode: "scramble" },
-    { phrase: "keep one hand on the wall of the real", mode: "drift" }
+    { phrase: "keep one hand on the wall of the real", mode: "drift" },
+    { phrase: "even the deepest signal is not supposed to replace the surface forever", mode: "scramble" }
   ];
 
   const neuroIntrusiveSignals = [
@@ -2071,7 +2096,6 @@
       "is-void-scroll-tearing",
       "is-void-scroll-resisting",
       "is-low-frequency-active",
-      "is-low-frequency-stabilized",
       "is-kernel-scroll-charged",
       "is-kernel-scroll-warning",
       "is-kernel-scroll-intensive",
@@ -2107,8 +2131,11 @@
       fragment.classList.remove("archive-zalgo-fragment");
       fragment.classList.add("archive-restored-fragment", "is-unscrambled");
     });
-    document.querySelectorAll(".low-frequency-fragment[data-low-source]").forEach((fragment) => {
-      fragment.textContent = fragment.dataset.lowSource;
+    document.querySelectorAll(".low-frequency-fragment[data-low-source], .low-frequency-fragment[data-low-id]").forEach((fragment) => {
+      const permit = fragment.dataset.lowId
+        ? lowFrequencySignalPermits.find((entry) => entry.id === fragment.dataset.lowId)
+        : null;
+      fragment.textContent = fragment.dataset.lowSource || permit?.phrase || fragment.textContent;
       fragment.classList.add("is-low-frequency-restored");
       fragment.removeAttribute("aria-label");
     });
@@ -2905,7 +2932,7 @@
     const width = 246;
     const height = 72;
     const center = height / 2;
-    const amplitude = 14 + (windowIndex % 4) * 3;
+    const amplitude = 18;
     const points = [];
     const steps = type === "square" || type === "pulse" ? 28 : 56;
 
@@ -2950,7 +2977,7 @@
   }
 
   function createLowFrequencyWindow(config, windowIndex) {
-    const [title, label, frequency, type, image] = config;
+    const [title, label, frequency, type] = config;
     const windowBox = document.createElement("aside");
     windowBox.className = `frequency-window frequency-window--${windowIndex % 5}`;
     windowBox.setAttribute("aria-label", "Frequency diagnostic window");
@@ -2968,21 +2995,42 @@
     const display = document.createElement("div");
     display.className = "frequency-window__display";
     display.append(createLowFrequencyWaveform(type, windowIndex));
-    if (image) {
-      const payload = document.createElement("img");
-      payload.className = "frequency-window__payload";
-      payload.src = `../assets/img/07-LowFrequency/${image}`;
-      payload.alt = "";
-      payload.loading = "lazy";
-      payload.decoding = "async";
-      display.append(payload);
-    }
 
     const legend = document.createElement("p");
     legend.className = "frequency-window__legend";
     legend.textContent = `${label}: ${frequency} Hz`;
     windowBox.append(titleBar, display, legend);
     return windowBox;
+  }
+
+  function createLowFrequencyImageBox(filename, imageIndex) {
+    const box = document.createElement("aside");
+    box.className = `low-frequency-image-box low-frequency-image-box--${imageIndex % 6}`;
+    box.setAttribute("aria-hidden", "true");
+    box.style.setProperty("--lf-depth", `${0.34 + (imageIndex % 7) * 0.09}`);
+
+    const titleBar = document.createElement("div");
+    titleBar.className = "low-frequency-image-box__titlebar";
+    const title = document.createElement("span");
+    title.textContent = ["BLACK HOLE PAYLOAD", "SIGNAL PAYLOAD", "DEEP IMAGE TRACE", "TUNNEL IMAGE CACHE"][imageIndex % 4];
+    const chip = document.createElement("span");
+    chip.textContent = `${String(imageIndex + 1).padStart(2, "0")}.IMG`;
+    titleBar.append(title, chip);
+
+    const viewport = document.createElement("div");
+    viewport.className = "low-frequency-image-box__viewport";
+    const image = document.createElement("img");
+    image.src = `../assets/img/07-LowFrequency/${filename}`;
+    image.alt = "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    viewport.append(image);
+
+    const footer = document.createElement("p");
+    footer.className = "low-frequency-image-box__footer";
+    footer.textContent = ["signal absorption", "surface occlusion", "mental payload", "depth artifact"][imageIndex % 4];
+    box.append(titleBar, viewport, footer);
+    return box;
   }
 
   function createLowFrequencyBand(index) {
@@ -3009,8 +3057,16 @@
         const permit = sortedPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
         const fragment = document.createElement("span");
         fragment.className = `low-frequency-fragment low-frequency-fragment--${permit?.mode || "drift"}`;
-        fragment.dataset.lowSource = match;
-        fragment.textContent = permit?.mode === "redaction" ? fileTheMissingWordUnderConcrete(match) : match;
+        if (permit?.mode === "redaction" && permit.id) {
+          fragment.dataset.lowId = permit.id;
+        } else {
+          fragment.dataset.lowSource = match;
+        }
+        fragment.textContent = permit?.mode === "redaction"
+          ? fileTheMissingWordUnderConcrete(match)
+          : permit?.mode === "scramble"
+            ? scrambleArchiveText(match, offset + match.length)
+            : match;
         if (permit?.mode === "redaction") {
           fragment.setAttribute("aria-label", "signal interference");
         }
@@ -3041,6 +3097,10 @@
       [3, 0], [7, 1], [11, 2], [16, 3], [22, 4], [27, 5], [33, 6], [37, 7],
       [43, 8], [49, 9], [54, 10], [60, 11], [66, 12], [72, 13], [81, 14], [91, 15]
     ]);
+    const imageSlots = new Map([
+      [5, 0], [10, 1], [14, 2], [18, 3], [21, 4], [25, 5], [30, 6], [34, 7], [39, 8], [42, 9],
+      [47, 10], [52, 11], [57, 12], [63, 13], [68, 14], [74, 15], [78, 16], [84, 17], [90, 18], [96, 19]
+    ]);
     const bandSlots = new Map([[9, 0], [35, 1], [67, 2], [88, 3]]);
     const statementLines = new Set([4, 9, 12, 20, 23, 36, 37, 50, 51, 62, 69, 83, 92, 98]);
     const narrowLines = new Set([3, 8, 25, 28, 34, 52, 65, 79, 86, 95]);
@@ -3063,6 +3123,10 @@
       fragment.append(paragraph);
       if (windowSlots.has(sourceIndex)) {
         fragment.append(createLowFrequencyWindow(lowFrequencySignalWindows[windowSlots.get(sourceIndex)], windowSlots.get(sourceIndex)));
+      }
+      if (imageSlots.has(sourceIndex)) {
+        const imageIndex = imageSlots.get(sourceIndex);
+        fragment.append(createLowFrequencyImageBox(lowFrequencyImagePayloads[imageIndex], imageIndex));
       }
       if (bandSlots.has(sourceIndex)) {
         fragment.append(createLowFrequencyBand(bandSlots.get(sourceIndex)));
@@ -4620,32 +4684,11 @@
     }
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const windows = Array.from(document.querySelectorAll(".frequency-window"));
+    const windows = Array.from(document.querySelectorAll(".frequency-window, .low-frequency-image-box"));
     const fragments = Array.from(document.querySelectorAll(".low-frequency-fragment--scramble"));
-    const animatedLines = Array.from(document.querySelectorAll(".low-frequency-line, .frequency-window, .low-frequency-band"));
-
-    if (!document.querySelector("[data-stabilize-signal]")) {
-      const stabilizer = document.createElement("button");
-      stabilizer.className = "low-frequency-stabilizer archive-button";
-      stabilizer.type = "button";
-      stabilizer.dataset.stabilizeSignal = "";
-      stabilizer.textContent = "Stabilize signal";
-      stabilizer.setAttribute("aria-pressed", "false");
-      stabilizer.addEventListener("click", () => {
-        const stable = document.body.classList.toggle("is-low-frequency-stabilized");
-        stabilizer.setAttribute("aria-pressed", String(stable));
-        stabilizer.textContent = stable ? "Signal stabilized" : "Stabilize signal";
-        if (stable) {
-          fragments.forEach((fragment) => {
-            fragment.textContent = fragment.dataset.lowSource || fragment.textContent;
-          });
-        }
-      });
-      document.body.append(stabilizer);
-    }
+    const animatedLines = Array.from(document.querySelectorAll(".low-frequency-line, .frequency-window, .low-frequency-image-box, .low-frequency-band"));
 
     if (prefersReducedMotion) {
-      document.body.classList.add("is-low-frequency-stabilized");
       animatedLines.forEach((node) => node.classList.add("is-low-frequency-visible"));
       return;
     }
@@ -4659,7 +4702,7 @@
 
       const updateScrollField = () => {
         ticking = false;
-        if (document.body.classList.contains("is-low-frequency-stabilized") || document.body.classList.contains("archive-clean")) {
+        if (document.body.classList.contains("archive-clean")) {
           windows.forEach((node) => {
             node.style.removeProperty("--lf-x");
             node.style.removeProperty("--lf-y");
