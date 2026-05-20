@@ -2228,10 +2228,10 @@
 
   function describeKernelEdgeSegment(index, total) {
     const sweep = 360 / total;
-    const start = index * sweep + 5.5;
-    const end = (index + 1) * sweep - 5.5;
-    const outerRadius = 486;
-    const innerRadius = 414;
+    const start = index * sweep + 2.4;
+    const end = (index + 1) * sweep - 2.4;
+    const outerRadius = 472;
+    const innerRadius = 424;
     const outerStart = getKernelOrbitPoint(outerRadius, start);
     const outerEnd = getKernelOrbitPoint(outerRadius, end);
     const innerEnd = getKernelOrbitPoint(innerRadius, end);

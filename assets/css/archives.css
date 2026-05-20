@@ -602,23 +602,25 @@ body.archive-shell {
 }
 
 .kernel-edge-segment {
-  fill: color-mix(in srgb, var(--segment-color) 62%, transparent);
-  stroke: rgba(15, 15, 27, 0.34);
-  stroke-width: 2;
+  fill: color-mix(in srgb, var(--segment-color) 82%, transparent);
+  stroke: rgba(15, 15, 27, 0.42);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(4px 4px 0 rgba(15, 15, 27, 0.08));
-  opacity: 0.78;
+  opacity: 0.9;
   animation: kernel-edge-segment-pulse 8s steps(18, end) infinite;
   animation-delay: calc(var(--edge-delay, 0) * -1s);
 }
 
 .kernel-edge-segment:nth-child(4n + 2),
 .kernel-edge-segment:nth-child(4n + 4) {
-  opacity: 0.58;
+  opacity: 0.76;
 }
 
 .kernel-edge-segment:nth-child(4n + 3) {
-  opacity: 0.68;
+  opacity: 0.84;
 }
 
 .kernel-particle {
@@ -907,13 +909,13 @@ body.archive-shell {
 
 @keyframes kernel-edge-segment-pulse {
   0%, 100% {
-    fill-opacity: 0.48;
+    fill-opacity: 0.74;
   }
   45% {
-    fill-opacity: 0.68;
+    fill-opacity: 0.92;
   }
   72% {
-    fill-opacity: 0.54;
+    fill-opacity: 0.8;
   }
 }
 
