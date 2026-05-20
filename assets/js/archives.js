@@ -2226,9 +2226,12 @@
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
     Array.from({ length: 240 }).forEach((_, index) => {
       const orbit = document.createElement("span");
+      const radius = Math.random() < 0.72
+        ? 315 + Math.random() * 150
+        : 70 + Math.random() * 145;
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
-      orbit.style.setProperty("--particle-radius", `${95 + Math.random() * 520}px`);
+      orbit.style.setProperty("--particle-radius", `${radius}px`);
       orbit.style.setProperty("--particle-duration", `${1.45 + Math.random() * 3.8}s`);
       orbit.style.setProperty("--particle-delay", `${Math.random() * -4.8}s`);
       orbit.style.setProperty("--particle-wobble", `${3 + Math.random() * 15}px`);
