@@ -675,25 +675,25 @@ body.archive-shell {
 .kernel-edge-spark {
   fill: none;
   stroke: var(--spark-color);
-  stroke-width: 3;
+  stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
-  opacity: 0.42;
-  filter: drop-shadow(2px 2px 0 rgba(15, 15, 27, 0.12));
-  animation: kernel-edge-spark-pulse var(--spark-duration, 6s) steps(10, end) infinite;
+  opacity: 0.5;
+  filter: drop-shadow(1px 1px 0 rgba(15, 15, 27, 0.16));
+  animation: kernel-edge-spark-pulse var(--spark-duration, 6s) steps(8, end) infinite;
   animation-delay: calc(var(--spark-delay, 0) * -1s);
 }
 
 .kernel-edge-spark--1,
 .kernel-edge-spark--3 {
-  stroke-width: 2;
-  opacity: 0.32;
+  stroke-width: 1;
+  opacity: 0.38;
 }
 
 .kernel-edge-spark--2 {
   stroke: #fafbf6;
-  opacity: 0.5;
+  opacity: 0.56;
 }
 
 .kernel-particle {
@@ -1023,20 +1023,20 @@ body.archive-shell {
 
 @keyframes kernel-edge-spark-pulse {
   0%, 100% {
-    opacity: 0.18;
-    stroke-dasharray: 1 7;
+    opacity: 0.16;
+    stroke-dasharray: 2 8;
   }
   36% {
-    opacity: 0.62;
-    stroke-dasharray: 8 3;
+    opacity: 0.54;
+    stroke-dasharray: 6 3;
   }
   48% {
-    opacity: 0.34;
-    stroke-dasharray: 3 5;
+    opacity: 0.28;
+    stroke-dasharray: 2 5;
   }
   72% {
-    opacity: 0.5;
-    stroke-dasharray: 5 4;
+    opacity: 0.46;
+    stroke-dasharray: 4 4;
   }
 }
 

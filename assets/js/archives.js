@@ -2251,11 +2251,12 @@
     const sweep = 360 / total;
     const center = index * sweep;
     const points = [
-      getKernelOrbitPoint(419, center - 0.7),
-      getKernelOrbitPoint(431, center + 1.2),
-      getKernelOrbitPoint(444, center - 0.9),
-      getKernelOrbitPoint(457, center + 0.8),
-      getKernelOrbitPoint(472, center - 1.1)
+      getKernelOrbitPoint(445, center - 1.7),
+      getKernelOrbitPoint(436, center - 0.85),
+      getKernelOrbitPoint(455, center - 0.2),
+      getKernelOrbitPoint(431, center + 0.55),
+      getKernelOrbitPoint(460, center + 1.1),
+      getKernelOrbitPoint(442, center + 1.7)
     ];
 
     return points.map((point, pointIndex) => {
