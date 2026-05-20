@@ -2247,6 +2247,23 @@
     ].join(" ");
   }
 
+  function describeKernelEdgeSpark(index, total) {
+    const sweep = 360 / total;
+    const center = index * sweep;
+    const points = [
+      getKernelOrbitPoint(419, center - 0.7),
+      getKernelOrbitPoint(431, center + 1.2),
+      getKernelOrbitPoint(444, center - 0.9),
+      getKernelOrbitPoint(457, center + 0.8),
+      getKernelOrbitPoint(472, center - 1.1)
+    ];
+
+    return points.map((point, pointIndex) => {
+      const command = pointIndex === 0 ? "M" : "L";
+      return `${command} ${point.x} ${point.y}`;
+    }).join(" ");
+  }
+
   function createKernelEdgeFrame(colors) {
     const frame = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     frame.classList.add("kernel-edge-frame");
@@ -2262,6 +2279,16 @@
       segment.style.setProperty("--edge-delay", `${index * 0.31 + Math.random() * 0.9}`);
       segment.style.setProperty("--edge-duration", `${5.8 + Math.random() * 7.2}s`);
       frame.append(segment);
+    });
+
+    Array.from({ length: 16 }).forEach((_, index) => {
+      const spark = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      spark.classList.add("kernel-edge-spark", `kernel-edge-spark--${index % 4}`);
+      spark.setAttribute("d", describeKernelEdgeSpark(index, 16));
+      spark.style.setProperty("--spark-color", colors[(index + 2) % colors.length]);
+      spark.style.setProperty("--spark-delay", `${index * 0.19 + Math.random() * 1.4}`);
+      spark.style.setProperty("--spark-duration", `${4.2 + Math.random() * 5.6}s`);
+      frame.append(spark);
     });
 
     return frame;
