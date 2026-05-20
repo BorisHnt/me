@@ -591,6 +591,46 @@ body.archive-shell {
   animation-delay: var(--particle-delay);
 }
 
+.kernel-edge-marker {
+  --marker-angle: 0deg;
+  --marker-color: var(--steel);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: 14px;
+  height: 8px;
+  border: 1px solid rgba(15, 15, 27, 0.38);
+  background: var(--marker-color);
+  box-shadow: 2px 2px 0 rgba(15, 15, 27, 0.12);
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--marker-angle))
+    translateX(calc(min(1000px, 112vw) * 0.47))
+    rotate(calc(var(--marker-angle) * -1));
+}
+
+.kernel-edge-marker--1 {
+  width: 9px;
+  height: 15px;
+}
+
+.kernel-edge-marker--2 {
+  width: 11px;
+  height: 11px;
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--marker-angle))
+    translateX(calc(min(1000px, 112vw) * 0.47))
+    rotate(45deg);
+}
+
+.kernel-edge-marker--3 {
+  width: 18px;
+  height: 5px;
+  opacity: 0.82;
+}
+
 .kernel-particle {
   position: absolute;
   top: 50%;
@@ -816,6 +856,7 @@ body.archive-shell {
 .archive-clean .kernel-particle-orbit,
 .archive-clean .kernel-particle,
 .archive-clean .kernel-particle-tail-segment,
+.archive-clean .kernel-edge-marker,
 .archive-clean .kernel-thermal-phrase,
 .archive-clean .kernel-line--pressure,
 .archive-clean .kernel-pulse {

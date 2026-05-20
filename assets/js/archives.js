@@ -2224,10 +2224,18 @@
     reactor.setAttribute("aria-hidden", "true");
 
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
+    Array.from({ length: 16 }).forEach((_, index) => {
+      const marker = document.createElement("span");
+      marker.className = `kernel-edge-marker kernel-edge-marker--${index % 4}`;
+      marker.style.setProperty("--marker-angle", `${index * 22.5}deg`);
+      marker.style.setProperty("--marker-color", colors[index % colors.length]);
+      reactor.append(marker);
+    });
+
     Array.from({ length: 240 }).forEach((_, index) => {
       const orbit = document.createElement("span");
       const radius = Math.random() < 0.72
-        ? 300 + Math.random() * 130
+        ? 300 + Math.random() * 75
         : 200 + Math.random() * 100;
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
