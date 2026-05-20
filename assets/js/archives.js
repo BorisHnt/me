@@ -2269,8 +2269,8 @@
       [0.12, -0.7, 0.52, -0.2, 0.72, -0.4, 0.58, -0.46]
     ][phase];
     const points = angleOffsets.map((angleOffset, pointIndex) => {
-      const crest = crestMap[pointIndex] * amplitude;
-      const roughness = ((index + lane + pointIndex + phase) % 3 - 1) * 0.75;
+      const crest = crestMap[pointIndex] * amplitude * 0.62;
+      const roughness = ((index + lane + pointIndex + phase) % 3 - 1) * 0.42;
       return getKernelOrbitPoint(laneRadius + crest + roughness, center + angleOffset);
     });
 
@@ -2289,9 +2289,9 @@
     const forkDirection = branchIndex % 2 === 0 ? 1 : -1;
     const baseRadius = 445 + lane * 1.8;
     const start = getKernelOrbitPoint(baseRadius, angle);
-    const elbow = getKernelOrbitPoint(baseRadius + forkDirection * (3.5 + amplitude * 0.36), angle + 0.14);
-    const fork = getKernelOrbitPoint(baseRadius - forkDirection * (5 + amplitude * 0.55), angle + 0.28 + branchIndex * 0.035);
-    const tip = getKernelOrbitPoint(baseRadius + forkDirection * (7 + amplitude * 0.72), angle + 0.42 + phase * 0.025);
+    const elbow = getKernelOrbitPoint(baseRadius + forkDirection * (2.2 + amplitude * 0.22), angle + 0.14);
+    const fork = getKernelOrbitPoint(baseRadius - forkDirection * (3.2 + amplitude * 0.34), angle + 0.28 + branchIndex * 0.035);
+    const tip = getKernelOrbitPoint(baseRadius + forkDirection * (4.6 + amplitude * 0.45), angle + 0.42 + phase * 0.025);
 
     return [
       `M ${start.x} ${start.y}`,
@@ -2323,7 +2323,7 @@
 
   function createKernelEdgeSpark(index, lane, colors) {
     const cluster = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    const amplitude = 2.4 + Math.random() * 5.6;
+    const amplitude = 1.7 + Math.random() * 3.8;
     const duration = 0.12 + Math.random() * 0.26;
     const firstShape = describeKernelEdgeSpark(index, 16, lane, amplitude, 0);
     const secondShape = describeKernelEdgeSpark(index, 16, lane, amplitude * (1.35 + Math.random() * 0.7), 1);
