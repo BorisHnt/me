@@ -4173,7 +4173,7 @@
         }
 
         const now = performance.now();
-        if (scrollIntensity > 100) {
+        if (scrollIntensity > 90) {
           if (!intensiveStart) {
             intensiveStart = now;
           }
