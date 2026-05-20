@@ -2218,19 +2218,60 @@
     });
   }
 
+  function getKernelOrbitPoint(radius, angle) {
+    const radians = (angle - 90) * Math.PI / 180;
+    return {
+      x: Number((Math.cos(radians) * radius).toFixed(3)),
+      y: Number((Math.sin(radians) * radius).toFixed(3))
+    };
+  }
+
+  function describeKernelEdgeSegment(index, total) {
+    const sweep = 360 / total;
+    const start = index * sweep + 5.5;
+    const end = (index + 1) * sweep - 5.5;
+    const outerRadius = 486;
+    const innerRadius = 414;
+    const outerStart = getKernelOrbitPoint(outerRadius, start);
+    const outerEnd = getKernelOrbitPoint(outerRadius, end);
+    const innerEnd = getKernelOrbitPoint(innerRadius, end);
+    const innerStart = getKernelOrbitPoint(innerRadius, start);
+    const largeArc = end - start > 180 ? 1 : 0;
+
+    return [
+      `M ${outerStart.x} ${outerStart.y}`,
+      `A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${outerEnd.x} ${outerEnd.y}`,
+      `L ${innerEnd.x} ${innerEnd.y}`,
+      `A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${innerStart.x} ${innerStart.y}`,
+      "Z"
+    ].join(" ");
+  }
+
+  function createKernelEdgeFrame(colors) {
+    const frame = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    frame.classList.add("kernel-edge-frame");
+    frame.setAttribute("viewBox", "-500 -500 1000 1000");
+    frame.setAttribute("focusable", "false");
+    frame.setAttribute("aria-hidden", "true");
+
+    Array.from({ length: 6 }).forEach((_, index) => {
+      const segment = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      segment.classList.add("kernel-edge-segment", `kernel-edge-segment--${index}`);
+      segment.setAttribute("d", describeKernelEdgeSegment(index, 6));
+      segment.style.setProperty("--segment-color", colors[index % colors.length]);
+      frame.append(segment);
+    });
+
+    return frame;
+  }
+
   function createKernelReactor() {
     const reactor = document.createElement("aside");
     reactor.className = "kernel-reactor";
     reactor.setAttribute("aria-hidden", "true");
 
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
-    Array.from({ length: 16 }).forEach((_, index) => {
-      const marker = document.createElement("span");
-      marker.className = `kernel-edge-marker kernel-edge-marker--${index % 4}`;
-      marker.style.setProperty("--marker-angle", `${index * 22.5}deg`);
-      marker.style.setProperty("--marker-color", colors[index % colors.length]);
-      reactor.append(marker);
-    });
+    reactor.append(createKernelEdgeFrame(colors));
 
     Array.from({ length: 240 }).forEach((_, index) => {
       const orbit = document.createElement("span");
