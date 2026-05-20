@@ -565,25 +565,23 @@ body.archive-shell {
 
 .kernel-reactor {
   position: absolute;
-  top: 1.25rem;
+  top: 0.5rem;
   left: 50%;
   z-index: 0;
   display: grid;
   place-items: center;
-  width: min(760px, 96vw);
+  width: min(840px, 106vw);
   aspect-ratio: 1;
   margin: 0;
   color: var(--steel);
   font-family: var(--mono);
-  opacity: 0.78;
+  opacity: 0.62;
   pointer-events: none;
   transform: translateX(-50%);
 }
 
 .kernel-reactor::before,
-.kernel-reactor::after,
-.kernel-reactor__core::before,
-.kernel-reactor__core::after {
+.kernel-reactor::after {
   content: "";
   position: absolute;
   border-radius: 50%;
@@ -606,44 +604,10 @@ body.archive-shell {
   animation: kernel-field-sway 9s steps(20, end) infinite;
 }
 
-.kernel-reactor__core {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(190px, 34vw);
-  aspect-ratio: 1;
-  border: 2px solid var(--ink);
-  background:
-    radial-gradient(circle, rgba(250, 251, 246, 0.98) 0 23%, rgba(198, 183, 190, 0.64) 24% 54%, rgba(86, 90, 117, 0.22) 55% 100%);
-  box-shadow:
-    inset -4px -4px 0 rgba(86, 90, 117, 0.18),
-    inset 4px 4px 0 rgba(250, 251, 246, 0.72),
-    0 0 0 12px rgba(198, 183, 190, 0.13);
-  color: var(--ink);
-  font-size: clamp(0.68rem, 1.5vw, 0.9rem);
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  text-align: center;
-  text-transform: uppercase;
-  animation: kernel-core-breathe 5.4s steps(14, end) infinite;
-}
-
-.kernel-reactor__core::before {
-  inset: -24%;
-  border: 1px solid rgba(15, 15, 27, 0.18);
-  transform: rotate(28deg);
-}
-
-.kernel-reactor__core::after {
-  inset: -44% -18%;
-  border: 1px solid rgba(86, 90, 117, 0.32);
-  transform: rotate(-34deg);
-}
-
 .kernel-particle-orbit {
   --particle-angle: 0deg;
   --particle-radius: 180px;
-  --particle-duration: 28s;
+  --particle-duration: 12s;
   --particle-delay: 0s;
   --particle-wobble: 6px;
   --particle-wobble-duration: 6s;
@@ -662,12 +626,41 @@ body.archive-shell {
   width: var(--particle-size);
   height: var(--particle-size);
   border: 1px solid rgba(15, 15, 27, 0.22);
+  color: var(--particle-color);
   background: var(--particle-color);
-  box-shadow: 0 0 0.45rem rgba(86, 90, 117, 0.18);
+  box-shadow:
+    0 0 0.45rem rgba(86, 90, 117, 0.18),
+    -7px 0 0 -1px currentColor,
+    -14px 0 0 -2px currentColor,
+    -22px 0 0 -3px currentColor;
   transform: rotate(var(--particle-angle)) translateX(var(--particle-radius)) translateY(0) translateX(-50%);
   animation:
     kernel-particle-wobble var(--particle-wobble-duration) steps(15, end) infinite,
     kernel-particle-breathe var(--particle-breathe-duration) steps(18, end) infinite;
+}
+
+.kernel-particle::before,
+.kernel-particle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  background: currentColor;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.kernel-particle::before {
+  right: calc(100% + 4px);
+  width: calc(var(--particle-size) * 1.7);
+  height: max(2px, calc(var(--particle-size) * 0.52));
+  opacity: 0.36;
+}
+
+.kernel-particle::after {
+  right: calc(100% + 18px);
+  width: calc(var(--particle-size) * 1.05);
+  height: max(1px, calc(var(--particle-size) * 0.34));
+  opacity: 0.2;
 }
 
 .kernel-line {
@@ -911,7 +904,6 @@ body.archive-shell {
 .archive-clean .kernel-document::after,
 .archive-clean .kernel-reactor::before,
 .archive-clean .kernel-reactor::after,
-.archive-clean .kernel-reactor__core,
 .archive-clean .kernel-particle-orbit,
 .archive-clean .kernel-particle,
 .archive-clean .kernel-thermal-phrase,
@@ -939,21 +931,6 @@ body.archive-shell {
   }
   72% {
     opacity: 0.62;
-  }
-}
-
-@keyframes kernel-core-breathe {
-  0%, 100% {
-    box-shadow:
-      inset -4px -4px 0 rgba(86, 90, 117, 0.18),
-      inset 4px 4px 0 rgba(250, 251, 246, 0.72),
-      0 0 0 12px rgba(198, 183, 190, 0.13);
-  }
-  50% {
-    box-shadow:
-      inset -4px -4px 0 rgba(86, 90, 117, 0.24),
-      inset 4px 4px 0 rgba(250, 251, 246, 0.8),
-      0 0 0 18px rgba(198, 183, 190, 0.2);
   }
 }
 

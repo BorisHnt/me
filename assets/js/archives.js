@@ -2223,21 +2223,17 @@
     reactor.className = "kernel-reactor";
     reactor.setAttribute("aria-hidden", "true");
 
-    const core = document.createElement("div");
-    core.className = "kernel-reactor__core";
-    reactor.append(core);
-
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
-    Array.from({ length: 56 }).forEach((_, index) => {
+    Array.from({ length: 72 }).forEach((_, index) => {
       const orbit = document.createElement("span");
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
       orbit.style.setProperty("--particle-radius", `${95 + Math.random() * 245}px`);
-      orbit.style.setProperty("--particle-duration", `${19 + Math.random() * 31}s`);
-      orbit.style.setProperty("--particle-delay", `${Math.random() * -34}s`);
+      orbit.style.setProperty("--particle-duration", `${6 + Math.random() * 12}s`);
+      orbit.style.setProperty("--particle-delay", `${Math.random() * -18}s`);
       orbit.style.setProperty("--particle-wobble", `${2 + Math.random() * 11}px`);
-      orbit.style.setProperty("--particle-wobble-duration", `${3.8 + Math.random() * 8.5}s`);
-      orbit.style.setProperty("--particle-breathe-duration", `${7 + Math.random() * 12}s`);
+      orbit.style.setProperty("--particle-wobble-duration", `${2.6 + Math.random() * 5.5}s`);
+      orbit.style.setProperty("--particle-breathe-duration", `${4.5 + Math.random() * 7}s`);
       orbit.style.setProperty("--particle-size", `${3 + Math.random() * 6}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
       const particle = document.createElement("span");
