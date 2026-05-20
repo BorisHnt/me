@@ -1487,6 +1487,329 @@ body.archive-shell {
   }
 }
 
+.archive-doc-07 {
+  background:
+    linear-gradient(180deg, rgba(15, 15, 27, 0.04), transparent 24rem),
+    var(--paper);
+}
+
+.low-frequency-shell {
+  width: min(calc(100vw - 28px), 1180px);
+}
+
+.low-frequency-document {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--steel);
+  background:
+    linear-gradient(180deg, rgba(86, 90, 117, 0.08), transparent 340px),
+    var(--paper);
+}
+
+.low-frequency-document::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, transparent 0 48%, rgba(15, 15, 27, 0.08) 48% 49%, transparent 49%),
+    repeating-linear-gradient(180deg, transparent 0 34px, rgba(86, 90, 117, 0.12) 35px, transparent 36px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.low-frequency-document .document-header,
+.low-frequency-essay {
+  position: relative;
+  z-index: 1;
+}
+
+.low-frequency-essay {
+  display: flow-root;
+  padding-bottom: 7rem;
+}
+
+.low-frequency-line {
+  position: relative;
+  width: min(760px, 100%);
+  margin: 1.35rem auto;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 900ms steps(12, end),
+    transform 900ms steps(14, end),
+    margin 700ms steps(10, end);
+}
+
+.low-frequency-line.is-low-frequency-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.low-frequency-line--narrow {
+  width: min(540px, 92%);
+  margin-left: clamp(0px, 10vw, 150px);
+}
+
+.low-frequency-line--statement {
+  width: min(930px, 100%);
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+  border-left: 4px solid var(--ink);
+  padding: 0.5rem 0 0.5rem 1rem;
+  font-family: var(--mono);
+  font-size: clamp(1.25rem, 3.6vw, 3rem);
+  font-weight: 900;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.low-frequency-line--deep {
+  text-shadow: 1px 0 0 rgba(86, 90, 117, 0.26);
+}
+
+.frequency-window {
+  position: relative;
+  z-index: 2;
+  width: min(430px, 100%);
+  border: 2px solid var(--ink);
+  margin: 2.2rem 0 2.2rem clamp(0px, 8vw, 90px);
+  background: var(--paper);
+  box-shadow: 6px 6px 0 rgba(86, 90, 117, 0.38), var(--raised);
+  color: var(--ink);
+  opacity: 0;
+  transform: translate(var(--lf-x, 0), var(--lf-y, 16px));
+  transition:
+    opacity 760ms steps(10, end),
+    transform 760ms steps(10, end),
+    box-shadow 240ms steps(4, end);
+}
+
+.frequency-window.is-low-frequency-visible {
+  opacity: 0.96;
+  transform: translate(var(--lf-x, 0), var(--lf-y, 0));
+}
+
+.frequency-window:nth-of-type(2n) {
+  margin-right: clamp(0px, 7vw, 82px);
+  margin-left: auto;
+}
+
+.frequency-window--1,
+.frequency-window--3 {
+  width: min(520px, 100%);
+}
+
+.frequency-window--2 {
+  width: min(360px, 100%);
+}
+
+.frequency-window__titlebar {
+  display: flex;
+  min-height: 25px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid var(--ink);
+  padding: 0.18rem 0.42rem;
+  background: var(--steel);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.frequency-window__display {
+  position: relative;
+  min-height: 134px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--ink);
+  background:
+    repeating-linear-gradient(0deg, rgba(86, 90, 117, 0.14) 0 1px, transparent 1px 8px),
+    linear-gradient(180deg, rgba(15, 15, 27, 0.94), rgba(15, 15, 27, 0.86));
+}
+
+.frequency-window__display::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(250, 251, 246, 0.16), transparent);
+  opacity: 0.18;
+  transform: translateX(calc(var(--lf-phase, 0px) - 80px));
+  pointer-events: none;
+}
+
+.frequency-window__waveform {
+  position: absolute;
+  inset: 18px 12px auto;
+  z-index: 2;
+  width: calc(100% - 24px);
+  height: 78px;
+  overflow: visible;
+}
+
+.frequency-window__wave {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(2px 0 0 rgba(198, 183, 190, 0.42));
+}
+
+.frequency-window__tremor {
+  fill: none;
+  stroke: var(--dust);
+  stroke-width: 1;
+  stroke-dasharray: 4 6;
+  opacity: 0.62;
+  vector-effect: non-scaling-stroke;
+}
+
+.frequency-window__payload {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.35) brightness(0.52);
+  opacity: 0.58;
+  transform: translate(calc(var(--lf-x, 0px) * -0.7), calc(var(--lf-y, 0px) * -0.55));
+}
+
+.frequency-window__legend {
+  margin: 0;
+  padding: 0.38rem 0.48rem;
+  background: var(--dust);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.is-low-frequency-active .frequency-window {
+  box-shadow: 4px 4px 0 rgba(86, 90, 117, 0.48), var(--sunken);
+}
+
+.low-frequency-band {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin: 4.4rem auto;
+  padding: 0.32rem 0.48rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: clamp(0.72rem, 1.4vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 800ms steps(8, end),
+    transform 800ms steps(8, end);
+}
+
+.low-frequency-band.is-low-frequency-visible {
+  opacity: 0.92;
+  transform: translateY(0);
+}
+
+.low-frequency-fragment {
+  display: inline;
+  position: relative;
+}
+
+.low-frequency-fragment--redaction {
+  display: inline-block;
+  min-width: 2.4em;
+  border: 1px solid var(--steel);
+  padding: 0 0.12em;
+  background: var(--ink);
+  color: var(--ink);
+  line-height: 0.95;
+  vertical-align: -0.08em;
+}
+
+.low-frequency-fragment--scramble {
+  border-bottom: 1px solid var(--steel);
+  background: rgba(198, 183, 190, 0.16);
+  font-family: var(--mono);
+}
+
+.low-frequency-fragment--drift {
+  font-weight: 700;
+  text-shadow: 1px 0 0 var(--dust), -1px 0 0 rgba(86, 90, 117, 0.28);
+}
+
+.low-frequency-fragment--echo::after {
+  content: attr(data-low-source);
+  position: absolute;
+  left: 0.18em;
+  top: 0.12em;
+  color: var(--steel);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.low-frequency-fragment.is-low-frequency-restored,
+.archive-clean .low-frequency-fragment {
+  display: inline;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-shadow: none;
+  vertical-align: baseline;
+}
+
+.archive-clean .low-frequency-fragment::after {
+  display: none;
+}
+
+.low-frequency-stabilizer {
+  position: fixed;
+  left: 10px;
+  top: 46%;
+  z-index: 20;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.is-low-frequency-stabilized .frequency-window,
+.archive-clean .frequency-window,
+.is-low-frequency-stabilized .low-frequency-line,
+.archive-clean .low-frequency-line,
+.is-low-frequency-stabilized .low-frequency-band,
+.archive-clean .low-frequency-band {
+  opacity: 1;
+  transform: none !important;
+  transition: none;
+}
+
+.is-low-frequency-stabilized .frequency-window__payload,
+.archive-clean .frequency-window__payload {
+  transform: none;
+  opacity: 0.34;
+}
+
+.is-low-frequency-stabilized .frequency-window__display::after,
+.archive-clean .frequency-window__display::after {
+  display: none;
+}
+
 .neuro-diagnostic-badge,
 .neuro-diagnostic-note {
   width: fit-content;
@@ -3246,6 +3569,20 @@ html.is-void-final-lock-root,
     display: none;
   }
 
+  .low-frequency-stabilizer {
+    position: static;
+    margin: 0.5rem 0 1rem;
+    writing-mode: horizontal-tb;
+  }
+
+  .low-frequency-line--narrow,
+  .frequency-window,
+  .frequency-window:nth-of-type(2n) {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .archive-doc-05 .essay p.is-unplanned-fractured-line {
     border-left: 0;
     padding-left: 0;
@@ -3297,5 +3634,19 @@ html.is-void-final-lock-root,
     text-shadow: none !important;
     transform: none !important;
     clip-path: none !important;
+  }
+
+  .archive-doc-07 *,
+  .archive-doc-07 *::before,
+  .archive-doc-07 *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .archive-doc-07 .low-frequency-line,
+  .archive-doc-07 .frequency-window,
+  .archive-doc-07 .low-frequency-band {
+    opacity: 1;
+    transform: none !important;
   }
 }

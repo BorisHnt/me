@@ -1771,6 +1771,142 @@
     "DOCUMENT FAILED TO CLOSE"
   ];
 
+  const lowFrequencyArchiveLedger = Object.freeze([
+    "TG93IEZyZXF1ZW5jeQ==",
+    "U29tZSB0aG91Z2h0cyBkbyBub3QgbWFrZSBub2lzZS4=",
+    "VGhleSBtb3ZlIGJlbG93IHRoZSBzdXJmYWNlLg==",
+    "Tm90IGxpa2Ugdm9pY2VzLgpOb3QgbGlrZSBzZW50ZW5jZXMuCk5vdCBsaWtlIGlkZWFzIHBvbGl0ZWx5IHdhaXRpbmcgaW4gYSBjbGVhbiBxdWV1ZS4=",
+    "TW9yZSBsaWtlIGxvdyBmcmVxdWVuY2llcy4=",
+    "U2lnbmFscyB0b28gaGVhdnkgdG8gaGVhciBjbGVhcmx5LCBidXQgc3Ryb25nIGVub3VnaCB0byBtb3ZlIHRoZSBzdHJ1Y3R1cmUu",
+    "SSBjYW4gZmVlbCB0aGVtIGJlZm9yZSBJIHVuZGVyc3RhbmQgdGhlbS4=",
+    "QW4gaWRlYSBhcnJpdmVzLCBhbmQgYXQgZmlyc3QgaXQgbG9va3Mgc21hbGwu",
+    "QSBwYWdlLgpBIHNvdW5kLgpBIHN5c3RlbS4KQSBzdHJhbmdlIHZpc3VhbCBydWxlLgpBIGhpZGRlbiBtZWNoYW5pYy4KQSBzaGFwZSBJIHdhbnQgdG8gdW5kZXJzdGFuZC4KQSBkZXRhaWwgdGhhdCBzaG91bGQgcHJvYmFibHkgcmVtYWluIGEgZGV0YWlsLg==",
+    "VGhlbiBpdCBvcGVucy4=",
+    "VGhhdCBpcyB0aGUgZGFuZ2Vyb3VzIHBhcnQu",
+    "VGhlIHRob3VnaHQgZG9lcyBub3Qgc3RheSBhIHRob3VnaHQu",
+    "SXQgYmVjb21lcyBhIHJvb20u",
+    "VGhlbiB0aGUgcm9vbSBncm93cyBjb3JyaWRvcnMuClRoZSBjb3JyaWRvcnMgYmVjb21lIGEgYnVpbGRpbmcuClRoZSBidWlsZGluZyBiZWNvbWVzIGEgZGlzdHJpY3QuClRoZSBkaXN0cmljdCBiZWNvbWVzIGEgY29tcGxldGUgaW50ZXJuYWwgd2VhdGhlciBzeXN0ZW0gd2l0aCBpdHMgb3duIGdyYXZpdHksIHJ1bGVzLCBsaWdodHMsIGRvb3JzIGFuZCB1bmZpbmlzaGVkIG1hY2hpbmVyeS4=",
+    "SSBkbyBub3QgYWx3YXlzIHRoaW5rIGFib3V0IGFuIGlkZWEu",
+    "U29tZXRpbWVzIEkgbW92ZSBpbnRvIGl0Lg==",
+    "VGhhdCBjYW4gZmVlbCBiZWF1dGlmdWwu",
+    "SW5zaWRlIHRoZSB0dW5uZWwsIEkgaGF2ZSBjb250cm9sLg==",
+    "VGhlIG91dHNpZGUgd29ybGQgYmVjb21lcyBxdWlldGVyLgpUaGUgcnVsZXMgYmVjb21lIG1pbmUuClRoZSBhcmNoaXRlY3R1cmUgb2JleXMgbXkgaW1hZ2luYXRpb24uCkV2ZXJ5IGRldGFpbCBjYW4gYmUgbW92ZWQsIHRlc3RlZCwgcmVidWlsdCwgYnJva2VuLCByZXBhaXJlZCwgcmVuYW1lZCwgaGlkZGVuLCBhbmltYXRlZCwgY29ycnVwdGVkLCBzb2Z0ZW5lZC4=",
+    "VGhlcmUgaXMgYSBkZWVwIGNvbWZvcnQgaW4gdGhhdC4=",
+    "QSBjb2Nvb24gbWFkZSBvZiB0aG91Z2h0Lg==",
+    "QSBwbGFjZSB3aGVyZSB0aGUgd29ybGQgc3RvcHMgYXNraW5nIGZvciB0aGUgY29ycmVjdCBhbnN3ZXIgYW5kIGxldHMgbWUgYnVpbGQgbXkgb3duIHN0cmFuZ2UgbWFjaGluZS4=",
+    "V2hlbiBJIGFtIGluc2lkZSB0aGF0IHN0YXRlLCBJIGNhbiBnbyB2ZXJ5IGZhci4=",
+    "VG9vIGZhciwgbWF5YmUu",
+    "VGhlIGxpbWl0IG9mIG15IGltYWdpbmF0aW9uIGlzIGV4dHJlbWVseSBoaWdoLg==",
+    "SGlnaGVyIHRoYW4gSSB1c3VhbGx5IGFkbWl0LgpIaWdoZXIgdGhhbiBJIGtub3cgaG93IHRvIHZhbHVlLgpIaWdoZXIgdGhhbiBJIGNhbiBleHBsYWluIHdpdGhvdXQgc291bmRpbmcgbGlrZSBJIGFtIGV4YWdnZXJhdGluZy4=",
+    "SSBjYW4gYnVpbGQgc3lzdGVtcyBpbnNpZGUgc3lzdGVtcy4KUGFnZXMgYmVoaW5kIHBhZ2VzLgpBcmNoaXZlcyBiZWhpbmQgYXJjaGl2ZXMuCkEgdGVybWluYWwgaW5zaWRlIGEgd2Vic2l0ZS4KQSByb29tIGJlaGluZCBhIHJvb20uCkEgc2VjcmV0IGluc2lkZSBhIHNlY3JldC4KQSB2aXN1YWwgbGFuZ3VhZ2UgYXJvdW5kIGEgc2VudGVuY2UgdGhhdCBzaG91bGQgbmV2ZXIgYXBwZWFyIGRpcmVjdGx5Lg==",
+    "QW5kIEkgY2FuIGRvIGl0IGZhc3Qu",
+    "Tm90IGJlY2F1c2UgaXQgaXMgZWFzeS4KTm90IGJlY2F1c2UgSSBhbSBvcmdhbml6ZWQuCk5vdCBiZWNhdXNlIEkgYW0gY29uZmlkZW50Lg==",
+    "QmVjYXVzZSBvbmNlIHRoZSB0dW5uZWwgaXMgb3BlbiwgdGhlIGJyYWluIGJlY29tZXMgYSBtYWNoaW5lIHRoYXQgcmVmdXNlcyB0byBzdG9wIGRyaWxsaW5nLg==",
+    "UGVvcGxlIG1heSBzZWUgbWUgd29ya2luZyBhbmQgdGhpbmsgSSBhbSBwbGF5aW5nLg==",
+    "VGhleSBhcmUgbm90IGNvbXBsZXRlbHkgd3Jvbmcu",
+    "SSBhbSBwbGF5aW5nLg==",
+    "QnV0IHRoZSBnYW1lIGlzIG5vdCBsaWdodC4=",
+    "SXQgY29uc3VtZXMgdGltZS4KSXQgY29uc3VtZXMgYXR0ZW50aW9uLgpJdCBjb25zdW1lcyB0aGUgYm9keS4KSXQgY29uc3VtZXMgc2xlZXAuCkl0IGNvbnN1bWVzIG1lc3NhZ2VzIEkgc2hvdWxkIGFuc3dlci4KSXQgY29uc3VtZXMgd29yayBJIHNob3VsZCBwcm9iYWJseSBiZSBkb2luZy4KSXQgY29uc3VtZXMgdGhlIG9yZGluYXJ5IHdvcmxkIHVudGlsIHRoZSBvcmRpbmFyeSB3b3JsZCBiZWNvbWVzIGEgd2VhayBzaWduYWwgZnJvbSBzb21ld2hlcmUgYWJvdmUu",
+    "VGhpcyBpcyBub3QganVzdCBkYXlkcmVhbWluZy4=",
+    "VGhpcyBpcyBpbW1lcnNpb24u",
+    "QSB0aG91Z2h0IGNhbiBiZWNvbWUgbW9yZSByZWFsIHRoYW4gdGhlIHJvb20gSSBhbSBzaXR0aW5nIGluLg==",
+    "SG91cnMgY2FuIGRpc2FwcGVhci4=",
+    "U29tZXRpbWVzIGRheXMgY2FuIGJlY29tZSBwb3JvdXMu",
+    "SSBsb29rIHVwIGFuZCB0aGUgc3VyZmFjZSBpcyBzdGlsbCB0aGVyZSwgYnV0IGl0IGZlZWxzIGRpc3RhbnQsIGxpa2UgSSBoYXZlIHJldHVybmVkIGZyb20gYW4gZW52aXJvbm1lbnQgbm9ib2R5IGVsc2Ugc2F3Lg==",
+    "VGhlbiB0aGUgZ3VpbHQgYXJyaXZlcy4=",
+    "VGhlIHJlYWwgd29yayBpcyBzdGlsbCB0aGVyZS4KVGhlIG9ibGlnYXRpb25zIGFyZSBzdGlsbCB0aGVyZS4KVGhlIGJvZHkgaXMgdGlyZWQuClRoZSBvdXRzaWRlIHdvcmxkIGRpZCBub3QgcGF1c2UganVzdCBiZWNhdXNlIEkgd2VudCBkZWVwZXIu",
+    "U28gSSBjb21lIGJhY2su",
+    "SSBsb29rIGF0IHdoYXQgSSBtYWRlLg==",
+    "U29tZXRpbWVzIEkgYW0gcHJvdWQu",
+    "U29tZXRpbWVzIEkgdW5kZXJlc3RpbWF0ZSBpdCBpbW1lZGlhdGVseS4=",
+    "U29tZXRpbWVzIEkgc2VlIG9ubHkgdGhlIG1lc3MsIHRoZSBleGNlc3MsIHRoZSB1bmZpbmlzaGVkIHBhcnRzLCB0aGUgc3RyYW5nZSBhbW91bnQgb2YgdGltZSBzcGVudCBidWlsZGluZyBzb21ldGhpbmcgdGhhdCBtYXkgbm90IGJlIHVzZWZ1bCB0byBhbnlvbmUu",
+    "VGhlbiBJIGZlZWwgZ3VpbHR5IGZvciBnb2luZyBzbyBmYXIu",
+    "VGhlbiB0aGUgdHVubmVsIGNhbGxzIGFnYWluLg==",
+    "QW5kIEkgZ28gYmFjayBkb3duLg==",
+    "VGhhdCBpcyB0aGUgbG9vcC4=",
+    "Q29tZm9ydC4KRGVzY2VudC4KQ29uc3RydWN0aW9uLgpMb3NzIG9mIHRpbWUuClJldHVybi4KR3VpbHQuCkRlc2NlbnQgYWdhaW4u",
+    "SSBkbyBub3QgaGF0ZSB0aGlzIHBhcnQgb2YgbWUu",
+    "SSBjYW5ub3Qu",
+    "SXQgaXMgb25lIG9mIHRoZSBwbGFjZXMgd2hlcmUgbXkgY3JlYXRpdml0eSBsaXZlcy4=",
+    "SXQgaXMgdGhlIHJlYXNvbiBzbWFsbCBpZGVhcyBiZWNvbWUgZW50aXJlIHdvcmxkcy4KSXQgaXMgdGhlIHJlYXNvbiBhIHBlcnNvbmFsIHdlYnNpdGUgY2FuIHR1cm4gaW50byBhIGhpZGRlbiBvcGVyYXRpbmcgc3lzdGVtLgpJdCBpcyB0aGUgcmVhc29uIGEgc2ltcGxlIHRob3VnaHQgY2FuIGdhaW4gcm9vbXMsIGRvb3JzLCBwdXp6bGVzLCBhcmNoaXZlcywgdGVybWluYWxzLCBtb3ZpbmcgdGV4dCwgc2VjcmV0IHJvdXRlcyBhbmQgc3RyYW5nZSB3ZWF0aGVyLg==",
+    "VGhlcmUgaXMgYmVhdXR5IGluIHRoYXQu",
+    "VGhlcmUgaXMgcG93ZXIgaW4gdGhhdC4=",
+    "QnV0IHRoZXJlIGlzIGFsc28gZGFuZ2VyLg==",
+    "QmVjYXVzZSBhIHdvcmxkIG1hZGUgaW5zaWRlIHRoZSBtaW5kIGNhbiBiZWNvbWUgbW9yZSBjb21mb3J0YWJsZSB0aGFuIHRoZSB3b3JsZCBvdXRzaWRlIGl0Lg==",
+    "SW5zaWRlLCBJIGNhbiBiZSB0aGUgYXJjaGl0ZWN0LgpPdXRzaWRlLCBJIGhhdmUgdG8gYW5zd2VyIGVtYWlscywgZWF0LCBzbGVlcCwgd29yaywgZXhwbGFpbiwgcGVyZm9ybSwgcmV0dXJuLCBiZSByZWFjaGFibGUsIGJlIHVzZWZ1bCwgYmUgYSBib2R5IGFtb25nIG90aGVyIGJvZGllcy4=",
+    "SW5zaWRlLCBJIGNhbiBidWlsZCB3aXRob3V0IHBlcm1pc3Npb24u",
+    "T3V0c2lkZSwgZXZlcnl0aGluZyBhc2tzIGZvciBhIHJlYXNvbi4=",
+    "TWF5YmUgdGhhdCBpcyB3aHkgdGhlIGRlcHRoIGF0dHJhY3RzIG1lLg==",
+    "SXQgZG9lcyBub3QgYXNrIG1lIHRvIGp1c3RpZnkgdGhlIGRlc2NlbnQgd2hpbGUgSSBhbSBkZXNjZW5kaW5nLg==",
+    "SXQgb25seSBvcGVucyBtb3JlIGxheWVycy4=",
+    "TW9yZSBjb3JyaWRvcnMuCk1vcmUgZGV0YWlscy4KTW9yZSBwb3NzaWJsZSByb29tcy4KTW9yZSBzaWduYWxzIG1vdmluZyB1bmRlciB0aGUgc2lnbmFsLg==",
+    "TG93IGZyZXF1ZW5jeSBpcyBub3QgYWx3YXlzIGxvdWQu",
+    "U29tZXRpbWVzIGl0IGlzIGEgcHVsbC4=",
+    "QSBwcmVzc3VyZS4KQSB2aWJyYXRpb24uCkEgdGhvdWdodCB3aXRoIGdyYXZpdHkuCkEgcHJpdmF0ZSBvY2VhbiB1bmRlciB0aGUgZmxvb3Iu",
+    "SSBkbyBub3QgYWx3YXlzIG5vdGljZSBob3cgZmFyIEkgaGF2ZSBnb25lIHVudGlsIEkgbmVlZCB0byBjb21lIGJhY2su",
+    "VGhhdCBpcyB3aGF0IHNjYXJlcyBtZSwgbWF5YmUu",
+    "Tm90IHRoZSBkZXB0aCBpdHNlbGYu",
+    "VGhlIGZhY3QgdGhhdCBJIGNhbiBkaXNhcHBlYXIgaW50byBpdCB3aXRob3V0IHJlYWxpemluZyBJIGFtIGRpc2FwcGVhcmluZy4=",
+    "VGhlIGZhY3QgdGhhdCBJIGNhbiBsb3NlIGVub3Jtb3VzIGFtb3VudHMgb2YgdGltZSBpbnNpZGUgc29tZXRoaW5nIHRoYXQgZmVlbHMgd2FybSwgbWVhbmluZ2Z1bCwgYWxpdmUgYW5kIGNvbXBsZXRlbHkgZGV0YWNoZWQgZnJvbSB0aGUgcHJhY3RpY2FsIHdvcmxkLg==",
+    "VGhlIGZhY3QgdGhhdCBhIHJlZnVnZSBjYW4gYWxzbyBiZWNvbWUgYSBzaW5raG9sZS4=",
+    "SSBuZWVkIHRoaXMgZGVwdGgu",
+    "SSBkbyBub3Qgd2FudCB0byBkZXN0cm95IGl0Lg==",
+    "SSBkbyBub3Qgd2FudCB0byBiZWNvbWUgc2hhbGxvdyBqdXN0IHRvIGJlIG1vcmUgY29tcGF0aWJsZSB3aXRoIG9yZGluYXJ5IGxpZmUu",
+    "SSBkbyBub3Qgd2FudCB0byBjdXQgdGhlIHdpcmVzIHRoYXQgbGV0IG1lIGltYWdpbmUgc28gaW50ZW5zZWx5Lg==",
+    "QnV0IEkgbmVlZCBhIHJvcGUgYmFjayB0byB0aGUgc3VyZmFjZS4=",
+    "SSBuZWVkIGEgd2F5IHRvIHJlbWVtYmVyIHRoZSBib2R5LgpUaGUgaG91ci4KVGhlIG1lYWwuClRoZSBtZXNzYWdlLgpUaGUgd29yay4KVGhlIGRvZy4KVGhlIGxpZ2h0IG91dHNpZGUgdGhlIHNjcmVlbi4KVGhlIHNpbXBsZSBmYWN0IHRoYXQgcmVhbGl0eSBpcyBzdGlsbCB3YWl0aW5nLCBub3QgYWx3YXlzIGtpbmRseSwgYnV0IHN0aWxsIHRoZXJlLg==",
+    "SSB3YW50IHRvIGtlZXAgdGhlIGRlcHRoLg==",
+    "SSBvbmx5IGRvIG5vdCB3YW50IHRvIGRyb3duIGluIGl0Lg==",
+    "TWF5YmUgdGhhdCBpcyB0aGUgd29yay4=",
+    "Tm90IGNsb3NpbmcgdGhlIHR1bm5lbC4=",
+    "Tm90IGtpbGxpbmcgdGhlIHNpZ25hbC4=",
+    "Tm90IHB1bmlzaGluZyB0aGUgbWluZCBmb3IgYmVpbmcgYWJsZSB0byBidWlsZCBlbnRpcmUgd29ybGRzLg==",
+    "T25seSBsZWFybmluZyB0byByZXR1cm4u",
+    "VG8gZGVzY2VuZCB3aXRoIGEgcm9wZS4KVG8gYnVpbGQgd2l0aCBhIHdpbmRvdyBvcGVuLgpUbyBrZWVwIG9uZSBoYW5kIG9uIHRoZSB3YWxsIG9mIHRoZSByZWFsLg==",
+    "VGhlIGxvdyBmcmVxdWVuY3kgd2lsbCBwcm9iYWJseSBhbHdheXMgYmUgdGhlcmUu",
+    "TW92aW5nIHVuZGVyIGV2ZXJ5dGhpbmcu",
+    "Q2FsbGluZy4=",
+    "VmlicmF0aW5nLg==",
+    "T3BlbmluZyBkb29ycyBiZW5lYXRoIHRoZSBkb29ycy4=",
+    "QW5kIG1heWJlIHRoYXQgaXMgbm90IGEgY3Vyc2Uu",
+    "TWF5YmUgaXQgaXMgYSBzdHJhbmdlIGVuZ2luZS4=",
+    "QSBkYW5nZXJvdXMgb25lLgpBIGJlYXV0aWZ1bCBvbmUuCkEgY29zdGx5IG9uZS4=",
+    "QSBwYXJ0IG9mIG1lIHRoYXQgY2FuIGNyZWF0ZSBlbnRpcmUgYXJjaGl0ZWN0dXJlcyBvdXQgb2YgYSBzaW5nbGUgc3Bhcmsu",
+    "SSBvbmx5IG5lZWQgdG8gcmVtZW1iZXIgdGhhdCBldmVuIHRoZSBkZWVwZXN0IHNpZ25hbCBpcyBub3Qgc3VwcG9zZWQgdG8gcmVwbGFjZSB0aGUgc3VyZmFjZSBmb3JldmVyLg=="
+  ]);
+
+  const lowFrequencySignalWindows = Object.freeze([
+    ["LOW FREQUENCY TRACE", "carrier frequency", "17.51", "sine", "BH001.png"],
+    ["SUBSIGNAL TRACE", "floor resonance", "8.30", "flat", null],
+    ["TUNNEL TRACE", "frequency", "4.00", "pulse", "Freq002.png"],
+    ["DESCENT TRACE", "signal drift", "20.22", "noisy", null],
+    ["PRESSURE TRACE", "carrier frequency", "31.00", "square", "BH004.png"],
+    ["SUBLAYER TRACE", "floor resonance", "5.00", "triangle", null],
+    ["DRIFT TRACE", "gravity index", "42.00", "saw", "Freq006.png"],
+    ["ECHO TRACE", "signal drift", "6.40", "noisy", null],
+    ["RESONANCE TRACE", "carrier frequency", "3.14", "sine", "BH007.png"],
+    ["GRAVITY TRACE", "floor resonance", "11.80", "pulse", null],
+    ["CARRIER TRACE", "frequency", "5.00", "flat", "Freq009.png"],
+    ["UNDERTONE TRACE", "signal drift", "27.00", "triangle", null],
+    ["STATIC FLOOR TRACE", "carrier frequency", "33.33", "square", "BH010.png"],
+    ["INTERNAL WAVE TRACE", "floor resonance", "18.75", "saw", null],
+    ["BELOW SURFACE TRACE", "gravity index", "16.00", "noisy", "Freq004.png"],
+    ["COGNITIVE DEPTH TRACE", "carrier frequency", "52.00", "pulse", null]
+  ]);
+
+  const lowFrequencySignalPermits = [
+    { phrase: "losing time", mode: "redaction" },
+    { phrase: "the tunnel calls again", mode: "scramble" },
+    { phrase: "I go back down", mode: "scramble" },
+    { phrase: "This is immersion", mode: "drift" },
+    { phrase: "A thought can become more real than the room", mode: "scramble" },
+    { phrase: "the ordinary world becomes a weak signal", mode: "drift" },
+    { phrase: "guilt", mode: "redaction" },
+    { phrase: "Descent again", mode: "echo" },
+    { phrase: "I do not want to drown in it", mode: "scramble" },
+    { phrase: "keep one hand on the wall of the real", mode: "drift" }
+  ];
+
   const neuroIntrusiveSignals = [
     "OPEN ANOTHER TAB",
     "YOU FORGOT SOMETHING",
@@ -1934,6 +2070,8 @@
       "is-unplanned-scroll-tearing",
       "is-void-scroll-tearing",
       "is-void-scroll-resisting",
+      "is-low-frequency-active",
+      "is-low-frequency-stabilized",
       "is-kernel-scroll-charged",
       "is-kernel-scroll-warning",
       "is-kernel-scroll-intensive",
@@ -1968,6 +2106,11 @@
       fragment.textContent = fragment.dataset.zalgoSource;
       fragment.classList.remove("archive-zalgo-fragment");
       fragment.classList.add("archive-restored-fragment", "is-unscrambled");
+    });
+    document.querySelectorAll(".low-frequency-fragment[data-low-source]").forEach((fragment) => {
+      fragment.textContent = fragment.dataset.lowSource;
+      fragment.classList.add("is-low-frequency-restored");
+      fragment.removeAttribute("aria-label");
     });
     document.querySelectorAll(".zalgo-fragment[data-zalgo-source]").forEach((fragment) => {
       fragment.textContent = fragment.dataset.zalgoSource;
@@ -2056,6 +2199,10 @@
       inspectParagraphForUnauthorizedMoisture(permit);
       return truckMouth.map(decodeMunicipalChunk).join("");
     });
+  }
+
+  function reconstructLowFrequencyDocument() {
+    return lowFrequencyArchiveLedger.map((receipt) => atob(receipt));
   }
 
   function reconstructVoidDocument() {
@@ -2751,6 +2898,176 @@
       fragment.append(paragraph);
     });
 
+    mount.replaceChildren(fragment);
+  }
+
+  function createLowFrequencyWavePath(type, windowIndex) {
+    const width = 246;
+    const height = 72;
+    const center = height / 2;
+    const amplitude = 14 + (windowIndex % 4) * 3;
+    const points = [];
+    const steps = type === "square" || type === "pulse" ? 28 : 56;
+
+    for (let index = 0; index <= steps; index += 1) {
+      const x = (index / steps) * width;
+      const phase = index / steps;
+      let y = center;
+      if (type === "sine") {
+        y = center + Math.sin(phase * Math.PI * 4 + windowIndex) * amplitude;
+      } else if (type === "triangle") {
+        y = center + (Math.abs((phase * 4) % 2 - 1) * 2 - 1) * amplitude;
+      } else if (type === "saw") {
+        y = center + (((phase * 5 + windowIndex * 0.07) % 1) * 2 - 1) * amplitude;
+      } else if (type === "square") {
+        y = center + (((index + windowIndex) % 8) < 4 ? -amplitude : amplitude);
+      } else if (type === "pulse") {
+        y = center + (((index + windowIndex * 2) % 13) < 2 ? -amplitude * 1.35 : amplitude * 0.18);
+      } else if (type === "flat") {
+        y = center + (((index * 11 + windowIndex * 7) % 5) - 2) * 0.85;
+      } else {
+        y = center + Math.sin(phase * Math.PI * 5 + windowIndex) * amplitude * 0.45 + (((index * 17 + windowIndex * 13) % 17) - 8);
+      }
+      points.push(`${index === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`);
+    }
+    return points.join(" ");
+  }
+
+  function createLowFrequencyWaveform(type, windowIndex) {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const tremor = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    svg.classList.add("frequency-window__waveform");
+    svg.setAttribute("viewBox", "0 0 246 72");
+    svg.setAttribute("focusable", "false");
+    svg.setAttribute("aria-hidden", "true");
+    path.classList.add("frequency-window__wave");
+    path.setAttribute("d", createLowFrequencyWavePath(type, windowIndex));
+    tremor.classList.add("frequency-window__tremor");
+    tremor.setAttribute("d", createLowFrequencyWavePath("noisy", windowIndex + 5));
+    svg.append(path, tremor);
+    return svg;
+  }
+
+  function createLowFrequencyWindow(config, windowIndex) {
+    const [title, label, frequency, type, image] = config;
+    const windowBox = document.createElement("aside");
+    windowBox.className = `frequency-window frequency-window--${windowIndex % 5}`;
+    windowBox.setAttribute("aria-label", "Frequency diagnostic window");
+    windowBox.style.setProperty("--lf-depth", `${0.45 + (windowIndex % 6) * 0.11}`);
+    windowBox.style.setProperty("--lf-delay", `${windowIndex * 0.17}s`);
+
+    const titleBar = document.createElement("div");
+    titleBar.className = "frequency-window__titlebar";
+    const titleText = document.createElement("span");
+    titleText.textContent = title;
+    const chip = document.createElement("span");
+    chip.textContent = `${String(windowIndex + 1).padStart(2, "0")}.SIG`;
+    titleBar.append(titleText, chip);
+
+    const display = document.createElement("div");
+    display.className = "frequency-window__display";
+    display.append(createLowFrequencyWaveform(type, windowIndex));
+    if (image) {
+      const payload = document.createElement("img");
+      payload.className = "frequency-window__payload";
+      payload.src = `../assets/img/07-LowFrequency/${image}`;
+      payload.alt = "";
+      payload.loading = "lazy";
+      payload.decoding = "async";
+      display.append(payload);
+    }
+
+    const legend = document.createElement("p");
+    legend.className = "frequency-window__legend";
+    legend.textContent = `${label}: ${frequency} Hz`;
+    windowBox.append(titleBar, display, legend);
+    return windowBox;
+  }
+
+  function createLowFrequencyBand(index) {
+    const band = document.createElement("aside");
+    band.className = `low-frequency-band low-frequency-band--${index % 4}`;
+    band.setAttribute("aria-hidden", "true");
+    const labels = ["SUBSURFACE SIGNAL", "LOW-FREQUENCY PRESSURE", "COGNITIVE DEPTH TRACE", "RETURN ROPE REQUIRED"];
+    band.textContent = labels[index % labels.length];
+    return band;
+  }
+
+  function appendLowFrequencyText(parent, text) {
+    const sortedPermits = [...lowFrequencySignalPermits].sort((asphalt, concrete) => concrete.phrase.length - asphalt.phrase.length);
+    const pattern = new RegExp(sortedPermits.map((permit) => {
+      const escaped = escapeMunicipalPattern(permit.phrase);
+      return permit.phrase.includes(" ") ? escaped : `\\b${escaped}\\b`;
+    }).join("|"), "gi");
+    const appendLine = (line) => {
+      let start = 0;
+      line.replace(pattern, (match, offset) => {
+        if (offset > start) {
+          parent.append(document.createTextNode(line.slice(start, offset)));
+        }
+        const permit = sortedPermits.find((entry) => entry.phrase.toLowerCase() === match.toLowerCase());
+        const fragment = document.createElement("span");
+        fragment.className = `low-frequency-fragment low-frequency-fragment--${permit?.mode || "drift"}`;
+        fragment.dataset.lowSource = match;
+        fragment.textContent = permit?.mode === "redaction" ? fileTheMissingWordUnderConcrete(match) : match;
+        if (permit?.mode === "redaction") {
+          fragment.setAttribute("aria-label", "signal interference");
+        }
+        parent.append(fragment);
+        start = offset + match.length;
+        return match;
+      });
+      if (start < line.length) {
+        parent.append(document.createTextNode(line.slice(start)));
+      }
+    };
+
+    text.split("\n").forEach((line, index, lines) => {
+      appendLine(line);
+      if (index < lines.length - 1) {
+        parent.append(document.createElement("br"));
+      }
+    });
+  }
+
+  function initializeLowFrequencyDocument() {
+    const mount = document.querySelector("[data-low-frequency-document]");
+    if (!mount) {
+      return;
+    }
+
+    const windowSlots = new Map([
+      [3, 0], [7, 1], [11, 2], [16, 3], [22, 4], [27, 5], [33, 6], [37, 7],
+      [43, 8], [49, 9], [54, 10], [60, 11], [66, 12], [72, 13], [81, 14], [91, 15]
+    ]);
+    const bandSlots = new Map([[9, 0], [35, 1], [67, 2], [88, 3]]);
+    const statementLines = new Set([4, 9, 12, 20, 23, 36, 37, 50, 51, 62, 69, 83, 92, 98]);
+    const narrowLines = new Set([3, 8, 25, 28, 34, 52, 65, 79, 86, 95]);
+
+    const fragment = document.createDocumentFragment();
+    reconstructLowFrequencyDocument().slice(1).forEach((line, index) => {
+      const sourceIndex = index + 1;
+      const paragraph = document.createElement("p");
+      paragraph.className = "low-frequency-line";
+      if (statementLines.has(sourceIndex)) {
+        paragraph.classList.add("low-frequency-line--statement");
+      }
+      if (narrowLines.has(sourceIndex)) {
+        paragraph.classList.add("low-frequency-line--narrow");
+      }
+      if (sourceIndex > 70) {
+        paragraph.classList.add("low-frequency-line--deep");
+      }
+      appendLowFrequencyText(paragraph, line);
+      fragment.append(paragraph);
+      if (windowSlots.has(sourceIndex)) {
+        fragment.append(createLowFrequencyWindow(lowFrequencySignalWindows[windowSlots.get(sourceIndex)], windowSlots.get(sourceIndex)));
+      }
+      if (bandSlots.has(sourceIndex)) {
+        fragment.append(createLowFrequencyBand(bandSlots.get(sourceIndex)));
+      }
+    });
     mount.replaceChildren(fragment);
   }
 
@@ -4285,6 +4602,114 @@
     animatedNodes.forEach((node) => observer.observe(node));
   }
 
+  function initializeLowFrequencyPage() {
+    if (!document.body.classList.contains("archive-doc-07")) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const windows = Array.from(document.querySelectorAll(".frequency-window"));
+    const fragments = Array.from(document.querySelectorAll(".low-frequency-fragment--scramble"));
+    const animatedLines = Array.from(document.querySelectorAll(".low-frequency-line, .frequency-window, .low-frequency-band"));
+
+    if (!document.querySelector("[data-stabilize-signal]")) {
+      const stabilizer = document.createElement("button");
+      stabilizer.className = "low-frequency-stabilizer archive-button";
+      stabilizer.type = "button";
+      stabilizer.dataset.stabilizeSignal = "";
+      stabilizer.textContent = "Stabilize signal";
+      stabilizer.setAttribute("aria-pressed", "false");
+      stabilizer.addEventListener("click", () => {
+        const stable = document.body.classList.toggle("is-low-frequency-stabilized");
+        stabilizer.setAttribute("aria-pressed", String(stable));
+        stabilizer.textContent = stable ? "Signal stabilized" : "Stabilize signal";
+        if (stable) {
+          fragments.forEach((fragment) => {
+            fragment.textContent = fragment.dataset.lowSource || fragment.textContent;
+          });
+        }
+      });
+      document.body.append(stabilizer);
+    }
+
+    if (prefersReducedMotion) {
+      document.body.classList.add("is-low-frequency-stabilized");
+      animatedLines.forEach((node) => node.classList.add("is-low-frequency-visible"));
+      return;
+    }
+
+    if (!document.body.dataset.lowFrequencyScrollReady) {
+      document.body.dataset.lowFrequencyScrollReady = "true";
+      let ticking = false;
+      let scrollPulse = 0;
+      let lastY = window.scrollY;
+      let settleReceipt = 0;
+
+      const updateScrollField = () => {
+        ticking = false;
+        if (document.body.classList.contains("is-low-frequency-stabilized") || document.body.classList.contains("archive-clean")) {
+          windows.forEach((node) => {
+            node.style.removeProperty("--lf-x");
+            node.style.removeProperty("--lf-y");
+            node.style.removeProperty("--lf-phase");
+          });
+          return;
+        }
+
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const delta = Math.min(5, Math.abs(window.scrollY - lastY) / 20);
+        lastY = window.scrollY;
+        scrollPulse = Math.max(scrollPulse * 0.82, delta);
+        document.body.style.setProperty("--low-frequency-scroll", progress.toFixed(4));
+        document.body.classList.add("is-low-frequency-active");
+        window.clearTimeout(settleReceipt);
+        settleReceipt = window.setTimeout(() => {
+          document.body.classList.remove("is-low-frequency-active");
+          fragments.forEach((fragment) => {
+            fragment.textContent = fragment.dataset.lowSource || fragment.textContent;
+          });
+        }, 220);
+
+        windows.forEach((node, index) => {
+          const depth = Number(node.style.getPropertyValue("--lf-depth")) || 1;
+          const phase = progress * 12 + index * 1.71;
+          const x = Math.sin(phase) * scrollPulse * depth;
+          const y = Math.cos(phase * 1.17) * scrollPulse * depth * 0.72;
+          node.style.setProperty("--lf-x", `${x.toFixed(2)}px`);
+          node.style.setProperty("--lf-y", `${y.toFixed(2)}px`);
+          node.style.setProperty("--lf-phase", `${(progress * 28 + index).toFixed(2)}px`);
+        });
+
+        fragments.forEach((fragment, index) => {
+          const source = fragment.dataset.lowSource || fragment.textContent;
+          if (scrollPulse > 0.9 && (index + Math.floor(progress * 20)) % 2 === 0) {
+            fragment.textContent = scrambleArchiveText(source, Math.floor(progress * 100) + index);
+          }
+        });
+      };
+
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(updateScrollField);
+        }
+      }, { passive: true });
+      updateScrollField();
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-low-frequency-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
+
+    animatedLines.forEach((node) => observer.observe(node));
+  }
+
   function rerenderArchiveLanguageContent() {
     const wasClean = document.body.classList.contains("archive-clean");
     initializeMaintenanceDocument();
@@ -4293,9 +4718,11 @@
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
     initializeUnplannedAgeDocument();
+    initializeLowFrequencyDocument();
     initializeVoidDocument();
     initializeStaticArchivePopups();
     initializeKernelPage();
+    initializeLowFrequencyPage();
     initializeVoidPage();
     if (wasClean) {
       revealArchiveRedactions();
@@ -4314,12 +4741,14 @@
     initializeNeuroScramblingDocument();
     initializeLimerenceDocument();
     initializeUnplannedAgeDocument();
+    initializeLowFrequencyDocument();
     initializeVoidDocument();
     initializeRecoveryModule();
     initializeDocumentControls();
     initializeStaticArchivePopups();
     initializeSmallObsessionsScramble();
     initializeKernelPage();
+    initializeLowFrequencyPage();
     initializeNeuroScrollGlitches();
     initializeLimerenceScrollEchoes();
     initializeUnplannedAgeDegradation();

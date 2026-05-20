@@ -72,8 +72,8 @@
       "archives.doc05.title": "05 — Cathédrale du désir",
       "archives.doc06.meta": "DOCUMENT 06 / STATUT : NON RÉSOLU",
       "archives.doc06.title": "06 — Âge non prévu",
-      "archives.doc07.meta": "DOCUMENT 07 / STATUT : SANS NOM",
-      "archives.doc07.title": "07 — [SANS NOM]",
+      "archives.doc07.meta": "DOCUMENT 07 / STATUT : BASSE FRÉQUENCE",
+      "archives.doc07.title": "07 — Basse fréquence",
       "archives.doc08.meta": "DOCUMENT 08 / STATUT : CONTAMINÉ",
       "archives.doc08.title": "08 — Le Vide n’est pas vide",
       "archives.hub.kicker": "Dossier récupéré / fragments de phrase non indexés",
@@ -100,8 +100,8 @@
       "archives.card.05.status": "Statut : émotionnellement dangereux",
       "archives.card.06.title": "Âge non prévu",
       "archives.card.06.status": "Statut : non résolu",
-      "archives.card.07.title": "[SANS NOM]",
-      "archives.card.07.status": "Statut : sans nom",
+      "archives.card.07.title": "Basse fréquence",
+      "archives.card.07.status": "Statut : signal bas",
       "archives.card.08.title": "Le Vide n’est pas vide",
       "archives.card.08.status": "Statut : contaminé",
       "archives.recovery.title": "MODULE DE RÉCUPÉRATION",
@@ -684,8 +684,8 @@
       "[06] Unplanned Age",
       "     /archives/06-unplanned-age.html",
       "",
-      "[07] [NO NAME]",
-      "     /archives/07-no-name.html",
+      "[07] Low Frequency",
+      "     /archives/07-low-frequency.html",
       "",
       "[08] The Void Is Not Empty",
       "     /archives/08-void.html",
@@ -842,7 +842,7 @@ The machine only looked at itself.`;
     "archives/04-neuro-scrambling.html",
     "archives/05-limerence.html",
     "archives/06-unplanned-age.html",
-    "archives/07-no-name.html",
+    "archives/07-low-frequency.html",
     "archives/08-void.html",
     "room/index.html",
     "room/01-useless-things.html",
@@ -871,7 +871,7 @@ The machine only looked at itself.`;
 │   ├── 04-neuro-scrambling.html
 │   ├── 05-limerence.html
 │   ├── 06-unplanned-age.html
-│   ├── 07-no-name.html
+│   ├── 07-low-frequency.html
 │   └── 08-void.html
 ├── terminal
 │   └── mounted in footer window
@@ -900,7 +900,7 @@ The machine only looked at itself.`;
 │   ├── 04-neuro-scrambling.html
 │   ├── 05-limerence.html
 │   ├── 06-unplanned-age.html
-│   ├── 07-no-name.html
+│   ├── 07-low-frequency.html
 │   └── 08-void.html
 ├── terminal
 │   └── mounted in footer window
@@ -1062,7 +1062,7 @@ open <path>
 │   ├── 04-neuro-scrambling.html
 │   ├── 05-limerence.html
 │   ├── 06-unplanned-age.html
-│   ├── 07-no-name.html
+│   ├── 07-low-frequency.html
 │   └── 08-void.html
 └── terminal
     └── mounted in footer window`);
