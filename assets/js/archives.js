@@ -2224,21 +2224,30 @@
     reactor.setAttribute("aria-hidden", "true");
 
     const colors = ["#0f0f1b", "#565a75", "#c6b7be", "#fafbf6"];
-    Array.from({ length: 144 }).forEach((_, index) => {
+    Array.from({ length: 240 }).forEach((_, index) => {
       const orbit = document.createElement("span");
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
-      orbit.style.setProperty("--particle-radius", `${75 + Math.random() * 365}px`);
-      orbit.style.setProperty("--particle-duration", `${2.8 + Math.random() * 5.6}s`);
-      orbit.style.setProperty("--particle-delay", `${Math.random() * -7}s`);
-      orbit.style.setProperty("--particle-wobble", `${2 + Math.random() * 11}px`);
-      orbit.style.setProperty("--particle-wobble-duration", `${1.8 + Math.random() * 3.8}s`);
-      orbit.style.setProperty("--particle-breathe-duration", `${3 + Math.random() * 5.5}s`);
+      orbit.style.setProperty("--particle-radius", `${95 + Math.random() * 520}px`);
+      orbit.style.setProperty("--particle-duration", `${1.45 + Math.random() * 3.8}s`);
+      orbit.style.setProperty("--particle-delay", `${Math.random() * -4.8}s`);
+      orbit.style.setProperty("--particle-wobble", `${3 + Math.random() * 15}px`);
+      orbit.style.setProperty("--particle-wobble-duration", `${1.1 + Math.random() * 2.4}s`);
+      orbit.style.setProperty("--particle-breathe-duration", `${2.4 + Math.random() * 4.2}s`);
       orbit.style.setProperty("--particle-size", `${2 + Math.random() * 6}px`);
-      orbit.style.setProperty("--particle-tail", `${18 + Math.random() * 54}px`);
+      orbit.style.setProperty("--particle-tail", `${58 + Math.random() * 118}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
       const particle = document.createElement("span");
       particle.className = "kernel-particle";
+      Array.from({ length: 16 }).forEach((_, tailIndex) => {
+        const segment = document.createElement("span");
+        segment.className = "kernel-particle-tail-segment";
+        segment.style.setProperty("--tail-angle", `${(tailIndex + 1) * -2.15}deg`);
+        segment.style.setProperty("--tail-opacity", `${0.38 - tailIndex * 0.021}`);
+        segment.style.setProperty("--tail-size", `${Math.max(1, 8 - tailIndex * 0.34)}px`);
+        segment.style.setProperty("--tail-inset", `${tailIndex * 4.4}px`);
+        orbit.append(segment);
+      });
       orbit.append(particle);
       reactor.append(orbit);
     });
@@ -2293,19 +2302,6 @@
     return box;
   }
 
-  function createKernelFieldBreak() {
-    const field = document.createElement("aside");
-    field.className = "kernel-field-break";
-    field.setAttribute("aria-hidden", "true");
-    ["softness", "trust", "signal", "warmth", "containment", "protection", "gentle protocol", "safe chamber"].forEach((text, index) => {
-      const particle = document.createElement("span");
-      particle.className = `kernel-field-break__particle kernel-field-break__particle--${index}`;
-      particle.textContent = text;
-      field.append(particle);
-    });
-    return field;
-  }
-
   function initializeKernelDocument() {
     const mount = document.querySelector("[data-kernel-document]");
     if (!mount) {
@@ -2323,7 +2319,6 @@
       [86, { id: "08", trace: "final rotation: 4 × 5", status: "state: online", tone: "stable" }]
     ]);
     const diagnosticSlots = new Map([[10, 0], [17, 1], [29, 2], [53, 3], [83, 4]]);
-    const fieldBreaks = new Set([8, 42, 64, 87]);
     const statementLines = new Set([2, 3, 4, 8, 25, 42, 48, 49, 70, 71, 82, 89]);
     const pressureLines = new Set([11, 13, 14, 15, 16, 17, 32, 33, 34, 35, 41, 54, 55, 56, 57]);
     const shutdownLines = new Set([20, 21, 22, 23, 24, 26]);
@@ -2355,9 +2350,6 @@
       }
       if (diagnosticSlots.has(sourceIndex)) {
         fragment.append(createKernelDiagnosticPanel(diagnosticSlots.get(sourceIndex)));
-      }
-      if (fieldBreaks.has(sourceIndex)) {
-        fragment.append(createKernelFieldBreak());
       }
     });
 
@@ -3907,7 +3899,7 @@
     }
 
     const animatedNodes = Array.from(document.querySelectorAll(
-      ".kernel-line, .kernel-diagnostic-panel, .kernel-pulse, .kernel-field-break"
+      ".kernel-line, .kernel-diagnostic-panel, .kernel-pulse"
     ));
     if (animatedNodes.length === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       animatedNodes.forEach((node) => node.classList.add("is-kernel-visible"));

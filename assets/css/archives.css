@@ -521,37 +521,6 @@ body.archive-shell {
     var(--paper);
 }
 
-.kernel-document::before,
-.kernel-document::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  border: 1px solid rgba(86, 90, 117, 0.32);
-  border-radius: 50%;
-}
-
-.kernel-document::before {
-  top: 8.5rem;
-  left: 50%;
-  width: min(88vw, 760px);
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  box-shadow:
-    inset 0 0 0 12px rgba(198, 183, 190, 0.16),
-    0 0 0 1px rgba(15, 15, 27, 0.08);
-  animation: kernel-ring-breathe 7.8s steps(18, end) infinite;
-}
-
-.kernel-document::after {
-  right: -11rem;
-  bottom: 11rem;
-  width: 28rem;
-  aspect-ratio: 1;
-  opacity: 0.26;
-  animation: kernel-ring-breathe 11s steps(22, end) infinite reverse;
-}
-
 .kernel-document .document-header,
 .kernel-essay {
   position: relative;
@@ -570,12 +539,12 @@ body.archive-shell {
   z-index: 0;
   display: grid;
   place-items: center;
-  width: min(1040px, 118vw);
+  width: min(1450px, 158vw);
   aspect-ratio: 1;
   margin: 0;
   color: var(--steel);
   font-family: var(--mono);
-  opacity: 0.52;
+  opacity: 0.58;
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
@@ -589,7 +558,7 @@ body.archive-shell {
 }
 
 .kernel-reactor::before {
-  inset: 8%;
+  inset: 5%;
   border: 2px solid rgba(86, 90, 117, 0.62);
   box-shadow:
     inset 0 0 0 10px rgba(198, 183, 190, 0.14),
@@ -598,7 +567,7 @@ body.archive-shell {
 }
 
 .kernel-reactor::after {
-  inset: 18% 6%;
+  inset: 13% 4%;
   border: 1px dashed rgba(86, 90, 117, 0.58);
   transform: rotate(-12deg);
   animation: kernel-field-sway 9s steps(20, end) infinite;
@@ -607,12 +576,12 @@ body.archive-shell {
 .kernel-particle-orbit {
   --particle-angle: 0deg;
   --particle-radius: 180px;
-  --particle-duration: 5s;
+  --particle-duration: 2.8s;
   --particle-delay: 0s;
   --particle-wobble: 6px;
   --particle-wobble-duration: 6s;
   --particle-breathe-duration: 10s;
-  --particle-tail: 38px;
+  --particle-tail: 96px;
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -630,43 +599,33 @@ body.archive-shell {
   border: 1px solid rgba(15, 15, 27, 0.22);
   color: var(--particle-color);
   background: var(--particle-color);
-  box-shadow:
-    0 0 0.45rem rgba(86, 90, 117, 0.18),
-    calc(var(--particle-tail) * -0.18) 0 0 -1px currentColor,
-    calc(var(--particle-tail) * -0.34) 0 0 -2px currentColor,
-    calc(var(--particle-tail) * -0.52) 0 0 -3px currentColor,
-    calc(var(--particle-tail) * -0.75) 0 0 -4px currentColor,
-    calc(var(--particle-tail) * -1) 0 0 -5px currentColor;
+  box-shadow: 0 0 0.45rem rgba(86, 90, 117, 0.18);
   transform: translate(-50%, -50%) translateX(var(--particle-radius)) rotate(90deg);
   animation:
     kernel-particle-wobble var(--particle-wobble-duration) steps(15, end) infinite,
     kernel-particle-breathe var(--particle-breathe-duration) steps(18, end) infinite;
 }
 
-.kernel-particle::before,
-.kernel-particle::after {
-  content: "";
+.kernel-particle-tail-segment {
+  --tail-angle: -3deg;
+  --tail-opacity: 0.24;
+  --tail-size: 5px;
+  --tail-inset: 0px;
   position: absolute;
   top: 50%;
-  background: currentColor;
-  transform: translateY(-50%);
+  left: 50%;
+  width: var(--tail-size);
+  height: max(1px, calc(var(--tail-size) * 0.65));
+  border: 1px solid rgba(15, 15, 27, 0.08);
+  background: var(--particle-color);
+  opacity: var(--tail-opacity);
   pointer-events: none;
-}
-
-.kernel-particle::before {
-  right: calc(100% + 4px);
-  width: var(--particle-tail);
-  height: max(2px, calc(var(--particle-size) * 0.52));
-  opacity: 0.3;
-  clip-path: polygon(0 0, 84% 0, 84% 32%, 100% 32%, 100% 68%, 78% 68%, 78% 100%, 0 100%);
-}
-
-.kernel-particle::after {
-  right: calc(100% + var(--particle-tail) + 8px);
-  width: calc(var(--particle-tail) * 0.64);
-  height: max(1px, calc(var(--particle-size) * 0.34));
-  opacity: 0.14;
-  clip-path: polygon(0 0, 64% 0, 64% 45%, 100% 45%, 100% 100%, 0 100%);
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--tail-angle))
+    translateX(calc(var(--particle-radius) - var(--tail-inset)))
+    rotate(90deg);
+  animation: kernel-tail-wobble var(--particle-wobble-duration) steps(15, end) infinite;
 }
 
 .kernel-line {
@@ -853,77 +812,20 @@ body.archive-shell {
   padding: 0.34rem 0.48rem;
 }
 
-.kernel-field-break {
-  position: relative;
-  z-index: 2;
-  min-height: 7rem;
-  margin: 3.2rem auto;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 800ms steps(10, end), transform 800ms steps(10, end);
-}
-
-.kernel-field-break.is-kernel-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.kernel-field-break::before,
-.kernel-field-break::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: min(740px, 92%);
-  height: 4.4rem;
-  border: 1px solid rgba(86, 90, 117, 0.48);
-  border-radius: 50%;
-  transform: translateX(-50%) rotate(var(--field-tilt, 0deg));
-  animation: kernel-field-sway 8s steps(16, end) infinite;
-}
-
-.kernel-field-break::before {
-  top: 0;
-  --field-tilt: -6deg;
-}
-
-.kernel-field-break::after {
-  bottom: 0;
-  --field-tilt: 7deg;
-}
-
-.kernel-field-break span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px solid var(--steel);
-  padding: 0.14rem 0.34rem;
-  background: var(--paper);
-  color: var(--steel);
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  transform: translate(-50%, -50%);
-}
-
-.archive-clean .kernel-document::before,
-.archive-clean .kernel-document::after,
 .archive-clean .kernel-reactor::before,
 .archive-clean .kernel-reactor::after,
 .archive-clean .kernel-particle-orbit,
 .archive-clean .kernel-particle,
+.archive-clean .kernel-particle-tail-segment,
 .archive-clean .kernel-thermal-phrase,
 .archive-clean .kernel-line--pressure,
-.archive-clean .kernel-pulse,
-.archive-clean .kernel-field-break::before,
-.archive-clean .kernel-field-break::after {
+.archive-clean .kernel-pulse {
   animation: none !important;
 }
 
 .archive-clean .kernel-line,
 .archive-clean .kernel-diagnostic-panel,
-.archive-clean .kernel-pulse,
-.archive-clean .kernel-field-break {
+.archive-clean .kernel-pulse {
   opacity: 1;
   transform: none;
 }
@@ -970,6 +872,32 @@ body.archive-shell {
   }
   63% {
     transform: translate(-50%, -50%) translateX(calc(var(--particle-radius) - var(--particle-wobble))) translateY(calc(var(--particle-wobble) * 0.8)) rotate(90deg);
+  }
+}
+
+@keyframes kernel-tail-wobble {
+  0%, 100% {
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--tail-angle))
+      translateX(calc(var(--particle-radius) - var(--tail-inset)))
+      rotate(90deg);
+  }
+  31% {
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--tail-angle) - 0.7deg))
+      translateX(calc(var(--particle-radius) + var(--particle-wobble) - var(--tail-inset)))
+      translateY(calc(var(--particle-wobble) * -0.55))
+      rotate(90deg);
+  }
+  63% {
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--tail-angle) + 0.9deg))
+      translateX(calc(var(--particle-radius) - var(--particle-wobble) - var(--tail-inset)))
+      translateY(calc(var(--particle-wobble) * 0.8))
+      rotate(90deg);
   }
 }
 
@@ -1048,8 +976,7 @@ body.archive-shell {
 
   .kernel-line,
   .kernel-diagnostic-panel,
-  .kernel-pulse,
-  .kernel-field-break {
+  .kernel-pulse {
     opacity: 1;
     transform: none;
   }
