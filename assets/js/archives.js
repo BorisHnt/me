@@ -4448,7 +4448,7 @@
       let rebootStart = 0;
       let shutdownActive = false;
 
-      const resetKernelIntensity = () => {
+      const resetKernelChargeOnly = () => {
         scrollIntensity = 0;
         intensiveStart = 0;
         document.body.style.removeProperty("--kernel-shake");
@@ -4456,7 +4456,13 @@
         document.body.classList.remove(
           "is-kernel-scroll-charged",
           "is-kernel-scroll-warning",
-          "is-kernel-scroll-intensive",
+          "is-kernel-scroll-intensive"
+        );
+      };
+
+      const resetKernelIntensity = () => {
+        resetKernelChargeOnly();
+        document.body.classList.remove(
           "is-kernel-shutdown",
           "is-kernel-rebooting",
           "is-kernel-recovery-lock"
@@ -4464,7 +4470,10 @@
       };
 
       const chargeKernelFromScroll = () => {
-        if (shutdownActive || document.body.classList.contains("archive-clean")) {
+        if (shutdownActive) {
+          return;
+        }
+        if (document.body.classList.contains("archive-clean")) {
           resetKernelIntensity();
           return;
         }
@@ -4503,7 +4512,10 @@
       };
 
       const updateKernelIntensiveState = () => {
-        if (shutdownActive || document.body.classList.contains("archive-clean")) {
+        if (shutdownActive) {
+          return;
+        }
+        if (document.body.classList.contains("archive-clean")) {
           resetKernelIntensity();
           return;
         }
@@ -4542,7 +4554,7 @@
 
       const decayKernelScrollIntensity = () => {
         if (!shutdownActive && scrollIntensity > 0) {
-          scrollIntensity = Math.max(0, scrollIntensity - 0.22);
+          scrollIntensity = Math.max(0, scrollIntensity - 0.18);
           updateKernelIntensiveState();
         }
         window.requestAnimationFrame(decayKernelScrollIntensity);
@@ -4569,7 +4581,7 @@
         const delta = Math.abs(event.deltaY);
         const spacing = lastWheelTime ? now - lastWheelTime : 240;
         lastWheelTime = now;
-        const wheelPressure = Math.min(4.2, delta / 130) + (spacing < 48 ? 1.1 : 0) + (spacing < 24 ? 0.9 : 0);
+        const wheelPressure = Math.min(4.8, delta / 115) + (spacing < 48 ? 1.2 : 0) + (spacing < 24 ? 1 : 0);
         scrollIntensity = Math.min(100, scrollIntensity + wheelPressure);
         updateKernelIntensiveState();
       };
