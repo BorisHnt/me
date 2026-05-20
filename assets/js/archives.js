@@ -2445,7 +2445,7 @@
       orbit.style.setProperty("--particle-size", `${2 + Math.random() * 6}px`);
       orbit.style.setProperty("--particle-tail", `${46 + Math.random() * 92}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
-      orbit.style.setProperty("--particle-return-delay", `${(index / 240 * 4.7 + Math.random() * 0.25).toFixed(2)}s`);
+      orbit.style.setProperty("--particle-return-delay", `${(index / 240 * 14.2 + Math.random() * 0.5).toFixed(2)}s`);
       const particle = document.createElement("span");
       particle.className = "kernel-particle";
       Array.from({ length: 16 }).forEach((_, tailIndex) => {
@@ -4163,8 +4163,8 @@
         window.setTimeout(() => {
           rebootStart = performance.now();
           document.body.classList.add("is-kernel-rebooting");
-          window.setTimeout(completeKernelReboot, 5000);
-        }, 1000);
+          window.setTimeout(completeKernelReboot, 15000);
+        }, 2500);
       };
 
       const updateKernelIntensiveState = () => {
@@ -4173,7 +4173,7 @@
         }
 
         const now = performance.now();
-        if (scrollIntensity > 44) {
+        if (scrollIntensity > 82) {
           if (!intensiveStart) {
             intensiveStart = now;
           }
@@ -4188,7 +4188,7 @@
           return;
         }
 
-        if (scrollIntensity < 28) {
+        if (scrollIntensity < 48) {
           document.body.classList.remove("is-kernel-scroll-intensive");
           document.body.style.removeProperty("--kernel-shake");
           intensiveStart = 0;
@@ -4197,7 +4197,7 @@
 
       const decayKernelScrollIntensity = () => {
         if (!shutdownActive && scrollIntensity > 0) {
-          scrollIntensity = Math.max(0, scrollIntensity - 0.42);
+          scrollIntensity = Math.max(0, scrollIntensity - 0.18);
           updateKernelIntensiveState();
         }
         window.requestAnimationFrame(decayKernelScrollIntensity);
@@ -4207,7 +4207,7 @@
         if (document.body.classList.contains("is-kernel-recovery-lock")) {
           event.preventDefault();
           if (document.body.classList.contains("is-kernel-rebooting") && rebootStart) {
-            const recovery = Math.min(1, (performance.now() - rebootStart) / 5000);
+            const recovery = Math.min(1, (performance.now() - rebootStart) / 15000);
             window.scrollBy(0, event.deltaY * recovery);
           }
           return;
@@ -4219,7 +4219,7 @@
         const delta = Math.abs(event.deltaY);
         const spacing = lastWheelTime ? now - lastWheelTime : 240;
         lastWheelTime = now;
-        const wheelPressure = Math.min(24, delta / 18) + (spacing < 70 ? 7 : 0) + (spacing < 38 ? 5 : 0);
+        const wheelPressure = Math.min(6, delta / 85) + (spacing < 55 ? 1.8 : 0) + (spacing < 28 ? 1.4 : 0);
         scrollIntensity = Math.min(100, scrollIntensity + wheelPressure);
         updateKernelIntensiveState();
       };
