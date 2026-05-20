@@ -1933,8 +1933,16 @@
       "is-unplanned-scroll-resisting",
       "is-unplanned-scroll-tearing",
       "is-void-scroll-tearing",
-      "is-void-scroll-resisting"
+      "is-void-scroll-resisting",
+      "is-kernel-scroll-charged",
+      "is-kernel-scroll-warning",
+      "is-kernel-scroll-intensive",
+      "is-kernel-shutdown",
+      "is-kernel-rebooting",
+      "is-kernel-recovery-lock"
     );
+    document.body.style.removeProperty("--kernel-shake");
+    document.body.style.removeProperty("--kernel-warning-shake");
     if (document.body.classList.contains("archive-doc-05")) {
       document.body.dataset.unplannedStage = "0";
     }
@@ -4128,11 +4136,19 @@
         intensiveStart = 0;
         document.body.style.removeProperty("--kernel-shake");
         document.body.style.removeProperty("--kernel-warning-shake");
-        document.body.classList.remove("is-kernel-scroll-warning", "is-kernel-scroll-intensive");
+        document.body.classList.remove(
+          "is-kernel-scroll-charged",
+          "is-kernel-scroll-warning",
+          "is-kernel-scroll-intensive",
+          "is-kernel-shutdown",
+          "is-kernel-rebooting",
+          "is-kernel-recovery-lock"
+        );
       };
 
       const chargeKernelFromScroll = () => {
-        if (shutdownActive) {
+        if (shutdownActive || document.body.classList.contains("archive-clean")) {
+          resetKernelIntensity();
           return;
         }
         document.body.classList.add("is-kernel-scroll-charged");
@@ -4170,7 +4186,8 @@
       };
 
       const updateKernelIntensiveState = () => {
-        if (shutdownActive) {
+        if (shutdownActive || document.body.classList.contains("archive-clean")) {
+          resetKernelIntensity();
           return;
         }
 
@@ -4215,6 +4232,11 @@
       };
 
       const handleKernelWheel = (event) => {
+        if (document.body.classList.contains("archive-clean")) {
+          resetKernelIntensity();
+          return;
+        }
+
         if (document.body.classList.contains("is-kernel-recovery-lock")) {
           event.preventDefault();
           if (document.body.classList.contains("is-kernel-rebooting") && rebootStart) {

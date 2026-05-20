@@ -1123,6 +1123,12 @@ body.archive-shell {
   transform: none;
 }
 
+.archive-clean .kernel-diagnostic-panel,
+.archive-clean .kernel-pulse,
+.archive-clean .kernel-line--statement::before {
+  display: none;
+}
+
 .is-kernel-shutdown .kernel-line--statement::before,
 .is-kernel-shutdown .kernel-diagnostic-panel,
 .is-kernel-shutdown .kernel-diagnostic-panel__title,
