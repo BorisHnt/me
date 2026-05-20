@@ -612,20 +612,12 @@ body.archive-shell {
   animation-delay: calc(var(--edge-delay, 0) * -1s);
 }
 
-.kernel-edge-segment--0 { --edge-delay: 0; }
-.kernel-edge-segment--1 { --edge-delay: 1.2; }
-.kernel-edge-segment--2 { --edge-delay: 2.4; }
-.kernel-edge-segment--3 { --edge-delay: 3.6; }
-.kernel-edge-segment--4 { --edge-delay: 4.8; }
-.kernel-edge-segment--5 { --edge-delay: 6; }
-
-.kernel-edge-segment--1,
-.kernel-edge-segment--4 {
+.kernel-edge-segment:nth-child(4n + 2),
+.kernel-edge-segment:nth-child(4n + 4) {
   opacity: 0.58;
 }
 
-.kernel-edge-segment--2,
-.kernel-edge-segment--5 {
+.kernel-edge-segment:nth-child(4n + 3) {
   opacity: 0.68;
 }
 

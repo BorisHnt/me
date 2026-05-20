@@ -2254,11 +2254,12 @@
     frame.setAttribute("focusable", "false");
     frame.setAttribute("aria-hidden", "true");
 
-    Array.from({ length: 6 }).forEach((_, index) => {
+    Array.from({ length: 16 }).forEach((_, index) => {
       const segment = document.createElementNS("http://www.w3.org/2000/svg", "path");
       segment.classList.add("kernel-edge-segment", `kernel-edge-segment--${index}`);
-      segment.setAttribute("d", describeKernelEdgeSegment(index, 6));
+      segment.setAttribute("d", describeKernelEdgeSegment(index, 16));
       segment.style.setProperty("--segment-color", colors[index % colors.length]);
+      segment.style.setProperty("--edge-delay", `${index * 0.42}`);
       frame.append(segment);
     });
 
