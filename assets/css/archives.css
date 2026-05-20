@@ -534,13 +534,9 @@ body.archive-shell {
   opacity: 1;
 }
 
-.archive-doc-kernel.is-kernel-rebooting {
-  animation: kernel-background-reboot 15s linear both;
-}
-
 .archive-doc-kernel.is-kernel-rebooting::after {
   opacity: 0;
-  transition: opacity 15s cubic-bezier(0.16, 0.84, 0.2, 1);
+  transition: opacity 10s cubic-bezier(0.16, 0.84, 0.2, 1);
 }
 
 .archive-doc-kernel.is-kernel-recovery-lock {
@@ -748,11 +744,11 @@ body.archive-shell {
 .is-kernel-rebooting .kernel-reactor {
   opacity: 0.58;
   filter: none;
-  transition: opacity 15s steps(90, end), filter 15s steps(90, end);
+  transition: opacity 10s steps(60, end), filter 10s steps(60, end);
 }
 
 .is-kernel-rebooting .kernel-reactor::before {
-  animation: kernel-reactor-core-reboot 15s steps(90, end) both;
+  animation: kernel-reactor-core-reboot 10s steps(60, end) both;
 }
 
 .is-kernel-rebooting .kernel-edge-segment,
@@ -760,9 +756,9 @@ body.archive-shell {
 .is-kernel-rebooting .kernel-edge-spark-branch {
   animation-play-state: running;
   transition:
-    opacity 15s steps(90, end),
-    filter 15s steps(90, end),
-    stroke-width 15s steps(90, end);
+    opacity 10s steps(60, end),
+    filter 10s steps(60, end),
+    stroke-width 10s steps(60, end);
 }
 
 .is-kernel-rebooting .kernel-edge-spark,
@@ -1141,25 +1137,25 @@ body.archive-shell {
 }
 
 .is-kernel-rebooting .kernel-line--statement::before {
-  animation: kernel-label-background-reboot 15s steps(90, end) both;
+  animation: kernel-label-background-reboot 10s steps(60, end) both;
 }
 
 .is-kernel-rebooting .kernel-diagnostic-panel {
-  animation: kernel-panel-background-reboot 15s steps(90, end) both;
+  animation: kernel-panel-background-reboot 10s steps(60, end) both;
 }
 
 .is-kernel-rebooting .kernel-diagnostic-panel__title {
-  animation: kernel-panel-title-reboot 15s steps(90, end) both;
+  animation: kernel-panel-title-reboot 10s steps(60, end) both;
 }
 
 .is-kernel-rebooting .kernel-pulse {
   animation:
     kernel-pulse-drift 7s steps(20, end) infinite,
-    kernel-pulse-background-reboot 15s steps(90, end) both;
+    kernel-pulse-background-reboot 10s steps(60, end) both;
 }
 
 .is-kernel-rebooting .kernel-pulse__header {
-  animation: kernel-label-background-reboot 15s steps(90, end) both;
+  animation: kernel-label-background-reboot 10s steps(60, end) both;
 }
 
 @keyframes kernel-ring-breathe {
@@ -1225,21 +1221,6 @@ body.archive-shell {
   }
   100% {
     filter: brightness(1);
-  }
-}
-
-@keyframes kernel-background-reboot {
-  0% {
-    background: #0f0f1b;
-  }
-  12% {
-    background: #0f0f1b;
-  }
-  100% {
-    background:
-      radial-gradient(circle at 50% 12%, rgba(198, 183, 190, 0.42), transparent 30rem),
-      radial-gradient(circle at 18% 44%, rgba(86, 90, 117, 0.16), transparent 24rem),
-      linear-gradient(180deg, var(--paper), rgba(198, 183, 190, 0.28) 54%, var(--paper));
   }
 }
 

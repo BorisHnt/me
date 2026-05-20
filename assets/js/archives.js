@@ -2445,7 +2445,7 @@
       orbit.style.setProperty("--particle-size", `${2 + Math.random() * 6}px`);
       orbit.style.setProperty("--particle-tail", `${46 + Math.random() * 92}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
-      orbit.style.setProperty("--particle-return-delay", `${(index / 240 * 14.2 + Math.random() * 0.5).toFixed(2)}s`);
+      orbit.style.setProperty("--particle-return-delay", `${(index / 240 * 9.4 + Math.random() * 0.5).toFixed(2)}s`);
       const particle = document.createElement("span");
       particle.className = "kernel-particle";
       Array.from({ length: 16 }).forEach((_, tailIndex) => {
@@ -4157,14 +4157,15 @@
 
         shutdownActive = true;
         window.clearTimeout(scrollChargeReceipt);
-        document.body.classList.remove("is-kernel-scroll-charged", "is-kernel-scroll-intensive");
+        document.body.classList.remove("is-kernel-scroll-charged", "is-kernel-scroll-warning", "is-kernel-scroll-intensive");
+        document.body.style.removeProperty("--kernel-warning-shake");
         document.body.classList.add("is-kernel-shutdown", "is-kernel-recovery-lock");
         document.body.style.setProperty("--kernel-shake", "0px");
 
         window.setTimeout(() => {
           rebootStart = performance.now();
           document.body.classList.add("is-kernel-rebooting");
-          window.setTimeout(completeKernelReboot, 15000);
+          window.setTimeout(completeKernelReboot, 10000);
         }, 2500);
       };
 
@@ -4217,7 +4218,7 @@
         if (document.body.classList.contains("is-kernel-recovery-lock")) {
           event.preventDefault();
           if (document.body.classList.contains("is-kernel-rebooting") && rebootStart) {
-            const recovery = Math.min(1, (performance.now() - rebootStart) / 15000);
+            const recovery = Math.min(1, (performance.now() - rebootStart) / 10000);
             window.scrollBy(0, event.deltaY * recovery);
           }
           return;
