@@ -2227,18 +2227,18 @@
     Array.from({ length: 240 }).forEach((_, index) => {
       const orbit = document.createElement("span");
       const radius = Math.random() < 0.72
-        ? 315 + Math.random() * 150
-        : 70 + Math.random() * 145;
+        ? 300 + Math.random() * 130
+        : 70 + Math.random() * 130;
       orbit.className = "kernel-particle-orbit";
       orbit.style.setProperty("--particle-angle", `${Math.floor(Math.random() * 360)}deg`);
       orbit.style.setProperty("--particle-radius", `${radius}px`);
       orbit.style.setProperty("--particle-duration", `${1.45 + Math.random() * 3.8}s`);
       orbit.style.setProperty("--particle-delay", `${Math.random() * -4.8}s`);
-      orbit.style.setProperty("--particle-wobble", `${3 + Math.random() * 15}px`);
+      orbit.style.setProperty("--particle-wobble", `${2 + Math.random() * 10}px`);
       orbit.style.setProperty("--particle-wobble-duration", `${1.1 + Math.random() * 2.4}s`);
       orbit.style.setProperty("--particle-breathe-duration", `${2.4 + Math.random() * 4.2}s`);
       orbit.style.setProperty("--particle-size", `${2 + Math.random() * 6}px`);
-      orbit.style.setProperty("--particle-tail", `${58 + Math.random() * 118}px`);
+      orbit.style.setProperty("--particle-tail", `${46 + Math.random() * 92}px`);
       orbit.style.setProperty("--particle-color", colors[index % colors.length]);
       const particle = document.createElement("span");
       particle.className = "kernel-particle";
